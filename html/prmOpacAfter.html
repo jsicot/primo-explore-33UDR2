@@ -1,0 +1,35 @@
+<div ng-if="kohaholdings" id="kohaholdings">
+    <h3 class="section-title">Etat de collection :</h3>
+    <md-list class="separate-list-items margin-bottom-medium padding-bottom-zero">
+        <md-list-item class="md-2-line _md-no-proxy _md" ng-repeat="(index, holding) in kohaholdings">
+            <div class="neutralized-button layout-full-width layout-display-flex md-button md-ink-ripple layout-row" tabindex="0" layout="flex" ng-click="$ctrl.onClick()"  md-ink-ripple="red" role="button">
+                <div layout="row" flex="100" layout-align="space-between center" class="layout-align-space-between-center layout-row flex-100">
+                    <div class="md-list-item-text layout-wrap layout-row flex" layout="row" layout-wrap="" flex="">
+                        <div flex="" flex-xs="100" class="flex-xs-100 flex">
+                            <h3>{{holding.library}}</h3>
+                            <p><span ng-if="holding.location">{{holding.location}} ; </span>{{holding.callnumber}}</p>
+                            <div ng-switch="!!holding.holdingsSummary">
+                            <details ng-switch-when="true">
+                                <summary ng-click="$event.stopPropagation()"><span class="summary">{{holding.holdingsSummary}}</span><span class="reduce">Réduire</span></summary>
+                                <p>{{holding.holdings}}</p>
+                            </details>
+                            <p ng-switch-default>{{holding.holdings}}</p>
+                            </div>
+                        </div>
+                        <div layout-align="end center" layout="row" layout-wrap="" flex-xs="100" flex-sm="30" flex="" class="list-item-actions layout-wrap layout-align-end-center layout-row flex-xs-100 flex-sm-30 flex"></div>
+                    </div>
+                    <prm-icon ng-if="!$ctrl.isOvp()" class="padding-right-small" icon-type="svg" svg-icon-set="action" icon-definition="ic_open_in_new_24px">
+                        <md-icon md-svg-icon="action:ic_open_in_new_24px" alt="" class="md-primoExplore-theme" aria-hidden="true">
+                            <svg width="100%" height="100%" viewBox="0 0 24 24" id="ic_open_in_new_24px" y="1752" xmlns="http://www.w3.org/2000/svg" fit="" preserveAspectRatio="xMidYMid meet" focusable="false">
+                                <path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"></path>
+                            </svg>
+                        </md-icon>
+                        <prm-icon-after parent-ctrl="$ctrl"></prm-icon-after>
+                    </prm-icon>
+                </div>
+                <div class="md-ripple-container" style=""></div>
+            </div>
+        </md-list-item>
+    </md-list>
+</div>
+<div ng-bind-html="sfxholdings" id="sfxholdings"></div>
