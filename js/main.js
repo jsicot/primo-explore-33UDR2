@@ -1,9 +1,10 @@
 import { viewName } from './viewName';
 import { kohaItems } from './kohaItems.module';
-
+import { kohaAvailabilities } from './kohaAvailabilities.module';
 let app = angular.module('viewCustom', [
                                         'angularLoad',
-                                        'kohaItems'
+                                        'kohaItems',
+                                        'kohaAvailabilities'
                                       ]);
                                       
 app.config(['$sceDelegateProvider', function ($sceDelegateProvider) {

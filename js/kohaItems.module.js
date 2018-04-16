@@ -23,14 +23,12 @@ angular.module('kohaItems', []).component('prmFullViewServiceContainerAfter', {
             var kohaid = response.data.record[0].biblionumber;
             var imagePath = response.data.record[0].cover;
             console.log(kohaid);
-            console.log(imagePath);
             if (kohaid === null) {
               $scope.kohaDisplay = false;
               console.log("it's false");
               $scope.kohaClass = "ng-hide";
             } else {
               $scope.kohaid = kohaid;
-              $scope.imagePath = imagePath;
               $scope.items = items;
               $scope.kohaDisplay = true;
               $element.children().removeClass("ng-hide"); /* initially set by $scope.kohaDisplay=false */
