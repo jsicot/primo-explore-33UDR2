@@ -1,0 +1,103 @@
+.check-avail-link {
+  color: #008a0c;
+  font-size: 18px !important; }
+
+/* Hides items from primo PNX*/
+/*
+prm-opac {
+    display: none;
+}
+*/
+.pin-button,
+prm-favorites-labels,
+prm-search-bookmark-filter a[aria-label='Go to my favorites'],
+prm-search-bookmark-filter a[aria-label="nui.favorites.goFavorites.tooltip"],
+prm-favorites md-tab-item:first-child {
+  display: none !important; }
+
+prm-library-card-menu > button {
+  display: none !important; }
+
+/*
+a.md-button[aria-label="Browse"],
+a.md-button[aria-label="mainmenu.label.Browse"] {
+  display: none;
+}
+*/
+[aria-label="Tags"],
+#tags {
+  display: none; }
+
+prm-brief-result-container prm-search-result-availability-line > *:not(:last-child),
+prm-full-view prm-search-result-availability-line > *:not(:last-child),
+prm-full-view prm-search-result-availability-line-after a.check-avail-link {
+  display: none; }
+
+/*
+// Hide Get It section on full view
+[aria-label="Get It"],
+[id^='getit_link1_'] {
+  display: none;
+}
+*/
+/*Uncomment the follwoing lines to move facets to the left*/
+/*
+prm-search > md-content.md-primoExplore-theme .main {
+    display: -webkit-flex; !* Safari *!
+    -webkit-flex-flow: row-reverse wrap; !* Safari 6.1+ *!
+    display: flex;
+    flex-flow: row-reverse wrap;
+
+}
+.screen-gt-sm .sidebar{
+    webkit-flex: 0 0 15%;
+    flex: 0 0 15%;
+}
+
+*/
+prm-opac > md-tabs {
+  display: none; }
+
+#sfxholdings table,
+#kohaholdings table {
+  width: 100%; }
+
+#kohaholdings details summary span.reduce {
+  display: none; }
+
+#kohaholdings details[open] summary span {
+  display: none; }
+
+#kohaholdings details[open] summary span.reduce {
+  display: inline; }
+
+#sfxholdings table .pull-right,
+#kohaholdings table .pull-right {
+  float: right; }
+
+#sfxholdings table .bg-databases,
+#kohaholdings table .bg-databases {
+  background-color: #774e9a; }
+
+#sfxholdings md-list-item.md-2-line .md-list-item-text span.summary,
+#sfxholdings md-list-item.md-2-line > ._md-no-style .md-list-item-text span.summary,
+#sfxholdings md-list-item.md-3-line .md-list-item-text span.summary,
+#sfxholdings md-list-item.md-3-line > ._md-no-style .md-list-item-text span.summary {
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: .01em;
+  margin: 0;
+  line-height: 1.6em; }
+
+#sfxholdings table .label,
+#kohaholdings table .label {
+  display: inline;
+  padding: 0.2em 0.6em 0.3em;
+  font-size: 75%;
+  font-weight: 700;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: .25em; }
