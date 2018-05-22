@@ -10,6 +10,7 @@ let app = angular.module('viewCustom', [
 app.config(['$sceDelegateProvider', function ($sceDelegateProvider) {
   var urlWhitelist = $sceDelegateProvider.resourceUrlWhitelist();
   urlWhitelist.push('https://catalogue.bu.univ-rennes2**');
+  urlWhitelist.push('https://**.bu.univ-rennes2**');
   urlWhitelist.push('https://cataloguepreprod.bu.univ-rennes2**');
   urlWhitelist.push('http://sfx-univ-rennes2.hosted.exlibrisgroup**');
   $sceDelegateProvider.resourceUrlWhitelist(urlWhitelist);
