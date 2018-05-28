@@ -7,6 +7,7 @@ prm-opac {
 
 
 // Disable built in e-shelf
+/*
 .pin-button,
 prm-favorites-labels,
 prm-search-bookmark-filter a[aria-label='Go to my favorites'],
@@ -14,6 +15,7 @@ prm-search-bookmark-filter a[aria-label="nui.favorites.goFavorites.tooltip"],
 prm-favorites md-tab-item:first-child {
   display: none !important;
 }
+*/
 
 // Hide default library card options
 /*
@@ -53,3 +55,6 @@ prm-full-view prm-search-result-availability-line-after a.check-avail-link {
   display: none;
 }
 */
+
+
+
