@@ -1,0 +1,32 @@
+/*reorder the full view sections*/
+#getit_link1_0 { order: 0; }
+#getit_link2_0, #getit_link2  { order: 1; display: none; }
+#details { order: 2; }
+#action_list{ order: 3; }
+#links { order: 4; display: none; }
+#citationTrails { order: 5;  }
+#virtualBrowse { order: 6; }
+#{ order: 3; }
+.full-view-inner-container {
+	padding-bottom: 10em;
+	display: flex;
+	flex-direction: column;
+}
+[aria-label="View it"] { order: 0 !important; }
+[aria-label="Obtenir"] { order: 1 !important; }
+[aria-label="Détails"] { order: 2 !important; }
+[aria-label="Plus"] { order: 3 !important; display: none;}
+[aria-label="Liens"] { order: 3 !important; display: none;}
+[aria-label="Envoyer à"] { order: 4 !important; }
+[aria-label="Citations"] { order: 5 !important; }
+
+[aria-label="Parcourir"] { order: 6 !important; }
+
+/*fix up shadows for bottom search result*/
+prm-search-result-list .pages-separated-with-gaps .list-item-wrapper:nth-last-child(2), prm-search-result-list .pages-separated-with-gaps .list-item-wrapper.first-in-page:not(:first-of-type)::before {
+	box-shadow: none;
+}
+/*fix background color in favorites area*/
+prm-favorites md-list-item.list-item-wrapper {
+	background: #FFF;
+}
