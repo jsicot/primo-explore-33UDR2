@@ -1091,6 +1091,11 @@ prm-main-menu div > prm-authentication {
 [aria-label="Set an RSS for this search"] {
   display: none !important; }
 
+.full-view-section prm-view-online-after .section-title {
+  font-weight: 400;
+  text-transform: uppercase;
+  font-size: 1em; }
+
 /*adjust "sort by" in favourites*/
 prm-favorites md-tabs-wrapper {
   position: absolute;
