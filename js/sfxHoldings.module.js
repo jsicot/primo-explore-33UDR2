@@ -4,7 +4,7 @@ angular.module('sfxHoldings', []).component('prmViewOnlineAfter', {
     this.$onInit = function () {
       var obj = $scope.$ctrl.parentCtrl.item.linkElement.links[0];
       if (obj.hasOwnProperty("getItTabText") && obj.hasOwnProperty("displayText") && obj.hasOwnProperty("isLinktoOnline") && obj.hasOwnProperty("link")) {
-        if (obj['getItTabText'] == "tab1_full" && obj['isLinktoOnline'] == true && obj['displayText'] == "openurlfulltext") {
+        if (obj['displayText'] == "openurlfulltext") {
 	      console.log(obj);
 	      console.log(obj['link']);
           var openurl = obj['link'];
@@ -14,9 +14,9 @@ angular.module('sfxHoldings', []).component('prmViewOnlineAfter', {
             if (holdings === null) {
 	            
             } else {
+	          angular.element(document.querySelector('prm-view-online div a.arrow-link.md-primoExplore-theme'))[0].style.display = "none"; 
 	          console.log(holdings);
               $scope.sfxholdings = holdings;
-              angular.element(document.querySelector('prm-view-online div a.arrow-link.md-primoExplore-theme'))[0].style.display = "none";
             }
           });
         } 

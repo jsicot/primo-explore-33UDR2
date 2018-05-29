@@ -8,22 +8,19 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
       if (obj.hasOwnProperty("sourcerecordid") && obj.hasOwnProperty("sourceid")) {
         var bn = obj.sourcerecordid[0];
         var source = obj.sourceid[0];
+        console.log("source :"+source);
         var type = $scope.$ctrl.parentCtrl.item.pnx.display.type[0];
-        if (bn && source == "33UDR2_KOHA" && type != "journal") {
+        if (bn && (source == "33UDR2_KOHA" || !bn.startsWith("dedupmrg")) && type != "journal") {
           var url = "https://catalogue.bu.univ-rennes2.fr/r2microws/json.getSru.php?index=rec.id&q=" + bn;
           var response = kohaitemsService.getKohaData(url).then(function (response) {
             var items = response.data.record[0].item;
             var kohaid = response.data.record[0].biblionumber;
             var imagePath = response.data.record[0].cover;
             if (kohaid === null) {
-              $scope.kohaDisplay = false;
-              $scope.kohaClass = "ng-hide";
             } else {
+	          angular.element(document.querySelector('prm-opac > md-tabs'))[0].style.display = "none"; 
               $scope.kohaid = kohaid;
               $scope.items = items;
-              $scope.kohaDisplay = true;
-              $element.children().removeClass("ng-hide"); /* initially set by $scope.kohaDisplay=false */
-              $scope.kohaClass = "ng-show";
             }
           });
         } else if (bn && source == "33UDR2_KOHA" && type == "journal") {
@@ -31,6 +28,7 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
 		  	var response = kohaitemsService.getKohaData(url).then(function (response) {
 				if (response.data.record != undefined && response.data.record.length > 0) {
 					console.log(response.data.record);
+					angular.element(document.querySelector('prm-opac > md-tabs'))[0].style.display = "none";
 					$scope.kohaholdings = [];
 					for (var i = 0 ; i < response.data.record[0].holdings.length ; i++) {
 						var holding = response.data.record[0].holdings[i]
@@ -48,9 +46,11 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
 					}
 				}
 			});
+/*
 			this.onClick = function() {
 				 $window.open('https://catalogue.bu.univ-rennes2.fr/bib/'+ bn, '_blank');
 			};
+*/
 		} 
 		
 		var delivery = $scope.$ctrl.parentCtrl.item.delivery;
