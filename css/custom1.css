@@ -499,6 +499,47 @@ md-toolbar.default-toolbar:not(.md-menu-toolbar) {
   color: #008a0c;
   font-size: 18px !important; }
 
+prm-search-result-availability-koha {
+  line-height: 1.2em;
+  display: block; }
+  prm-search-result-availability-koha:before {
+    content: "";
+    display: block;
+    height: .5em;
+    width: 100%; }
+  prm-search-result-availability-koha [availability-type] {
+    color: rgba(58, 58, 58, 0.4);
+    flex-shrink: 0;
+    margin-right: 0.35em; }
+    [dir=rtl] prm-search-result-availability-koha [availability-type] {
+      margin-right: 0;
+      margin-left: 0.35em; }
+    prm-search-result-availability-koha [availability-type] md-icon {
+      height: 15px;
+      width: 15px;
+      min-height: 15px;
+      min-width: 15px;
+      position: relative; }
+  prm-search-result-availability-koha span {
+    white-space: normal;
+    display: inline; }
+    [dir="rtl"] prm-search-result-availability-koha span:not(.availability-status) {
+      display: inline-flex; }
+    [dir="rtl"] prm-search-result-availability-koha span + span {
+      padding-right: .2em; }
+  prm-search-result-availability-koha .availability-status span:first-child + .locations-link:before {
+    content: "\00a0"; }
+  prm-search-result-availability-koha prm-spinner {
+    position: relative;
+    transition: transform 0.3s 0s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    transform: scale(0.8);
+    margin-left: .2em;
+    top: 1px; }
+    prm-search-result-availability-koha prm-spinner.hidden {
+      transform: scale(0); }
+  prm-brief-result + prm-search-result-availability-koha {
+    position: relative; }
+
 /* Hides items from primo PNX*/
 /*
 prm-opac {
@@ -525,8 +566,14 @@ a.md-button[aria-label="mainmenu.label.Browse"] {
   display: none;
 }
 */
+/*
 [aria-label="Tags"],
 #tags {
+  display: none;
+}
+*/
+/*remove availability text in full record view*/
+prm-full-view-service-container prm-brief-result-container prm-search-result-availability-koha {
   display: none; }
 
 prm-brief-result-container prm-search-result-availability-line > *:not(:last-child),
@@ -743,17 +790,6 @@ a.md-primoExplore-theme, #banner > a:nth-child(1):hover {
   width: 88.3%;
   min-width: 88.3%; }
 
-/*remove availability text in full record view*/
-prm-full-view-service-container prm-brief-result-container prm-search-result-availability-line {
-  display: none; }
-
-/*remove "Additional Services" from View It*/
-[name="uResolverViewItForm"] div h1 {
-  display: none; }
-
-[name="uResolverViewItForm"] div ul:first-of-type {
-  padding-bottom: 1em; }
-
 /*add space to link out icon in "Links" section of full view*/
 [translate="fulldisplay.worldcat"] {
   padding-right: 1.8em; }
@@ -770,17 +806,6 @@ prm-full-view-service-container prm-brief-result-container prm-search-result-ava
 .saved-query-list > md-nav-bar .md-nav-item, prm-action-list > md-nav-bar .md-nav-item {
   max-width: 110px; }
 
-/*Remove the "Return to" line in the Loans area*/
-#tab-content-1 > div > div > prm-loans > md-list > md-list-item > prm-loan > div.md-list-item-text.layout-wrap.layout-row.flex > div.weak-text.flex-xs-100.flex-40 > p {
-  display: none; }
-
-#tab-content-0 > div > div > div > prm-loans-overview > div > div > md-list > md-list-item > div > div._md-list-item-inner > div.md-list-item-text > p.normal-text.loans-brief-display.no-wrap-line.weak-text {
-  display: none; }
-
-/*Use current no results text for the no results page*/
-#mainResults > div.margin-bottom-medium > prm-no-search-result > md-card > md-card-content > ul > li:nth-child(5) {
-  display: none; }
-
 /*move sort options*/
 @media screen and (min-width: 960px) {
   #facets > prm-facet > div > div > div.sidebar-section.margin-bottom-small.compensate-padding-left.layout-row {
@@ -793,9 +818,7 @@ prm-full-view-service-container prm-brief-result-container prm-search-result-ava
     font-weight: 600; }
   prm-search-result-sort-by {
     padding-bottom: 6px;
-    font-size: 14px; }
-  prm-facet > div.primo-scrollbar.is-stuck > div > div.sidebar-section.margin-bottom-small.compensate-padding-left.layout-row {
-    display: none; } }
+    font-size: 14px; } }
 
 /*change page number heading to lower case*/
 div._md-subheader-inner > div._md-subheader-content > span.text.tiny-uppercase-text {
@@ -1081,15 +1104,11 @@ prm-main-menu div > prm-authentication {
 #mainResults > div.margin-bottom-medium {
   margin-top: -4.5em; }
 
-#facets > prm-facet > div > div > div.sidebar-section.margin-bottom-small.compensate-padding-left.layout-row {
-  display: none; }
-
 #mainResults > div.results-title.layout-align-start-center.layout-row {
   width: 50%; }
 
-/*hide rss feed icon in saved searches area*/
-[aria-label="Set an RSS for this search"] {
-  display: none !important; }
+.full-view-section {
+  margin-top: 1.5em; }
 
 .full-view-section prm-view-online-after .section-title {
   font-weight: 400;
@@ -1329,6 +1348,9 @@ prm-full-view prm-brief-result > h3.item-title {
 #virtualBrowse {
   order: 6; }
 
+#tags {
+  order: 7; }
+
 order
 .full-view-inner-container {
   padding-bottom: 10em;
@@ -1361,6 +1383,9 @@ order
 [aria-label="Parcourir"] {
   order: 6 !important; }
 
+[aria-label="Tags"] {
+  order: 7 !important; }
+
 /*fix up shadows for bottom search result*/
 prm-search-result-list .pages-separated-with-gaps .list-item-wrapper:nth-last-child(2), prm-search-result-list .pages-separated-with-gaps .list-item-wrapper.first-in-page:not(:first-of-type)::before {
   box-shadow: none; }
@@ -1384,9 +1409,11 @@ prm-search > md-content.md-primoExplore-theme .main {
 }
 
 */
+/*
 prm-opac > md-tabs {
-  display: none; }
-
+	display: none;	
+}
+*/
 #sfxholdings table,
 #kohaholdings table {
   width: 100%; }

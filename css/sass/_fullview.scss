@@ -6,6 +6,7 @@
 #links { order: 4; display: none; }
 #citationTrails { order: 5;  }
 #virtualBrowse { order: 6; }
+#tags { order: 7;  }
 #{ order: 3; }
 .full-view-inner-container {
 	padding-bottom: 10em;
@@ -21,6 +22,7 @@
 [aria-label="Citations"] { order: 5 !important; }
 
 [aria-label="Parcourir"] { order: 6 !important; }
+[aria-label="Tags"] { order: 7 !important; }
 
 /*fix up shadows for bottom search result*/
 prm-search-result-list .pages-separated-with-gaps .list-item-wrapper:nth-last-child(2), prm-search-result-list .pages-separated-with-gaps .list-item-wrapper.first-in-page:not(:first-of-type)::before {

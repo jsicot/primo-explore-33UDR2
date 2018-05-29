@@ -6,13 +6,13 @@
                 <div layout="row" flex="100" layout-align="space-between center" class="layout-align-space-between-center layout-row flex-100">
                     <div class="md-list-item-text layout-wrap layout-row flex" layout="row" layout-wrap="" flex="">
                         <div flex="" flex-xs="100" class="flex-xs-100 flex">
-                            <h3>{{item.homebranch}}</h3>
+                            <h3 ng-if="item.homebranch">{{item.homebranch}}</h3>
 							<p >
 								<span ng-if="item.istatus" class="availability-status {{item.statusClass}}">{{item.istatus}}</span> 
 								<span ng-if="item.location">,</span> 
-								<span>{{item.location}}</span>
+								<span ng-if="item.location">{{item.location}}</span>
 								<span ng-if="item.itemcallnumber">;</span> 
-								<span>{{item.itemcallnumber}}</span>
+								<span ng-if="item.itemcallnumber">{{item.itemcallnumber}}</span>
 							</p>
                         </div>
                         <div layout-align="end center" layout="row" layout-wrap="" flex-xs="100" flex-sm="30" flex="" class="list-item-actions layout-wrap layout-align-end-center layout-row flex-xs-100 flex-sm-30 flex"></div>
@@ -42,14 +42,14 @@
                 <div layout="row" flex="100" layout-align="space-between center" class="layout-align-space-between-center layout-row flex-100">
                     <div class="md-list-item-text layout-wrap layout-row flex" layout="row" layout-wrap="" flex="">
                         <div flex="" flex-xs="100" class="flex-xs-100 flex">
-                            <h3>{{holding.library}}</h3>
+                            <h3 ng-if="holding.library">{{holding.library}}</h3>
                             <p><span ng-if="holding.location">{{holding.location}} ; </span>{{holding.callnumber}}</p>
                             <div ng-switch="!!holding.holdingsSummary">
                             <details ng-switch-when="true">
                                 <summary ng-click="$event.stopPropagation()"><span class="summary">{{holding.holdingsSummary}}</span><span class="reduce">Réduire</span></summary>
-                                <p>{{holding.holdings}}</p>
+                                <p ng-if="holding.holdings">{{holding.holdings}}</p>
                             </details>
-                            <p ng-switch-default>{{holding.holdings}}</p>
+                            <p ng-switch-default ng-if="holding.holdings">{{holding.holdings}}</p>
                             </div>
                         </div>
                         <div layout-align="end center" layout="row" layout-wrap="" flex-xs="100" flex-sm="30" flex="" class="list-item-actions layout-wrap layout-align-end-center layout-row flex-xs-100 flex-sm-30 flex"></div>

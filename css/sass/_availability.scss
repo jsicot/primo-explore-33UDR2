@@ -2,3 +2,92 @@
   color: $getit_green;
   font-size: 18px !important;
 }
+
+// set element size
+// pass a value to set it's size
+@mixin setSize($iconSize) {
+	height: $iconSize;
+	width: $iconSize;
+	min-height: $iconSize;
+	min-width: $iconSize;
+}
+
+@mixin rtl-prop($ltr-prop, $rtl-prop, $value, $reset-value) {
+  #{$ltr-prop}: $value;
+  [dir=rtl] & {
+    #{$ltr-prop}: $reset-value;
+    #{$rtl-prop}: $value;
+  }
+}
+
+prm-search-result-availability-koha {
+
+
+  line-height: 1.2em;
+  display: block;
+  &:before {
+    content: "";
+    display: block;
+    height: .5em;
+    width: 100%;
+  }
+
+  [availability-type] {
+    color: transparentize(#3a3a3a, .6);
+    flex-shrink: 0;
+    // margin-right: .35em;
+
+    @include rtl-prop(margin-right, margin-left,.35em, 0);
+
+    md-icon {
+      @include setSize(15px);
+      position: relative;
+    }
+  }
+
+  span {
+    white-space: normal;
+    display: inline;
+
+    &:not(.availability-status){
+      [dir="rtl"] & {
+        display: inline-flex;
+      }
+    }
+
+    + span {
+      [dir="rtl"] & {
+        padding-right:  .2em;
+      }
+    }
+  }
+  .availability-status {
+    span {
+      // display: inline-block;
+      &:first-child {
+        + .locations-link:before {
+            content: "\00a0";
+        }
+      }
+    }
+    
+  }
+
+  prm-spinner {
+    position: relative;
+    transition: transform .3s 0s cubic-bezier(0.680, -0.550, 0.265, 1.550);;
+    transform: scale(.8);
+    margin-left: .2em;
+    // transform-origin: 0 50%;
+    // left: 2.8em;
+    top: 1px;
+    &.hidden {
+      transform: scale(0);
+    }
+  }
+  prm-brief-result +&  {
+      position: relative;
+      // top: -4px;
+  }
+
+}
