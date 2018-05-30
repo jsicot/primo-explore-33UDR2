@@ -5,6 +5,7 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
       $scope.kohaDisplay = false; /* default hides template */
       var obj = $scope.$ctrl.parentCtrl.item.pnx.control;
       var openurl;
+      $scope.loading = true;
       if (obj.hasOwnProperty("sourcerecordid") && obj.hasOwnProperty("sourceid")) {
         var bn = obj.sourcerecordid[0];
         var source = obj.sourceid[0];
@@ -18,6 +19,7 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
             var imagePath = response.data.record[0].cover;
             if (kohaid === null) {
             } else {
+	          $scope.loading = false;
 	          angular.element(document.querySelector('prm-opac > md-tabs'))[0].style.display = "none"; 
               $scope.kohaid = kohaid;
               $scope.items = items;
@@ -30,8 +32,10 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
 					console.log(response.data.record);
 					angular.element(document.querySelector('prm-opac > md-tabs'))[0].style.display = "none";
 					$scope.kohaholdings = [];
+					$scope.loading = false;
 					for (var i = 0 ; i < response.data.record[0].holdings.length ; i++) {
 						var holding = response.data.record[0].holdings[i]
+						
 						$scope.kohaholdings[i] = {
 							"library" : holding["rcr"],
 							"holdings" : holding["holdings"]
