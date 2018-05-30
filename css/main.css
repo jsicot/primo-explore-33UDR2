@@ -1,7 +1,18 @@
 @charset "UTF-8";
+/*Direct linking stuff*/
+/*make "view details" remain visible on record mouseover*/
+/*
+prm-search-result-availability-line {
+	z-index: 10;
+}
+*/
 .check-avail-link {
   color: #008a0c;
   font-size: 18px !important; }
+
+/*make Location be in bold - to increase contrast and make it easier to photograph call number with smart phone journal*/
+span[class*="best-location"] {
+  font-weight: bold; }
 
 prm-search-result-availability-koha {
   line-height: 1.2em;
@@ -76,6 +87,10 @@ a.md-button[aria-label="mainmenu.label.Browse"] {
   display: none;
 }
 */
+/*remove "Show results beyond my Libraries collection"*/
+#facets > prm-facet > div > div > div.sidebar-section.margin-top-small.margin-bottom-medium.compensate-padding-left {
+  display: none; }
+
 /*remove availability text in full record view*/
 prm-full-view-service-container prm-brief-result-container prm-search-result-availability-koha {
   display: none; }
@@ -85,6 +100,15 @@ prm-full-view prm-search-result-availability-line > *:not(:last-child),
 prm-full-view prm-search-result-availability-line-after a.check-avail-link {
   display: none; }
 
+/* hide non-utf-8 options in export to ris/bibtex dropdown*/
+[value="windows-1251"],
+[value="US-ASCII"],
+[value="ISO-8859-1"],
+prm-export-ris ._md-select-icon,
+prm-export-bibtex ._md-select-icon {
+  display: none !important;
+  cursor: pointer; }
+
 /*
 // Hide Get It section on full view
 [aria-label="Get It"],
@@ -92,6 +116,13 @@ prm-full-view prm-search-result-availability-line-after a.check-avail-link {
   display: none;
 }
 */
+/*Hide "Get it" link for online resources*/
+#getit_link2 > div {
+  display: none; }
+
+[aria-label="Get It 2"] {
+  display: none; }
+
 html, body {
   background: #FFF;
   color: #333; }
@@ -104,10 +135,10 @@ body, prm-topbar .md-button, .md-button {
 prm-logo .product-logo {
   cursor: pointer;
   height: 140px;
-  padding: 20px 20px 10px 20px;
+  padding: 20px 20px 10px;
   background: #BD9A55;
   position: absolute;
-  top: 0px;
+  top: 0;
   margin: 0 30px; }
 
 @media screen and (max-width: 1280px) {
@@ -118,7 +149,15 @@ prm-logo .product-logo {
     background: #BD9A55;
     margin: 0; } }
 
-/*stop nav from sliding under logo journal*/
+prm-main-menu[menu-type=menu] .top-nav-bar-links {
+  position: relative; }
+
+div.full-view-inner-container {
+  background: #FFF; }
+
+prm-brief-result-container .list-item-primary-content {
+  background: #FFF; }
+
 prm-topbar prm-logo {
   z-index: 10;
   height: 100%;
@@ -133,160 +172,12 @@ prm-main-menu[menu-type="menu"] .md-button {
 prm-main-menu[menu-type="menu"] .md-button span.item-content {
   text-transform: uppercase; }
 
-/*apply min height to top bar so images show up journal*/
 prm-topbar {
   height: 80px; }
 
-/*change font size in top bar journal*/
 prm-main-menu[menu-type=menu] .md-button span.item-content {
   font-size: 1.25em;
   font-weight: 400; }
-
-/*search history and thumbtack in top bar journal*/
-prm-main-menu[menu-type=menu] .top-nav-bar-links {
-  position: relative; }
-
-div.full-view-inner-container {
-  background: #FFF; }
-
-prm-brief-result-container .list-item-primary-content {
-  background: #FFF; }
-
-/*Advanced search 'page' journal*/
-prm-search-bar div.advanced-search-backdrop {
-  background: #434A54; }
-
-/*advanced search - push first line across journal*/
-#advanced-search > form > div > div.layout-xs-column.layout-row.flex > md-card.zero-margin.marginless-inputs.padded-container._md.md-primoExplore-theme.layout-align-start-start.layout-column.flex > div.layout-full-width.layout-align-start-start.layout-column > div:first-of-type {
-  margin-left: 71px; }
-
-md-input-container:after {
-  background-color: #416ebf; }
-
-/*make text 'simple search' on Advanced screen white journal*/
-prm-search-bar .search-switch-buttons .md-button.switch-to-simple {
-  color: #FFF; }
-
-/*make Location be in bold - to increase contrast and make it easier to photograph call number with smart phone journal*/
-span[class*="best-location"] {
-  font-weight: bold; }
-
-/*E-journal page journal*/
-prm-journals-search-bar {
-  background: #434A54; }
-
-/*Give some space under Fines heading on Fines page journal */
-#tab-content-3 > div > div > prm-fines > div > div.layout-column > div.header-title.layout-row {
-  margin-top: -7px;
-  padding-bottom: 0.7em; }
-
-/* ----------------------------------------------------*/
-/*responsive stuff for small screens journal*/
-@media screen and (max-width: 640px) {
-  /*add border to search box journal*/
-  prm-search-bar #searchBar {
-    border-top: 1px solid #e1e1e1;
-    border-radius: 0; }
-  prm-autocomplete md-autocomplete-wrap {
-    border-top: 1px solid #e1e1e1; }
-  /*hide the search scopes dropdown journal*/
-  prm-search-bar .simple-search-wrapper .search-options prm-tabs-and-scopes-selector, #select_value_label_1, #select_value_label_2, prm-search-bar div.search-options.flex-sm-40.visible {
-    display: none; } }
-
-@media screen and (max-width: 768px) {
-  /*fit user area in journal */
-  #user_area_after {
-    position: relative;
-    float: right;
-    min-width: 200px;
-    height: 100%;
-    margin: 0;
-    padding: 0; }
-  /*hide boolean tips and search tips on mobile journal*/
-  #boolean, #searchtips {
-    max-width: 100%; }
-  /*make search button bit tidier journal*/
-  prm-search-bar .simple-search-wrapper md-autocomplete-wrap input {
-    height: 59px; }
-  /* lop off username if too long journal*/
-  .user-name {
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-    max-width: 10em;
-    right: -0.8em; }
-  /*shorten placeholder text journal*/
-  ::-webkit-input-placeholder {
-    /* Chrome/Opera/Safari */
-    text-overflow: ellipsis;
-    max-width: 63%; }
-  ::-moz-placeholder {
-    /* Firefox 19+ */
-    text-overflow: ellipsis; }
-  :-ms-input-placeholder {
-    /* IE 10+ */
-    text-overflow: ellipsis; }
-  :-moz-placeholder {
-    /* Firefox 18- */
-    text-overflow: ellipsis; }
-  [placeholder] {
-    text-overflow: ellipsis; }
-  ::placeholder {
-    text-overflow: ellipsis; }
-  input::placeholder {
-    text-overflow: ellipsis; }
-  /*for FF because it's being daft journal*/
-  #searchBar:placeholder-shown {
-    overflow: hidden;
-    max-width: 99%;
-    width: 99%;
-    border: none;
-    text-overflow: ellipsis; }
-  prm-autocomplete md-autocomplete-wrap {
-    width: 99% !important;
-    max-width: 99%;
-    text-overflow: ellipsis; } }
-
-/*November release bits */
-/*remove extra space in basic search results journal */
-.search-result-availability-line-wrapper {
-  min-height: 0.5em; }
-
-/*try and get rid of little blue pixels that appear in Safari on input fields journal*/
-md-input-container::after {
-  height: 0;
-  width: 0;
-  content: "";
-  display: block;
-  border-bottom: 2px solid #416ebf; }
-
-/*fix issue with logo hover highlighting journal*/
-#banner.product-logo a.md-primoExplore-theme {
-  background: none; }
-
-#banner.product-logo a:hover {
-  background: none; }
-
-/* Fix display of 'X' for Safari journal*/
-div.md-dialog-container.fixed-container > div > button {
-  background: #d4d4d4;
-  border-radius: 50%;
-  opacity: 4; }
-
-/*remove blue hover under banner logo journal */
-a.md-primoExplore-theme, #banner > a:nth-child(1):hover {
-  box-shadow: none; }
-
-/*remove "Show results beyond my Libraries collection"*/
-#facets > prm-facet > div > div > div.sidebar-section.margin-top-small.margin-bottom-medium.compensate-padding-left {
-  display: none; }
-
-/*Hide "Get it" link for online resources*/
-#getit_link2 > div {
-  display: none; }
-
-[aria-label="Get It 2"] {
-  display: none; }
 
 /*move first advanced search box to line up labels/inputs*/
 #advanced-search > form > div > div.layout-xs-column.layout-row.flex > md-card.zero-margin.marginless-inputs.padded-container._md.md-primoExplore-theme.layout-align-start-start.layout-column.flex > div.layout-full-width.layout-align-start-start.layout-column > div:nth-child(1) {
@@ -294,98 +185,187 @@ a.md-primoExplore-theme, #banner > a:nth-child(1):hover {
   width: 88.3%;
   min-width: 88.3%; }
 
-/*add space to link out icon in "Links" section of full view*/
-[translate="fulldisplay.worldcat"] {
-  padding-right: 1.8em; }
-
-/*Remove Hide Details from monograph records*/
-#selectIssueForm > div > div > ul > li:last-child {
-  display: none; }
-
-/*remove space from left of "Request an interload"*/
-.iframeHeader .submitAsLink.popout {
-  margin-left: 0px; }
-
-/*increase send-to box sizes to allow all text to fit*/
-.saved-query-list > md-nav-bar .md-nav-item, prm-action-list > md-nav-bar .md-nav-item {
-  max-width: 110px; }
-
-/*move sort options*/
-@media screen and (min-width: 960px) {
-  #facets > prm-facet > div > div > div.sidebar-section.margin-bottom-small.compensate-padding-left.layout-row {
-    margin-left: 260%;
-    position: absolute;
-    margin-top: -27px;
-    z-index: 1; }
-  #facets > prm-facet > div > div > div.sidebar-section.margin-bottom-small.compensate-padding-left.layout-row > div > h3 {
-    font-size: 0.85em;
-    font-weight: 600; }
-  prm-search-result-sort-by {
-    padding-bottom: 6px;
-    font-size: 14px; } }
-
-/*change page number heading to lower case*/
-div._md-subheader-inner > div._md-subheader-content > span.text.tiny-uppercase-text {
-  letter-spacing: 0;
-  text-transform: capitalize; }
-
-/*resize E-journal search box label to fit*/
-prm-browse-search-bar .journal-search-tile, prm-journals-search-bar .journal-search-tile, prm-tags-search-bar .journal-search-tile {
-  width: 95px; }
-
-/*tidy up date facet in Firefox*/
-[translate="facets.date.slider.from"] + input {
-  max-width: 80px !important; }
-
-[translate="facets.date.slider.to"] + input {
-  max-width: 80px !important; }
-
-/*capitalise 'reviews" in advanced search material type dropdown*/
-md-select-menu > md-content > [value="reviews"] {
-  text-transform: capitalize; }
-
-/*Direct linking stuff*/
-/*make "view details" remain visible on record mouseover*/
-prm-search-result-availability-line {
-  z-index: 10; }
-
-div > div > prm-fines > md-list > md-list-item > div.in-element-dialog-context.layout-row.flex > div.md-list-item-text.layout-wrap.layout-row.flex > div.weak-text.flex-xs-100.flex [translate="nui.fine.brief.2"] {
-  padding-left: 1em; }
-
-div > div._md-list-item-inner > div.md-list-item-text > p.bold-text.weak-text {
-  direction: rtl; }
-
-/*fix up fines button positioning until Merrin fixes it at her end*/
-#pay_fines_btn_wrapper_main {
-  height: 0;
-  top: 0; }
-
-#tab-content-0 > div > div > div > prm-fines-overview > div > div > div.tile-header.layout-column > div.layout-align-space-between-stretch.layout-row > h2 {
-  margin-top: 0px; }
-
 prm-view-online > div > a > prm-icon [aria-label="icon-open-in-new"] {
-  margin-left: 0.5em; }
+  margin-left: .5em; }
 
-/*fix the topbar in the services page*/
-prm-services-page prm-topbar {
-  height: 140px; }
+#changUserStatus {
+  /* 	display: none; */
+  background-color: #774E9A; }
 
-prm-services-page prm-topbar > div {
-  border-top: 13px solid #774E9A; }
+/*mobile stuff - menu, etc*/
+md-backdrop._md-dialog-backdrop {
+  z-index: 80; }
 
-prm-services-page prm-user-area {
+prm-main-menu md-card.transparent-card:nth-child(2) {
+  display: flex; }
+
+prm-main-menu div > prm-authentication {
+  padding-left: .8em; }
+
+/*updated sort by dropdown*/
+#sort_by_dropdown_wrapper {
+  overflow: hidden;
+  display: block;
+  margin-bottom: -1.1em; }
+
+#sort_by_dropdown_header {
+  font-size: .85em;
+  font-weight: 600;
+  float: right;
+  padding-top: .8em; }
+
+#sort_by_dropdown_wrapper > prm-search-result-sort-by {
+  padding: 0;
+  margin-top: -.05em;
+  float: right; }
+
+/*when controlled vocab box present*/
+.controlled_vocab_present {
+  margin-top: 3em; }
+
+#mainResults > div.margin-bottom-medium {
+  margin-top: -4.5em; }
+
+#mainResults > div.results-title.layout-align-start-center.layout-row {
+  width: 50%; }
+
+/*adjust "sort by" in favourites*/
+prm-favorites md-tabs-wrapper {
+  position: absolute;
+  width: 80%; }
+
+prm-favorites .section-title {
+  margin-top: -6em;
+  margin-left: -11em;
+  position: absolute; }
+
+prm-favorites [translate="nui.favorites.sortby"] {
+  font-size: 13px;
+  font-weight: 600; }
+
+prm-favorites .static-select.empty-select-on-init.md-primoExplore-theme.layout-row.md-input-has-value {
+  font-size: 14px;
+  padding-bottom: .15em; }
+
+prm-favorites .main._md.md-primoExplore-theme.layout-align-center-start.layout-row.flex.padded-container {
+  padding-top: 5em; }
+
+prm-favorites md-tabs.md-dynamic-height md-tabs-content-wrapper {
+  margin-top: 3em; }
+
+prm-favorites div > md-content > div.flex {
+  margin-top: -3em; }
+
+/*align alert bar "sign in" */
+prm-alert-bar [translate="eshelf.signin.title"] {
+  line-height: normal; }
+
+.bar.alert-bar, .classic-input .search-scope, .prm-alert-border {
+  border-color: #d6d6d6; }
+
+.bar.alert-bar, .classic-input .search-scope, .prm-alert-bg {
+  background-color: #efefef; }
+
+/*favorites back button*/
+a#back_button {
+  padding-top: .3em;
+  font-weight: 300;
+  font-size: 1em;
+  margin-right: .5em;
+  padding-left: .5em;
+  color: grey;
+  right: 23%;
+  position: absolute;
+  box-shadow: none;
+  padding-right: .5em; }
+
+#back_button > md-icon {
+  height: 28px;
+  width: 28px;
+  margin-right: .5em; }
+
+/*allow clicking while autocomplete box is open*/
+.md-scroll-mask {
+  position: initial; }
+
+/*no search results*/
+#sort_by_dropdown_wrapper.no_results {
   display: none; }
 
-prm-services-page prm-search-bookmark-filter {
-  display: none !important; }
+prm-no-search-result md-card.default-card.zero-margin._md.md-primoExplore-theme {
+  margin-top: 4.5em !important; }
 
-prm-services-page div.full-view-section-content prm-full-view-service-container {
+.pinDummy.animating {
+  top: 6em !important;
+  left: calc(100% - 7.2em) !important; }
+
+/*make main menu hovers sentence case*/
+md-tooltip > div._md-content._md._md-show:first-letter {
+  text-transform: uppercase; }
+
+/*hide "sign in" link on search results alert bar */
+prm-alert-bar prm-authentication {
   display: none; }
+
+/*hide duplicate wording under main menu elipses*/
+prm-main-menu md-card-title-text .md-subhead {
+  display: none; }
+
+/*fix search options dropdown width*/
+prm-search-bar div.search-options.flex-sm-40.visible {
+  max-width: 11.7em;
+  width: 11.7em; }
+
+/*fix size of advanced search options dropdowns*/
+prm-advanced-search md-card.zero-margin.marginless-inputs.padded-container._md.md-primoExplore-theme.layout-column.flex-gt-sm-30.flex {
+  width: 11.7em;
+  max-width: 13.8em; }
+
+/*show favorites sort in ipad view*/
+#favoritesLabels {
+  display: block !important; }
+
+/*bookmark filter tidyup*/
+prm-search-bookmark-filter a:hover {
+  box-shadow: none; }
+
+/*direct linking - background color while waiting for stuff to load*/
+prm-search-result-list div.list-item-wrapper {
+  background-color: #fff; }
+
+#view_deets {
+  margin-top: .5em; }
+
+/*hide exlibris default icons*/
+.fallback-img {
+  /* display: none; */ }
+
+/*central floor info*/
+.cenFloor {
+  padding-left: 5px;
+  font-weight: 700; }
+
+prm-advanced-search div.date-range-inputs.animate-input.layout-row > md-input-container > md-select > md-select-value > span._md-select-icon {
+  width: 15px; }
+
+.peer-reviewed-mark {
+  padding: 4px 0 0; }
+
+prm-full-view prm-brief-result > h3.item-title {
+  max-width: 87% !important; }
 
 /*change colour of title in full result view*/
 #brief > prm-full-view-service-container > div.section-body > prm-brief-result-container > div.list-item-primary-content.result-item-primary-content.layout-row > div.result-item-text.layout-fill.layout-column.flex > prm-brief-result > h3 > a > span > prm-highlight > span {
   color: #6d6d6d;
   /*cursor: auto;*/ }
+
+.full-view-section {
+  margin-top: 1.5em; }
+
+.full-view-section prm-view-online-after .section-title {
+  font-weight: 400;
+  text-transform: uppercase;
+  font-size: 1em; }
 
 @media screen and (min-height: 460px) and (min-width: 1280px) {
   /*make send-to vertical*/
@@ -560,274 +540,6 @@ prm-services-page div.full-view-section-content prm-full-view-service-container 
     margin: 0 8px;
     padding: 0 8px; } }
 
-/*fixes the sticky "exclude" facet option*/
-#facets > prm-facet > div > div > div > prm-facet-group > div > prm-facet-exact > div > div.md-chips.md-chips-wrap > div:nth-child(6):focus {
-  display: none; }
-
-.cust_prm_out {
-  padding-left: 0.5em;
-  display: inline; }
-
-.cust_prm_out md-icon {
-  height: 16px;
-  width: 16px;
-  min-height: 16px;
-  min-width: 16px; }
-
-/*mobile stuff - menu, etc*/
-md-backdrop._md-dialog-backdrop {
-  z-index: 80; }
-
-prm-main-menu md-card.transparent-card:nth-child(2) {
-  display: flex; }
-
-prm-main-menu div > prm-authentication {
-  padding-left: 0.8em; }
-
-/*updated sort by dropdown*/
-#sort_by_dropdown_wrapper {
-  overflow: hidden;
-  display: block;
-  margin-bottom: -1.1em; }
-
-#sort_by_dropdown_header {
-  font-size: 0.85em;
-  font-weight: 600;
-  float: right;
-  padding-top: 0.8em; }
-
-#sort_by_dropdown_wrapper > prm-search-result-sort-by {
-  padding: 0;
-  margin-top: -0.05em;
-  float: right; }
-
-/*when controlled vocab box present*/
-.controlled_vocab_present {
-  margin-top: 3em; }
-
-#mainResults > div.margin-bottom-medium {
-  margin-top: -4.5em; }
-
-#mainResults > div.results-title.layout-align-start-center.layout-row {
-  width: 50%; }
-
-.full-view-section {
-  margin-top: 1.5em; }
-
-.full-view-section prm-view-online-after .section-title {
-  font-weight: 400;
-  text-transform: uppercase;
-  font-size: 1em; }
-
-/*adjust "sort by" in favourites*/
-prm-favorites md-tabs-wrapper {
-  position: absolute;
-  width: 80%; }
-
-prm-favorites .section-title {
-  margin-top: -6em;
-  margin-left: -11em;
-  position: absolute; }
-
-prm-favorites [translate="nui.favorites.sortby"] {
-  font-size: 13px;
-  font-weight: 600; }
-
-prm-favorites .static-select.empty-select-on-init.md-primoExplore-theme.layout-row.md-input-has-value {
-  font-size: 14px;
-  padding-bottom: 0.15em; }
-
-prm-favorites .main._md.md-primoExplore-theme.layout-align-center-start.layout-row.flex.padded-container {
-  padding-top: 5em; }
-
-prm-favorites md-tabs.md-dynamic-height md-tabs-content-wrapper {
-  margin-top: 3em; }
-
-prm-favorites div > md-content > div.flex {
-  margin-top: -3em; }
-
-/*make facet checkboxes show on facet area hover*/
-prm-facet > div:hover .multiselect-facet-group.multiselect-inactive .md-chip md-checkbox {
-  opacity: 1;
-  visibility: visible;
-  z-index: 100;
-  transform: scaleX(1);
-  transition: all 0s 0s; }
-
-/* make the lock show on facets area */
-prm-facet prm-breadcrumbs div.md-chip-content strong {
-  padding-left: 22px; }
-
-prm-breadcrumbs .md-chips .md-chip-content .persistence-button {
-  opacity: 1;
-  transform: none;
-  padding-left: -2px; }
-
-prm-breadcrumbs .md-chip.persistent-facet strong {
-  padding-left: 0; }
-
-prm-breadcrumbs .md-chip.persistent-facet .md-chip-content .persistence-button {
-  left: -1px; }
-
-/*stop the facets from jump in when checkbox ticked*/
-.md-chip.animate-opacity-and-scale.facet-element-marker-rtype,
-.md-chip.animate-opacity-and-scale.facet-element-marker-tlevel,
-.md-chip.animate-opacity-and-scale.facet-element-marker-library,
-.md-chip.animate-opacity-and-scale.facet-element-marker-topic,
-.md-chip.animate-opacity-and-scale.facet-element-marker-jtitle,
-.section-content.animate-max-height-variable.md-chip {
-  transform: none; }
-
-/*stop the checkbox remaining after it's unchecked*/
-prm-facet .multiselect-facet-group.multiselect-inactive .md-chip md-checkbox:focus {
-  visibility: hidden; }
-
-/*align alert bar "sign in" */
-prm-alert-bar [translate="eshelf.signin.title"] {
-  line-height: normal; }
-
-.bar.alert-bar, .classic-input .search-scope, .prm-alert-border {
-  border-color: #d6d6d6; }
-
-.bar.alert-bar, .classic-input .search-scope, .prm-alert-bg {
-  background-color: #efefef; }
-
-/*date facet adjustments*/
-prm-facet md-input-container .md-input {
-  border-bottom-color: rgba(0, 0, 0, 0.12);
-  width: 4.5em;
-  margin-right: 0.8em; }
-
-/*make chrome date facet inputs always show arrows*/
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button {
-  opacity: 1; }
-
-/*favorites back button*/
-a#back_button {
-  padding-top: 0.3em;
-  font-weight: 300;
-  font-size: 1em;
-  margin-right: .5em;
-  padding-left: .5em;
-  color: grey;
-  right: 23%;
-  position: absolute;
-  box-shadow: none;
-  padding-right: 0.5em; }
-
-#back_button > md-icon {
-  height: 28px;
-  width: 28px;
-  margin-right: 0.5em; }
-
-/* hide non-utf-8 options in export to ris/bibtex dropdown*/
-[value="windows-1251"],
-[value="US-ASCII"],
-[value="ISO-8859-1"],
-prm-export-ris ._md-select-icon,
-prm-export-bibtex ._md-select-icon {
-  display: none !important;
-  cursor: pointer; }
-
-/*allow clicking while autocomplete box is open*/
-.md-scroll-mask {
-  position: initial; }
-
-/*no search results*/
-#sort_by_dropdown_wrapper.no_results {
-  display: none; }
-
-prm-no-search-result md-card.default-card.zero-margin._md.md-primoExplore-theme {
-  margin-top: 4.5em !important; }
-
-.pinDummy.animating {
-  top: 6em !important;
-  left: calc(100% - 7.2em) !important; }
-
-/*remove odd stuff when signing in*/
-prm-stand-alone-login {
-  display: none; }
-
-/*make main menu hovers sentence case*/
-md-tooltip > div._md-content._md._md-show:first-letter {
-  text-transform: uppercase; }
-
-/*hide "sign in" link on search results alert bar */
-prm-alert-bar prm-authentication {
-  display: none; }
-
-/*hide duplicate wording under main menu elipses*/
-prm-main-menu md-card-title-text .md-subhead {
-  display: none; }
-
-/*fix search options dropdown width*/
-prm-search-bar div.search-options.flex-sm-40.visible {
-  max-width: 11.7em;
-  width: 11.7em; }
-
-/*fix size of advanced search options dropdowns*/
-prm-advanced-search md-card.zero-margin.marginless-inputs.padded-container._md.md-primoExplore-theme.layout-column.flex-gt-sm-30.flex {
-  width: 11.7em;
-  max-width: 13.8em; }
-
-/*fix facet widths*/
-prm-search div#facets {
-  flex: 1 1 25%;
-  max-width: 25%;
-  max-height: 100%;
-  box-sizing: border-box;
-  min-width: 19em; }
-
-/*show favorites sort in ipad view*/
-#favoritesLabels {
-  display: block !important; }
-
-/*bookmark filter tidyup*/
-prm-search-bookmark-filter a:hover {
-  box-shadow: none; }
-
-/*make the lib card hover behave like the other icons*/
-#library_card_button_not_signed_in:hover, #library_card_button > button > prm-icon:hover {
-  background-color: rgba(0, 0, 0, 0.1);
-  transition: box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), background-color 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); }
-
-/*direct linking - background color while waiting for stuff to load*/
-prm-search-result-list div.list-item-wrapper {
-  background-color: #fff; }
-
-#view_deets {
-  margin-top: 0.5em; }
-
-/*hide exlibris default icons*/
-.fallback-img {
-  /* display: none; */ }
-
-/*central floor info*/
-.cenFloor {
-  padding-left: 5px;
-  font-weight: bold; }
-
-prm-advanced-search div.date-range-inputs.animate-input.layout-row > md-input-container > md-select > md-select-value > span._md-select-icon {
-  width: 15px; }
-
-/*feb release remove default exl sign in area*/
-#changUserStatus {
-  /* 	display: none; */
-  background-color: #774E9A; }
-
-/*fix first result not having an underline (not a complete fix)*/
-.peer-reviewed-mark {
-  padding: 4px 0 0 0; }
-
-/*remove sms option under my account > details*/
-prm-personal-info md-input-container.underlined-input.md-primoExplore-theme.layout-column md-checkbox {
-  display: none; }
-
-/*stop fav's btn overlapping on small screens*/
-prm-full-view prm-brief-result > h3.item-title {
-  max-width: 87% !important; }
-
 /*reorder the full view sections*/
 #getit_link1_0 {
   order: 0; }
@@ -897,6 +609,72 @@ prm-search-result-list .pages-separated-with-gaps .list-item-wrapper:nth-last-ch
 /*fix background color in favorites area*/
 prm-favorites md-list-item.list-item-wrapper {
   background: #FFF; }
+
+prm-breadcrumbs .md-chips .md-chip-content .persistence-button {
+  opacity: 1;
+  transform: none;
+  padding-left: -2px; }
+
+prm-breadcrumbs .md-chip.persistent-facet strong {
+  padding-left: 0; }
+
+prm-breadcrumbs .md-chip.persistent-facet .md-chip-content .persistence-button {
+  left: -1px; }
+
+/*tidy up date facet in Firefox*/
+[translate="facets.date.slider.from"] + input {
+  max-width: 80px !important; }
+
+[translate="facets.date.slider.to"] + input {
+  max-width: 80px !important; }
+
+/*fixes the sticky "exclude" facet option*/
+#facets > prm-facet > div > div > div > prm-facet-group > div > prm-facet-exact > div > div.md-chips.md-chips-wrap > div:nth-child(6):focus {
+  display: none; }
+
+/*make facet checkboxes show on facet area hover*/
+prm-facet > div:hover .multiselect-facet-group.multiselect-inactive .md-chip md-checkbox {
+  opacity: 1;
+  visibility: visible;
+  z-index: 100;
+  transform: scaleX(1);
+  transition: all 0s 0s; }
+
+/* make the lock show on facets area */
+prm-facet prm-breadcrumbs div.md-chip-content strong {
+  padding-left: 22px; }
+
+/*stop the facets from jump in when checkbox ticked*/
+.md-chip.animate-opacity-and-scale.facet-element-marker-rtype,
+.md-chip.animate-opacity-and-scale.facet-element-marker-tlevel,
+.md-chip.animate-opacity-and-scale.facet-element-marker-library,
+.md-chip.animate-opacity-and-scale.facet-element-marker-topic,
+.md-chip.animate-opacity-and-scale.facet-element-marker-jtitle,
+.section-content.animate-max-height-variable.md-chip {
+  transform: none; }
+
+/*stop the checkbox remaining after it's unchecked*/
+prm-facet .multiselect-facet-group.multiselect-inactive .md-chip md-checkbox:focus {
+  visibility: hidden; }
+
+/*fix facet widths*/
+prm-search div#facets {
+  flex: 1 1 25%;
+  max-width: 25%;
+  max-height: 100%;
+  box-sizing: border-box;
+  min-width: 19em; }
+
+/*date facet adjustments*/
+prm-facet md-input-container .md-input {
+  border-bottom-color: rgba(0, 0, 0, 0.12);
+  width: 4.5em;
+  margin-right: 0.8em; }
+
+/*make chrome date facet inputs always show arrows*/
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  opacity: 1; }
 
 /*Uncomment the follwoing lines to move facets to the left*/
 /*

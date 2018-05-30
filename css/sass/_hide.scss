@@ -41,6 +41,10 @@ a.md-button[aria-label="mainmenu.label.Browse"] {
 }
 */
 
+
+/*remove "Show results beyond my Libraries collection"*/
+#facets > prm-facet > div > div > div.sidebar-section.margin-top-small.margin-bottom-medium.compensate-padding-left {display: none;}
+
 /*remove availability text in full record view*/
  prm-full-view-service-container prm-brief-result-container prm-search-result-availability-koha{display: none;}
 // Hide availability links on brief and full display
@@ -51,6 +55,15 @@ prm-full-view prm-search-result-availability-line-after a.check-avail-link {
   display: none;
 }
 
+/* hide non-utf-8 options in export to ris/bibtex dropdown*/
+[value="windows-1251"],
+[value="US-ASCII"],
+[value="ISO-8859-1"],
+prm-export-ris ._md-select-icon,
+prm-export-bibtex ._md-select-icon {
+	display: none !important;
+	cursor: pointer;
+}
 
 
 /*
@@ -62,4 +75,7 @@ prm-full-view prm-search-result-availability-line-after a.check-avail-link {
 */
 
 
+/*Hide "Get it" link for online resources*/
+#getit_link2 > div {display: none;}
+[aria-label="Get It 2"] {display: none;}
 

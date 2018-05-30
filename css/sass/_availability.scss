@@ -1,7 +1,18 @@
+/*Direct linking stuff*/
+/*make "view details" remain visible on record mouseover*/
+/*
+prm-search-result-availability-line {
+	z-index: 10;
+}
+*/
+
 .check-avail-link {
   color: $getit_green;
   font-size: 18px !important;
 }
+
+/*make Location be in bold - to increase contrast and make it easier to photograph call number with smart phone journal*/
+span[class*="best-location"] {font-weight: bold;}
 
 // set element size
 // pass a value to set it's size
@@ -21,8 +32,6 @@
 }
 
 prm-search-result-availability-koha {
-
-
   line-height: 1.2em;
   display: block;
   &:before {
