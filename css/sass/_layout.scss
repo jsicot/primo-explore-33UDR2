@@ -8,6 +8,8 @@ body,prm-topbar .md-button,.md-button {
 	text-transform:none;
 }
 
+prm-search-bar div.advanced-search-backdrop {background: #434A54;}
+
 /*make logo area bit better journal*/
 prm-logo .product-logo {
 	cursor:pointer;
@@ -97,38 +99,7 @@ prm-main-menu div > prm-authentication {
 	padding-left:.8em;
 }
 
-/*updated sort by dropdown*/
-#sort_by_dropdown_wrapper {
-	overflow:hidden;
-	display:block;
-	margin-bottom:-1.1em;
-}
 
-#sort_by_dropdown_header {
-	font-size:.85em;
-	font-weight:600;
-	float:right;
-	padding-top:.8em;
-}
-
-#sort_by_dropdown_wrapper > prm-search-result-sort-by {
-	padding:0;
-	margin-top:-.05em;
-	float:right;
-}
-
-/*when controlled vocab box present*/
-.controlled_vocab_present {
-	margin-top:3em;
-}
-
-#mainResults > div.margin-bottom-medium {
-	margin-top:-4.5em;
-}
-
-#mainResults > div.results-title.layout-align-start-center.layout-row {
-	width:50%;
-}
 
 /*adjust "sort by" in favourites*/
 prm-favorites md-tabs-wrapper {

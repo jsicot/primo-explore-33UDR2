@@ -41,6 +41,7 @@ a.md-button[aria-label="mainmenu.label.Browse"] {
 }
 */
 
+.sidebar-section h2.sidebar-title {display: none;}
 
 /*remove "Show results beyond my Libraries collection"*/
 #facets > prm-facet > div > div > div.sidebar-section.margin-top-small.margin-bottom-medium.compensate-padding-left {display: none;}
