@@ -8,7 +8,8 @@ body,prm-topbar .md-button,.md-button {
 	text-transform:none;
 }
 
-prm-search-bar div.advanced-search-backdrop {background: #434A54;}
+prm-search-bar div.advanced-search-backdrop {background: #8981B5;}
+prm-atoz-search-bar .search-switch-buttons .md-button.switch-to-simple, prm-browse-search-bar .search-switch-buttons .md-button.switch-to-simple, prm-newspapers-search-bar .search-switch-buttons .md-button.switch-to-simple, prm-search-bar .search-switch-buttons .md-button.switch-to-simple, prm-tags-search-bar .search-switch-buttons .md-button.switch-to-simple{color: #FFF;}
 
 /*make logo area bit better journal*/
 prm-logo .product-logo {
@@ -62,7 +63,7 @@ prm-main-menu[menu-type="menu"] .md-button span.item-content {
 }
 
 prm-topbar {
-	height:80px;
+	height:60px;
 }
 
 prm-main-menu[menu-type=menu] .md-button span.item-content {
@@ -81,10 +82,6 @@ prm-view-online > div > a > prm-icon [aria-label="icon-open-in-new"] {
 	margin-left:.5em;
 }
 
-#changUserStatus {
-/* 	display: none; */
-	background-color:#774E9A;
-}
 
 /*mobile stuff - menu, etc*/
 md-backdrop._md-dialog-backdrop {
