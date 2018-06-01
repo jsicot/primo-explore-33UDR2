@@ -14,6 +14,8 @@
   "license": "ISC",
   "dependencies": {},
   "devDependencies": {
+    "angulartics": "^1.6.0",
+    "angulartics-google-tag-manager": "^0.0.1",
     "primo-explore-google-analytics": "^0.1.1"
   },
   "keywords": []
