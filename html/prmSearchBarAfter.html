@@ -1,0 +1,15 @@
+<md-fab-toolbar md-direction="left" md-open="$ctrl.showUserMenu" (keydown)="$ctrl.keydownSupport($event)" class="md-fab-toolbar _md-animations-ready md-left"><div class="_md-fab-toolbar-wrapper">
+	<prm-top-bar-before parent-ctrl="$ctrl">
+	</prm-top-bar-before>
+	<div class="top-nav-bar" layout="row" tabindex="-1" role="banner">
+		<prm-skip-to tabindex="-1"></prm-skip-to>
+		<prm-logo class="hide-lg hide-xl"></prm-logo>
+		<div flex="50" hide-xs class="logospace"></div>
+		<prm-main-menu role="navigation" menu-type="menu" flex="50" hide-xs></prm-main-menu>
+		<div flex="50" flex-xs="100"></div>
+		<prm-search-bookmark-filter class="view-switcher" layout-align="end center" layout="row" flex="noshrink"></prm-search-bookmark-filter>
+		<prm-user-area></prm-user-area>
+	</div>
+	<prm-topbar-after parent-ctrl="$ctrl">
+	</prm-topbar-after>
+</md-fab-toolbar>
