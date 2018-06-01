@@ -30,12 +30,13 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
 		  	var response = kohaitemsService.getKohaData(url).then(function (response) {
 				if (response.data.record != undefined && response.data.record.length > 0) {
 					console.log(response.data.record);
+					$scope.loading = false;
 					angular.element(document.querySelector('prm-opac > md-tabs'))[0].style.display = "none";
 					$scope.kohaholdings = [];
-					$scope.loading = false;
+					
 					for (var i = 0 ; i < response.data.record[0].holdings.length ; i++) {
 						var holding = response.data.record[0].holdings[i]
-						
+						$scope.loading = false;
 						$scope.kohaholdings[i] = {
 							"library" : holding["rcr"],
 							"holdings" : holding["holdings"]
@@ -49,6 +50,10 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
 						}
 					}
 				}
+				else {  
+						console.log("journal : no print holding");
+						$scope.loading = false;
+					}
 			});
 /*
 			this.onClick = function() {
