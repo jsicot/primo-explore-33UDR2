@@ -9,7 +9,7 @@ angular.module('sfxHoldings', []).component('prmViewOnlineAfter', {
 	      console.log(obj);
 	      console.log(obj['link']);
           var openurl = obj['link'];
-          var openurlSvc = openurl.replace("http://acceder.bu.univ-rennes2.fr/sfx_33puedb","https://cataloguepreprod.bu.univ-rennes2.fr/r2microws/getSfx.php");
+          var openurlSvc = openurl.replace("http://acceder.bu.univ-rennes2.fr/sfx_33puedb","https://catalogue.bu.univ-rennes2.fr/r2microws/getSfx.php");
           var response = sfxholdingsService.getSfxData(openurlSvc).then(function (response) {
             var holdings = response.data;
             if (holdings === null) {

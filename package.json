@@ -1,0 +1,20 @@
+{
+  "name": "33udr2_vu1",
+  "version": "1.0.0",
+  "description": "primo customization for Rennes 2 University Libraries",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.uhb.fr/applis-doc/primo-explore-custom.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {
+    "primo-explore-google-analytics": "^0.1.1"
+  },
+  "keywords": []
+}
