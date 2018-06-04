@@ -20,7 +20,11 @@
     .md-button.md-secondary:hover:not([disabled]), .md-button.md-secondary:focus:not([disabled]), .md-button.md-secondary.hovered:not([disabled]), .md-button.md-secondary.md-focused:not([disabled]), .md-button.md-secondary._md-focused:not([disabled]) {
       color: #432260;
       background-color: rgba(119, 78, 154, 0.1); }
-  .md-button.button-confirm, .service-form-static-panel button.button-confirm prm-icon + span, .service-form-static-panel button.button-confirm prm-icon svg path {
+  .md-button.button-confirm {
+    color: white; 
+    background-color: #774E9A;
+    border-radius: 0;}
+  .service-form-static-panel button.button-confirm prm-icon + span, .service-form-static-panel button.button-confirm prm-icon svg path {
     color: #774E9A; }
     .md-button.button-confirm:hover:not([disabled]), .service-form-static-panel button.button-confirm prm-icon + span:hover:not([disabled]), .service-form-static-panel button.button-confirm prm-icon svg path:hover:not([disabled]), .md-button.button-confirm:focus:not([disabled]), .service-form-static-panel button.button-confirm prm-icon + span:focus:not([disabled]), .service-form-static-panel button.button-confirm prm-icon svg path:focus:not([disabled]), .md-button.button-confirm.hovered:not([disabled]), .service-form-static-panel button.button-confirm prm-icon + span.hovered:not([disabled]), .service-form-static-panel button.button-confirm prm-icon svg path.hovered:not([disabled]), .md-button.button-confirm.md-focused:not([disabled]), .service-form-static-panel button.button-confirm prm-icon + span.md-focused:not([disabled]), .service-form-static-panel button.button-confirm prm-icon svg path.md-focused:not([disabled]), .md-button.button-confirm._md-focused:not([disabled]), .service-form-static-panel button.button-confirm prm-icon + span._md-focused:not([disabled]), .service-form-static-panel button.button-confirm prm-icon svg path._md-focused:not([disabled]) {
       color: #432260;
@@ -31,7 +35,7 @@
         color: #FFF;
         background-color: rgba(255, 255, 255, 0.08); }
   .md-button.button-notice {
-    color: #D4CCD0; }
+    color: #7870A1; }
     .md-button.button-notice:hover:not([disabled]), .md-button.button-notice:focus:not([disabled]), .md-button.button-notice.hovered:not([disabled]), .md-button.button-notice.md-focused:not([disabled]), .md-button.button-notice._md-focused:not([disabled]) {
       color: #b4869d;
       background-color: rgba(212, 204, 208, 0.1); }
@@ -61,7 +65,7 @@
     .tiles-grid-tile .tile-content > prm-icon.md-button,
     .tiles-grid-tile .section-title .tile-content > prm-icon.md-button, md-grid-tile .tile-content > .md-button.link-alt-color,
     .tiles-grid-tile .tile-content > .md-button.link-alt-color {
-      color: #2e1c46; }
+      color: #774E9A; }
       .md-button.button-link.link-alt-color:hover:not([disabled]), .section-title prm-icon.md-button.button-link:hover:not([disabled]), .section-title md-grid-tile .tile-content > prm-icon.md-button:hover:not([disabled]), md-grid-tile .section-title .tile-content > prm-icon.md-button:hover:not([disabled]), .section-title
       .tiles-grid-tile .tile-content > prm-icon.md-button:hover:not([disabled]),
       .tiles-grid-tile .section-title .tile-content > prm-icon.md-button:hover:not([disabled]), md-grid-tile .tile-content > .md-button.link-alt-color:hover:not([disabled]),
@@ -155,7 +159,7 @@
       color: #124380;
       background-color: rgba(50, 116, 198, 0.1); }
     .md-button.button-as-link.link-alt-color, .bar prm-authentication .md-button.link-alt-color, .bar prm-authentication .section-title prm-icon.md-button, .section-title .bar prm-authentication prm-icon.md-button, .section-title prm-icon.md-button.button-as-link, prm-gallery-collection .collection-folder .item-actions button, prm-gallery-collection .collection-folder .item-actions .md-button, .is-gallery-view prm-gallery-item .collection-element .item-actions button, .is-gallery-view prm-gallery-item .collection-element .item-actions .md-button, .is-grid-view prm-gallery-item .collection-element .item-actions button, .is-grid-view prm-gallery-item .collection-element .item-actions .md-button {
-      color: black; }
+      color: #774E9A; }
       .md-button.button-as-link.link-alt-color:hover:not([disabled]), .bar prm-authentication .md-button.link-alt-color:hover:not([disabled]), .bar prm-authentication .section-title prm-icon.md-button:hover:not([disabled]), .section-title .bar prm-authentication prm-icon.md-button:hover:not([disabled]), .section-title prm-icon.md-button.button-as-link:hover:not([disabled]), prm-gallery-collection .collection-folder .item-actions button:hover:not([disabled]), prm-gallery-collection .collection-folder .item-actions .md-button:hover:not([disabled]), .is-gallery-view prm-gallery-item .collection-element .item-actions button:hover:not([disabled]), .is-gallery-view prm-gallery-item .collection-element .item-actions .md-button:hover:not([disabled]), .is-grid-view prm-gallery-item .collection-element .item-actions button:hover:not([disabled]), .is-grid-view prm-gallery-item .collection-element .item-actions .md-button:hover:not([disabled]), .md-button.button-as-link.link-alt-color:focus:not([disabled]), .bar prm-authentication .md-button.link-alt-color:focus:not([disabled]), .bar prm-authentication .section-title prm-icon.md-button:focus:not([disabled]), .section-title .bar prm-authentication prm-icon.md-button:focus:not([disabled]), .section-title prm-icon.md-button.button-as-link:focus:not([disabled]), prm-gallery-collection .collection-folder .item-actions button:focus:not([disabled]), prm-gallery-collection .collection-folder .item-actions .md-button:focus:not([disabled]), .is-gallery-view prm-gallery-item .collection-element .item-actions button:focus:not([disabled]), .is-gallery-view prm-gallery-item .collection-element .item-actions .md-button:focus:not([disabled]), .is-grid-view prm-gallery-item .collection-element .item-actions button:focus:not([disabled]), .is-grid-view prm-gallery-item .collection-element .item-actions .md-button:focus:not([disabled]), .md-button.button-as-link.link-alt-color.hovered:not([disabled]), .bar prm-authentication .md-button.link-alt-color.hovered:not([disabled]), .bar prm-authentication .section-title prm-icon.md-button.hovered:not([disabled]), .section-title .bar prm-authentication prm-icon.md-button.hovered:not([disabled]), .section-title prm-icon.md-button.button-as-link.hovered:not([disabled]), prm-gallery-collection .collection-folder .item-actions button.hovered:not([disabled]), prm-gallery-collection .collection-folder .item-actions .hovered.md-button:not([disabled]), .is-gallery-view prm-gallery-item .collection-element .item-actions button.hovered:not([disabled]), .is-gallery-view prm-gallery-item .collection-element .item-actions .hovered.md-button:not([disabled]), .is-grid-view prm-gallery-item .collection-element .item-actions button.hovered:not([disabled]), .is-grid-view prm-gallery-item .collection-element .item-actions .hovered.md-button:not([disabled]), .md-button.button-as-link.link-alt-color.md-focused:not([disabled]), .bar prm-authentication .md-button.link-alt-color.md-focused:not([disabled]), .bar prm-authentication .section-title prm-icon.md-button.md-focused:not([disabled]), .section-title .bar prm-authentication prm-icon.md-button.md-focused:not([disabled]), .section-title prm-icon.md-button.button-as-link.md-focused:not([disabled]), prm-gallery-collection .collection-folder .item-actions button.md-focused:not([disabled]), prm-gallery-collection .collection-folder .item-actions .md-focused.md-button:not([disabled]), .is-gallery-view prm-gallery-item .collection-element .item-actions button.md-focused:not([disabled]), .is-gallery-view prm-gallery-item .collection-element .item-actions .md-focused.md-button:not([disabled]), .is-grid-view prm-gallery-item .collection-element .item-actions button.md-focused:not([disabled]), .is-grid-view prm-gallery-item .collection-element .item-actions .md-focused.md-button:not([disabled]), .md-button.button-as-link.link-alt-color._md-focused:not([disabled]), .bar prm-authentication .md-button.link-alt-color._md-focused:not([disabled]), .bar prm-authentication .section-title prm-icon.md-button._md-focused:not([disabled]), .section-title .bar prm-authentication prm-icon.md-button._md-focused:not([disabled]), .section-title prm-icon.md-button.button-as-link._md-focused:not([disabled]), prm-gallery-collection .collection-folder .item-actions button._md-focused:not([disabled]), prm-gallery-collection .collection-folder .item-actions ._md-focused.md-button:not([disabled]), .is-gallery-view prm-gallery-item .collection-element .item-actions button._md-focused:not([disabled]), .is-gallery-view prm-gallery-item .collection-element .item-actions ._md-focused.md-button:not([disabled]), .is-grid-view prm-gallery-item .collection-element .item-actions button._md-focused:not([disabled]), .is-grid-view prm-gallery-item .collection-element .item-actions ._md-focused.md-button:not([disabled]) {
         color: black;
         background-color: rgba(0, 0, 0, 0.1); }
@@ -201,7 +205,7 @@
     font-size: 1em;
     border-radius: 0; }
     .md-button.neutralized-button:hover {
-      background-color: transparent; }
+     text-decoration: none; }
   .md-button.arrow-link-button .button-content {
     line-height: 1.4em; }
   .md-button.arrow-link-button:hover, .md-button.arrow-link-button:focus {
@@ -218,7 +222,6 @@
       box-shadow: 1px 0 0 0 rgba(0, 0, 0, 0.1), -1px 0 0 0 rgba(0, 0, 0, 0.1); }
   .md-button .md-ripple-container + .md-ripple-container {
     display: none; }
-
 .prm-primary-color, .request-form md-input-container label,
 .request-form md-input-container label:not(.md-no-float):not(._md-container-ignore),
 .request-form md-input-container md-select .md-select-value.md-select-placeholder,
@@ -258,14 +261,14 @@
 .prm-secondary-color, prm-search-bookmark-filter .md-button, prm-topbar .top-nav-bar {
   color: #774E9A; }
   .prm-secondary-color.prm-hue1, .link-alt-color, .section-title prm-icon, .result-item-actions .pin-button, prm-add-query-to-saved-searches .custom-button.pin-button, prm-search-bookmark-filter .prm-hue1.md-button, prm-topbar .prm-hue1.top-nav-bar, prm-pre-filters md-input-container.is-active :focus, prm-recomendation-item .media-on-hover .pin-button {
-    color: #2e1c46; }
+    color: #774E9A; }
   .prm-secondary-color.prm-hue2, prm-search-bookmark-filter .prm-hue2.md-button, prm-topbar .prm-hue2.top-nav-bar {
     color: #432c56; }
 
 .prm-secondary-bg, md-progress-linear[md-mode=indeterminate].header-progress-bar .md-bar {
   background-color: #774E9A; }
   .prm-secondary-bg.prm-hue1, .new-result-item .list-item-count, md-progress-linear[md-mode=indeterminate].header-progress-bar .prm-hue1.md-bar, md-tabs md-ink-bar, md-input-container:after, prm-tags-list .md-chips .md-chip-input-container:after, prm-tags-list .md-chips ._md-chip-input-container:after, prm-tags-list md-chips .md-chip-input-container:after, prm-tags-list md-chips ._md-chip-input-container:after, .md-input-color-underline, md-input-container.empty-select-on-init:not(.md-input-focused) md-select md-select-value:after, md-input-container.empty-select-on-init:not(.md-input-focused) .md-input-container-dummy > .md-select-dummy md-select-value:after, md-radio-button.md-checked .md-on, md-radio-button.md-checked ._md-on {
-    background-color: #2e1c46; }
+    background-color: #774E9A; }
   .prm-secondary-bg.prm-hue2, .dark-toolbar prm-pre-filters md-input-container:after, .dark-toolbar prm-pre-filters prm-tags-list .md-chips .md-chip-input-container:after, prm-tags-list .md-chips .dark-toolbar prm-pre-filters .md-chip-input-container:after, .dark-toolbar prm-pre-filters prm-tags-list .md-chips ._md-chip-input-container:after, prm-tags-list .md-chips .dark-toolbar prm-pre-filters ._md-chip-input-container:after, .dark-toolbar prm-pre-filters prm-tags-list md-chips .md-chip-input-container:after, prm-tags-list md-chips .dark-toolbar prm-pre-filters .md-chip-input-container:after, .dark-toolbar prm-pre-filters prm-tags-list md-chips ._md-chip-input-container:after, prm-tags-list md-chips .dark-toolbar prm-pre-filters ._md-chip-input-container:after, md-progress-linear[md-mode=indeterminate].header-progress-bar .prm-hue2.md-bar, md-checkbox.md-checked .md-icon,
   md-checkbox.md-checked ._md-icon, md-radio-group.layout-row.md-focused md-radio-button.md-checked :before {
     background-color: #432c56; }
@@ -278,7 +281,7 @@
   md-select:not([disabled]):focus .md-select-value,
   .md-input-focused
   md-select:not([disabled]) .md-select-value, md-radio-button.md-checked .md-off, md-radio-button.md-checked ._md-off {
-    border-color: #2e1c46; }
+    border-color: #774E9A; }
 
 .prm-background, html, body, prm-search .ui-blocker, prm-featured-results .horizontal-content-container .horizontal-content-control, prm-search-bar .simple-search-wrapper .search-options:after, prm-atoz-search-bar .simple-search-wrapper .search-options:after, prm-browse-search-bar .simple-search-wrapper .search-options:after, prm-tags-search-bar .simple-search-wrapper .search-options:after, prm-newspapers-search-bar .simple-search-wrapper .search-options:after, prm-search-bar .simple-search-wrapper .search-options md-divider, prm-atoz-search-bar .simple-search-wrapper .search-options md-divider, prm-browse-search-bar .simple-search-wrapper .search-options md-divider, prm-tags-search-bar .simple-search-wrapper .search-options md-divider, prm-newspapers-search-bar .simple-search-wrapper .search-options md-divider, .prm-view-overlay-inner, .__xs prm-facet,
 .__sm prm-facet, .__sm .sidebar,
@@ -492,7 +495,7 @@ md-tabs.tabs-as-links md-tab-item:not([disabled]), md-tabs.tabs-as-app .back-but
   .tiles-grid-tile .tile-header .prm-alt-link.header-link:hover,
   .tiles-grid-tile .tile-header .prm-alt-link.header-link:focus, md-grid-tile .tile-header .prm-alt-link.md-button,
   .tiles-grid-tile .tile-header .prm-alt-link.md-button, md-input-container.has-fixed-message [ng-message] a.prm-alt-link, .separate-list-items md-list-item .item-loader-with-text .prm-alt-link.md-button, md-list-item.prm-alt-link.list-item-as-link {
-    color: #2e1c46; }
+    color: #774E9A; }
     .prm-links.prm-alt-link.prm-hue1, .md-button.arrow-link-button .prm-alt-link.prm-hue1[link-arrow], a.prm-alt-link.prm-hue1, .md-button.arrow-link-button .prm-alt-link.prm-hue1.button-content, [class*="NFT"] > span.prm-alt-link.prm-hue1,
     [class*="check_"] > span.prm-alt-link.prm-hue1,
     [class*="_more"] > span.prm-alt-link.prm-hue1,
@@ -605,7 +608,7 @@ md-toolbar.default-toolbar:not(.md-menu-toolbar) {
 [class*="does_not_exist"],
 .worldcat,
 .getit, prm-search-result-frbr-line a > prm-icon:first-child, prm-search-result-frbr-line .md-button.arrow-link-button .button-content > prm-icon:first-child, .md-button.arrow-link-button prm-search-result-frbr-line .button-content > prm-icon:first-child {
-  color: #D4CCD0; }
+  color: #7870A1; }
 
 .prm-positive, .status-available, [class*="available"],
 [class*="FT"],
@@ -631,7 +634,7 @@ md-toolbar.default-toolbar:not(.md-menu-toolbar) {
     color: #7a1300; }
 
 .prm-citation-title, prm-citation-trails-item.active-item .item-title, prm-opac .related-title .related-title-name, prm-gallery-collection .collection-folder .collection-overlay, prm-gallery-item .collection-element .item-title, prm-browse-search md-list.prm-list.prm-linkable-list-items md-list-item .item-title, prm-tags-results-list md-list.prm-list.prm-linkable-list-items md-list-item .item-title, md-list.prm-list.prm-linkable-list-items md-list-item .item-title {
-  color: #44707b; }
+  color: #333; }
 
 .prm-hover-list-element-bg, prm-brief-result-container .list-item-primary-content:before, prm-browse-search md-list.prm-list.prm-linkable-list-items md-list-item > .md-button > a:hover + .md-list-item-inner,
 prm-browse-search md-list.prm-list.prm-linkable-list-items md-list-item > .md-button > a:hover + ._md-list-item-inner, prm-browse-search md-list.prm-list.prm-linkable-list-items md-list-item > .md-button > a:focus + .md-list-item-inner,

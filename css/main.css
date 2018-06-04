@@ -130,6 +130,11 @@ html, body {
 body, prm-topbar .md-button, .md-button {
   text-transform: none; }
 
+a:hover,
+a:focus,
+a.hover {
+  box-shadow: none; }
+
 prm-search-bar div.advanced-search-backdrop {
   background: #8981B5; }
 
@@ -719,3 +724,6 @@ prm-opac > md-tabs {
   white-space: nowrap;
   vertical-align: baseline;
   border-radius: .25em; }
+
+.resource-content {
+  font-size: .9em; }

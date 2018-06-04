@@ -8,6 +8,16 @@ body,prm-topbar .md-button,.md-button {
 	text-transform:none;
 }
 
+a {
+    &:hover,
+    &:focus,
+    &.hover {
+       box-shadow:none;
+    }
+      
+}
+
+
 prm-search-bar div.advanced-search-backdrop {background: #8981B5;}
 prm-atoz-search-bar .search-switch-buttons .md-button.switch-to-simple, prm-browse-search-bar .search-switch-buttons .md-button.switch-to-simple, prm-newspapers-search-bar .search-switch-buttons .md-button.switch-to-simple, prm-search-bar .search-switch-buttons .md-button.switch-to-simple, prm-tags-search-bar .search-switch-buttons .md-button.switch-to-simple{color: #FFF;}
 
