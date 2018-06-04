@@ -9,7 +9,7 @@ let app = angular.module('viewCustom', [
                                         'kohaItems',
                                         'kohaAvailabilities',
                                         'sfxHoldings',
-                                        'googleAnalytics'
+										'googleAnalytics'
                                       ]);
 
 app
@@ -77,3 +77,11 @@ app.controller('prmAdvancedSearchAfterController', function($scope) {
               , characterData: false
        })
 });
+
+app.run(runBlock);
+
+runBlock.$inject = ['gaInjectionService'];
+
+function runBlock(gaInjectionService) {
+  gaInjectionService.injectGACode();
+}

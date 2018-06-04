@@ -154,6 +154,10 @@ prm-logo .product-logo {
     background: #BD9A55;
     margin: 0; } }
 
+prm-spinner.half-transparent .diamond {
+  color: #764d99;
+  background: #764d99; }
+
 prm-main-menu[menu-type=menu] .top-nav-bar-links {
   position: relative; }
 

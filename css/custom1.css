@@ -201,7 +201,7 @@
     font-size: 1em;
     border-radius: 0; }
     .md-button.neutralized-button:hover {
-      background-color: transparent; }
+      background-color: transparent; text-decoration: none;}
   .md-button.arrow-link-button .button-content {
     line-height: 1.4em; }
   .md-button.arrow-link-button:hover, .md-button.arrow-link-button:focus {
@@ -825,6 +825,10 @@ prm-logo .product-logo {
     padding: 10px;
     background: #BD9A55;
     margin: 0; } }
+
+prm-spinner.half-transparent .diamond {
+  color: #764d99;
+  background: #764d99; }
 
 prm-main-menu[menu-type=menu] .top-nav-bar-links {
   position: relative; }
