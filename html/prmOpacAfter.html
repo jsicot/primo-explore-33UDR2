@@ -1,9 +1,12 @@
+<div ng-if="sfxholdings" ng-include src="'custom/33UDR2_VU1/html/prmViewOnlineAfter.html'"></div>
+
+
 <prm-spinner class="inline-loader display-inline dark-on-light half-transparent" ng-if="loading"></prm-spinner>
 
 <div ng-if="items" id="kohaitems">
     <h3 class="section-title">En rayon :</h3>
     <md-list class="separate-list-items margin-bottom-medium padding-bottom-zero">
-        <md-list-item class="md-2-line _md-no-proxy _md" ng-repeat="(index, item) in items">
+        <md-list-item class="md-2-line _md-no-proxy _md" ng-repeat="item in items | orderBy:['homebranch','istatus']">
             <div class="neutralized-button layout-full-width layout-display-flex md-button md-ink-ripple layout-row" tabindex="0" layout="flex" ng-click="$ctrl.onClick()"  md-ink-ripple="red" role="button">
                 <div layout="row" flex="100" layout-align="space-between center" class="layout-align-space-between-center layout-row flex-100">
                     <div class="md-list-item-text layout-wrap layout-row flex" layout="row" layout-wrap="" flex="">
@@ -36,7 +39,6 @@
     </md-list>
 </div>
 
-<div ng-if="sfxholdings" ng-include src="'custom/33UDR2_VU1/html/prmViewOnlineAfter.html'"></div>
 
 <div ng-if="kohaholdings" id="kohaholdings">
     <h3 class="section-title">En rayon :</h3>
