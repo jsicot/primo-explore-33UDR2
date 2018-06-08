@@ -1,4 +1,6 @@
 import 'primo-explore-google-analytics';
+import 'primo-explore-report-problem';
+import 'primo-explore-oadoi-link';
 import { viewName } from './viewName';
 import { kohaItems } from './kohaItems.module';
 import { kohaAvailabilities } from './kohaAvailabilities.module';
@@ -9,11 +11,17 @@ let app = angular.module('viewCustom', [
                                         'kohaItems',
                                         'kohaAvailabilities',
                                         'sfxHoldings',
-										'googleAnalytics'
+										'googleAnalytics',
+										'reportProblem',
+										'oadoi'
                                       ]);
 
 app
-  .constant(googleAnalyticsConfig.name, googleAnalyticsConfig.config);
+  .constant(googleAnalyticsConfig.name, googleAnalyticsConfig.config)
+  .constant('oadoiOptions', {
+  	"imagePath": "custom/33UDR2_VU1/img/icon_newspaper_article.png",
+  	"email": "julien.sicot@univ-rennes2.fr"
+  });
 
 
                                       
@@ -25,6 +33,12 @@ app.config(['$sceDelegateProvider', function ($sceDelegateProvider) {
   urlWhitelist.push('http://sfx-univ-rennes2.hosted.exlibrisgroup**');
   $sceDelegateProvider.resourceUrlWhitelist(urlWhitelist);
 }]);
+
+
+//adds a "report a problem" banner to the detail view of an item in primo-explore. 
+app.component('prmSearchResultAvailabilityLineAfter', {template: '<oca-report-problem report-url="http://www.bu.univ-rennes2.fr/reportproblem.php?" message-text="Signaler un problème ?" button-text="Soumettre" />'});
+
+
 
 
 // change advanced search to jump to results
@@ -77,6 +91,26 @@ app.controller('prmAdvancedSearchAfterController', function($scope) {
               , characterData: false
        })
 });
+
+//AngularJS' orderBy filter does just support arrays - no objects. So you have to write an own small filter, which does the sorting for you.
+app.filter('orderObjectBy', function(){
+ return function(input, attribute) {
+    if (!angular.isObject(input)) return input;
+
+    var array = [];
+    for(var objectKey in input) {
+        array.push(input[objectKey]);
+    }
+
+    array.sort(function(a, b){
+        a = parseInt(a[attribute]);
+        b = parseInt(b[attribute]);
+        return a - b;
+    });
+    return array;
+ }
+});
+
 
 app.run(runBlock);
 
