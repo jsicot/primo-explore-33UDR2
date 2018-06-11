@@ -1,5 +1,4 @@
 import 'primo-explore-google-analytics';
-import 'primo-explore-report-problem';
 import 'primo-explore-oadoi-link';
 import { viewName } from './viewName';
 import { kohaItems } from './kohaItems.module';
@@ -12,15 +11,14 @@ let app = angular.module('viewCustom', [
                                         'kohaAvailabilities',
                                         'sfxHoldings',
 										'googleAnalytics',
-										'reportProblem',
 										'oadoi'
                                       ]);
 
 app
   .constant(googleAnalyticsConfig.name, googleAnalyticsConfig.config)
   .constant('oadoiOptions', {
-  	"imagePath": "custom/33UDR2_VU1/img/icon_newspaper_article.png",
-  	"email": "julien.sicot@univ-rennes2.fr"
+	  	"imagePath": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAMAAAD04JH5AAAAk1BMVEX///81vfYqufWy7eNUwus3vvZ92uWp6+IuvPcoufYxvfjZ8PlUx/XQ9urV7vn6//3I6fVgxeNGwvYxtu1Yv92E3eVay/Hq+/SI3+Nzy+Ch6OJ01uiw4O1Mxfjy/fjE8+e95fGT1eRnxuCk3Oljz+1Fu+x7ytpSu9+J0OBLuedYvt+s4OuS2eaU4+LZ+O3J9Oht1OtlyPIDAAADeklEQVR4nO2aa3fiIBCGBY0OWV3XEOttTdN2Y2/W9v//uo0b04uGzEDgcE6X92PCME9gYIDQ6wUFBQUFBX0SexcMCJrNVvu7/JcTAAZEsahY7Z9tQTBTAefJbO8RoGK4ff7hEaAU58WDV4BjM6w6hUNngCODiH56BSgRiju/AGVH3Bp2hCWAMhyLG78AZSMYBYI9gBKBGTSCTYCyEXZ+AcpI0O4GywBspktgG4CJJz0E6wBMzDwDMKGVIB0AMK2h4AIA5G+/AGVuoicGcp28EpBK8xk5Dqjek/m6fz162WwZCYGT10kkgGjTX5zKTydjzgnI0h4Av5qc2WQvBARqXkI/hc+nl1YJTkCNQ/T7101WizFKIFZ2ABr9kwhYbgGAv32UzA6TxafeeEVHAydNR61VQFIHfy97SyIWjecfAYk2ASdlpfYqRnWx/vY4BQFwGNaP8E7gXQFgXDf58mPsi7oN+u4B3jtAfKl2e3qMzwaU6bDNfnMqc/gab+LUCxM0DAtCRmizr4fg8PzF4d/jbIsRUMZBm/1rVWQRnde7rF68YX1AmYxazKH60Mtog3H1YokBxAW+QG0DOI2B+aWf6sUaHwf46owAsFEBjFAAGKBh2GZexcAiuYw1KgCTaE5ss95eZ1l2+NPghgzA0YOLdvvjqWCTyADw1A1AJTJAXHgGqIv6A0AT0rcHgACATYVqS66UOHXsWhAmAiwdqQw3C8SwUj9C1gSmALxhO9RMgDQCYMlABUD035uO25vAFACdwN7VkKxtAERkgCECYBgD9gAMh+H3ATDNBQHg2wAAWpFrgIFnAI6e1jkGwI+t3QIQdqduAeAWtXcKEONbQ7cAQDi1dwqAjwHHAIQecAtAOat1CYCuBVwDdDoptQCAnw20AJCX5b0rJYAg/bhSWS9pO5NJwwlW/Q20H2dK86uXPq6RemcGj7S/6Cp7pt6bfpZ6W4SfjyEAXZUS/5268k+OYkf+8fNBtwCxzP0CUNKgQwBINe6xuAB41LnX5sA/5Br+HQDE5KsDbgBiqXe30bZ/TffWAUD7aqdl/6Q1iDsAcZ/7BACjS6XW3Mfi3sS/NQCQO7PLzZb881Tj/pp1ACH177JaBIjlrsvt9q7egWvlPtsAINMb84v1HQEAuDSYeLoDlI65LNJOHW8OEEk5SFcPecd2DwoKCgr63/UXnxY8Wl1A45AAAAAASUVORK5CYII=",
+	  	"email": "bibliotheques@univ-rennes2.fr"
   });
 
 
@@ -33,12 +31,6 @@ app.config(['$sceDelegateProvider', function ($sceDelegateProvider) {
   urlWhitelist.push('http://sfx-univ-rennes2.hosted.exlibrisgroup**');
   $sceDelegateProvider.resourceUrlWhitelist(urlWhitelist);
 }]);
-
-
-//adds a "report a problem" banner to the detail view of an item in primo-explore. 
-app.component('prmSearchResultAvailabilityLineAfter', {template: '<oca-report-problem report-url="http://www.bu.univ-rennes2.fr/reportproblem.php?" message-text="Signaler un problème ?" button-text="Soumettre" />'});
-
-
 
 
 // change advanced search to jump to results

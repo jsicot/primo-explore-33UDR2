@@ -15,7 +15,7 @@ angular.module('sfxHoldings', []).component('prmViewOnlineAfter', {
             if (holdings === null) {
 	            
             } else {
-	          angular.element(document.querySelector('prm-view-online div a.arrow-link.md-primoExplore-theme'))[0].style.display = "none"; 
+// 	          angular.element(document.querySelector('prm-view-online div a.arrow-link.md-primoExplore-theme'))[0].style.display = "none"; 
 	          $scope.sfxloading = false;
 // 	          console.log(holdings);
               $scope.sfxholdings = holdings;

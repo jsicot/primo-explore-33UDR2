@@ -31,7 +31,9 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
 				if (response.data.record != undefined && response.data.record.length > 0) {
 					console.log(response.data.record);
 					$scope.loading = false;
-					angular.element(document.querySelector('prm-opac > md-tabs'))[0].style.display = "none";
+					if(angular.element(document.querySelector('prm-opac > md-tabs')).length > 0) {
+						angular.element(document.querySelector('prm-opac > md-tabs'))[0].style.display = "none";
+					}
 					$scope.kohaholdings = [];
 					
 					for (var i = 0 ; i < response.data.record[0].holdings.length ; i++) {
