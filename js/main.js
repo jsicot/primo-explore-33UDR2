@@ -5,12 +5,15 @@ import { kohaItems } from './kohaItems.module';
 import { kohaAvailabilities } from './kohaAvailabilities.module';
 import { sfxHoldings } from './sfxHoldings.module';
 import { googleAnalyticsConfig } from './googleAnalyticsConfig';
+import { libraryhours } from './libraryhours.module';
+
 let app = angular.module('viewCustom', [
                                         'angularLoad',
                                         'kohaItems',
                                         'kohaAvailabilities',
                                         'sfxHoldings',
-										'googleAnalytics'
+										'googleAnalytics',
+                                        'libraryhours'
                                       ]);
 
 

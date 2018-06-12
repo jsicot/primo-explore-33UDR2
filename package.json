@@ -12,7 +12,9 @@
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {},
+  "dependencies": {
+    "@material/drawer": "^0.36.0"
+  },
   "devDependencies": {
     "angulartics": "^1.6.0",
     "angulartics-google-tag-manager": "^0.0.1",

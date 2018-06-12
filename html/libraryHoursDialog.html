@@ -1,0 +1,39 @@
+<div layout="row" (keydown)="$ctrl.keydownSupport($event)">
+   <md-dialog class="full prm-full-view-dialog _md md-primoExplore-theme md-dialog-fullscreen _md-transition-in" aria-label="List dialog">
+	   <md-dialog-content>
+		  <md-toolbar class="default-toolbar is-stuck zero-padding hide-md hide-lg hide-xl">
+			 <div class="md-toolbar-tools zero-padding" layout="row">
+			 <md-button class="back-button has-text padding-left-medium" (click)="closeDialog()" aria-label="{{'nui.aria.fulldisplay.closeButton' | translate}}">
+				<prm-icon icon-type="svg" svg-icon-set="primo-ui" icon-definition="chevron-left"></prm-icon>
+			 </md-button>
+			 </div>
+		  </md-toolbar>
+		  <div class="full-view-inner-container" id="hoursPanel">
+			<h2>Horaires</h2>
+			<div class="layout-row">
+			   <div flex="50">
+				  <h3>Bibliothèques</h3>
+				  <div class="layout-column" ng-if="libhoursloading">
+					<prm-spinner class="inline-loader display-inline dark-on-light half-transparent" style="margin:auto"></prm-spinner>
+				  </div>
+				  <div  ng-bind-html="librarieshours" ng-if="librarieshours" id="librarieshours"></div>
+				  <pre ng-if="error">{{libhourserror}}</pre>
+			   </div>
+			   <div flex="50">
+				  <h3>Services</h3>
+				  <div class="layout-column" ng-if="serhoursloading">
+					<prm-spinner class="inline-loader display-inline dark-on-light half-transparent" style="margin:auto"></prm-spinner>
+				  </div>
+				  <div  ng-bind-html="serviceshours" ng-if="serviceshours" id="serviceshours"></div>
+				  <pre ng-if="error">{{serhourserror}}</pre>
+			   </div>
+			</div>
+		  </div>
+	   </md-dialog-content>
+   </md-dialog>
+   <!---->
+   <md-button class="md-icon-button close-button hide-xs hide-sm" (click)="closeDialog()" aria-label="{{'nui.aria.fulldisplay.closeButton' | translate}}">
+      <prm-icon icon-type="svg" svg-icon-set="primo-ui" icon-definition="close"></prm-icon>
+   </md-button>
+   <!---->
+</div>
