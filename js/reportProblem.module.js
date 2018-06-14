@@ -55,25 +55,34 @@ angular.module('reportProblem', []).controller('prmSaveToFavoritesButtonAfterCon
 	                            replyTo: $scope.report.replyTo,
 	                            userAgent: navigator.userAgent
 	                        };	                        	
-	                        var bodyContent = "RecordId: " + data.recordId + "<br />Title: " + data.title + "<br />Browser: " + data.userAgent + "<br /><br />Message:<br />" + data.message.replace("\n", "<br />");
-	                        	var email = {
-	                            	toAddress: 'scd-discovery@listes.univ-rennes2.fr', 
-									fromAddress: $scope.report.replyTo, 
-									subject: '[PRIMO] Nouvel incident', 
-									body: bodyContent
-	                        	}
-	                        
+	                        var bodyContent = "From: " + $scope.report.replyTo + "<br />RecordId: " + data.recordId + "<br />Title: " + data.title + "<br />Browser: " + data.userAgent + "<br /><br />Message:<br />" + data.message.replace("\n", "<br />");
 	                        
 	                        if ($scope.report.replyTo.length > 0 && $scope.report.message.length > 0) {
 	                            //$mdDialog.hide();
-								var url = "https://catalogue.bu.univ-rennes2.fr/r2microws/getReportFromPrimo.php";
-					            var config = {
-					                headers : {
-					                    'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
-					                }
-					            }
-								$http.post(url, email, config)
-						            .then(function(response){
+								var url = "https://uportal.univ-rennes2.fr/formulaire-tickets/sampleHelpdeskPortTypeProxy/Result.jsp";
+	
+								 $http({
+	                                method: 'GET',
+	                                url: url,
+	                                headers: {
+	                                    'Content-Type': 'application/json',
+	                                    'X-From-ExL-API-Gateway': undefined
+	                                },
+	                                params: {
+		                            	in063: 'sicot_j',
+		                            	in165: '12',
+		                            	in267: '251',
+		                            	in369: 'OTHER',
+		                            	in471: '[PRIMO] Nouvel incident',
+		                            	in573: 'machine.uhb.fr',
+		                            	in675: '3',
+										in777: bodyContent,
+										in879: 'DEFAULT',
+										method: '60'
+	                        		},
+	                                cache: false,
+	                               
+	                            }).then(function(response){
 						                $scope.returnMessage = 'Merci pour votre message. Vous recevrez une réponse très prochainement. Vous pouvez dorénavant fermer cette fenêtre.';
 										console.log(response);
 										$scope.hideForm = false;

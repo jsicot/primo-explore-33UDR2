@@ -7,7 +7,6 @@ import { sfxHoldings } from './sfxHoldings.module';
 import { googleAnalyticsConfig } from './googleAnalyticsConfig';
 import { libraryhours } from './libraryhours.module';
 import { reportProblem } from './reportProblem.module';
-
 (function () {
     "use strict";
     'use strict';
@@ -41,6 +40,7 @@ app.config(['$sceDelegateProvider', function ($sceDelegateProvider) {
   urlWhitelist.push('https://**.bu.univ-rennes2**');
   urlWhitelist.push('https://cataloguepreprod.bu.univ-rennes2**');
   urlWhitelist.push('http://sfx-univ-rennes2.hosted.exlibrisgroup**');
+  urlWhitelist.push('https://uportal.univ-rennes2.fr**');
   $sceDelegateProvider.resourceUrlWhitelist(urlWhitelist);
 }]);
 
