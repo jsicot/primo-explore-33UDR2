@@ -74,7 +74,7 @@ angular.module('reportProblem', []).controller('prmSaveToFavoritesButtonAfterCon
 					            }
 								$http.post(url, email, config)
 						            .then(function(response){
-						                $scope.returnMessage = 'Merci votre message. Vous recevrez une réponse très prochainement. Vous pouvez dorénavant fermer cette fenêtre.';
+						                $scope.returnMessage = 'Merci pour votre message. Vous recevrez une réponse très prochainement. Vous pouvez dorénavant fermer cette fenêtre.';
 										console.log(response);
 										$scope.hideForm = false;
 						            }, function(response){
