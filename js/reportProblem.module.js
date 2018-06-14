@@ -57,7 +57,7 @@ angular.module('reportProblem', []).controller('prmSaveToFavoritesButtonAfterCon
 	                        };	                        	
 	                        var bodyContent = "RecordId: " + data.recordId + "<br />Title: " + data.title + "<br />Browser: " + data.userAgent + "<br /><br />Message:<br />" + data.message.replace("\n", "<br />");
 	                        	var email = {
-	                            	toAddress: 'julien.sicot@univ-rennes2.fr', 
+	                            	toAddress: 'scd-discovery@listes.univ-rennes2.fr', 
 									fromAddress: $scope.report.replyTo, 
 									subject: '[PRIMO] Nouvel incident', 
 									body: bodyContent
