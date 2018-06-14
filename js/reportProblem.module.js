@@ -66,7 +66,7 @@ angular.module('reportProblem', []).controller('prmSaveToFavoritesButtonAfterCon
 	                        
 	                        if ($scope.report.replyTo.length > 0 && $scope.report.message.length > 0) {
 	                            //$mdDialog.hide();
-								var url = "https://cataloguepreprod.bu.univ-rennes2.fr/r2microws/getReportFromPrimo.php";
+								var url = "https://catalogue.bu.univ-rennes2.fr/r2microws/getReportFromPrimo.php";
 					            var config = {
 					                headers : {
 					                    'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
