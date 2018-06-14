@@ -6,27 +6,31 @@ angular.module('kohaAvailabilities', []).component('prmBriefResultAfter', {
       var obj = $scope.$ctrl.parentCtrl.item.pnx.control;
       if (obj.hasOwnProperty("sourcerecordid") && obj.hasOwnProperty("sourceid")) {
         var bn = obj.sourcerecordid[0];
+         if(bn.startsWith("$$V")){
+	         bn = bn.replace(/\$\$V.+\$\$O33UDR2_KOHA/,"");
+	         console.log(bn+" special bn ");
+        }
         var source = obj.sourceid[0];
+        if(source.startsWith("$$V33UDR2_KOHA$$")){
+	         source = "33UDR2_KOHA";
+	         console.log(bn+" special source ");
+        }
         var recordid = obj.recordid[0];
+//         var s = $scope.$ctrl.parentCtrl;
         var type = $scope.$ctrl.parentCtrl.item.pnx.display.type[0];
-/*
-        console.log("source:" + bn);
-        console.log("biblionumber:" + bn);
-*/
+
+         console.log(source);
+
         if (bn && source == "33UDR2_KOHA" && type != "journal") {
           var url = "https://catalogue.bu.univ-rennes2.fr/r2microws/json.getItems.php?biblionumber=" + bn;
           var response = kohaavailService.getKohaData(url).then(function (response) {
-	         if(response){
+	         if(response.data){
 	            console.log("it worked");
 	//             console.log(response);
 	            var items = response.data;
+	            $scope.kohaDisplay = true;
 	            console.log(items);
-	            var availability = items.available;
-	            console.log(availability);
-	            if (availability === null) {
-	              console.log("it's false");
-	            } else {
-	              $scope.kohaDisplay = true;
+	            if (items.available != null) {
 	              $element.children().removeClass("ng-hide"); /* initially set by $scope.kohaDisplay=false */
 	              $scope.status = items.status;
 	              $scope.recordid = recordid;
@@ -35,9 +39,13 @@ angular.module('kohaAvailabilities', []).component('prmBriefResultAfter', {
 	              $scope.class = items.class;
 	              $scope.callnumber = items.itemcallnumber;
 	              $scope.otherLocations = (items.total - 1);
-
+	            } else {
+					console.log("it's false");
 	            }
 	         }
+	         else {
+		         	$scope.kohaDisplay = true;
+		         }
           });
         } 
       } 
