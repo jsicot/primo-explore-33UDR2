@@ -6,15 +6,24 @@ import { kohaAvailabilities } from './kohaAvailabilities.module';
 import { sfxHoldings } from './sfxHoldings.module';
 import { googleAnalyticsConfig } from './googleAnalyticsConfig';
 import { libraryhours } from './libraryhours.module';
+import { reportProblem } from './reportProblem.module';
 
-let app = angular.module('viewCustom', [
+(function () {
+    "use strict";
+    'use strict';
+
+	let app = angular.module('viewCustom', [
                                         'angularLoad',
                                         'kohaItems',
                                         'kohaAvailabilities',
                                         'sfxHoldings',
 										'googleAnalytics',
-                                        'libraryhours'
-                                      ]);
+                                        'libraryhours',
+                                        'reportProblem'
+                                      ], function ($compileProvider) {
+		$compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|data):/);
+	});
+
 
 
 app
@@ -26,8 +35,6 @@ app
   });
 */
 
-
-                                      
 app.config(['$sceDelegateProvider', function ($sceDelegateProvider) {
   var urlWhitelist = $sceDelegateProvider.resourceUrlWhitelist();
   urlWhitelist.push('https://catalogue.bu.univ-rennes2**');
@@ -36,6 +43,17 @@ app.config(['$sceDelegateProvider', function ($sceDelegateProvider) {
   urlWhitelist.push('http://sfx-univ-rennes2.hosted.exlibrisgroup**');
   $sceDelegateProvider.resourceUrlWhitelist(urlWhitelist);
 }]);
+
+
+
+app.component('prmSaveToFavoritesButtonAfter', {
+	bindings: {parentCtrl: '<'},
+	controller: 'prmSaveToFavoritesButtonAfterController',
+	templateUrl: 'custom/33UDR2_VU1/html/reportProblemButton.html'
+
+	});
+ 
+
 
 
 // change advanced search to jump to results
@@ -51,7 +69,7 @@ app.controller('prmAdvancedSearchAfterController', function($scope) {
                                   //need an id to jump to
                                   let submitArea = document.querySelector(".advanced-search-output.layout-row.flex");
                                   submitArea.setAttribute("id", "advancedSearchSubmitArea");
-                                 
+
                                   var submitBtn = document.querySelector("prm-advanced-search .button-confirm.button-large.button-with-icon.md-button.md-primoExplore-theme.md-ink-ripple");
                                   submitBtn.addEventListener("click", function(){
                                          // wait for some results
@@ -67,7 +85,7 @@ app.controller('prmAdvancedSearchAfterController', function($scope) {
                                                        }
                                                 });
                                          });
-                                               
+
                                          advancedSearchObs2.observe(document.getElementsByTagName('prm-explore-main')[0], {
                                                 childList: true
                                                 , subtree: true
@@ -80,7 +98,7 @@ app.controller('prmAdvancedSearchAfterController', function($scope) {
                      }
               })
        })
-      
+
        advancedSearchObs.observe(document.getElementsByTagName('prm-advanced-search')[0], {
               childList: true
               , subtree: true
@@ -116,3 +134,5 @@ runBlock.$inject = ['gaInjectionService'];
 function runBlock(gaInjectionService) {
   gaInjectionService.injectGACode();
 }
+
+})();
