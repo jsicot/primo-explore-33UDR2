@@ -1,8 +1,8 @@
 <prm-spinner class="inline-loader display-inline dark-on-light half-transparent" ng-if="sfxloading"></prm-spinner>
 
-<div ng-if="sfxholdings" id="sfxholdings">
-	<h3 class="section-title">En Ligne :</h3>
-    <md-list class="separate-list-items margin-bottom-medium padding-bottom-zero">
+<h3 ng-if="sfxholdings" class="section-title" style="margin-bottom: .75em !important;"><span>En Ligne :</span></h3>
+
+    <md-list ng-if="sfxholdings" class="separate-list-items margin-left-medium">
         <md-list-item class="md-2-line _md-no-proxy _md" ng-repeat="(index, holding) in sfxholdings">
         <a class="neutralized-button layout-full-width layout-display-flex md-button md-ink-ripple layout-row" tabindex="0" layout="flex" href="{{holding.href}}" target="_blank" md-ink-ripple="red" role="button">
                 <div layout="row" flex="100" layout-align="space-between center" class="layout-align-space-between-center layout-row flex-100">
@@ -20,7 +20,8 @@
                 </div>
                 <div class="md-ripple-container" style=""></div>
             </div>
+            </a>
         </md-list-item>
     </md-list>
-</div>
+
 

@@ -8,7 +8,17 @@ prm-search-result-availability-line {
 
 .check-avail-link {
   color: $getit_green;
-  font-size: 18px !important;
+  }
+
+.status-maybe {
+    
+}
+//the class must be after status-maybe to avoid that the latter will override definitions of the former
+.status-available, .callnum {
+    font-weight: 700 !important;
+}
+.status-unavailable {
+
 }
 
 

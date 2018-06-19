@@ -7,65 +7,87 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
       var openurl;
       $scope.loading = true;
       if (obj.hasOwnProperty("sourcerecordid") && obj.hasOwnProperty("sourceid")) {
-        var bn = obj.sourcerecordid[0];
-        
-        if(bn.startsWith("$$V")){
-	         bn = bn.replace(/\$\$V.+\$\$O33UDR2_KOHA/,"");
-	         console.log(bn+" special bn ");
-        }
-        var source = obj.sourceid[0];
-        //console.log("source :"+source);
-        //var docId = $scope.$ctrl.parentCtrl.fullViewService.$location.$$search.docid;
-        //console.log(docId+" docid ");
-        //docId =  docId.replace("33UDR2_KOHA","");
+        var recid = obj.recordid[0];
+        console.log(recid);
+        var ids = obj.sourcerecordid;
+        var total_ids = ids.length;
+       if (total_ids > 1){
+		    var bn = [];
+	        angular.forEach(ids, function(value, key) {
+				if(value.startsWith("$$V") && value.includes("33UDR2_KOHA")){
+			        this.push(value.replace(/\$\$V.+\$\$O33UDR2_KOHA/,""));
+		        }
+			}, bn);
+			
+	        var source = [];
+	        angular.forEach(obj.sourceid, function(value, key) {
+				if(value.includes("33UDR2_KOHA")){
+			        this.push("33UDR2_KOHA");
+		        }
+			}, source);
+       }
+       else {
+	        var source = obj.sourceid[0];
+	        var bn = obj.sourcerecordid[0];
+       }
+		console.log("id: "+source+bn);
+		if(recid.startsWith("dedupmrg")) {
+			 if(angular.element(document.querySelector('#getit_link1_0').length > 0)) {
+		       	angular.element(document.querySelector('#getit_link1_0'))[0].style.display = "none"; 
+	         }  
+		}
+
         var type = $scope.$ctrl.parentCtrl.item.pnx.display.type[0];
-        if (bn && (source == "33UDR2_KOHA" || !bn.startsWith("dedupmrg")) && type != "journal") {
+        if (bn && (source == "33UDR2_KOHA") && type != "journal") {
+	      	 if(angular.element(document.querySelector('prm-opac > md-tabs').length > 0)) {
+		       	angular.element(document.querySelector('prm-opac > md-tabs'))[0].style.display = "none"; 
+	         }  
           var url = "https://catalogue.bu.univ-rennes2.fr/r2microws/json.getSru.php?index=rec.id&q=" + bn;
           var response = kohaitemsService.getKohaData(url).then(function (response) {
-            var items = response.data.record[0].item;
-            var kohaid = response.data.record[0].biblionumber;
-            var imagePath = response.data.record[0].cover;
-            if (kohaid === null) {
-	            $scope.loading = false;
-            } else {
-	          $scope.loading = false;
-	         if(angular.element(document.querySelector('prm-opac > md-tabs').length > 0)) {
-		        angular.element(document.querySelector('prm-opac > md-tabs'))[0].style.display = "none"; 
-
-	         }
-              $scope.kohaid = kohaid;
-              $scope.items = items;
-            }
+	           if(response.data.record[0].item){
+		          var items = response.data.record[0].item; 
+	           }
+	            var kohaid = response.data.record[0].biblionumber;
+	            var imagePath = response.data.record[0].cover;
+	            if (kohaid === null) {
+		            $scope.loading = false;
+	            } else {
+		          $scope.loading = false;
+	              $scope.kohaid = kohaid;
+	              $scope.items = items;
+	            }
           }, function(response){
 		     	$scope.loading = false;
 			});
 
         } else if (bn && source == "33UDR2_KOHA" && type == "journal") {
+	        if(angular.element(document.querySelector('prm-opac > md-tabs')).length > 0) {
+				angular.element(document.querySelector('prm-opac > md-tabs'))[0].style.display = "none";
+			}
 	      	var url = "https://catalogue.bu.univ-rennes2.fr/r2microws/json.getSru.php?index=rec.id&q="+ bn;
 		  	var response = kohaitemsService.getKohaData(url).then(function (response) {
 				if (response.data.record != undefined && response.data.record.length > 0) {
 					console.log(response.data.record);
 					$scope.loading = false;
-					if(angular.element(document.querySelector('prm-opac > md-tabs')).length > 0) {
-						angular.element(document.querySelector('prm-opac > md-tabs'))[0].style.display = "none";
-					}
-					$scope.kohaholdings = [];
-					
-					for (var i = 0 ; i < response.data.record[0].holdings.length ; i++) {
-						var holding = response.data.record[0].holdings[i]
-						$scope.loading = false;
-						$scope.kohaholdings[i] = {
-							"library" : holding["rcr"],
-							"holdings" : holding["holdings"]
-						};
-						if (holding["holdings"].length > 80) {
-							$scope.kohaholdings[i]["holdingsSummary"] = holding["holdings"].substring(0,77)+"...";
-						}
-						if (response.data.record[0].locations[i]["rcr"] ==  holding["rcr"]) {
-							$scope.kohaholdings[i]["callnumber"] =  response.data.record[0].locations[i]["callnumber"];
-							$scope.kohaholdings[i]["location"] =	response.data.record[0].locations[i]["location"];
+					if(response.data.record[0].holdings){
+						$scope.kohaholdings = [];
+						for (var i = 0 ; i < response.data.record[0].holdings.length ; i++) {
+							var holding = response.data.record[0].holdings[i]
+							$scope.loading = false;
+							$scope.kohaholdings[i] = {
+								"library" : holding["rcr"],
+								"holdings" : holding["holdings"]
+							};
+							if (holding["holdings"].length > 80) {
+								$scope.kohaholdings[i]["holdingsSummary"] = holding["holdings"].substring(0,77)+"...";
+							}
+							if (response.data.record[0].locations[i]["rcr"] ==  holding["rcr"]) {
+								$scope.kohaholdings[i]["callnumber"] =  response.data.record[0].locations[i]["callnumber"];
+								$scope.kohaholdings[i]["location"] =	response.data.record[0].locations[i]["location"];
+							}
 						}
 					}
+
 				}
 				else {  
 						console.log("journal : no print holding");
