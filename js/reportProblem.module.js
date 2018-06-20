@@ -5,7 +5,6 @@ angular.module('reportProblem', []).controller('prmSaveToFavoritesButtonAfterCon
 	function getIconLink() {
 		return vm.parentCtrl.iconLink;
 		}
-		   
 	$scope.showReportAProblemForm = function($event){
 	            $mdDialog.show( {
 	                parent: angular.element(document.body),
@@ -15,7 +14,7 @@ angular.module('reportProblem', []).controller('prmSaveToFavoritesButtonAfterCon
 	                templateUrl: 'custom/33UDR2_VU1/html/reportProblem.html', controller: function ($scope, $mdDialog, $http) {
 	                    let recordData = self.parentCtrl.item;
 	                    $scope.report = {
-	                    replyTo: '',
+	                    	replyTo: '',
 	                        message: '',
 	                        subject: 'report a problem'
 	                    }
@@ -57,12 +56,15 @@ angular.module('reportProblem', []).controller('prmSaveToFavoritesButtonAfterCon
 	                        };	                        	
 	                        var bodyContent = "From: " + $scope.report.replyTo + "<br />RecordId: " + data.recordId + "<br />Title: " + data.title + "<br />Browser: " + data.userAgent + "<br /><br />Message:<br />" + data.message.replace("\n", "<br />");
 	                        
+	                       //retrieve of user id when is logged
+	                       if(self.parentCtrl.primolyticsService.userSessionManagerService){
+		                       var uid = self.parentCtrl.primolyticsService.userSessionManagerService['areaName'];
+	                       }
 	                        if ($scope.report.replyTo.length > 0 && $scope.report.message.length > 0) {
 	                            //$mdDialog.hide();
-								var url = "https://uportal.univ-rennes2.fr/formulaire-tickets/sampleHelpdeskPortTypeProxy/Result.jsp";
-	
+								var url = "https://cataloguepreprod.bu.univ-rennes2.fr/r2microws/createPrimoTicket.php";
 								 $http({
-	                                method: 'GET',
+	                                method: 'JSONP',
 	                                url: url,
 	                                headers: {
 	                                    'Content-Type': 'application/json',
@@ -74,14 +76,13 @@ angular.module('reportProblem', []).controller('prmSaveToFavoritesButtonAfterCon
 		                            	in267: '251',
 		                            	in369: 'OTHER',
 		                            	in471: '[PRIMO] Nouvel incident',
-		                            	in573: 'machine.uhb.fr',
+		                            	in573: 'rechercher.bu.univ-rennes2.fr',
 		                            	in675: '3',
 										in777: bodyContent,
 										in879: 'DEFAULT',
 										method: '60'
 	                        		},
 	                                cache: false,
-	                               
 	                            }).then(function(response){
 						                $scope.returnMessage = 'Merci pour votre message. Vous recevrez une réponse très prochainement. Vous pouvez dorénavant fermer cette fenêtre.';
 										console.log(response);
@@ -116,6 +117,8 @@ angular.module('reportProblem', []).controller('prmSaveToFavoritesButtonAfterCon
 	}
 
 }]);
+
+
 	
 	
 

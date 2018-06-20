@@ -6,7 +6,7 @@ import { kohaAvailabilities } from './kohaAvailabilities.module';
 import { sfxHoldings } from './sfxHoldings.module';
 import { googleAnalyticsConfig } from './googleAnalyticsConfig';
 import { libraryhours } from './libraryhours.module';
-// import { reportProblem } from './reportProblem.module';
+import { reportProblem } from './reportProblem.module';
 import { getThumbnail } from './getThumbnail.module';
 (function () {
     "use strict";
@@ -19,8 +19,8 @@ import { getThumbnail } from './getThumbnail.module';
                                         'sfxHoldings',
 										'googleAnalytics',
                                         'libraryhours',
-                                        'getThumbnail'
-//                                         'reportProblem'
+                                        'getThumbnail',
+                                        'reportProblem'
                                       ], function ($compileProvider) {
 		$compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|data):/);
 	});
@@ -51,15 +51,12 @@ app.config(['$sceDelegateProvider', function ($sceDelegateProvider) {
 
 
 //Report a problem init
-
-/*
 app.component('prmSaveToFavoritesButtonAfter', {
 	bindings: {parentCtrl: '<'},
 	controller: 'prmSaveToFavoritesButtonAfterController',
 	templateUrl: 'custom/33UDR2_VU1/html/reportProblemButton.html'
 
 	});
-*/
  
 
 

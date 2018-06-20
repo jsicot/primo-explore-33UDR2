@@ -1,0 +1,49 @@
+<md-dialog id="lbsReportAProblemForm" aria-label="Signaler un problème" ng-hide="hideForm">
+        <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2><span>Signaler un problème</span></h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="cancelReport()">
+                <md-icon md-svg-icon="navigation:ic_close_24px" aria-label="Close dialog"></md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content>
+      <form name="reportAProblemForm">
+        <div class="md-dialog-content">
+            <input type="hidden" name="subject" ng-model="report.subject">
+            <md-input-container class="md-block">
+                <label><span>Votre email *</span></label>
+                <input type="email" name="replyTo" title="{{ default.nui.details.email.why | translate}}" placeholder="john.doe@etudiant.univ-rennes2.fr" required ng-model="report.replyTo" ng-pattern="/^.+@.+\..+$/">
+                <div ng-if="reportAProblemForm.replyTo.$error.required" class="md-input-message-animation" style="opacity: 1; margin-top: 0px;" role="alert">
+                  <div class="req" style="color:tomato;"><span>* champ requis</span></div>
+                </div>
+                <div ng-if="reportAProblemForm.replyTo.$error.email" class="md-input-message-animation" style="opacity: 1; margin-top: 0px;" role="error">
+                 <div class="req" style="color:tomato;"><span>* adresse email invalide</span></div>
+                 
+                </div>
+            </md-input-container>
+            <md-input-container>
+                <label><span>Description du problème *</span></label>
+<!--                 <input type="text" name="message" placeholder="ex. le lien ne fonctionne pas." md-maxlength="5000" required md-no-asterisk  ng-model="report.message"/> -->
+
+  				<mat-form-field class="example-full-width">
+                <textarea matInput name="message" placeholder="ex. le lien ne fonctionne pas."  md-maxlength="1500" required md-no-asterisk ng-model="report.message"></textarea>
+				</mat-form-field>
+
+                <div ng-if="reportAProblemForm.message.$error.required" role="error">
+                  <div class="req md-input-message-animation" style="color:tomato;" ><span>* champ requis</span></div>
+                </div>
+                 <span ng-if="returnMessage" class="md-input-message-animation" style="opacity: 1; margin-top: 0px;color:tomato;">{{returnMessage}}</span>
+            </md-input-container>
+
+        </div>
+        
+      </form>
+    </md-dialog-content>
+    <md-dialog-actions layout="row">
+        <md-button class="md-button md-secondary" ng-click="cancelReport()">Annuler</md-button>
+        <md-button class="button-with-icon button-confirm md-button md-primoExplore-theme md-ink-ripple" ng-click="sendReport()"><prm-icon icon-type="svg" svg-icon-set="primo-ui" icon-definition="send"></prm-icon>       
+ Envoyer</md-button>
+    </md-dialog-actions>
+   </md-dialog>
