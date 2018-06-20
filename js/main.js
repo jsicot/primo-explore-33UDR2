@@ -6,7 +6,8 @@ import { kohaAvailabilities } from './kohaAvailabilities.module';
 import { sfxHoldings } from './sfxHoldings.module';
 import { googleAnalyticsConfig } from './googleAnalyticsConfig';
 import { libraryhours } from './libraryhours.module';
-import { reportProblem } from './reportProblem.module';
+// import { reportProblem } from './reportProblem.module';
+import { getThumbnail } from './getThumbnail.module';
 (function () {
     "use strict";
     'use strict';
@@ -18,7 +19,8 @@ import { reportProblem } from './reportProblem.module';
                                         'sfxHoldings',
 										'googleAnalytics',
                                         'libraryhours',
-                                        'reportProblem'
+                                        'getThumbnail'
+//                                         'reportProblem'
                                       ], function ($compileProvider) {
 		$compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|data):/);
 	});
@@ -41,17 +43,23 @@ app.config(['$sceDelegateProvider', function ($sceDelegateProvider) {
   urlWhitelist.push('https://cataloguepreprod.bu.univ-rennes2**');
   urlWhitelist.push('http://sfx-univ-rennes2.hosted.exlibrisgroup**');
   urlWhitelist.push('https://uportal.univ-rennes2.fr**');
+  urlWhitelist.push('https://**.hosted.exlibrisgroup.com**');
+  
   $sceDelegateProvider.resourceUrlWhitelist(urlWhitelist);
 }]);
 
 
 
+//Report a problem init
+
+/*
 app.component('prmSaveToFavoritesButtonAfter', {
 	bindings: {parentCtrl: '<'},
 	controller: 'prmSaveToFavoritesButtonAfterController',
 	templateUrl: 'custom/33UDR2_VU1/html/reportProblemButton.html'
 
 	});
+*/
  
 
 

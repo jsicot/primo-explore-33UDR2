@@ -2,13 +2,13 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
   bindings: { parentCtrl: '<' },
   controller: function controller($scope, $http, $element, kohaitemsService) {
     this.$onInit = function () {
+	 if($scope.$ctrl.parentCtrl.item) { 
       $scope.kohaDisplay = false; /* default hides template */
       var obj = $scope.$ctrl.parentCtrl.item.pnx.control;
       var openurl;
       $scope.loading = true;
       if (obj.hasOwnProperty("sourcerecordid") && obj.hasOwnProperty("sourceid")) {
         var recid = obj.recordid[0];
-        console.log(recid);
         var ids = obj.sourcerecordid;
         var total_ids = ids.length;
        if (total_ids > 1){
@@ -32,14 +32,14 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
        }
 		console.log("id: "+source+bn);
 		if(recid.startsWith("dedupmrg")) {
-			 if(angular.element(document.querySelector('#getit_link1_0').length > 0)) {
+			 if(angular.element(document.querySelector('#getit_link1_0')).length > 0) {
 		       	angular.element(document.querySelector('#getit_link1_0'))[0].style.display = "none"; 
 	         }  
 		}
 
         var type = $scope.$ctrl.parentCtrl.item.pnx.display.type[0];
         if (bn && (source == "33UDR2_KOHA") && type != "journal") {
-	      	 if(angular.element(document.querySelector('prm-opac > md-tabs').length > 0)) {
+	      	 if(angular.element(document.querySelector('prm-opac > md-tabs')).length > 0) {
 		       	angular.element(document.querySelector('prm-opac > md-tabs'))[0].style.display = "none"; 
 	         }  
           var url = "https://catalogue.bu.univ-rennes2.fr/r2microws/json.getSru.php?index=rec.id&q=" + bn;
@@ -132,7 +132,8 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
 		}
 		
 		
-      } 
+      }
+     } 
     };
   },
   templateUrl: 'custom/33UDR2_VU1/html/prmOpacAfter.html'
