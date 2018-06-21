@@ -1,56 +1,86 @@
-
-<md-content layout-xs="column" layout="row">
-    <div flex="60" layout="column">
-        <md-card class="default-card">
+<md-content layout-xs="column" layout="row" class="display-block-xs _md md-primoExplore-theme layout-xs-column layout-row">
+   
+   <div flex-xs="100" flex="60" layout="column" class="layout-column flex-xs-100 flex-60">
+		<md-card class="default-card _md md-primoExplore-theme" prm-text="" dir="auto">
             <md-card-title>
                 <md-card-title-text>
-                    <span class="md-headline">How does this work?</span>
+                    <span class="md-headline">Astuces de recherche</span>
+                </md-card-title-text>
+            </md-card-title>
+            <md-card-content>
+                <p>Pour rechercher une <strong>expression exacte</strong> utiliser les guillemets
+                    <br> <strong>exemple</strong> : "psychologie positive" théorie</p>
+
+                <p>Utiliser <strong>le symbole (?)</strong> comme motif de recherche pour trouver les variantes d'un terme ou un mot incomplet 
+                    <br> <strong>exemple</strong> : wom?n - pour trouver <strong>women</strong> et <strong>woman</strong></p>
+
+                <p>Utiliser <strong>le symbole (*) comme troncature</strong> pour rechercher tous les mots contenant la même racine ou le même préfixe 
+                    <br><strong>exemple</strong> : franco* permettra de trouver francophone, francophonie, francophobe, etc...</p>
+
+            </md-card-content>
+        </md-card>
+        <md-card class="default-card _md md-primoExplore-theme" prm-text="" dir="auto">
+            <md-card-title>
+                <md-card-title-text>
+                    <span class="md-headline">Recherche booléenne (AND, OR, et NOT)</span>
+                </md-card-title-text>
+            </md-card-title>
+            <md-card-content>
+                <p> <strong>AND</strong> est l'opérateur de recherche utilisé par défaut
+                    <br> <strong>exemple</strong> : climate <strong>AND</strong> change <strong>AND</strong> effects  donnera la même chose que climate change effects</p>
+
+                <p>Utiliser <strong>OR</strong> pour relier deux ou termes dont l’un ou l’autre, ou les deux doivent se trouver dans le résultat
+                    <br> <strong>exemple</strong> : web <strong>OR</strong> internet</p>
+
+                <p>Utiliser <strong>NOT</strong> pour exclure le terme des résultats de recherche
+                    <br> <strong>exemple</strong> : fishing <strong>NOT</strong> whales
+                </p>
+
+                <p>Il est possible de combiner ces différents opérateurs à l'aide parenthèses - <strong>(</strong> <strong>)</strong>
+                    <br> <strong>exemple</strong> : shakespeare <strong>(</strong>drama OR tragedy<strong>)</strong>
+                </p>
+            </md-card-content>
+
+        </md-card>
+        
+               
+        
+	</div>
+
+    <div flex-xs="100" flex="40" layout="column" class="layout-column flex-xs-100 flex-40">
+	    
+	    <md-card class="default-card _md md-primoExplore-theme">
+            <md-card-title>
+                <md-card-title-text>
+                    <span class="md-headline">Une question, un commentaire ?</span>
                 </md-card-title-text>
             </md-card-title>
             <md-card-content>
                 <p>
-                    Primo provides simple, one-stop searching for books and e-books, videos, articles, digital media, and more.
+                    <a href="mailto:scd-discovery@listes.univ-rennes2.fr" class="md-primoExplore-theme">Contactez-nous</a> 
                 </p>
-                <p>
-                    Primo also helps you manage your research. Sign-in in order to:
-                </p>
-                <ul>
-                    <li>Renew books and videos</li>
-                    <li>Create favoriets lists</li>
-                    <li>Export citations to Refworks and Endnote Web</li>
-                    <li>View full search results. (Some databases, only show results when you're signed in.)</li>
+
+            </md-card-content>
+        </md-card>
+	     <md-card class="default-card _md md-primoExplore-theme" prm-text="" dir="auto">
+            <md-card-title>
+                <md-card-title-text>
+                    <span class="md-headline">Signification des icônes&nbsp;?</span>
+                </md-card-title-text>
+            </md-card-title>
+            <md-card-content>
+                <ul class="homelist">
+                    <li><img src="custom/33UDR2_VU1/img/lock.png" alt="image for renew"> Verrouiller le filtre de recherche</li>
+                    <li><img src="custom/33UDR2_VU1/img/exclude.png" alt="image for list of loans"> Exclure le filtre de recherche</li>
+                    <li><img src="custom/33UDR2_VU1/img/search_history.png" alt="image for requesting"> Consulter l'historique de recherche</li>
+                    <li><img src="custom/33UDR2_VU1/img/favourites.png" alt="image for fines"> Consulter les favoris</li>
+                    <li><img src="custom/33UDR2_VU1/img/search_results.png" alt="image for search results"> Retourner à la recherche</li>
                 </ul>
             </md-card-content>
         </md-card>
-        <md-card class="default-card">
-            <md-card-title>
-                <md-card-title-text>
-                    <span class="md-headline">Questions? Comments?</span>
-                </md-card-title-text>
-            </md-card-title>
-            <md-card-content>
-                <a href="#" class="arrow-link">
-                    Let us know what you think!
-                    <prm-icon link-arrow>
-                        <md-icon md-svg-icon="./images/chevron-right.svg"></md-icon>
-                    </prm-icon>
-                </a>
-            </md-card-content>
-        </md-card>
-    </div>
-    <div flex-xs flex="40" layout="column">
-        <md-card class="default-card">
-            <md-card-title>
-                <md-card-title-text>
-                    <span class="md-headline">Where can I get help?</span>
-                </md-card-title-text>
-            </md-card-title>
-            <md-card-content>
-                <p>
-                    <a href="#">Ask a librarian</a> how to start your search
-                </p>
 
-            </md-card-content>
-        </md-card>
+
+
+
+
     </div>
-</md-content>

@@ -1,0 +1,11 @@
+<prm-spinner class="inline-loader display-inline dark-on-light half-transparent column center" ng-if="loading"></prm-spinner>
+
+<div ng-if="lists" ng-repeat="l in lists" class="kohalists">
+<h2>{{l.name}}</h2>
+<div class="flexRow" >
+<div class="flexItem" ng-repeat="i in l.items">
+	<a ng-if="i.cover" href="{{i.biblionumber}}&tab=default_tab&search_scope=default_scope&vid=33UDR2_VU1 "><img src="{{i.cover}}" alt="{{i.title}}" title="{{i.title}}" border="0"></a><md-tooltip>{{i.title}} / {{i.author}}. {{i.publisher}} : {{i.publicationyear}}</md-tooltip>
+</div>
+<a class="button-confirm md-mini button-with-icon md-button md-primoExplore-theme md-ink-ripple" href="https://catalogue.bu.univ-rennes2.fr/cgi-bin/koha/opac-shelves.pl?op=view&shelfnumber={{l.id}}&sortfield=title"><prm-icon class="padding-right-small" icon-type="svg" svg-icon-set="action" icon-definition="ic_open_in_new_24px"></prm-icon-after></prm-icon></a>
+</div>
+</div>
