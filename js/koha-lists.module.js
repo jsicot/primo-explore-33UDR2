@@ -4,7 +4,7 @@ angular
     templateUrl: 'custom/33UDR2_VU1/html/koha-lists.html',
     controller: ['$scope', 'kohalistsService', function ($scope, kohalistsService) {
       $scope.loading = true;
-      var url = "https://catalogue.bu.univ-rennes2.fr/r2microws/getPublicLists.php";
+      var url = "https://catalogue.bu.univ-rennes2.fr/data/publiclists.json";
       var response = kohalistsService.getLists(url).then(function (response) {
 	       $scope.loading = false;
 	       $scope.lists =response.data;

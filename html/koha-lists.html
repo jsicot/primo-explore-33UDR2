@@ -1,11 +1,16 @@
-<prm-spinner class="inline-loader display-inline dark-on-light half-transparent column center" ng-if="loading"></prm-spinner>
+<div layout="row" layout-align="center center" class="padding-top-large layout-align-center-center layout-row"><prm-spinner class="inline-loader display-inline dark-on-light half-transparent column center" ng-if="loading"></prm-spinner></div>
+
+
 
 <div ng-if="lists" ng-repeat="l in lists" class="kohalists">
-<h2>{{l.name}}</h2>
+<h2><a class="arrow-link md-primoExplore-theme" href="https://catalogue.bu.univ-rennes2.fr/cgi-bin/koha/opac-shelves.pl?op=view&shelfnumber={{l.id}}&sortfield=title">{{l.name}} <prm-icon class="padding-right-small" icon-type="svg" svg-icon-set="action" icon-definition="ic_open_in_new_24px"></prm-icon-after></prm-icon></a></h2>
 <div class="flexRow" >
 <div class="flexItem" ng-repeat="i in l.items">
-	<a ng-if="i.cover" href="{{i.biblionumber}}&tab=default_tab&search_scope=default_scope&vid=33UDR2_VU1 "><img src="{{i.cover}}" alt="{{i.title}}" title="{{i.title}}" border="0"></a><md-tooltip>{{i.title}} / {{i.author}}. {{i.publisher}} : {{i.publicationyear}}</md-tooltip>
+	<a ng-if="i.cover" href="https://rechercher.bu.univ-rennes2.fr/primo-explore/fulldisplay?docid=33UDR2_KOHA{{i.biblionumber}}&context=L&vid=33UDR2_VU1&search_scope=default_scope&tab=default_tab&lang=fr_FR"><img src="{{i.cover}}" alt="{{i.title}}" title="{{i.title}}" border="0"></a><md-tooltip>{{i.title}}. {{i.author}}. {{i.publicationyear}}</md-tooltip>
 </div>
-<a class="button-confirm md-mini button-with-icon md-button md-primoExplore-theme md-ink-ripple" href="https://catalogue.bu.univ-rennes2.fr/cgi-bin/koha/opac-shelves.pl?op=view&shelfnumber={{l.id}}&sortfield=title"><prm-icon class="padding-right-small" icon-type="svg" svg-icon-set="action" icon-definition="ic_open_in_new_24px"></prm-icon-after></prm-icon></a>
+
 </div>
+
 </div>
+
+<div ng-if="lists" layout="row" layout-align="center center" class="padding-top-large layout-align-center-center layout-row"><!----><button class="button-confirm button-large md-button md-primoExplore-theme md-ink-ripple" type="button">Toutes les listes de lecture<div class="md-ripple-container" style=""></div></button><!----><prm-spinner class="inline-loader display-inline dark-on-light half-transparent column center" ng-if="loading"></prm-spinner></div>
