@@ -9,6 +9,24 @@ prm-opac > md-tabs {
 }
 
 
+
+
+
+md-fab-toolbar prm-library-card-menu {display: none;}
+
+
+/*remove "Search for:" on advanced search*/
+#advanced-search > form > div > div.advanced-search-tabs.padded-container.layout-wrap.layout-align-space-between-center.layout-row > div.input-cell.layout-wrap.layout-align-start-center.layout-row > span {display: none;}
+
+
+/*move first advanced search box to line up labels/inputs*/
+#advanced-search > form > div > div.layout-xs-column.layout-row.flex > md-card.zero-margin.marginless-inputs.padded-container._md.md-primoExplore-theme.layout-align-start-start.layout-column.flex > div.layout-full-width.layout-align-start-start.layout-column > div:nth-child(1) {
+	margin-left: 11.7%;
+	width: 88.3%;
+	min-width: 88.3%;
+}
+
+
 // Disable built in e-shelf
 /*
 .pin-button,

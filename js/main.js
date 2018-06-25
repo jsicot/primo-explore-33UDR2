@@ -21,13 +21,20 @@ import { kohaLists } from './koha-lists.module';
 										'googleAnalytics',
                                         'libraryhours',
                                         'getThumbnail',
-//                                         'reportProblem',
                                         'kohaLists'
                                       ], function ($compileProvider) {
 		$compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|data):/);
 	});
 
+app.run(['$templateCache', function($templateCache) {
+	
+$templateCache.put('components/search/topbar/userArea/libraryCard/library-card-menu.html','<md-button aria-label="{{$ctrl.getLibraryCardAriaLabel() | translate}}" class="md-icon-button button-over-dark" (click)="$ctrl.goToMyLibraryCard();"  aria-label="{{\'nui.menu.librarycard\' | translate}}" (keydown)="$ctrl.keydownSupport($event)"><md-tooltip md-delay="400"><span translate="nui.menu.librarycard"></span></md-tooltip><prm-icon [icon-type]="::$ctrl.topBarIcons.library.type" [svg-icon-set]="::$ctrl.topBarIcons.library.iconSet" [icon-definition]="::$ctrl.topBarIcons.library.icon"></prm-icon></md-button><prm-library-card-menu-after parent-ctrl="$ctrl"></prm-library-card-menu-after>');	
+	
+	
+$templateCache.put('components/search/topbar/bookmarkFilter/search-bookmark-filter.html','<md-button ng-if="!$ctrl.isFavorites && $ctrl.showSearchHistoryTab()" class="md-icon-button button-over-dark" aria-label="{{\'nui.favorites.gohistory.tooltip\' | translate}}" ng-click="$ctrl.goToSearchHistory()" ui-state="$ctrl.FAVORITES_STATE" ui-state-params="$ctrl.searchHistoryParams" ui-sref-opts="{reload: true, inherit:false}" href=""><md-tooltip md-delay="400"><span translate="nui.favorites.gohistory.tooltip"></span></md-tooltip><prm-icon class="rotate-25" icon-type="svg" svg-icon-set="primo-ui" icon-definition="restore"></prm-icon></md-button><div id="fixed-buttons-holder" ng-class="{\'fixed-to-top\': $ctrl.fixedToTop()}" layout="row" layout-align="center center"><md-button ng-if="$ctrl.isFavorites" id="search-button" class="md-icon-button button-over-dark" aria-label="{{\'nui.favorites.goSearch.tooltip\' | translate}}" ng-click="$ctrl.goToSearch()" ui-state="$ctrl.uiState" ui-state-params="$ctrl.searchStateParams" ui-sref-opts="{reload: true, inherit:false}" href=""><md-tooltip md-delay="400"><span translate="nui.favorites.goSearch.tooltip"></span></md-tooltip><prm-icon icon-type="svg" svg-icon-set="primo-ui" icon-definition="magnifying-glass" layout="row"></prm-icon></md-button><md-button ng-if="!$ctrl.isFavorites" id="favorites-button" class="md-icon-button button-over-dark" aria-label="{{\'nui.favorites.goFavorites.tooltip\' | translate}}" ng-click="$ctrl.goToFavorties()" ui-state="$ctrl.FAVORITES_STATE" ui-state-params="$ctrl.favoritesStateParams" ui-sref-opts="{reload: true, inherit:false}" href=""><md-tooltip md-delay="400"><span translate="nui.favorites.goFavorites.tooltip"></span></md-tooltip><prm-icon class="rotate-25" icon-type="svg" svg-icon-set="primo-ui" icon-definition="prm_pin"></prm-icon></md-button><prm-library-card-menu></prm-library-card-menu><div ng-if="$ctrl.fixedToTop()" class="ng-scope"><md-button id="back-to-top-button" class="zero-margin md-icon-button md-button md-ink-ripple" type="button" aria-label="User Action" ng-click="$ctrl.backToTop()"><prm-icon icon-type="{{$ctrl.backToTopIcon.backToTop.type}}" svg-icon-set="{{$ctrl.backToTopIcon.backToTop.iconSet}}" icon-definition="{{$ctrl.backToTopIcon.backToTop.icon}}"></prm-icon><div class="md-ripple-container"></div></md-button></div></div><prm-search-bookmark-filter-after parent-ctrl="$ctrl"></prm-search-bookmark-filter-after>');
 
+
+}]);
 
 app
   .constant(googleAnalyticsConfig.name, googleAnalyticsConfig.config);
@@ -46,6 +53,7 @@ app.config(['$sceDelegateProvider', function ($sceDelegateProvider) {
   urlWhitelist.push('http://sfx-univ-rennes2.hosted.exlibrisgroup**');
   urlWhitelist.push('https://uportal.univ-rennes2.fr**');
   urlWhitelist.push('https://**.hosted.exlibrisgroup.com**');
+  urlWhitelist.push('https://**.image.tmdb.org**');
   
   $sceDelegateProvider.resourceUrlWhitelist(urlWhitelist);
 }]);
@@ -62,6 +70,20 @@ app.component('prmSaveToFavoritesButtonAfter', {
 	});
 */
  
+ 
+/** Tabs and Scopes for Basic Searches **/
+app.component('prmSearchBarAfter', {
+	 bindings: {parentCtrl: '<'},
+	 controller: 'SearchBarAfterController'
+});
+
+app.controller('SearchBarAfterController', ['angularLoad', function (angularLoad) {
+	var vm = this;
+	vm.parentCtrl.showTabsAndScopes = true;
+}]);
+	
+ 
+
 
 
 
@@ -134,6 +156,9 @@ app.filter('orderObjectBy', function(){
     return array;
  }
 });
+
+
+
 
 
 app.run(runBlock);
