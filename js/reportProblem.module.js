@@ -13,6 +13,11 @@ angular.module('reportProblem', []).controller('prmSaveToFavoritesButtonAfterCon
 	                targetEvent: $event,
 	                templateUrl: 'custom/33UDR2_VU1/html/reportProblem.html', controller: function ($scope, $mdDialog, $http) {
 	                    let recordData = self.parentCtrl.item;
+                        if (self.parentCtrl.userSessionManagerService.areaName.match(/^anonymous-/)) {
+							$scope.userLogged = false;
+						} else {
+                            $scope.userLogged = true;
+                        }
 	                    $scope.report = {
 	                    	replyTo: '',
 	                        message: '',
@@ -50,17 +55,15 @@ angular.module('reportProblem', []).controller('prmSaveToFavoritesButtonAfterCon
 	                            //ip: self.view.ip.address,
 	                            ip: "",
 	                            message: $scope.report.message,
-	                            //replyTo: $scope.report.replyTo || self.user.email,
-	                            replyTo: $scope.report.replyTo,
 	                            userAgent: navigator.userAgent
 	                        };	                        	
-	                        var bodyContent = "From: " + $scope.report.replyTo + "<br />RecordId: " + data.recordId + "<br />Title: " + data.title + "<br />Browser: " + data.userAgent + "<br /><br />Message:<br />" + data.message.replace("\n", "<br />");
+	                        var bodyContent = "RecordId: " + data.recordId + "<br />Title: " + data.title + "<br />Browser: " + data.userAgent + "<br /><br />Message:<br />" + data.message.replace("\n", "<br />");
 	                        
 	                       //retrieve of user id when is logged
 	                       if(self.parentCtrl.primolyticsService.userSessionManagerService){
 		                       var uid = self.parentCtrl.primolyticsService.userSessionManagerService['areaName'];
 	                       }
-	                        if ($scope.report.replyTo.length > 0 && $scope.report.message.length > 0) {
+	                        if ($scope.report.message.length > 0) {
 	                            //$mdDialog.hide();
 								var url = "https://cataloguepreprod.bu.univ-rennes2.fr/r2microws/createPrimoTicket.php";
 								 $http({
@@ -71,26 +74,30 @@ angular.module('reportProblem', []).controller('prmSaveToFavoritesButtonAfterCon
 	                                    'X-From-ExL-API-Gateway': undefined
 	                                },
 	                                params: {
-		                            	in063: 'sicot_j',
-		                            	in165: '12',
-		                            	in267: '251',
-		                            	in369: 'OTHER',
-		                            	in471: '[PRIMO] Nouvel incident',
-		                            	in573: 'rechercher.bu.univ-rennes2.fr',
-		                            	in675: '3',
-										in777: bodyContent,
-										in879: 'DEFAULT',
-										method: '60'
+		                            	message : bodyContent
 	                        		},
 	                                cache: false,
 	                            }).then(function(response){
-						                $scope.returnMessage = 'Merci pour votre message. Vous recevrez une réponse très prochainement. Vous pouvez dorénavant fermer cette fenêtre.';
-										console.log(response);
-										$scope.hideForm = false;
+                                        if (response.data != undefined) {
+                                                console.log(response.data);
+											if (response.data.state == "success") {
+                                                console.log(response.data.state);
+												$scope.report_succeed = true;
+                                                $scope.reportMessage = "succes";
+											} else {
+                                                var errors = {
+                                                        "LOGIN_FAILED" : "Vous devez être connecté pour pouvoir envoyer le message.",
+                                                        "USER_NOT_FOUND" : "Erreur de connection, utilisateur non-trouvé.",
+                                                        "MSG_EMPTY" : "Votre message ne doit pas être vide.",
+                                                        "WS_CALL_FAILED" : "Le services est temporairement hors-service, veuillez réessayer ultérieurement."
+                                                };
+                                                $scope.returnMessage = errors[response.data.error];
+                                            }
+										} else {
+                                                $scope.returnMessage = "Le services est temporairement hors-service, veuillez réessayer ultérieurement.";
+                                        }
 						            }, function(response){
-		                                $scope.returnMessage = 'Oups. Impossible d\'envoyer le message.';
-										console.log($scope.returnMessage);
-		                                $scope.hideForm = false;
+		                                $scope.returnMessage = "Le services est temporairement hors-service, veuillez réessayer ultérieurement.";
 						            });
 	                        }
 	                    }

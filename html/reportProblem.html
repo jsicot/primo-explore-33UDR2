@@ -8,21 +8,16 @@
             </md-button>
         </div>
     </md-toolbar>
-    <md-dialog-content>
+    <md-dialog-content ng-if="!userLogged">
+        <div class="md-dialog-content">
+            Vous devez être connecté pour pouvoir signaler un problème.
+            <prm-authentication></prm-authentication>
+        </div>
+    </md-dialog-content>
+    <md-dialog-content ng-if="!report_succeed && userLogged">
       <form name="reportAProblemForm">
         <div class="md-dialog-content">
             <input type="hidden" name="subject" ng-model="report.subject">
-            <md-input-container class="md-block">
-                <label><span>Votre email *</span></label>
-                <input type="email" name="replyTo" title="{{ default.nui.details.email.why | translate}}" placeholder="john.doe@etudiant.univ-rennes2.fr" required ng-model="report.replyTo" ng-pattern="/^.+@.+\..+$/">
-                <div ng-if="reportAProblemForm.replyTo.$error.required" class="md-input-message-animation" style="opacity: 1; margin-top: 0px;" role="alert">
-                  <div class="req" style="color:tomato;"><span>* champ requis</span></div>
-                </div>
-                <div ng-if="reportAProblemForm.replyTo.$error.email" class="md-input-message-animation" style="opacity: 1; margin-top: 0px;" role="error">
-                 <div class="req" style="color:tomato;"><span>* adresse email invalide</span></div>
-                 
-                </div>
-            </md-input-container>
             <md-input-container>
                 <label><span>Description du problème *</span></label>
 <!--                 <input type="text" name="message" placeholder="ex. le lien ne fonctionne pas." md-maxlength="5000" required md-no-asterisk  ng-model="report.message"/> -->
@@ -40,10 +35,16 @@
         </div>
         
       </form>
-    </md-dialog-content>
-    <md-dialog-actions layout="row">
+	</md-dialog-content>
+    <md-dialog-actions layout="row" ng-if="!report_succeed && userLogged">
         <md-button class="md-button md-secondary" ng-click="cancelReport()">Annuler</md-button>
         <md-button class="button-with-icon button-confirm md-button md-primoExplore-theme md-ink-ripple" ng-click="sendReport()"><prm-icon icon-type="svg" svg-icon-set="primo-ui" icon-definition="send"></prm-icon>       
  Envoyer</md-button>
+    </md-dialog-actions>
+	<md-dialog-content ng-if="report_succeed && userLogged">
+        <div class="md-dialog-content">Merci pour votre message. Vous recevrez une réponse très prochainement. Vous pouvez dorénavant fermer cette fenêtre.</div>
+	</md-dialog-content>
+    <md-dialog-actions layout="row" ng-if="report_succeed && userLogged">
+        <md-button class="button-with-icon button-confirm md-button md-primoExplore-theme md-ink-ripple" ng-click="cancelReport()">Fermer</md-button>
     </md-dialog-actions>
    </md-dialog>
