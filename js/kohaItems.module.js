@@ -112,6 +112,11 @@ angular.module('kohaItems', []).component('prmOpacAfter',  {
                                 $scope.loading = false;
                                 if (len > 0) {
                                     $scope.sfxholdings = response.data
+                                     if(angular.element(document.querySelector('#getit_link1_0')).length > 0) {
+										 	angular.element(document.querySelector('#getit_link1_0'))[0].style.display = "none";
+									}
+                                    
+                                    
                                     
                                 }
                             }
