@@ -65,7 +65,7 @@ angular.module('reportProblem', []).controller('prmSaveToFavoritesButtonAfterCon
 	                       }
 	                        if ($scope.report.message.length > 0) {
 	                            //$mdDialog.hide();
-								var url = "https://cataloguepreprod.bu.univ-rennes2.fr/r2microws/createPrimoTicket.php";
+								var url = "https://catalogue.bu.univ-rennes2.fr/r2microws/createPrimoTicket.php";
 								 $http({
 	                                method: 'JSONP',
 	                                url: url,
