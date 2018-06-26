@@ -1,8 +1,8 @@
-angular.module('kohaItems', []).component('prmOpacAfter', {
+angular.module('kohaItems', []).component('prmOpacAfter',  {
     bindings: {
         parentCtrl: '<'
     },
-    controller: function controller($scope, $http, $element, kohaitemsService) {
+    controller: function controller($scope, $mdDialog, $http, $element, kohaitemsService) {
         this.$onInit = function() {
             if ($scope.$ctrl.parentCtrl.item) {
                 $scope.kohaDisplay = false; /* default hides template */
@@ -36,6 +36,7 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                                 items.push(kohaitems[i]);
                                                 $scope.loading = false;
                                                 $scope.onshelves = true;
+                                                
                                             }
                                         } else if (response.data.record[0].holdings && type === "journal") {
 
@@ -74,6 +75,23 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                         }
                         $scope.items = items;
                         console.log(items);
+                        
+			$scope.showRequestItem = function($event){
+	            $mdDialog.show( {
+	                parent: angular.element(document.body),
+	                clickOutsideToClose: true,
+	                fullscreen: false,
+	                targetEvent: $event,
+	                templateUrl: 'custom/33UDR2_VU1/html/requestItem.html', controller: function ($scope, $mdDialog, $http) {
+	                    $scope.cancelReport = function () {
+	                        $mdDialog.cancel();
+	                    }
+	                }
+	            });
+	        };
+                        
+                        
+                        
                     }
                     var delivery = $scope.$ctrl.parentCtrl.item.delivery;
                     if (delivery != undefined) {

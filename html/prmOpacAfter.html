@@ -40,6 +40,14 @@
 						<p class="availability-status {{item.statusClass}}"><span translate="nui.item.brief.2"></span> {{item.istatus}}</p>
 						<md-tooltip>{{item.istatus}}</md-tooltip>
 					</div>
+					<div ng-if='item.istatus === "Disponible sur demande"'>
+			<button class="md-icon-button  custom-button md-button md-primoExplore-theme md-ink-ripple hide-xs" type="button" (click)="showRequestItem($event)" aria-label="Comment obtenir ce document">
+			<prm-icon class="md-icon-button-custom" icon-type="svg" svg-icon-set="primo-ui" icon-definition="help-circle-outline"></prm-icon>
+			<md-tooltip md-direction="down" md-delay="400" class="multi-row-tooltip slide-tooltip-anim"><span class="item-description popover animate-popover">Comment obtenir ce document ?</span></md-tooltip></button>
+					
+					
+
+					</div>
 <!--
 					<div layout="row" layout-align="center center" ng-repeat="service in item.listOfServices track by $index" ng-if="$ctrl.isLoggedIn()">
 						<prm-service-button ng-if="$ctrl.allowService()" [service]="service" (change-tab-event)="::$ctrl.onChangeTabEvent($event)" [parent-tab]="::$ctrl.tabId" [request-parameters]="$ctrl.getServiceAdditionalParams(item, service)" method="GET"></prm-service-button>
