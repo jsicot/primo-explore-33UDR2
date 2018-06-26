@@ -16,6 +16,7 @@ angular.module('kohaItems', []).component('prmOpacAfter',  {
                     var type = $scope.$ctrl.parentCtrl.item.pnx.display.type[0];
                     if (total_ids > 0) {
                         var items = [];
+                        var branches = [];
                         var holdings = [];
                         for (var i = 0; i < ids.length; i++) {
                             if (ids[i].startsWith("$$V") && ids[i].includes("33UDR2_KOHA")) {
@@ -34,6 +35,12 @@ angular.module('kohaItems', []).component('prmOpacAfter',  {
                                             var kohaitems = response.data.record[0].item
                                             for (var i = 0; i < kohaitems.length; i++) {
                                                 items.push(kohaitems[i]);
+                                                
+                                               if(!(branches.indexOf(kohaitems[i].homebranch) !== -1)) { 
+                                                
+                                                branches.push(kohaitems[i].homebranch);
+                                                }
+												//branches[kohaitems[i].branchcode] = kohaitems[i].homebranch;
                                                 $scope.loading = false;
                                                 $scope.onshelves = true;
                                                 
@@ -73,8 +80,12 @@ angular.module('kohaItems', []).component('prmOpacAfter',  {
                                 $scope.loading = false;
                             }
                         }
-                        $scope.items = items;
-                        console.log(items);
+                        if(items){
+	                       $scope.items = items;
+						   $scope.branches = branches; 
+                        }
+                        
+         
                         
 			$scope.showRequestItem = function($event){
 	            $mdDialog.show( {

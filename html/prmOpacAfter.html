@@ -2,11 +2,21 @@
 
 <prm-spinner class="inline-loader half-transparent dark-on-light no-text" layout="row" ng-if="loading" layout-align="center center"></prm-spinner>
 
-<h3 ng-if="onshelves" class="section-title" style="margin-bottom: .75em !important;"><span translate="nui.aria.locationItems.locationItems"></span></h3>
 
+<div ng-if="onshelves">
+<h3 class="section-title" style="margin-bottom: .75em !important;"><span translate="nui.aria.locationItems.locationItems"></span></h3>
+
+
+<div  class="bar filter-bar animate-horizontal-swap margin-bottom-small layout-fill layout-wrap layout-align-start-center layout-row" layout="row" layout-align="start center" layout-wrap="" style="padding: .5em 1em; position: relative; border-radius: 3px;" layout-fill="">
+<md-input-container layout="row" layout-align="start" class="zero-padding margin-right-small md-primoExplore-theme layout-align-start-stretch layout-row"><!---->
+<md-select ng-model="selection" placeholder="Choisir une bibliothèque" class="borderless ng-pristine ng-untouched ng-valid md-primoExplore-theme ng-empty" tabindex="0" aria-label="Location" role="listbox" aria-expanded="false" aria-multiselectable="false" aria-disabled="false" aria-invalid="false">
+    <md-option ng-value="item" ng-repeat="item in branches | orderBy:['item'] ">{{item}}</md-option>
+</md-select>
+</md-input-container>
+</div>
 
 <md-list ng-if="items"  layout="column" class="separate-list-items margin-left-medium">
-	<md-list-item ng-repeat="item in items | orderBy:['branchrank','itemcallnumber'] " class="md-2-line">
+	<md-list-item ng-repeat="item in items | filter:{'homebranch':selection} | orderBy:['branchrank','itemcallnumber'] " class="md-2-line">
 		<div layout="row" flex>
 				<div class="md-list-item-text" layout="row" layout-wrap flex><div flex flex-xs="100">
 					<div ng-if="item.homebranch">
@@ -70,7 +80,11 @@
 	</md-list-item>
 </md-list>
 
-<h3 ng-if="kohaholdings" class="section-title" style="margin-bottom: .75em !important;"><span translate="nui.aria.locationItems.locationItems"></span></h3>
+</div>
+
+<div ng-if="kohaholdings">
+
+<h3  class="section-title" style="margin-bottom: .75em !important;"><span translate="nui.aria.locationItems.locationItems"></span></h3>
 
 
 <md-list ng-if="kohaholdings" id="kohaholdings" layout="column" class="separate-list-items margin-left-medium">
@@ -127,4 +141,4 @@
 	</md-list-item>
 </md-list>
 
-
+</div>
