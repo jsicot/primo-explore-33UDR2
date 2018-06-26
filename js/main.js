@@ -6,7 +6,7 @@ import { kohaAvailabilities } from './kohaAvailabilities.module';
 import { sfxHoldings } from './sfxHoldings.module';
 import { googleAnalyticsConfig } from './googleAnalyticsConfig';
 import { libraryhours } from './libraryhours.module';
-// import { reportProblem } from './reportProblem.module';
+import { reportProblem } from './reportProblem.module';
 import { getThumbnail } from './getThumbnail.module';
 import { kohaLists } from './koha-lists.module';
 (function () {
@@ -21,7 +21,8 @@ import { kohaLists } from './koha-lists.module';
 										'googleAnalytics',
                                         'libraryhours',
                                         'getThumbnail',
-                                        'kohaLists'
+                                        'kohaLists',
+										'reportProblem'
                                       ], function ($compileProvider) {
 		$compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|data):/);
 	});
@@ -61,14 +62,13 @@ app.config(['$sceDelegateProvider', function ($sceDelegateProvider) {
 
 
 //Report a problem init
-/*
+
 app.component('prmSaveToFavoritesButtonAfter', {
 	bindings: {parentCtrl: '<'},
 	controller: 'prmSaveToFavoritesButtonAfterController',
 	templateUrl: 'custom/33UDR2_VU1/html/reportProblemButton.html'
+});
 
-	});
-*/
  
  
 /** Tabs and Scopes for Basic Searches **/
