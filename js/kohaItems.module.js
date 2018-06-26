@@ -38,13 +38,13 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                                 $scope.onshelves = true;
                                             }
                                         } else if (response.data.record[0].holdings && type === "journal") {
-                                            
+
 	                                            if(recid.startsWith("dedupmrg")) {
-			 if(angular.element(document.querySelector('#getit_link1_0')).length > 0) {
- 		       	angular.element(document.querySelector('#getit_link1_0'))[0].style.display = "none"; 
-	         }  
-		}
-                                            $scope.kohaholdings = [];
+													 if(angular.element(document.querySelector('#getit_link1_0')).length > 0) {
+										 		       	angular.element(document.querySelector('#getit_link1_0'))[0].style.display = "none";
+											         }
+												}
+										                                            $scope.kohaholdings = [];
                                             for (var i = 0; i < response.data.record[0].holdings.length; i++) {
                                                 var holding = response.data.record[0].holdings[i]
                                                 $scope.kohaholdings[i] = {
@@ -71,12 +71,10 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                             } else {
                                 $scope.loading = false;
                             }
-
                         }
                         $scope.items = items;
                         console.log(items);
                     }
-
                     var delivery = $scope.$ctrl.parentCtrl.item.delivery;
                     if (delivery != undefined) {
                         for (var i = 0; i < delivery.link.length; i++) {
@@ -93,16 +91,16 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                 var keys = Object.keys(response.data);
                                 var len = keys.length;
                                 console.log("SFX results: " + len);
+                                $scope.loading = false;
                                 if (len > 0) {
-                                    $scope.sfxholdings = response.data;
+                                    $scope.sfxholdings = response.data
+                                    
                                 }
                             }
-                        }).catch(function(e) {
-                            console.log(e);
-                        });
+                        }, function(response) {
+                                    $scope.loading = false;
+                        	});
                     }
-
-
                 }
             }
         };

@@ -6,7 +6,7 @@
 
 
 <md-list ng-if="items"  layout="column" class="separate-list-items margin-left-medium">
-	<md-list-item ng-repeat="item in items | orderBy:['homebranch','istatus'] " class="md-2-line">
+	<md-list-item ng-repeat="item in items | orderBy:['branchrank','istatus'] " class="md-2-line">
 		<div layout="row" flex>
 				<div class="md-list-item-text" layout="row" layout-wrap flex><div flex flex-xs="100">
 					<div ng-if="item.homebranch">
