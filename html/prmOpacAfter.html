@@ -6,7 +6,7 @@
 
 
 <md-list ng-if="items"  layout="column" class="separate-list-items margin-left-medium">
-	<md-list-item ng-repeat="item in items | orderBy:['branchrank','istatus'] " class="md-2-line">
+	<md-list-item ng-repeat="item in items | orderBy:['branchrank','itemcallnumber'] " class="md-2-line">
 		<div layout="row" flex>
 				<div class="md-list-item-text" layout="row" layout-wrap flex><div flex flex-xs="100">
 					<div ng-if="item.homebranch">
@@ -22,6 +22,10 @@
 					<div ng-if="item.itemcallnumber">
 						<p class="callnum"><span translate="nui.item.brief.4"></span> {{item.itemcallnumber}}</p>
 						<md-tooltip>{{item.itemcallnumber}}</md-tooltip>
+					</div>
+					<div ng-if="item.copynumber">
+						<p class="weak-text"><span translate="nui.item.brief.3"></span> {{item.copynumber}}</p>
+						<md-tooltip>{{item.copynumber}}</md-tooltip>
 					</div>
 					<div ng-if="item.isExpanded">
 						<div ng-repeat="full in item.fullItemFields track by $index">
