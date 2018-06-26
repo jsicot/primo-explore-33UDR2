@@ -34,11 +34,11 @@ angular.module('getThumbnail', []).component('prmSearchResultThumbnailContainerA
           var response = thumbnailService.getThumbSrc(url).then(function (response) {
 	         if(response.data){
 	            var thumb = response.data[0].cover;
-	           if( thumb == "no_img"){
+	           if(thumb && thumb.includes("no_img")){
 		           thumb = null;
 	           }
 				$scope.thumbnailLink = thumb;//we have the link - success
-				if(thumb !== "no_img"){
+				if(thumb && !thumb.includes("no_img")){
 					$element.parent().children()[0].style.display = "none";
 				}
 	         }

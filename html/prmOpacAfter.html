@@ -2,9 +2,10 @@
 
 <prm-spinner class="inline-loader half-transparent dark-on-light no-text" layout="row" ng-if="loading" layout-align="center center"></prm-spinner>
 
-<h3 ng-if="items" class="section-title" style="margin-bottom: .75em !important;"><span translate="nui.aria.locationItems.locationItems"></span></h3>
+<h3 ng-if="onshelves" class="section-title" style="margin-bottom: .75em !important;"><span translate="nui.aria.locationItems.locationItems"></span></h3>
 
-<md-list ng-if="items" id="kohaitems" layout="column" class="separate-list-items margin-left-medium">
+
+<md-list ng-if="items"  layout="column" class="separate-list-items margin-left-medium">
 	<md-list-item ng-repeat="item in items | orderBy:['homebranch','istatus'] " class="md-2-line">
 		<div layout="row" flex>
 				<div class="md-list-item-text" layout="row" layout-wrap flex><div flex flex-xs="100">
