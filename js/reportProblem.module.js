@@ -13,7 +13,7 @@ angular.module('reportProblem', []).controller('prmSaveToFavoritesButtonAfterCon
 	                targetEvent: $event,
 	                templateUrl: 'custom/33UDR2_VU1/html/reportProblem.html', controller: function ($scope, $mdDialog, $http) {
 	                    let recordData = self.parentCtrl.item;
-                        if (self.parentCtrl.userSessionManagerService.areaName.match(/^anonymous-/)) {
+                        if (self.parentCtrl.userSessionManagerService.areaName == undefined || self.parentCtrl.userSessionManagerService.areaName.match(/^anonymous-/)) {
 							$scope.userLogged = false;
 						} else {
                             $scope.userLogged = true;
