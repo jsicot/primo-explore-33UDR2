@@ -39,7 +39,7 @@ angular.module('kohaItems', []).component('prmOpacAfter',  {
                                                 
                                                 var itemstatus = kohaitems[i].istatus ;
                                                 if(itemstatus.startsWith("Emprunt")){
-		                                                itemstatus = "Emprunté"; 
+		                                                itemstatus = "Emprunt\u00e9"; 
 	                                              }
                                                if(!(branches.indexOf(kohaitems[i].homebranch) !== -1)) { 
                                                 	branches.push(kohaitems[i].homebranch);
