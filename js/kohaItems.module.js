@@ -17,6 +17,7 @@ angular.module('kohaItems', []).component('prmOpacAfter',  {
                     if (total_ids > 0) {
                         var items = [];
                         var branches = [];
+                        var status = [];
                         var holdings = [];
                         for (var i = 0; i < ids.length; i++) {
                             if (ids[i].startsWith("$$V") && ids[i].includes("33UDR2_KOHA")) {
@@ -36,9 +37,15 @@ angular.module('kohaItems', []).component('prmOpacAfter',  {
                                             for (var i = 0; i < kohaitems.length; i++) {
                                                 items.push(kohaitems[i]);
                                                 
+                                                var itemstatus = kohaitems[i].istatus ;
+                                                if(itemstatus.startsWith("Emprunté")){
+		                                                itemstatus = "Emprunté"; 
+	                                              }
                                                if(!(branches.indexOf(kohaitems[i].homebranch) !== -1)) { 
-                                                
-                                                branches.push(kohaitems[i].homebranch);
+                                                	branches.push(kohaitems[i].homebranch);
+                                                }
+                                                if(!(status.indexOf(itemstatus) !== -1)) {
+                                                	status.push(itemstatus);
                                                 }
 												//branches[kohaitems[i].branchcode] = kohaitems[i].homebranch;
                                                 $scope.loading = false;
@@ -82,7 +89,8 @@ angular.module('kohaItems', []).component('prmOpacAfter',  {
                         }
                         if(items){
 	                       $scope.items = items;
-						   $scope.branches = branches; 
+						   $scope.branches = branches;
+						   $scope.status = status;  
                         }
                         
          

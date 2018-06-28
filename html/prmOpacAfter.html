@@ -13,10 +13,15 @@
     <md-option ng-value="item" ng-repeat="item in branches | orderBy:['item'] ">{{item}}</md-option>
 </md-select>
 </md-input-container>
+<md-input-container layout="row" layout-align="start" class="zero-padding margin-right-small md-primoExplore-theme layout-align-start-stretch layout-row"><!---->
+<md-select ng-model="availability" placeholder="Disponibilité" class="borderless ng-pristine ng-untouched ng-valid md-primoExplore-theme ng-empty" tabindex="0" aria-label="Status" role="listbox" aria-expanded="false" aria-multiselectable="false" aria-disabled="false" aria-invalid="false">
+    <md-option ng-value="item" ng-repeat="item in status | orderBy:['item'] ">{{item}}</md-option>
+</md-select>
+</md-input-container>
 </div>
 
 <md-list ng-if="items"  layout="column" class="separate-list-items margin-left-medium">
-	<md-list-item ng-repeat="item in items | filter:{'homebranch':selection} | orderBy:['branchrank','itemcallnumber'] " class="md-2-line">
+	<md-list-item ng-repeat="item in items | filter:{'homebranch':selection, 'istatus':availability} | orderBy:['branchrank','itemcallnumber'] " class="md-2-line">
 		<div layout="row" flex>
 				<div class="md-list-item-text" layout="row" layout-wrap flex><div flex flex-xs="100">
 					<div ng-if="item.homebranch">
