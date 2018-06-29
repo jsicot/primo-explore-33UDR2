@@ -54,8 +54,6 @@ app.config(['$sceDelegateProvider', function ($sceDelegateProvider) {
   urlWhitelist.push('https://**.bu.univ-rennes2**');
   urlWhitelist.push('https://cataloguepreprod.bu.univ-rennes2**');
   urlWhitelist.push('http://sfx-univ-rennes2.hosted.exlibrisgroup**');
-  urlWhitelist.push('https://uportal.univ-rennes2.fr**');
-  urlWhitelist.push('https://**.hosted.exlibrisgroup.com**');
   urlWhitelist.push('https://**.image.tmdb.org**');
   
   $sceDelegateProvider.resourceUrlWhitelist(urlWhitelist);
