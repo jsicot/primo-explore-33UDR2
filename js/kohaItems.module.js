@@ -35,10 +35,12 @@ angular.module('kohaItems', []).component('prmOpacAfter',  {
                                         if (response.data.record[0].item && type !== "journal") {
                                             var kohaitems = response.data.record[0].item
                                             for (var i = 0; i < kohaitems.length; i++) {
+                                             
+                                            if(kohaitems[i].withdrawnstatus == 'false' && kohaitems[i].itemlost == "0" ){
                                                 items.push(kohaitems[i]);
-                                                
                                                 var itemstatus = kohaitems[i].istatus ;
-                                                if(itemstatus.startsWith("Emprunt")){
+
+                                               if(itemstatus.startsWith("Emprunt")){
 		                                                itemstatus = "Emprunt\u00e9"; 
 	                                              }
                                                if(!(branches.indexOf(kohaitems[i].homebranch) !== -1)) { 
@@ -50,7 +52,7 @@ angular.module('kohaItems', []).component('prmOpacAfter',  {
 												//branches[kohaitems[i].branchcode] = kohaitems[i].homebranch;
                                                 $scope.loading = false;
                                                 $scope.onshelves = true;
-                                                
+                                             }   
                                             }
                                         } else if (response.data.record[0].holdings && type === "journal") {
 
