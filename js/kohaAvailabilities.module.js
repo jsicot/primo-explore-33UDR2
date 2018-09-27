@@ -38,17 +38,36 @@ angular.module('kohaAvailabilities', []).component('prmBriefResultAfter', {
 	            if (items.available != null) {
 	              $element.children().removeClass("ng-hide"); /* initially set by $scope.kohaDisplay=false */
 	              $scope.status = items.status;
-	              $scope.recordid = bn;
-	              $scope.branch = items.homebranch;
+                $scope.recordid = bn;
+                var homebranch = items.homebranch;
+                // homebranch = homebranch.replace(/Bibliothèque Universitaire/,"BU");
+                // homebranch = homebranch.replace(/Bibliothèque/,"BU");
+                $scope.branch = homebranch;
 	              $scope.location = items.location;
 	              $scope.class = items.class;
 	              $scope.callnumber = items.itemcallnumber;
 	              $scope.otherLocations = (items.total - 1);
-	            } else {
-					console.log("it's false");
+              } 
+              else {
+                console.log("it's false");
 	            }
 	         }
 	         else {
+            var orderSvc = "https://catalogue.bu.univ-rennes2.fr/r2microws/getInfoOrder.php?biblionumber=" + bn;
+            var response = kohaavailService.getKohaData(orderSvc).then(function (response) {
+             if(response.data.orders){
+               console.log("notice acq");
+               var order = response.data.orders[0];
+               $element.children().removeClass("ng-hide"); /* initially set by $scope.kohaDisplay=false */
+               $scope.status = "Bientôt disponible";
+               $scope.recordid = bn;
+               $scope.branch = "(en commande - domaine : "+order.budget+")";
+               $scope.location = "";
+               $scope.class = " status-unavailable unavailable";
+               $scope.callnumber = "";
+               $scope.otherLocations = 0;
+             }
+            });
 		         	$scope.kohaDisplay = true;
 		         }
           });
