@@ -1,0 +1,93 @@
+
+
+
+
+/*advanced search - push first line across journal*/
+#advanced-search > form > div > div.layout-xs-column.layout-row.flex > md-card.zero-margin.marginless-inputs.padded-container._md.md-primoExplore-theme.layout-align-start-start.layout-column.flex > div.layout-full-width.layout-align-start-start.layout-column > div:first-of-type {margin-left: 71px;}
+
+/*make text 'simple search' on Advanced screen white journal*/
+prm-search-bar .search-switch-buttons .md-button.switch-to-simple {color: #FFF;}
+
+/*make Location be in bold - to increase contrast and make it easier to photograph call number with smart phone journal*/
+span[class*="best-location"] {font-weight: bold;}
+
+/*E-journal page journal*/
+prm-journals-search-bar {background: #434A54;}
+
+/* ----------------------------------------------------*/
+/*responsive stuff for small screens journal*/
+
+@media screen and (max-width:640px){
+	/*add border to search box journal*/
+	prm-search-bar #searchBar {border-top:1px solid #e1e1e1; border-radius:0;}
+	prm-autocomplete md-autocomplete-wrap {border-top:1px solid #e1e1e1;}
+	/*hide the search scopes dropdown journal*/
+	prm-search-bar .simple-search-wrapper .search-options prm-tabs-and-scopes-selector, #select_value_label_1, #select_value_label_2, prm-search-bar div.search-options.flex-sm-40.visible{display: none;}
+
+}
+
+@media screen and (max-width:768px)
+{
+
+/*fit user area in journal */
+#user_area_after{position:relative;float:right;min-width:200px;height:100%;margin:0;padding:0;}
+
+/*hide boolean tips and search tips on mobile journal*/
+#boolean, #searchtips {max-width: 100%;}
+
+/*make search button bit tidier journal*/
+prm-search-bar .simple-search-wrapper md-autocomplete-wrap input {height: 59px;}
+
+/* lop off username if too long journal*/
+.user-name {text-overflow: ellipsis;white-space: nowrap;overflow: hidden;max-width: 10em;right: -0.8em;}
+
+/*shorten placeholder text journal*/
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    text-overflow: ellipsis;
+    max-width: 63%;
+}
+::-moz-placeholder { /* Firefox 19+ */
+    text-overflow: ellipsis;
+}
+:-ms-input-placeholder { /* IE 10+ */
+    text-overflow: ellipsis;
+}
+:-moz-placeholder { /* Firefox 18- */
+    text-overflow: ellipsis;
+}
+[placeholder] {
+    text-overflow: ellipsis;
+    }
+::placeholder{
+  text-overflow: ellipsis;
+}
+input::placeholder  {
+  text-overflow: ellipsis;
+}
+
+/*for FF because it's being daft journal*/
+#searchBar:placeholder-shown {overflow:hidden;max-width:99%;width:99%;border:none;text-overflow: ellipsis;}
+prm-autocomplete md-autocomplete-wrap {width: 99% !important; max-width: 99%;text-overflow: ellipsis;}
+}
+/*remove extra space in basic search results journal */
+.search-result-availability-line-wrapper {
+min-height: 0.5em;
+}
+
+/*try and get rid of little blue pixels that appear in Safari on input fields journal*/
+md-input-container::after{height:0;width:0;content:"";display: block;border-bottom: 2px solid #416ebf;}
+
+/*fix issue with logo hover highlighting journal*/
+#banner.product-logo a.md-primoExplore-theme {background: none;}
+#banner.product-logo a:hover {background:none;}
+
+/* Fix display of 'X' for Safari journal*/
+div.md-dialog-container.fixed-container > div > button{background:#d4d4d4;border-radius:50%; opacity:4;}
+
+/*remove blue hover under banner logo journal */
+a.md-primoExplore-theme, #banner > a:nth-child(1):hover {box-shadow:none;}
+
+/*resize E-journal search box label to fit*/
+prm-browse-search-bar .journal-search-tile, prm-journals-search-bar .journal-search-tile, prm-tags-search-bar .journal-search-tile {width:95px;}
+
+

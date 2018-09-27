@@ -67,6 +67,7 @@ a.md-button[aria-label="mainmenu.label.Browse"] {
 /*remove "Show results beyond my Libraries collection"*/
 #facets > prm-facet > div > div > div.sidebar-section.margin-top-small.margin-bottom-medium.compensate-padding-left {display: none;}
 
+
 /*remove availability text in full record view*/
  prm-full-view-service-container prm-brief-result-container prm-search-result-availability-koha{display: none;}
 // Hide availability links on brief and full display
