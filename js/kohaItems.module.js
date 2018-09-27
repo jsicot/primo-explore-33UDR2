@@ -74,8 +74,10 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                                 }
                                             }
                                         } else {
-                                            console.log("journal : no print holding");
+                                            console.log("journal : no holdings");
                                             $scope.loading = false;
+                                            $scope.onshelves = false;
+                                            angular.element(document.querySelector('#getit_link1_0.full-view-section'))[0].style.display = "none";
                                         }
                                     }
                                 }, function (response) {
