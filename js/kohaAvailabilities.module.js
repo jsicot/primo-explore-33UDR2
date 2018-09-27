@@ -59,9 +59,9 @@ angular.module('kohaAvailabilities', []).component('prmBriefResultAfter', {
                console.log("notice acq");
                var order = response.data.orders[0];
                $element.children().removeClass("ng-hide"); /* initially set by $scope.kohaDisplay=false */
-               $scope.status = "Bientôt disponible";
+               $scope.status = "Prochainement disponible";
                $scope.recordid = bn;
-               $scope.branch = "(en commande - domaine : "+order.budget+")";
+               $scope.branch = "(en commande)";
                $scope.location = "";
                $scope.class = " status-unavailable unavailable";
                $scope.callnumber = "";
