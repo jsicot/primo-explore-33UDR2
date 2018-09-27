@@ -1,9 +1,9 @@
-angular.module('kohaItems', []).component('prmOpacAfter',  {
+angular.module('kohaItems', []).component('prmOpacAfter', {
     bindings: {
         parentCtrl: '<'
     },
     controller: function controller($scope, $mdDialog, $http, $element, kohaitemsService) {
-        this.$onInit = function() {
+        this.$onInit = function () {
             if ($scope.$ctrl.parentCtrl.item) {
                 $scope.kohaDisplay = false; /* default hides template */
                 var obj = $scope.$ctrl.parentCtrl.item.pnx.control;
@@ -27,41 +27,38 @@ angular.module('kohaItems', []).component('prmOpacAfter',  {
                                 var source = obj.sourceid[0];
                                 var bn = obj.sourcerecordid[0];
                             }
-
                             if (bn && source == "33UDR2_KOHA") {
                                 var url = "https://catalogue.bu.univ-rennes2.fr/r2microws/json.getSru.php?index=rec.id&q=" + bn;
-                                var response = kohaitemsService.getKohaData(url).then(function(response) {
+                                var response = kohaitemsService.getKohaData(url).then(function (response) {
                                     if (response.data.record[0]) {
                                         if (response.data.record[0].item && type !== "journal") {
                                             var kohaitems = response.data.record[0].item
                                             for (var i = 0; i < kohaitems.length; i++) {
-                                             
-                                            if(kohaitems[i].withdrawnstatus == 'false' && kohaitems[i].itemlost == "0" ){
-                                                items.push(kohaitems[i]);
-                                                var itemstatus = kohaitems[i].istatus ;
+                                                if (kohaitems[i].withdrawnstatus == 'false' && kohaitems[i].itemlost == "0") {
+                                                    items.push(kohaitems[i]);
+                                                    var itemstatus = kohaitems[i].istatus;
 
-                                               if(itemstatus.startsWith("Emprunt")){
-		                                                itemstatus = "Emprunt\u00e9"; 
-	                                              }
-                                               if(!(branches.indexOf(kohaitems[i].homebranch) !== -1)) { 
-                                                	branches.push(kohaitems[i].homebranch);
+                                                    if (itemstatus.startsWith("Emprunt")) {
+                                                        itemstatus = "Emprunt\u00e9";
+                                                    }
+                                                    if (!(branches.indexOf(kohaitems[i].homebranch) !== -1)) {
+                                                        branches.push(kohaitems[i].homebranch);
+                                                    }
+                                                    if (!(status.indexOf(itemstatus) !== -1)) {
+                                                        status.push(itemstatus);
+                                                    }
+                                                    //branches[kohaitems[i].branchcode] = kohaitems[i].homebranch;
+                                                    $scope.loading = false;
+                                                    $scope.onshelves = true;
                                                 }
-                                                if(!(status.indexOf(itemstatus) !== -1)) {
-                                                	status.push(itemstatus);
-                                                }
-												//branches[kohaitems[i].branchcode] = kohaitems[i].homebranch;
-                                                $scope.loading = false;
-                                                $scope.onshelves = true;
-                                             }   
                                             }
                                         } else if (response.data.record[0].holdings && type === "journal") {
-
-	                                            if(recid.startsWith("dedupmrg")) {
-													 if(angular.element(document.querySelector('#getit_link1_0')).length > 0) {
-										 		       	angular.element(document.querySelector('#getit_link1_0'))[0].style.display = "none";
-											         }
-												}
-										                                            $scope.kohaholdings = [];
+                                            if (recid.startsWith("dedupmrg")) {
+                                                if (angular.element(document.querySelector('#getit_link1_0')).length > 0) {
+                                                    angular.element(document.querySelector('#getit_link1_0'))[0].style.display = "none";
+                                                }
+                                            }
+                                            $scope.kohaholdings = [];
                                             for (var i = 0; i < response.data.record[0].holdings.length; i++) {
                                                 var holding = response.data.record[0].holdings[i]
                                                 $scope.kohaholdings[i] = {
@@ -81,7 +78,7 @@ angular.module('kohaItems', []).component('prmOpacAfter',  {
                                             $scope.loading = false;
                                         }
                                     }
-                                }, function(response) {
+                                }, function (response) {
                                     $scope.loading = false;
                                 });
 
@@ -89,43 +86,38 @@ angular.module('kohaItems', []).component('prmOpacAfter',  {
                                 $scope.loading = false;
                             }
                         }
-                        if(items){
-	                       $scope.items = items;
-						   $scope.branches = branches;
-						   $scope.status = status;  
+                        if (items) {
+                            $scope.items = items;
+                            $scope.branches = branches;
+                            $scope.status = status;
                         }
-                        
-         
-                        
-			$scope.showRequestItem = function($event){
-	            $mdDialog.show( {
-	                parent: angular.element(document.body),
-	                clickOutsideToClose: true,
-	                fullscreen: false,
-	                targetEvent: $event,
-	                templateUrl: 'custom/33UDR2_VU1/html/requestItem.html', controller: function ($scope, $mdDialog, $http) {
-	                    $scope.cancelReport = function () {
-	                        $mdDialog.cancel();
-	                    }
-	                }
-	            });
-	        };
-                        
-                        
-                        
+                        $scope.showRequestItem = function ($event) {
+                            $mdDialog.show({
+                                parent: angular.element(document.body),
+                                clickOutsideToClose: true,
+                                fullscreen: false,
+                                targetEvent: $event,
+                                templateUrl: 'custom/33UDR2_VU1/html/requestItem.html',
+                                controller: function ($scope, $mdDialog, $http) {
+                                    $scope.cancelReport = function () {
+                                        $mdDialog.cancel();
+                                    }
+                                }
+                            });
+                        };
                     }
                     var delivery = $scope.$ctrl.parentCtrl.item.delivery;
                     if (delivery != undefined) {
                         for (var i = 0; i < delivery.link.length; i++) {
                             if (delivery.link[i].displayLabel == "openurl") {
                                 openurl = delivery.link[i].linkURL;
+                                console.log("openurl : "+openurl);
                             }
                         }
                     }
                     if (openurl != undefined) {
-                        openurl = openurl.replace(/.+\?/, "");
-                        $scope.proxifiedurl = "https://catalogue.bu.univ-rennes2.fr/r2microws/getSfx.php?" + openurl;
-                        $http.jsonp($scope.proxifiedurl).then(function(response) {
+                        $scope.proxifiedurl = openurl.replace("http://acceder.bu.univ-rennes2.fr/sfx_33puedb","https://catalogue.bu.univ-rennes2.fr/r2microws/getSfx.php");
+                        $http.jsonp($scope.proxifiedurl).then(function (response) {
                             if (response.data.error == undefined) {
                                 var keys = Object.keys(response.data);
                                 var len = keys.length;
@@ -133,19 +125,19 @@ angular.module('kohaItems', []).component('prmOpacAfter',  {
                                 $scope.loading = false;
                                 if (len > 0) {
                                     $scope.sfxholdings = response.data
-                                    
+
                                 }
                             }
-                        }, function(response) {
-                                    $scope.loading = false;
-                        	});
+                        }, function (response) {
+                            $scope.loading = false;
+                        });
                     }
                 }
             }
         };
     },
     templateUrl: 'custom/33UDR2_VU1/html/prmOpacAfter.html'
-}).factory('kohaitemsService', ['$http', function($http) {
+}).factory('kohaitemsService', ['$http', function ($http) {
     return {
         getKohaData: function getKohaData(url) {
             return $http({
@@ -154,7 +146,7 @@ angular.module('kohaItems', []).component('prmOpacAfter',  {
             });
         }
     };
-}]).run(function($http) {
+}]).run(function ($http) {
     // Necessary for requests to succeed...not sure why
     $http.defaults.headers.common = {
         'X-From-ExL-API-Gateway': undefined
