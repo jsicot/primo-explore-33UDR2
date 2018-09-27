@@ -13,7 +13,8 @@ prm-opac > md-tabs {
 
 
 md-fab-toolbar prm-library-card-menu {display: none;}
-
+//parameters button
+.ovl-button-ctm{display: none;}
 
 /*remove "Search for:" on advanced search*/
 #advanced-search > form > div > div.advanced-search-tabs.padded-container.layout-wrap.layout-align-space-between-center.layout-row > div.input-cell.layout-wrap.layout-align-start-center.layout-row > span {display: none;}
@@ -65,12 +66,14 @@ a.md-button[aria-label="mainmenu.label.Browse"] {
 .sidebar-section h2.sidebar-title {display: none;}
 
 /*remove "Show results beyond my Libraries collection"*/
-#facets > prm-facet > div > div > div.sidebar-section.margin-top-small.margin-bottom-medium.compensate-padding-left {display: none;}
+//#facets > prm-facet > div > div > div.sidebar-section.margin-top-small.margin-bottom-medium.compensate-padding-left {display: none;}
 
 
 /*remove availability text in full record view*/
- prm-full-view-service-container prm-brief-result-container prm-search-result-availability-koha{display: none;}
+ //prm-full-view-service-container prm-brief-result-container prm-search-result-availability-koha{display: none;}
 // Hide availability links on brief and full display
+
+.search-result-availability-line-wrapper {display: none;}
 
 prm-brief-result-container prm-search-result-availability-line > *:not(:last-child),
 prm-full-view prm-search-result-availability-line > *:not(:last-child),
