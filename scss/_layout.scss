@@ -262,3 +262,16 @@ prm-advanced-search div.date-range-inputs.animate-input.layout-row > md-input-co
 prm-full-view prm-brief-result > h3.item-title {
 	max-width:87%!important;
 }
+
+prm-citation-trails-item.active-item .item-title {
+    line-height: 1em;
+}
+prm-brief-result .item-title span {
+	color: #3274c6;
+}
+
+prm-search-result-frbr-line {
+	padding-top: 0.5em;
+	padding-bottom: 0.5em;
+	
+}
