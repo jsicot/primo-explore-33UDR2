@@ -61,6 +61,7 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                             $scope.kohaholdings = [];
                                             for (var i = 0; i < response.data.record[0].holdings.length; i++) {
                                                 var holding = response.data.record[0].holdings[i]
+                                                console.log(response.data.record[0]);
                                                 $scope.kohaholdings[i] = {
                                                     "library": holding["rcr"],
                                                     "holdings": holding["holdings"]
@@ -68,11 +69,18 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                                 if (holding["holdings"].length > 80) {
                                                     $scope.kohaholdings[i]["holdingsSummary"] = holding["holdings"].substring(0, 77) + "...";
                                                 }
-                                                if (response.data.record[0].locations[i]["rcr"] == holding["rcr"]) {
-                                                    $scope.kohaholdings[i]["callnumber"] = response.data.record[0].locations[i]["callnumber"];
-                                                    $scope.kohaholdings[i]["location"] = response.data.record[0].locations[i]["location"];
+                                                for (var j = 0; j < response.data.record[0].locations.length; j++) {
+                                                    if (response.data.record[0].locations[j]["rcr"] == holding["rcr"]) {
+                                                        $scope.kohaholdings[i]["callnumber"] = response.data.record[0].locations[j]["callnumber"];
+                                                        $scope.kohaholdings[i]["location"] = response.data.record[0].locations[j]["location"];
+                                                    }
+             
                                                 }
+         
                                             }
+ 
+
+
                                         } else {
                                             console.log("journal : no holdings");
                                             $scope.loading = false;
