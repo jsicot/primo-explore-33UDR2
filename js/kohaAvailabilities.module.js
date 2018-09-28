@@ -1,6 +1,6 @@
 angular.module('kohaAvailabilities', []).component('prmBriefResultAfter', {
   bindings: { parentCtrl: '<' },
-  controller: function controller($scope, $http, $element, kohaavailService) {
+  controller: ['$scope', '$http', '$element', 'kohaavailService', function controller($scope, $http, $element, kohaavailService) {
     this.$onInit = function () {
 	if($scope.$ctrl.parentCtrl.item) { 
       $scope.kohaDisplay = false; /* default hides template */
@@ -75,7 +75,7 @@ angular.module('kohaAvailabilities', []).component('prmBriefResultAfter', {
       } 
      }
     };
-  },
+  }],
   templateUrl: 'custom/33UDR2_VU1/html/prmBriefResultAfter.html'
 }).factory('kohaavailService', ['$http', function ($http) {
   return {

@@ -1,8 +1,7 @@
 angular.module('sfxHoldings', []).component('prmViewOnlineAfter', {
   bindings: { parentCtrl: '<' },
-  controller: function controller($scope, $http, $element, sfxholdingsService) {
-    this.$onInit = function () {
-	
+    controller: ['$scope', '$http', '$element', 'sfxholdingsService', function controller($scope, $http, $element, sfxholdingsService) {
+      this.$onInit = function () {
       var obj = $scope.$ctrl.parentCtrl.item.linkElement.links[0];
       if (obj.hasOwnProperty("getItTabText") && obj.hasOwnProperty("displayText") && obj.hasOwnProperty("isLinktoOnline") && obj.hasOwnProperty("link")) {
         if (obj['displayText'] == "openurlfulltext") {
@@ -28,7 +27,7 @@ angular.module('sfxHoldings', []).component('prmViewOnlineAfter', {
         } 
       } 
     };
-  },
+  }],
   templateUrl: 'custom/33UDR2_VU1/html/prmViewOnlineAfter.html'
 }).factory('sfxholdingsService', ['$http', function ($http) {
   return {

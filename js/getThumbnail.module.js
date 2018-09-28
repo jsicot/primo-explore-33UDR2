@@ -1,6 +1,6 @@
 angular.module('getThumbnail', []).component('prmSearchResultThumbnailContainerAfter', {
   bindings: { parentCtrl: '<' },
-  controller: function controller($scope, $http, $element, thumbnailService) {
+  controller: ['$scope', '$http', '$element', 'thumbnailService', function controller($scope, $http, $element, thumbnailService) { 
   this.$onInit = function () {
   	$scope.kohaDisplay = false; /* default hides template */
     if($scope.$ctrl.parentCtrl.item) { 
@@ -47,7 +47,7 @@ angular.module('getThumbnail', []).component('prmSearchResultThumbnailContainerA
       } 
      } 
     };
-  },
+  }],
   templateUrl: 'custom/33UDR2_VU1/html/prmSearchResultThumbnailContainerAfter.html'
 }).factory('thumbnailService', ['$http', function ($http) {
   return {

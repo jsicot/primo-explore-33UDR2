@@ -1,6 +1,6 @@
 angular.module('libraryhours', []).component('prmSearchBookmarkFilterAfter', {
 	bindings: { parentCtrl: '<' },
-	controller: function controller($scope, $mdDialog) {
+	controller: ['$scope', '$mdDialog', function controller($scope, $mdDialog) {
 		this.$onInit = function () {
 			var alert;
 			$scope.showDialog = showDialog;
@@ -99,6 +99,6 @@ angular.module('libraryhours', []).component('prmSearchBookmarkFilterAfter', {
 				return serializer.serializeToString(doc);
 			}
 		}
-	},
+	}],
 	templateUrl: 'custom/33UDR2_VU1/html/prmSearchBookmarkFilterAfter.html'
 });

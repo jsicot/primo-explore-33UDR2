@@ -2,7 +2,7 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
     bindings: {
         parentCtrl: '<'
     },
-    controller: function controller($scope, $mdDialog, $http, $element, kohaitemsService) {
+    controller: ['$scope', '$mdDialog', '$http', '$element', 'kohaitemsService', function controller($scope, $mdDialog, $http, $element, kohaitemsService) {
         this.$onInit = function () {
             if ($scope.$ctrl.parentCtrl.item) {
                 $scope.kohaDisplay = false; /* default hides template */
@@ -137,7 +137,7 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                 }
             }
         };
-    },
+    }],
     templateUrl: 'custom/33UDR2_VU1/html/prmOpacAfter.html'
 }).factory('kohaitemsService', ['$http', function ($http) {
     return {
