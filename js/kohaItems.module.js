@@ -125,7 +125,7 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                 }
                             });
                         };
-                    }
+
                     var delivery = $scope.$ctrl.parentCtrl.item.delivery;
                     if (delivery != undefined) {
                         for (var i = 0; i < delivery.link.length; i++) {
@@ -152,6 +152,7 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                             $scope.loading = false;
                         });
                     }
+                  }  
                 }
             }
         };
