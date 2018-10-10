@@ -14,14 +14,22 @@ prm-search-result-availability-line {
     
 }
 //the class must be after status-maybe to avoid that the latter will override definitions of the former
-.status-available, .callnum {
+ .callnum {
     font-weight: 700 !important;
 }
 .status-unavailable {
 
 }
 
-
+.prm-positive, .status-available, [class*="available"],
+[class*="FT"],
+.not_restricted,
+.ext_not_restricted,
+.fulltext,
+.fulltext_linktorsrc,
+.fulltext_newspaper,
+.fulltext_linktorsrc_newspaper {
+  font-weight: normal; }
 
 // set element size
 // pass a value to set it's size
