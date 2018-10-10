@@ -85,7 +85,17 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                             console.log("journal : no holdings");
                                             $scope.loading = false;
                                             $scope.onshelves = false;
-                                            angular.element(document.querySelector('#getit_link1_0.full-view-section'))[0].style.display = "none";
+
+                                            if (!angular.element(document.querySelector('#getit_link1_1 > div > prm-full-view-service-container > div.section-body prm-view-online')).length > 0) {
+                                                angular.element(document.querySelector('#getit_link1_1')).addClass("hide");
+                                            }
+
+                                            if (!angular.element(document.querySelector('#getit_link1_0 > div > prm-full-view-service-container > div.section-body prm-view-online')).length > 0) {
+                                                angular.element(document.querySelector('#getit_link1_0')).addClass("hide");
+                                            }
+                                            
+                                            //#getit_link1_1
+                                             //#getit_link1_1 > div
                                         }
                                     }
                                 }, function (response) {
