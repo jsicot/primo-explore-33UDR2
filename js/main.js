@@ -1,9 +1,9 @@
-import 'primo-explore-google-analytics';
+// import 'primo-explore-google-analytics';
 import { viewName } from './viewName';
 import { kohaItems } from './kohaItems.module';
 import { kohaAvailabilities } from './kohaAvailabilities.module';
 import { sfxHoldings } from './sfxHoldings.module';
-import { googleAnalyticsConfig } from './googleAnalyticsConfig';
+// import { googleAnalyticsConfig } from './googleAnalyticsConfig';
 import { libraryhours } from './libraryhours.module';
 import { reportProblem } from './reportProblem.module';
 import { getThumbnail } from './getThumbnail.module';
@@ -14,7 +14,7 @@ import { kohaLists } from './koha-lists.module';
                                         'kohaItems',
                                         'kohaAvailabilities',
                                         'sfxHoldings',
-                     										'googleAnalytics',
+                     										// 'googleAnalytics',
                                         'libraryhours',
                                         'getThumbnail',
                                         'kohaLists',
@@ -29,8 +29,8 @@ import { kohaLists } from './koha-lists.module';
 // }]);
 
 
-app
-  .constant(googleAnalyticsConfig.name, googleAnalyticsConfig.config);
+// app
+//   .constant(googleAnalyticsConfig.name, googleAnalyticsConfig.config);
 
 
 app.config(['$sceDelegateProvider', function ($sceDelegateProvider) {
@@ -129,8 +129,8 @@ app.filter('orderObjectBy', function(){
  }
 });
 
-app.run(runBlock);
-runBlock.$inject = ['gaInjectionService'];
-function runBlock(gaInjectionService) {
-  gaInjectionService.injectGACode();
-}
+// app.run(runBlock);
+// runBlock.$inject = ['gaInjectionService'];
+// function runBlock(gaInjectionService) {
+//   gaInjectionService.injectGACode();
+// }
