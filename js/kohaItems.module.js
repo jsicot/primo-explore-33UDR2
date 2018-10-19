@@ -74,11 +74,11 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                                         $scope.kohaholdings[i]["callnumber"] = response.data.record[0].locations[j]["callnumber"];
                                                         $scope.kohaholdings[i]["location"] = response.data.record[0].locations[j]["location"];
                                                     }
-             
+
                                                 }
-         
+
                                             }
- 
+
 
 
                                         } else {
@@ -93,9 +93,9 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                             if (!angular.element(document.querySelector('#getit_link1_0 > div > prm-full-view-service-container > div.section-body prm-view-online')).length > 0) {
                                                 angular.element(document.querySelector('#getit_link1_0')).addClass("hide");
                                             }
-                                            
+
                                             //#getit_link1_1
-                                             //#getit_link1_1 > div
+                                            //#getit_link1_1 > div
                                         }
                                     }
                                 }, function (response) {
@@ -105,54 +105,55 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                             } else {
                                 $scope.loading = false;
                             }
-                        }
-                        if (items) {
-                            $scope.items = items;
-                            $scope.branches = branches;
-                            $scope.status = status;
-                        }
-                        $scope.showRequestItem = function ($event) {
-                            $mdDialog.show({
-                                parent: angular.element(document.body),
-                                clickOutsideToClose: true,
-                                fullscreen: false,
-                                targetEvent: $event,
-                                templateUrl: 'custom/33UDR2_VU1/html/requestItem.html',
-                                controller: function ($scope, $mdDialog, $http) {
-                                    $scope.cancelReport = function () {
-                                        $mdDialog.cancel();
+
+                            if (items) {
+                                $scope.items = items;
+                                $scope.branches = branches;
+                                $scope.status = status;
+                            }
+                            $scope.showRequestItem = function ($event) {
+                                $mdDialog.show({
+                                    parent: angular.element(document.body),
+                                    clickOutsideToClose: true,
+                                    fullscreen: false,
+                                    targetEvent: $event,
+                                    templateUrl: 'custom/33UDR2_VU1/html/requestItem.html',
+                                    controller: function ($scope, $mdDialog, $http) {
+                                        $scope.cancelReport = function () {
+                                            $mdDialog.cancel();
+                                        }
+                                    }
+                                });
+                            };
+
+                            var delivery = $scope.$ctrl.parentCtrl.item.delivery;
+                            if (delivery != undefined) {
+                                for (var i = 0; i < delivery.link.length; i++) {
+                                    if (delivery.link[i].displayLabel == "openurl") {
+                                        openurl = delivery.link[i].linkURL;
+                                        console.log("openurl : " + openurl);
                                     }
                                 }
-                            });
-                        };
+                            }
+                            if (openurl != undefined) {
+                                $scope.proxifiedurl = openurl.replace("http://acceder.bu.univ-rennes2.fr/sfx_33puedb", "https://catalogue.bu.univ-rennes2.fr/r2microws/getSfx.php");
+                                $http.jsonp($scope.proxifiedurl).then(function (response) {
+                                    if (response.data.error == undefined) {
+                                        var keys = Object.keys(response.data);
+                                        var len = keys.length;
+                                        console.log("SFX results: " + len);
+                                        $scope.loading = false;
+                                        if (len > 0) {
+                                            $scope.sfxholdings = response.data
 
-                    var delivery = $scope.$ctrl.parentCtrl.item.delivery;
-                    if (delivery != undefined) {
-                        for (var i = 0; i < delivery.link.length; i++) {
-                            if (delivery.link[i].displayLabel == "openurl") {
-                                openurl = delivery.link[i].linkURL;
-                                console.log("openurl : "+openurl);
+                                        }
+                                    }
+                                }, function (response) {
+                                    $scope.loading = false;
+                                });
                             }
                         }
                     }
-                    if (openurl != undefined) {
-                        $scope.proxifiedurl = openurl.replace("http://acceder.bu.univ-rennes2.fr/sfx_33puedb","https://catalogue.bu.univ-rennes2.fr/r2microws/getSfx.php");
-                        $http.jsonp($scope.proxifiedurl).then(function (response) {
-                            if (response.data.error == undefined) {
-                                var keys = Object.keys(response.data);
-                                var len = keys.length;
-                                console.log("SFX results: " + len);
-                                $scope.loading = false;
-                                if (len > 0) {
-                                    $scope.sfxholdings = response.data
-
-                                }
-                            }
-                        }, function (response) {
-                            $scope.loading = false;
-                        });
-                    }
-                  }  
                 }
             }
         };
