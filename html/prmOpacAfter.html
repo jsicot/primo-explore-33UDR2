@@ -3,7 +3,7 @@
 <prm-spinner class="inline-loader half-transparent dark-on-light no-text" layout="row" ng-if="loading" layout-align="center center"></prm-spinner>
 
 
-<div ng-if="onshelves">
+<div ng-if="items.length > 0">
 <h3 class="section-title" style="margin-bottom: .75em !important;"><span translate="nui.aria.locationItems.locationItems"></span></h3>
 
 
@@ -87,10 +87,8 @@
 
 </div>
 
-<div ng-if="kohaholdings">
-
-<h3  class="section-title" style="margin-bottom: .75em !important;"><span translate="nui.aria.locationItems.locationItems"></span></h3>
-
+<div ng-if="kohaholdings.length > 0" >
+	<h3  class="section-title" style="margin-bottom: .75em !important;"><span translate="nui.aria.locationItems.locationItems"></span></h3>
 
 <md-list ng-if="kohaholdings" id="kohaholdings" layout="column" class="separate-list-items margin-left-medium">
 	<md-list-item ng-repeat="holding in kohaholdings | orderBy:['library'] " class="md-2-line">

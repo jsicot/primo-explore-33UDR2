@@ -16,10 +16,12 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                     var type = $scope.$ctrl.parentCtrl.item.pnx.display.type[0];
                     if (total_ids > 0) {
                         var items = [];
+                        var journalholdings = [];
                         var branches = [];
                         var status = [];
                         var holdings = [];
                         for (var i = 0; i < ids.length; i++) {
+
                             if (ids[i].startsWith("$$V") && ids[i].includes("33UDR2_KOHA")) {
                                 var source = "33UDR2_KOHA";
                                 var bn = ids[i].replace(/\$\$V.+\$\$O33UDR2_KOHA/, "");
@@ -27,10 +29,14 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                 var source = obj.sourceid[0];
                                 var bn = obj.sourcerecordid[0];
                             }
+
                             if (bn && source == "33UDR2_KOHA") {
+                                console.log("biblionumber:" + bn)
                                 var url = "https://catalogue.bu.univ-rennes2.fr/r2microws/json.getSru.php?index=rec.id&q=" + bn;
                                 var response = kohaitemsService.getKohaData(url).then(function (response) {
                                     if (response.data.record[0]) {
+
+                                        //Book Items
                                         if (response.data.record[0].item && type !== "journal") {
                                             var kohaitems = response.data.record[0].item
                                             for (var i = 0; i < kohaitems.length; i++) {
@@ -49,53 +55,45 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                                     }
                                                     //branches[kohaitems[i].branchcode] = kohaitems[i].homebranch;
                                                     $scope.loading = false;
-                                                    $scope.onshelves = true;
                                                 }
                                             }
+
+                                            //Journal Holdings   
                                         } else if (response.data.record[0].holdings && type === "journal") {
                                             if (recid.startsWith("dedupmrg")) {
                                                 if (angular.element(document.querySelector('#getit_link1_0')).length > 0) {
                                                     angular.element(document.querySelector('#getit_link1_0'))[0].style.display = "none";
                                                 }
                                             }
-                                            $scope.kohaholdings = [];
+                                            var kohaholdings = [];
                                             for (var i = 0; i < response.data.record[0].holdings.length; i++) {
                                                 var holding = response.data.record[0].holdings[i]
                                                 console.log(response.data.record[0]);
-                                                $scope.kohaholdings[i] = {
+                                                kohaholdings[i] = {
                                                     "library": holding["rcr"],
                                                     "holdings": holding["holdings"]
                                                 };
                                                 if (holding["holdings"].length > 80) {
-                                                    $scope.kohaholdings[i]["holdingsSummary"] = holding["holdings"].substring(0, 77) + "...";
+                                                    kohaholdings[i]["holdingsSummary"] = holding["holdings"].substring(0, 77) + "...";
                                                 }
                                                 for (var j = 0; j < response.data.record[0].locations.length; j++) {
                                                     if (response.data.record[0].locations[j]["rcr"] == holding["rcr"]) {
-                                                        $scope.kohaholdings[i]["callnumber"] = response.data.record[0].locations[j]["callnumber"];
-                                                        $scope.kohaholdings[i]["location"] = response.data.record[0].locations[j]["location"];
+                                                        kohaholdings[i]["callnumber"] = response.data.record[0].locations[j]["callnumber"];
+                                                        kohaholdings[i]["location"] = response.data.record[0].locations[j]["location"];
                                                     }
-
                                                 }
-
+                                                journalholdings.push(kohaholdings[i]);
                                             }
-
-
 
                                         } else {
                                             console.log("journal : no holdings");
                                             $scope.loading = false;
-                                            $scope.onshelves = false;
-
                                             if (!angular.element(document.querySelector('#getit_link1_1 > div > prm-full-view-service-container > div.section-body prm-view-online')).length > 0) {
                                                 angular.element(document.querySelector('#getit_link1_1')).addClass("hide");
                                             }
-
                                             if (!angular.element(document.querySelector('#getit_link1_0 > div > prm-full-view-service-container > div.section-body prm-view-online')).length > 0) {
                                                 angular.element(document.querySelector('#getit_link1_0')).addClass("hide");
                                             }
-
-                                            //#getit_link1_1
-                                            //#getit_link1_1 > div
                                         }
                                     }
                                 }, function (response) {
@@ -105,54 +103,62 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                             } else {
                                 $scope.loading = false;
                             }
+                        }
 
-                            if (items) {
-                                $scope.items = items;
-                                $scope.branches = branches;
-                                $scope.status = status;
-                            }
-                            $scope.showRequestItem = function ($event) {
-                                $mdDialog.show({
-                                    parent: angular.element(document.body),
-                                    clickOutsideToClose: true,
-                                    fullscreen: false,
-                                    targetEvent: $event,
-                                    templateUrl: 'custom/33UDR2_VU1/html/requestItem.html',
-                                    controller: function ($scope, $mdDialog, $http) {
-                                        $scope.cancelReport = function () {
-                                            $mdDialog.cancel();
-                                        }
-                                    }
-                                });
-                            };
+                        if (items) {
+                            $scope.items = items;
+                            $scope.branches = branches;
+                            $scope.status = status;
+                        }
+                        if (journalholdings) {
+                            $scope.kohaholdings = journalholdings;
+                        }
 
-                            var delivery = $scope.$ctrl.parentCtrl.item.delivery;
-                            if (delivery != undefined) {
-                                for (var i = 0; i < delivery.link.length; i++) {
-                                    if (delivery.link[i].displayLabel == "openurl") {
-                                        openurl = delivery.link[i].linkURL;
-                                        console.log("openurl : " + openurl);
-                                    }
+                        var delivery = $scope.$ctrl.parentCtrl.item.delivery;
+                        if (delivery != undefined) {
+                            for (var i = 0; i < delivery.link.length; i++) {
+                                if (delivery.link[i].displayLabel == "openurl") {
+                                    openurl = delivery.link[i].linkURL;
+                                    console.log("openurl : " + openurl);
                                 }
                             }
-                            if (openurl != undefined) {
-                                $scope.proxifiedurl = openurl.replace("http://acceder.bu.univ-rennes2.fr/sfx_33puedb", "https://catalogue.bu.univ-rennes2.fr/r2microws/getSfx.php");
-                                $http.jsonp($scope.proxifiedurl).then(function (response) {
-                                    if (response.data.error == undefined) {
-                                        var keys = Object.keys(response.data);
-                                        var len = keys.length;
-                                        console.log("SFX results: " + len);
-                                        $scope.loading = false;
-                                        if (len > 0) {
-                                            $scope.sfxholdings = response.data
-
-                                        }
-                                    }
-                                }, function (response) {
-                                    $scope.loading = false;
-                                });
-                            }
                         }
+
+                        if (openurl != undefined) {
+                            $scope.proxifiedurl = openurl.replace("http://acceder.bu.univ-rennes2.fr/sfx_33puedb", "https://catalogue.bu.univ-rennes2.fr/r2microws/getSfx.php");
+                            $http.jsonp($scope.proxifiedurl).then(function (response) {
+                                if (response.data.error == undefined) {
+                                    var keys = Object.keys(response.data);
+                                    var len = keys.length;
+                                    console.log("SFX results: " + len);
+                                    $scope.loading = false;
+                                    if (len > 0) {
+                                        $scope.sfxholdings = response.data
+
+                                    }
+                                }
+                            }, function (response) {
+                                $scope.loading = false;
+                            });
+                        }
+
+                        $scope.showRequestItem = function ($event) {
+                            $mdDialog.show({
+                                parent: angular.element(document.body),
+                                clickOutsideToClose: true,
+                                fullscreen: false,
+                                targetEvent: $event,
+                                templateUrl: 'custom/33UDR2_VU1/html/requestItem.html',
+                                controller: function ($scope, $mdDialog, $http) {
+                                    $scope.cancelReport = function () {
+                                        $mdDialog.cancel();
+                                    }
+                                }
+                            });
+                        };
+
+
+
                     }
                 }
             }
