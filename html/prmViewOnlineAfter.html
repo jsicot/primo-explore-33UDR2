@@ -1,6 +1,6 @@
 <prm-spinner class="inline-loader display-inline dark-on-light half-transparent" ng-if="sfxloading"></prm-spinner>
 
-<h3 ng-if="sfxholdings" class="section-title" style="margin-bottom: .75em !important;"><span>En Ligne :</span></h3>
+<h3 ng-if="sfxholdings.length > 0" class="section-title" style="margin-bottom: .75em !important;"><span>En Ligne :</span></h3>
 
     <md-list ng-if="sfxholdings" class="separate-list-items margin-left-medium">
         <md-list-item class="md-2-line _md-no-proxy _md" ng-repeat="(index, holding) in sfxholdings">
