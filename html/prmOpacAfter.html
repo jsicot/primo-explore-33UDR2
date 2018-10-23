@@ -2,7 +2,6 @@
 
 <prm-spinner class="inline-loader half-transparent dark-on-light no-text" layout="row" ng-if="loading" layout-align="center center"></prm-spinner>
 
-
 <div ng-if="items.length > 0">
 <h3 class="section-title" style="margin-bottom: .75em !important;"><span translate="nui.aria.locationItems.locationItems"></span></h3>
 
@@ -20,6 +19,8 @@
 </md-input-container>
 </div>
 
+
+<prm-spinner class="inline-loader half-transparent dark-on-light no-text" layout="row" ng-if="kohaitems_loading" layout-align="center center"></prm-spinner>
 <md-list ng-if="items"  layout="column" class="separate-list-items margin-left-medium">
 	<md-list-item ng-repeat="item in items | filter:{'homebranch':selection, 'istatus':availability} | orderBy:['branchrank','itemcallnumber'] " class="md-2-line">
 		<div layout="row" flex>
@@ -86,6 +87,9 @@
 </md-list>
 
 </div>
+
+
+<prm-spinner class="inline-loader half-transparent dark-on-light no-text" layout="row" ng-if="kohajholdings_loading" layout-align="center center"></prm-spinner>
 
 <div ng-if="kohaholdings.length > 0" >
 	<h3  class="section-title" style="margin-bottom: .75em !important;"><span translate="nui.aria.locationItems.locationItems"></span></h3>
