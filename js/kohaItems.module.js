@@ -35,12 +35,13 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                         //Book Items
                                         if (response.data.record[0].item && type !== "journal") {
                                             $scope.kohaitems_loading = true;
+                                            $scope.loading = false;
                                             var kohaitems = response.data.record[0].item
                                             for (var i = 0; i < kohaitems.length; i++) {
                                                 if (kohaitems[i].withdrawnstatus == 'false' && kohaitems[i].itemlost == "0") {
                                                     items.push(kohaitems[i]);
                                                     $scope.kohaitems_loading = false;
-                                                    $scope.loading = false;
+
                                                     var itemstatus = kohaitems[i].istatus;
                                                     if (itemstatus.startsWith("Emprunt")) {
                                                         itemstatus = "Emprunt\u00e9";
