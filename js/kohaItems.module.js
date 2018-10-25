@@ -74,7 +74,7 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                                     kohaholdings[i]["holdingsSummary"] = holding["holdings"].substring(0, 77) + "...";
                                                 }
                                                 for (var j = 0; j < response.data.record[0].locations.length; j++) {
-                                                    if (response.data.record[0].locations[j]["rcr"] == holding["rcr"]) {
+                                                    if (response.data.record[0].locations[j]["5"] == holding["5"]) {
                                                         kohaholdings[i]["callnumber"] = response.data.record[0].locations[j]["callnumber"];
                                                         kohaholdings[i]["location"] = response.data.record[0].locations[j]["location"];
                                                     }
