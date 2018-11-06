@@ -13,6 +13,10 @@ prm-search-result-availability-line {
 .status-maybe {
     
 }
+
+.status-ondemand {
+  color: #cc0070;    
+}
 //the class must be after status-maybe to avoid that the latter will override definitions of the former
  .callnum {
     font-weight: 700 !important;
