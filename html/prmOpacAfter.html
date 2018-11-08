@@ -51,6 +51,11 @@
 					</div>
 				</div>
 
+
+				<div ng-if="item.itemnotes" flex flex-xs="100">
+					<p class="weak-text small"><span>Note : </span>{{item.itemnotes}}</p>
+				</div>
+
 				<div layout-align="end" flex-xs="100" flex-sm="30">
 					<div ng-if="item.istatus" class="center"  layout="row" layout-wrap  >
 						<p class="availability-status {{item.statusClass}}"> {{item.istatus}}						
@@ -61,17 +66,12 @@
 						<md-tooltip>{{item.istatus}}</md-tooltip>
 
 					</div>
-
-
 <!--
 					<div layout="row" layout-align="center center" ng-repeat="service in item.listOfServices track by $index" ng-if="$ctrl.isLoggedIn()">
 						<prm-service-button ng-if="$ctrl.allowService()" [service]="service" (change-tab-event)="::$ctrl.onChangeTabEvent($event)" [parent-tab]="::$ctrl.tabId" [request-parameters]="$ctrl.getServiceAdditionalParams(item, service)" method="GET"></prm-service-button>
 						<div class="skewed-divider" ng-if="!$last"></div>
 					</div>
 -->
-<div ng-if="item.itemnotes">
-	<p class="weak-text"><span>Note : </span>{{item.itemnotes}}</p>
-</div>
 				</div>
 
 			</div>

@@ -11,9 +11,11 @@
                         <h3>{{holding.title}}</h3>
                             <p><span class="availability-status available">Accès</span>
                             	<span ng-if="holding.coverage">, </span>
-								<span>{{holding.coverage}}</span></p>
+                                <span ng-if="holding.coverage">{{holding.coverage}}</span>
+                            </p>
+                            <p><span ng-if="holding.note" class="weak-text">{{holding.note}}</span></p>
 						</div>
-                        <div layout-align="end center" layout="row" layout-wrap="" flex-xs="100" flex-sm="30" flex="" class="list-item-actions layout-wrap layout-align-end-center layout-row flex-xs-100 flex-sm-30 flex"></div>
+                        <div layout-align="end center" layout="row" layout-wrap="" flex-xs="100" flex-sm="10" flex="" class="list-item-actions layout-wrap layout-align-end-center layout-row flex-xs-100 flex-sm-10 flex-10"></div>
                     </div>
                     <prm-icon class="padding-right-small" icon-type="svg" svg-icon-set="action" icon-definition="ic_open_in_new_24px"></prm-icon-after>
                     </prm-icon>
