@@ -33,6 +33,141 @@ import { kohaLists } from './koha-lists.module';
 //   .constant(googleAnalyticsConfig.name, googleAnalyticsConfig.config);
 
 
+/**-------------- Insert Custom header  -------------- **/
+
+var url = new URL(document.location.href);   
+var lang = url.searchParams.get('lang');
+var homeLink = location.origin + '/primo-explore/search?vid=' + window.appConfig.vid + '&lang=' + lang;
+
+
+function add_custom_header(header_container)
+{
+       console.log("... in add_custom_header function");
+       var header_container = angular.element(document.getElementsByClassName('custom-header'));
+
+	if(header_container.length == 0)
+	{
+              var custom_header_html = '<link rel="stylesheet" id="r2-portalbar-css"  href="https://static.univ-rennes2.fr/barre-portail/jquery.barre-portail-R2.min.css" type="text/css" media="all" /><div class="custom-header"><header id="r2-portalbar"><nav role="navigation" aria-labelledby="block-nosportails-menu" id="block-nosportails" class="navbar-is-fixed-top container">                 <ul class="menu nos-portails"><li> <a href="https://www.univ-rennes2.fr" class="site-public">Université Rennes 2</a></li><li> <a href="https://ent.univ-rennes2.fr/etudiants" class="site-etudiant">étudiants</a></li><li> <a href="https://ent.univ-rennes2.fr/personnels" class="site-personnel">Personnels</a></li><li> <a href="https://international.univ-rennes2.fr/" class="site-internat">International website</a></li><li> <a href="https://www.univ-rennes2.fr/partenaires-pro" class="site-pro">Partenaires pro</a></li><li> <a href="https://www.bu.univ-rennes2.fr/" class="site-bu is-active" data-active-regexp="^(\\w+\\.bu|bu\\-test)\\.univ\\-rennes2\\.fr" class="site-bu">Bibliothèques</a></li><li> <a href="https://www.lairedu.fr/" class="site-webmedia">Webmedia</a></li></ul></nav></header></div>';
+		var prm_explore_main = angular.element(document.querySelector('prm-explore-main'));
+		if(prm_explore_main.length == 1)
+		{
+			prm_explore_main.after(custom_header_html);
+			var header_container = angular.element(document.getElementsByClassName('custom-header'));
+                     angular.element(header_container).after(prm_explore_main);
+                     initR2PortalBar();
+		}
+		
+		var prm_full_view_page = angular.element(document.querySelector('prm-full-view-page'));
+		if(prm_full_view_page.length == 1)
+		{
+			prm_full_view_page.after(custom_header_html);
+			var header_container = angular.element(document.getElementsByClassName('custom-header'));
+                     header_container.after(prm_full_view_page);
+                     initR2PortalBar();
+		}
+		
+		var prm_services_page = angular.element(document.querySelector('prm-services-page'));
+		if(prm_services_page.length == 1)
+		{
+			prm_services_page.after(custom_header_html);
+			var header_container = angular.element(document.getElementsByClassName('custom-header'));
+                     header_container.after(prm_services_page);
+                     initR2PortalBar();
+		}		
+	}
+	else
+	{
+		console.log("header already exists - this function shouldn't have been called?!");
+		console.log("path name: " + window.location.pathname);
+	}
+}
+
+
+
+// load jquery
+app.component('prmTopBarBefore', {
+	bindings: {parentCtrl: '<'},
+	controller: function () {
+		this.$onInit = function () {
+			loadScript("https://static.univ-rennes2.fr/bootstrap/3.1/js/jquery.js", jquery_loaded);
+		};
+	},
+});
+       
+function loadScript(url, callback)
+{
+	var head = document.getElementsByTagName('head')[0];
+	var script = document.createElement('script');
+	script.type = 'text/javascript';
+	script.src = url;
+	script.onreadystatechange = callback;
+	script.onload = callback;
+	head.appendChild(script);
+}
+
+var script_loaded = function() {
+	console.log("external script loaded");
+};
+
+function initR2PortalBar() {
+       jQuery('head').append('<link rel="stylesheet" as="style" href="https://static.univ-rennes2.fr/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css" type="text/css" />');
+       jQuery.ajaxSetup({
+         cache: true
+       });
+       jQuery.getScript('https://static.univ-rennes2.fr/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js',function() {
+         jQuery("#block-nosportails").mCustomScrollbar({
+           axis:"x",
+           theme:"minimal",
+           callbacks: {
+             onInit: function() {
+               moveScrollGradient(this);
+             },
+             whileScrolling: function() {
+               moveScrollGradient(this);
+             },
+             onOverflowX: function() {
+               jQuery(this).addClass('showGradient');
+             },
+             onOverflowXNone: function() {
+               jQuery(this).removeClass('showGradient');
+             }
+           }
+         });  
+       });
+     }
+     
+     function moveScrollGradient(el) {
+       if (el.mcs.leftPct < 5) {
+         jQuery('#block-nosportails').addClass('scroll-full-left');
+       } else {
+         jQuery('#block-nosportails').removeClass('scroll-full-left');
+       }
+       if (el.mcs.leftPct > 95) {
+         jQuery('#block-nosportails').addClass('scroll-full-right');
+       } else {
+         jQuery('#block-nosportails').removeClass('scroll-full-right');
+       }
+     }
+     
+
+
+var jquery_loaded = function() {
+	console.log("jquery loaded");
+	// load custom header
+	$(document).ready(function(){
+		var header_container = angular.element(document.getElementsByClassName('custom-header'));
+		if(header_container.length > 0)
+			console.log(" ### header exists when jquery loaded");
+		else
+                     add_custom_header();
+                     initR2PortalBar();                   
+		console.log(" ### path name: " + window.location.pathname);
+		
+
+	});
+};
+  
+
 app.config(['$sceDelegateProvider', function ($sceDelegateProvider) {
   var urlWhitelist = $sceDelegateProvider.resourceUrlWhitelist();
   urlWhitelist.push('https://catalogue.bu.univ-rennes2**');

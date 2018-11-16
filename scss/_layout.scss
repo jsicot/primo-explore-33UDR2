@@ -22,23 +22,14 @@ prm-search-bar div.advanced-search-backdrop {background: #8981B5;}
 prm-atoz-search-bar .search-switch-buttons .md-button.switch-to-simple, prm-browse-search-bar .search-switch-buttons .md-button.switch-to-simple, prm-newspapers-search-bar .search-switch-buttons .md-button.switch-to-simple, prm-search-bar .search-switch-buttons .md-button.switch-to-simple, prm-tags-search-bar .search-switch-buttons .md-button.switch-to-simple{color: #FFF;}
 
 /*make logo area bit better journal*/
-prm-logo .product-logo {
-	cursor:pointer;
-	height:140px;
-	padding:20px 20px 10px;
-	background:#BD9A55;
-	position:absolute;
-	top:0;
-	margin:0 30px;
+prm-logo {
+ height: 129.5px !important;
 }
 
 @media screen and (max-width:1280px) {
-	prm-logo .product-logo {
-		cursor:pointer;
-		height:100%;
-		padding:10px;
-		background:#BD9A55;
-		margin:0;
+	prm-logo {
+		height: 70px !important;
+		padding: 5px;
 	}
 }
 prm-spinner.half-transparent .diamond {color:#764d99;background: #764d99;}

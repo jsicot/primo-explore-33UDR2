@@ -235,13 +235,13 @@
   .request-form md-input-container .md-input-container-dummy > .md-select-dummy .prm-hue1.md-select-value.md-select-placeholder,
   .request-form md-input-container md-select .prm-hue1._md-select-value._md-select-placeholder,
   .request-form md-input-container .md-input-container-dummy > .md-select-dummy .prm-hue1._md-select-value._md-select-placeholder, .result-item-actions .prm-hue1.md-icon-button, .result-item-actions .prm-hue1.more-options-button, prm-add-query-to-saved-searches .prm-hue1.custom-button, prm-pre-filters md-input-container.prm-hue1.is-active, .md-autocomplete-suggestions .prm-hue1.suggestion-scope, md-tabs md-tabs-wrapper md-tabs-canvas md-pagination-wrapper md-tab-item.md-active:not([disabled]), md-tabs md-tabs-wrapper md-tabs-canvas md-pagination-wrapper md-tab-item.md-focused:not([disabled]), md-tab-content .tab-content-header md-input-container md-select-value .prm-hue1.md-text {
-    color: #8077af; }
+    color: #8981B5; }
 
 .prm-primary-bg, prm-spinner.overlay-cover.light-on-dark:after, prm-search-bar, prm-atoz-search-bar, prm-browse-search-bar, prm-tags-search-bar, prm-newspapers-search-bar, prm-collection-gallery-header .collection-header-inner {
   color: white;
   background-color: #8981B5; }
   .prm-primary-bg.prm-hue1, prm-spinner.prm-hue1.overlay-cover.light-on-dark:after, prm-topbar .top-nav-bar, prm-search-bar.prm-hue1, prm-atoz-search-bar.prm-hue1, prm-browse-search-bar.prm-hue1, prm-tags-search-bar.prm-hue1, prm-newspapers-search-bar.prm-hue1, prm-collection-gallery-header .prm-hue1.collection-header-inner {
-    background-color: #8077af; }
+    background-color: #8981B5; }
   .prm-primary-bg.prm-hue2, prm-spinner.prm-hue2.overlay-cover.light-on-dark:after, prm-search-bar.prm-hue2, prm-atoz-search-bar.prm-hue2, prm-browse-search-bar.prm-hue2, prm-tags-search-bar.prm-hue2, prm-newspapers-search-bar.prm-hue2, prm-collection-gallery-header .prm-hue2.collection-header-inner, md-backdrop.md-opaque {
     background-color: #7a71ac; }
   .prm-primary-bg.prm-hue3, prm-spinner.prm-hue3.overlay-cover.light-on-dark:after, prm-search-bar.prm-hue3, prm-atoz-search-bar.prm-hue3, prm-browse-search-bar.prm-hue3, prm-tags-search-bar.prm-hue3, prm-newspapers-search-bar.prm-hue3, prm-collection-gallery-header .prm-hue3.collection-header-inner {
