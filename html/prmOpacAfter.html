@@ -31,10 +31,15 @@
 					</div>
 				</div>
 				<div  flex flex-xs="100">
-					<div ng-if="item.location">
+					<div ng-if="item.location && item.statusClass !== 'status-ondemand'">
 						<p class="weak-text"><span translate="nui.item.brief.3"></span> {{item.location}}</p>
 						<md-tooltip>{{item.location}}</md-tooltip>
 					</div>
+					<div ng-if="item.location && item.statusClass === 'status-ondemand'">
+							<p class="weak-text"> Accueil de la bibliothèque</p>
+							<md-tooltip>Accueil de la bibliothèque</md-tooltip>
+						</div>
+
 					<div ng-if="item.itemcallnumber">
 						<p class="callnum"><span translate="nui.item.brief.4"></span> {{item.itemcallnumber}}</p>
 						<md-tooltip>{{item.itemcallnumber}}</md-tooltip>
@@ -58,12 +63,16 @@
 
 				<div layout-align="end" flex-xs="100" flex-sm="30">
 					<div ng-if="item.istatus" class="center"  layout="row" layout-wrap  >
-						<p class="availability-status {{item.statusClass}}"> {{item.istatus}}						
-								<button ng-if='item.statusClass === "status-ondemand"' class="md-icon-button  custom-button md-button md-primoExplore-theme md-ink-ripple hide-xs" type="button" (click)="showRequestItem($event)" aria-label="Comment obtenir ce document">
-								<prm-icon class="md-icon-button-custom" icon-type="svg" svg-icon-set="primo-ui" icon-definition="help-circle-outline"></prm-icon>
-								<md-tooltip md-direction="down" md-delay="400" class="multi-row-tooltip slide-tooltip-anim"><span class="item-description popover animate-popover">Comment obtenir ce document ?</span></md-tooltip></button>
+						<p ng-if='item.statusClass === "status-ondemand" && item.homebranch === "Bibliothèque Universitaire Centrale"' class="availability-status {{item.statusClass}}"> 						
+								<button  class="custom-button md-button button-confirm md-primoExplore-theme md-ink-ripple hide-xs" type="button" (click)="showRequestItem($event,'{{biblionumber}}','{{item.itemnumber}}', '{{item.itemcallnumber}}')" aria-label="Retirer ce document sous 1h à l'accueil de votre bibliothèque">
+								<prm-icon class="md-icon-button-custom" icon-type="svg" svg-icon-set="action" icon-definition="ic_add_shopping_cart_24px"></prm-icon>
+								Retrait 1h en bibliothèque
+								<md-tooltip md-direction="down" md-delay="400" class="multi-row-tooltip slide-tooltip-anim"><span class="item-description popover animate-popover">Retirer ce document sous 1h à l'accueil de votre bibliothèque</span></md-tooltip></button>
 						</p>
-						<md-tooltip>{{item.istatus}}</md-tooltip>
+						<p class="availability-status {{item.statusClass}}"> Demander à un bibliothécaire</p>
+						<p ng-if='item.statusClass !== "status-ondemand"' class="availability-status {{item.statusClass}}"> {{item.istatus}}
+						 <md-tooltip>{{item.istatus}}</md-tooltip>			
+						</p>
 
 					</div>
 <!--
@@ -112,11 +121,20 @@
 						<p class="callnum"><span translate="nui.item.brief.4"></span> {{holding.callnumber}}</p>
 						<md-tooltip>{{holding.callnumber}}</md-tooltip>
 					</div>
+					
 				</div>
 				<div class="weak-text" flex flex-xs="100">
 					<div ng-if="holding.holdings">
 						<p class="availability-status available"><span translate="nui.item.brief.2"></span> {{holding.holdings}}</p>
 						<md-tooltip>{{holding.holdings}}</md-tooltip>
+					</div>
+					<div ng-if='holding.location.indexOf("Magasin") > -1' flex flex-xs="100">
+							<p ng-if='holding.location.indexOf("Magasin") > -1 && holding.library === "Bibliothèque Universitaire Centrale"' class="availability-status {{item.statusClass}}"> 						
+									<button  class="custom-button md-button button-confirm md-primoExplore-theme md-ink-ripple" type="button" (click)="showRequestItem($event,'{{biblionumber}}','','{{holding.callnumber}}')" aria-label="Obtenir ce document">
+									<prm-icon class="md-icon-button-custom" icon-type="svg" svg-icon-set="action" icon-definition="ic_add_shopping_cart_24px"></prm-icon>
+									Retrait 1h en bibliothèque
+									<md-tooltip md-direction="down" md-delay="400" class="multi-row-tooltip slide-tooltip-anim"><span class="item-description popover animate-popover">Obtenir ce document ?</span></md-tooltip></button>
+							</p>
 					</div>
 					<div ng-if="item.isExpanded">
 						<div ng-repeat="full in item.fullItemFields track by $index">

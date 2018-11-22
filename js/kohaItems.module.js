@@ -2,7 +2,7 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
     bindings: {
         parentCtrl: '<'
     },
-    controller: ['$scope', '$mdDialog', '$http', '$element', 'kohaitemsService', function controller($scope, $mdDialog, $http, $element, kohaitemsService) {
+    controller: ['$scope', '$rootScope', '$mdDialog', '$http', '$element', 'kohaitemsService', function controller($scope, $rootScope, $mdDialog, $http, $element, kohaitemsService) {
         this.$onInit = function () {
             if ($scope.$ctrl.parentCtrl.item) {
                 var obj = $scope.$ctrl.parentCtrl.item.pnx.control;
@@ -33,6 +33,7 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                 var response = kohaitemsService.getKohaData(url).then(function (response) {
                                     if (response.data.record[0]) {
                                         //Book Items
+                                        $scope.biblionumber = bn;
                                         if (response.data.record[0].item && type !== "journal") {
                                             $scope.kohaitems_loading = true;
                                             $scope.loading = false;
@@ -54,7 +55,7 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                                     }
                                                 }
                                             }
-                                        //Journal Holdings   
+                                            //Journal Holdings   
                                         } else if (response.data.record[0].holdings && type === "journal") {
                                             $scope.kohajholdings_loading = true;
                                             if (recid.startsWith("dedupmrg")) {
@@ -97,16 +98,15 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                 }, function (response) {
                                     $scope.loading = false;
                                 });
-                            }
-                            else {
+                            } else {
                                 $scope.loading = false;
-                            } 
+                            }
                         }
 
-                        if (items) {                           
+                        if (items) {
                             $scope.items = items;
                             $scope.branches = branches;
-                            $scope.status = status;                            
+                            $scope.status = status;
                         }
                         if (journalholdings) {
                             $scope.kohaholdings = journalholdings;
@@ -139,24 +139,92 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                 $scope.sfxloading = false;
                             });
                         }
-
-                        $scope.showRequestItem = function ($event) {
+                        let self = this;
+                        self.scope = $scope;
+                        self.rootScope = $rootScope;
+                       // console.log(self)
+                       //console.log('rootScope')
+                        //console.log(self.rootScope)
+                        console.log('rootScope - userSessionManagerService')
+                        console.log(self.rootScope.$$childHead.$ctrl.userSessionManagerService)
+                        console.log(self.rootScope.$$childHead.$ctrl.userSessionManagerService.isGuest())
+                        let userData = self.rootScope.$$childHead.$ctrl.userSessionManagerService;
+                        //console.log(self.rootScope.$$childHead.$ctrl.userSessionManagerService.getUserLanguage())
+                        //console.log(self.rootScope.$$childHead.$ctrl.userSessionManagerService.i18nService.getLanguage() )
+                       
+                        $scope.showRequestItem = function ($event, biblionumber, itemnumber, callnumber) {
                             $mdDialog.show({
                                 parent: angular.element(document.body),
                                 clickOutsideToClose: true,
                                 fullscreen: false,
                                 targetEvent: $event,
-                                templateUrl: 'custom/33UDR2_VU1/html/requestItem.html',
+                                templateUrl: 'custom/33UDR2_VU1/html/requestItem.html', 
                                 controller: function ($scope, $mdDialog, $http) {
-                                    $scope.cancelReport = function () {
+                                    let recordData = self.parentCtrl.item
+                                    console.log(recordData.pnx.display);
+                                    $scope.biblionumber = biblionumber;
+                                    $scope.callnumber = callnumber;
+                                    $scope.itemnumber = itemnumber;
+                                    $scope.userIsGuest = userData.isGuest();
+                                    $scope.addata = recordData.pnx.addata;
+                                    console.log($scope.addata);
+                                    $scope.title =  recordData.pnx.display.title[0];
+
+                                    $scope.cancelRequest = function () {
                                         $mdDialog.cancel();
+                                    }
+                                    $scope.request = {
+                                        message: '',
+                                        volume: '',
+                                        issue: '',
+                                        year: '',
+                                        
+                                    }
+                                    $scope.sendRequest = function (answer) {                   	                                        
+                                            var url = "https://cataloguepreprod.bu.univ-rennes2.fr/r2microws/requestItem.php";
+                                             $http({
+                                                method: 'JSONP',
+                                                url: url,
+                                                headers: {
+                                                    'Content-Type': 'application/json',
+                                                    'X-From-ExL-API-Gateway': undefined
+                                                },
+                                                params: {
+                                                    biblionumber : biblionumber,
+                                                    uid : 'sicot_j',
+                                                    itemnumber : itemnumber,
+                                                    callnumber : callnumber,
+                                                    type : recordData.pnx.addata.ristype['0'],
+                                                    volume :  $scope.request.volume,
+                                                    issue : $scope.request.issue,
+                                                    year : $scope.request.year
+                                                },
+                                                cache: false,
+                                            }).then(function(response){
+                                                    if (response.data != undefined) {
+                                                            console.log(response.data);
+                                                        if (response.data.state == "success") {
+                                                            console.log(response.data.state);
+                                                            $scope.request_succeed = true;
+                                                        } else {
+                                                            var errors = {
+                                                                    "LOGIN_FAILED" : "Vous devez être connecté pour pouvoir envoyer le message.",
+                                                                    "USER_NOT_FOUND" : "Erreur de connection, utilisateur non-trouvé.",
+                                                                    "MSG_EMPTY" : "Votre message ne doit pas être vide.",
+                                                                    "WS_CALL_FAILED" : "Le services est temporairement hors-service, veuillez réessayer ultérieurement."
+                                                            };
+                                                            $scope.returnMessage = errors[response.data.error];
+                                                        }
+                                                    } else {
+                                                            $scope.returnMessage = "Le services est temporairement hors-service, veuillez réessayer ultérieurement.";
+                                                    }
+                                                }, function(response){
+                                                    $scope.returnMessage = "Le services est temporairement hors-service, veuillez réessayer ultérieurement.";
+                                                });
                                     }
                                 }
                             });
                         };
-
-
-
                     }
                 }
             }
