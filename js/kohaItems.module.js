@@ -165,6 +165,7 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                     let recordData = self.parentCtrl.item
                                     console.log(recordData.pnx.display);
                                     $scope.biblionumber = biblionumber;
+                                    console.log(callnumber);
                                     $scope.callnumber = callnumber;
                                     $scope.itemnumber = itemnumber;
                                     $scope.userIsGuest = userData.isGuest();
