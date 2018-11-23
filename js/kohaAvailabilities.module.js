@@ -1,3 +1,5 @@
+import { viewName } from './viewName';
+
 angular.module('kohaAvailabilities', []).component('prmBriefResultAfter', {
   bindings: { parentCtrl: '<' },
   controller: ['$scope', '$http', '$element', 'kohaavailService', function controller($scope, $http, $element, kohaavailService) {
@@ -76,7 +78,7 @@ angular.module('kohaAvailabilities', []).component('prmBriefResultAfter', {
      }
     };
   }],
-  templateUrl: 'custom/33UDR2_VU1/html/prmBriefResultAfter.html'
+  templateUrl: 'custom/'+viewName+'/html/prmBriefResultAfter.html'
 }).factory('kohaavailService', ['$http', function ($http) {
   return {
     getKohaData: function getKohaData(url) {

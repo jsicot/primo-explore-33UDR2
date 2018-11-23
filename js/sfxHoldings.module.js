@@ -1,3 +1,5 @@
+import { viewName } from './viewName';
+
 angular.module('sfxHoldings', []).component('prmViewOnlineAfter', {
   bindings: { parentCtrl: '<' },
     controller: ['$scope', '$http', '$element', 'sfxholdingsService', function controller($scope, $http, $element, sfxholdingsService) {
@@ -28,7 +30,7 @@ angular.module('sfxHoldings', []).component('prmViewOnlineAfter', {
       } 
     };
   }],
-  templateUrl: 'custom/33UDR2_VU1/html/prmViewOnlineAfter.html'
+  templateUrl: 'custom/'+viewName+'/html/prmViewOnlineAfter.html'
 }).factory('sfxholdingsService', ['$http', function ($http) {
   return {
     getSfxData: function getSfxData(url) {

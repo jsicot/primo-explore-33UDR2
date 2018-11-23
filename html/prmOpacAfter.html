@@ -69,7 +69,7 @@
 								Retrait 1h en bibliothèque
 								<md-tooltip md-direction="down" md-delay="400" class="multi-row-tooltip slide-tooltip-anim"><span class="item-description popover animate-popover">Retirer ce document sous 1h à l'accueil de votre bibliothèque</span></md-tooltip></button>
 						</p>
-						<p class="availability-status {{item.statusClass}}"> Demander à un bibliothécaire</p>
+						<p ng-if='item.statusClass === "status-ondemand" && item.homebranch !== "Bibliothèque Universitaire Centrale"' class="availability-status {{item.statusClass}}"> Demander à un bibliothécaire</p>
 						<p ng-if='item.statusClass !== "status-ondemand"' class="availability-status {{item.statusClass}}"> {{item.istatus}}
 						 <md-tooltip>{{item.istatus}}</md-tooltip>			
 						</p>

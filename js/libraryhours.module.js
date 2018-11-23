@@ -1,3 +1,5 @@
+import { viewName } from './viewName';
+
 angular.module('libraryhours', []).component('prmSearchBookmarkFilterAfter', {
 	bindings: { parentCtrl: '<' },
 	controller: ['$scope', '$mdDialog', function controller($scope, $mdDialog) {
@@ -100,5 +102,5 @@ angular.module('libraryhours', []).component('prmSearchBookmarkFilterAfter', {
 			}
 		}
 	}],
-	templateUrl: 'custom/33UDR2_VU1/html/prmSearchBookmarkFilterAfter.html'
+	templateUrl: 'custom/'+viewName+'/html/prmSearchBookmarkFilterAfter.html'
 });

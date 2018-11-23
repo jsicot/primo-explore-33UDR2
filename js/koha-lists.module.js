@@ -1,7 +1,9 @@
+import { viewName } from './viewName';
+
 angular
   .module('kohaLists', [])
   .component('kohaLists', {
-    templateUrl: 'custom/33UDR2_VU1/html/koha-lists.html',
+    templateUrl: 'custom/'+viewName+'/html/koha-lists.html',
     controller: ['$scope', 'kohalistsService', function ($scope, kohalistsService) {
       $scope.loading = true;
       var url = "https://catalogue.bu.univ-rennes2.fr/r2microws/getPublicLists.php";

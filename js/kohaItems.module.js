@@ -1,3 +1,5 @@
+import { viewName } from './viewName';
+
 angular.module('kohaItems', []).component('prmOpacAfter', {
     bindings: {
         parentCtrl: '<'
@@ -158,7 +160,7 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                 clickOutsideToClose: true,
                                 fullscreen: false,
                                 targetEvent: $event,
-                                templateUrl: 'custom/33UDR2_VU1/html/requestItem.html', 
+                                templateUrl: 'custom/'+viewName+'/html/requestItem.html', 
                                 controller: function ($scope, $mdDialog, $http) {
                                     let recordData = self.parentCtrl.item
                                     console.log(recordData.pnx.display);
@@ -210,7 +212,7 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                                             var errors = {
                                                                     "LOGIN_FAILED" : "Vous devez être connecté pour pouvoir envoyer le message.",
                                                                     "USER_NOT_FOUND" : "Erreur de connection, utilisateur non-trouvé.",
-                                                                    "MSG_EMPTY" : "Votre message ne doit pas être vide.",
+                                                                    "MISSING_INFO_JOURNAL" : "Merci d'indiquer au moins le volume, le numéro, ou l'année pour une revue.",
                                                                     "WS_CALL_FAILED" : "Le services est temporairement hors-service, veuillez réessayer ultérieurement."
                                                             };
                                                             $scope.returnMessage = errors[response.data.error];
@@ -230,7 +232,7 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
             }
         };
     }],
-    templateUrl: 'custom/33UDR2_VU1/html/prmOpacAfter.html'
+    templateUrl: 'custom/'+viewName+'/html/prmOpacAfter.html'
 }).factory('kohaitemsService', ['$http', function ($http) {
     return {
         getKohaData: function getKohaData(url) {

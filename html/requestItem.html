@@ -9,14 +9,14 @@
         </div>
     </md-toolbar>
 
-    <md-dialog-content ng-if="!userIsGuest">
+    <md-dialog-content ng-if="userIsGuest">
         <div class="md-dialog-content">
             Vous devez être connecté pour utiliser ce service.
             <prm-authentication></prm-authentication>
         </div>
     </md-dialog-content>
 
-    <md-dialog-content ng-if="!request_succeed && userIsGuest">
+    <md-dialog-content ng-if="!request_succeed && !userIsGuest">
 
             <div class="send-actions-content-item">
                 <md-content>
@@ -51,6 +51,7 @@
                 </md-content>
             </div>
         <form name="requestItemForm">
+            <div class="md-dialog-content">
             <input ng-if="biblionumber" type="hidden" name="biblionumber" id="biblionumber" value="{{biblionumber}}" />
             <input ng-if="itemnumber" type="hidden" name="itemnumber" id="itemnumber" value="{{itemnumber}}" />
             <input ng-if="uid" type="hidden" name="uid" id="uid" value="{{uid}}" />
@@ -93,29 +94,30 @@
                     </div>
 
                 </div>
-
-
+            </div>
+                <span ng-if="returnMessage" class="md-input-message-animation" style="opacity: 1; margin-top: 0px;color:tomato;">{{returnMessage}}</span>
             </div>
         </form>
     </md-dialog-content>
 
-    <md-dialog-actions layout="row" ng-if="!request_succeed && userIsGuest">
+    <md-dialog-actions layout="row" ng-if="!request_succeed && !userIsGuest">
         <md-button class="md-button md-secondary" ng-click="cancelRequest()">Annuler</md-button>
         <span flex></span>
         <md-button class="button-with-icon button-confirm md-button md-primoExplore-theme md-ink-ripple" ng-click="sendRequest()">
-            <prm-icon icon-type="svg" svg-icon-set="primo-ui" icon-definition="send"></prm-icon>
-            Valider la demande
+            <prm-icon icon-type="svg" svg-icon-set="action" icon-definition="ic_done_24px"></prm-icon>
+            Confirmer votre demande
         </md-button>
     </md-dialog-actions>
 
-    <md-dialog-content ng-if="request_succeed && userIsGuest">
+    <md-dialog-content ng-if="request_succeed && !userIsGuest">
         <div class="md-dialog-content">
         <p>Votre demande a bien été prise en compte, elle est cours de traitement.</p>
-        <p>Vous recevrez très prochainement un message vous informant de la disponiblité du document à l'accueil de la bibliothèque.</p>
-        <p>Vous aurez alors trois jours pour venir le retirer.</p></div>
+        <p>Vous recevrez très prochainement un message vous informant de la disponiblité du document à l'accueil de la bibliothèque, vous aurez alors trois jours pour venir le retirer.</p>
+        <p>Excellente journée et à très bientôt dans nos bibliothèques.</p>
+    </div>
     </md-dialog-content>
 
-    <md-dialog-actions layout="row" ng-if="report_succeed && userIsGuest">
+    <md-dialog-actions layout="row" ng-if="request_succeed && !userIsGuest">
         <md-button class="button-with-icon button-confirm md-button md-primoExplore-theme md-ink-ripple" ng-click="cancelRequest()">Fermer</md-button>
     </md-dialog-actions>
 

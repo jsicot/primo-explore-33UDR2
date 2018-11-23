@@ -18,7 +18,7 @@ import { kohaLists } from './koha-lists.module';
                                         'libraryhours',
                                         'getThumbnail',
                                         'kohaLists',
-                    										'reportProblem'
+                                        'reportProblem'
                                       ], function ($compileProvider) {
 		$compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|data):/);
   });
@@ -182,7 +182,7 @@ app.config(['$sceDelegateProvider', function ($sceDelegateProvider) {
 app.component('prmSaveToFavoritesButtonAfter', {
 	bindings: {parentCtrl: '<'},
 	controller: 'prmSaveToFavoritesButtonAfterController',
-	templateUrl: 'custom/33UDR2_VU1/html/reportProblemButton.html'
+	templateUrl: 'custom/'+viewName+'/html/reportProblemButton.html'
 });
  
 /** Tabs and Scopes for Basic Searches **/

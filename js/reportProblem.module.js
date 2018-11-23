@@ -1,3 +1,5 @@
+import { viewName } from './viewName';
+
 angular.module('reportProblem', []).controller('prmSaveToFavoritesButtonAfterController', ['$scope', '$mdDialog', '$http', function ($scope, $mdDialog, $http) {
 	    var vm = this;
 	    let self = this;
@@ -11,7 +13,7 @@ angular.module('reportProblem', []).controller('prmSaveToFavoritesButtonAfterCon
 	                clickOutsideToClose: true,
 	                fullscreen: false,
 	                targetEvent: $event,
-	                templateUrl: 'custom/33UDR2_VU1/html/reportProblem.html', controller: function ($scope, $mdDialog, $http) {
+	                templateUrl: 'custom/'+viewName+'/html/reportProblem.html', controller: function ($scope, $mdDialog, $http) {
 	                    let recordData = self.parentCtrl.item;
                         if (self.parentCtrl.userSessionManagerService.areaName == undefined || self.parentCtrl.userSessionManagerService.areaName.match(/^anonymous-/)) {
 							$scope.userLogged = false;

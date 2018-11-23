@@ -1,3 +1,5 @@
+import { viewName } from './viewName';
+
 angular.module('getThumbnail', []).component('prmSearchResultThumbnailContainerAfter', {
   bindings: { parentCtrl: '<' },
   controller: ['$scope', '$http', '$element', 'thumbnailService', function controller($scope, $http, $element, thumbnailService) { 
@@ -48,7 +50,7 @@ angular.module('getThumbnail', []).component('prmSearchResultThumbnailContainerA
      } 
     };
   }],
-  templateUrl: 'custom/33UDR2_VU1/html/prmSearchResultThumbnailContainerAfter.html'
+  templateUrl: 'custom/'+viewName+'/html/prmSearchResultThumbnailContainerAfter.html'
 }).factory('thumbnailService', ['$http', function ($http) {
   return {
     getThumbSrc: function getThumbSrc(url) {
