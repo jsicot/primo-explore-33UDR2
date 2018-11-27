@@ -57,8 +57,12 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                                 return kohaitems[k].statusClass === "status-ondemand";
                                                }
                                             });
-
+                                            console.log(Object.values(kohaitems));
+                                            var isavailableonshelf = Object.keys(kohaitems).some(function(k) {
+                                                 return kohaitems[k].istatus === "Disponible";
+                                             });
                                             $scope.isclosedstacks = isclosedstacks;
+                                            $scope.isavailableonshelf = isavailableonshelf;
                                             for (var i = 0; i < kohaitems.length; i++) {
                                                 if (kohaitems[i].withdrawnstatus == 'false' && kohaitems[i].itemlost == "0") {
                                                     items.push(kohaitems[i]);
@@ -135,10 +139,13 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                             $scope.branches = branches;
                             $scope.status = status;
                             $scope.userIsGuest = userData.isGuest();
+                            $scope.userIsGuest = false;
+
                         }
                         if (journalholdings) {
                             $scope.kohaholdings = journalholdings;
                             $scope.userIsGuest = userData.isGuest();
+                            $scope.userIsGuest = false;
                         }
 
                         var delivery = $scope.$ctrl.parentCtrl.item.delivery;
@@ -170,7 +177,7 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                         }
 
                        
-                        $scope.showRequestItem = function ($event, biblionumber, itemnumber, callnumber) {
+                        $scope.showRequestItem = function ($event, biblionumber, itemnumber, callnumber, holdings, isavailableonshelf) {
                             $mdDialog.show({
                                 parent: angular.element(document.body),
                                 clickOutsideToClose: true,
@@ -181,10 +188,13 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                     let recordData = self.parentCtrl.item
                                     // console.log(recordData.pnx.display);
                                     $scope.biblionumber = biblionumber;
+                                    $scope.holdings = holdings;
                                     //console.log("call num:"+callnumber);
                                     $scope.callnumber = callnumber;
                                     $scope.itemnumber = itemnumber;
+                                    $scope.isavailableonshelf = isavailableonshelf;
                                     $scope.userIsGuest = userData.isGuest();
+                                    $scope.userIsGuest = false;
                                     $scope.addata = recordData.pnx.addata;
                                     // console.log($scope.addata);
                                     $scope.title =  recordData.pnx.display.title[0];
@@ -201,6 +211,7 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                     }
                                     $scope.sendRequest = function (answer) {                   	                                        
                                             var url = "https://cataloguepreprod.bu.univ-rennes2.fr/r2microws/requestItem.php";
+                                            var message = "\n\nMessage : " + $scope.request.message +"\n";
                                              $http({
                                                 method: 'JSONP',
                                                 url: url,
@@ -216,7 +227,8 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                                     type : recordData.pnx.addata.ristype['0'],
                                                     volume :  $scope.request.volume,
                                                     issue : $scope.request.issue,
-                                                    year : $scope.request.year
+                                                    year : $scope.request.year,
+                                                    message : message
                                                 },
                                                 cache: false,
                                             }).then(function(response){
@@ -229,7 +241,7 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                                             var errors = {
                                                                     "LOGIN_FAILED" : "Vous devez être connecté pour pouvoir envoyer le message.",
                                                                     "USER_NOT_FOUND" : "Erreur de connection, utilisateur non-trouvé.",
-                                                                    "MISSING_INFO_JOURNAL" : "Merci d'indiquer au moins le volume, le numéro, ou l'année pour une revue.",
+                                                                    "MISSING_INFO_JOURNAL" : "Merci d'indiquer au moins un volume OU un numéro Et une année.",
                                                                     "WS_CALL_FAILED" : "Le services est temporairement hors-service, veuillez réessayer ultérieurement."
                                                             };
                                                             $scope.returnMessage = errors[response.data.error];

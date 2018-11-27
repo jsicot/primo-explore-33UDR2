@@ -74,7 +74,7 @@
 				<div layout-align="end" flex-xs="100" flex-sm="30">
 					<div ng-if="item.istatus" class="center"  layout="row" layout-wrap  >
 						<p ng-if='item.statusClass === "status-ondemand" && item.homebranch === "Bibliothèque Universitaire Centrale"' class="availability-status {{item.statusClass}}"> 						
-								<button ng-disabled="{{userIsGuest}}"  class="custom-button md-button zero-margin button-with-icon button-confirm md-primoExplore-theme md-ink-ripple" type="button" ng-click="showRequestItem($event,biblionumber,item.itemnumber,item.itemcallnumber)" aria-label="Retirer ce document sous 1h à l'accueil de votre bibliothèque">
+								<button ng-disabled="{{userIsGuest}}"  class="custom-button md-button zero-margin button-with-icon button-confirm md-primoExplore-theme md-ink-ripple" type="button" ng-click="showRequestItem($event,biblionumber,item.itemnumber,item.itemcallnumber,'',isavailableonshelf)" aria-label="Retirer ce document sous 1h à l'accueil de votre bibliothèque">
 								<prm-icon class="md-icon-button-custom" icon-type="svg" svg-icon-set="action" icon-definition="ic_add_shopping_cart_24px"></prm-icon>
 								Retrait 1h en bibliothèque
 								<md-tooltip md-direction="down" md-delay="400" class="multi-row-tooltip slide-tooltip-anim"><span class="item-description popover animate-popover">Retirer ce document sous 1h à l'accueil de votre bibliothèque</span></md-tooltip></button>
@@ -89,7 +89,6 @@
 				</div>
 
 			</div>
-			
 		</div>
 		<prm-location-item-after parent-ctrl="$ctrl"></prm-location-item-after>
 	</md-list-item>
@@ -128,7 +127,7 @@
 					</div>
 					<div ng-if='holding.location.indexOf("Magasin") > -1' flex flex-xs="100">
 							<p ng-if='holding.location.indexOf("Magasin") > -1 && holding.library === "Bibliothèque Universitaire Centrale"' class="availability-status {{item.statusClass}}"> 						
-									<button  ng-disabled="{{userIsGuest}}" class="custom-button md-button zero-margin button-with-icon button-confirm md-primoExplore-theme md-ink-ripple" type="button" ng-click="showRequestItem($event,biblionumber,'',holding.callnumber)" aria-label="Obtenir ce document">
+									<button  ng-disabled="{{userIsGuest}}" class="custom-button md-button zero-margin button-with-icon button-confirm md-primoExplore-theme md-ink-ripple" type="button" ng-click="showRequestItem($event,biblionumber,'',holding.callnumber,holding.holdings,false)" aria-label="Obtenir ce document">
 									<prm-icon class="md-icon-button-custom" icon-type="svg" svg-icon-set="action" icon-definition="ic_add_shopping_cart_24px"></prm-icon>
 									Retrait 1h en bibliothèque
 									<md-tooltip md-direction="down" md-delay="400" class="multi-row-tooltip slide-tooltip-anim"><span class="item-description popover animate-popover">Obtenir ce document ?</span></md-tooltip></button>

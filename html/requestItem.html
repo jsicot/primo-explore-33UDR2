@@ -57,9 +57,17 @@
             <input ng-if="itemnumber" type="hidden" name="itemnumber" id="itemnumber" value="{{itemnumber}}" />
             <input ng-if="uid" type="hidden" name="uid" id="uid" value="{{uid}}" />
             <input ng-if="callnumber" type="hidden" name="callnumber" id="callnumber" value="{{callnumber}}" />
+                    <p ng-if="isavailableonshelf" style="opacity: 1; margin-top: 0px;color:tomato;">Des exemplaires en rayon semblent disponibles dans nos bibliothèques pour ce document, n'hésitez pas à emprunter ces derniers.</p>
+
+
             <div ng-if="addata.ristype['0'] === 'JOUR'" class="padding-large layout-align-xs-strech layout-align-gt-xs-start-start layout-column" layout="column"
                 layout-align-gt-xs="start start" layout-align-xs="strech">
                 <label><strong>Merci de préciser les éléments suivants :</strong> </label> 
+
+                <p ng-if="addata.ristype['0'] === 'JOUR'" class="weak-text">Pour rappel, les numéros disponibles sont : {{holdings}}</p>
+
+                <span ng-if="returnMessage" class="md-input-message-animation" style="opacity: 1; margin-top: 0px;color:tomato;">{{returnMessage}}</span>
+                
 
                 <div class="request-form-group layout-xs-column layout-row" layout="row" layout-xs="column">
                     <!---->
@@ -76,7 +84,7 @@
                     <div layout="row" layout-xs="column" class="request-form-group-item layout-xs-column layout-row">
                         <md-input-container class="underlined-input md-primoExplore-theme" ng-class="{'md-required':$ctrl.field.mandatory, '' :$ctrl.field.css}">
                             <label class="" for="issue">Numéro</label>
-                            <input type="text" name="issue" ng-model="request.issue" ng-required="$ctrl.field.mandatory" size="6" maxlength="" class="ng-pristine ng-untouched md-input ng-empty ng-valid-pattern ng-valid-maxlength ng-valid ng-valid-required" aria-invalid="false">
+                            <input type="text" name="issue" ng-model="request.issue"  size="6" maxlength="" class="ng-pristine ng-untouched md-input ng-empty ng-valid-pattern ng-valid-maxlength ng-valid ng-valid-required" aria-invalid="false">
                             <div class="md-errors-spacer"></div>
                             <!---->
                         </md-input-container>
@@ -87,16 +95,21 @@
                             <label for="year">Année</label>
                             <input type="text" maxlength="4" size="4" class="ng-pristine ng-untouched ng-valid md-input ng-empty ng-valid-pattern ng-valid-maxlength" name="year" ng-model="request.year" aria-invalid="false">
                             <div class="md-errors-spacer"></div>
-                            <div style="color:tomato" class="md-input-messages-animation md-auto-hide ng-inactive"
-                                aria-live="assertive">
-                                <!---->
-                            </div>
+                            
                         </md-input-container>
                     </div>
 
                 </div>
+                 <div class="request-form-group layout-xs-column layout-row" layout="row" layout-xs="column">
+                    <div layout="row" class="layout-row" style="">
+                    <md-input-container class="underlined-input md-primoExplore-theme">
+                        <label  for="message"><span>Message</span></label>
+                        <textarea class="ng-pristine ng-untouched ng-valid md-input ng-empty ng-valid-pattern ng-valid-maxlength" name="message"ng-model="request.message"  placeholder=""  md-maxlength="1000" ></textarea>
+                       <div class="md-errors-spacer"></div>
+                     </md-input-container>
+                     </div>
+                </div>
             </div>
-                <span ng-if="returnMessage" class="md-input-message-animation" style="opacity: 1; margin-top: 0px;color:tomato;">{{returnMessage}}</span>
             </div>
         </form>
     </md-dialog-content>
