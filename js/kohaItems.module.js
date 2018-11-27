@@ -139,13 +139,11 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                             $scope.branches = branches;
                             $scope.status = status;
                             $scope.userIsGuest = userData.isGuest();
-                            $scope.userIsGuest = false;
 
                         }
                         if (journalholdings) {
                             $scope.kohaholdings = journalholdings;
                             $scope.userIsGuest = userData.isGuest();
-                            $scope.userIsGuest = false;
                         }
 
                         var delivery = $scope.$ctrl.parentCtrl.item.delivery;
@@ -194,7 +192,6 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                     $scope.itemnumber = itemnumber;
                                     $scope.isavailableonshelf = isavailableonshelf;
                                     $scope.userIsGuest = userData.isGuest();
-                                    $scope.userIsGuest = false;
                                     $scope.addata = recordData.pnx.addata;
                                     // console.log($scope.addata);
                                     $scope.title =  recordData.pnx.display.title[0];
