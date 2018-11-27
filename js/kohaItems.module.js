@@ -7,6 +7,18 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
     controller: ['$scope', '$rootScope', '$mdDialog', '$http', '$element', 'kohaitemsService', function controller($scope, $rootScope, $mdDialog, $http, $element, kohaitemsService) {
         this.$onInit = function () {
             if ($scope.$ctrl.parentCtrl.item) {
+                let self = this;
+                self.scope = $scope;
+                self.rootScope = $rootScope;
+               // console.log(self)
+               //console.log('rootScope')
+                //console.log(self.rootScope)
+                // console.log('rootScope - userSessionManagerService')
+                // console.log(self.rootScope.$$childHead.$ctrl.userSessionManagerService)
+                // console.log(self.rootScope.$$childHead.$ctrl.userSessionManagerService.isGuest())
+                let userData = self.rootScope.$$childHead.$ctrl.userSessionManagerService;
+                //console.log(self.rootScope.$$childHead.$ctrl.userSessionManagerService.getUserLanguage())
+                //console.log(self.rootScope.$$childHead.$ctrl.userSessionManagerService.i18nService.getLanguage() )
                 var obj = $scope.$ctrl.parentCtrl.item.pnx.control;
                 var openurl;
                 //init loading
@@ -30,7 +42,6 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                 var bn = obj.sourcerecordid[0];
                             }
                             if (bn && source == "33UDR2_KOHA") {
-                                console.log("biblionumber:" + bn)
                                 var url = "https://catalogue.bu.univ-rennes2.fr/r2microws/json.getSru.php?index=rec.id&q=" + bn;
                                 var response = kohaitemsService.getKohaData(url).then(function (response) {
                                     if (response.data.record[0]) {
@@ -40,11 +51,18 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                             $scope.kohaitems_loading = true;
                                             $scope.loading = false;
                                             var kohaitems = response.data.record[0].item
+                                        
+                                             var isclosedstacks = Object.keys(kohaitems).some(function(k) {
+                                               if(kohaitems[k].branchcode === "BU"){
+                                                return kohaitems[k].statusClass === "status-ondemand";
+                                               }
+                                            });
+
+                                            $scope.isclosedstacks = isclosedstacks;
                                             for (var i = 0; i < kohaitems.length; i++) {
                                                 if (kohaitems[i].withdrawnstatus == 'false' && kohaitems[i].itemlost == "0") {
                                                     items.push(kohaitems[i]);
                                                     $scope.kohaitems_loading = false;
-
                                                     var itemstatus = kohaitems[i].istatus;
                                                     if (itemstatus.startsWith("Emprunt")) {
                                                         itemstatus = "Emprunt\u00e9";
@@ -66,9 +84,16 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                                 }
                                             }
                                             var kohaholdings = [];
+                                            
+                                            var isclosedstacks = Object.keys(response.data.record[0].locations).some(function(k) {
+                                                 return response.data.record[0].locations[k].location === "En Magasin Périodiques";
+                                             });
+ 
+                                             $scope.isclosedstacks = isclosedstacks;
+
                                             for (var i = 0; i < response.data.record[0].holdings.length; i++) {
                                                 var holding = response.data.record[0].holdings[i]
-                                                console.log(response.data.record[0]);
+                                                // console.log(response.data.record[0]);
                                                 kohaholdings[i] = {
                                                     "library": holding["rcr"],
                                                     "holdings": holding["holdings"]
@@ -109,9 +134,11 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                             $scope.items = items;
                             $scope.branches = branches;
                             $scope.status = status;
+                            $scope.userIsGuest = userData.isGuest();
                         }
                         if (journalholdings) {
                             $scope.kohaholdings = journalholdings;
+                            $scope.userIsGuest = userData.isGuest();
                         }
 
                         var delivery = $scope.$ctrl.parentCtrl.item.delivery;
@@ -119,7 +146,7 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                             for (var i = 0; i < delivery.link.length; i++) {
                                 if (delivery.link[i].displayLabel == "openurl") {
                                     openurl = delivery.link[i].linkURL;
-                                    console.log("openurl : " + openurl);
+                                    // console.log("openurl : " + openurl);
                                 }
                             }
                         }
@@ -141,18 +168,7 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                 $scope.sfxloading = false;
                             });
                         }
-                        let self = this;
-                        self.scope = $scope;
-                        self.rootScope = $rootScope;
-                       // console.log(self)
-                       //console.log('rootScope')
-                        //console.log(self.rootScope)
-                        console.log('rootScope - userSessionManagerService')
-                        console.log(self.rootScope.$$childHead.$ctrl.userSessionManagerService)
-                        console.log(self.rootScope.$$childHead.$ctrl.userSessionManagerService.isGuest())
-                        let userData = self.rootScope.$$childHead.$ctrl.userSessionManagerService;
-                        //console.log(self.rootScope.$$childHead.$ctrl.userSessionManagerService.getUserLanguage())
-                        //console.log(self.rootScope.$$childHead.$ctrl.userSessionManagerService.i18nService.getLanguage() )
+
                        
                         $scope.showRequestItem = function ($event, biblionumber, itemnumber, callnumber) {
                             $mdDialog.show({
@@ -163,14 +179,14 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                 templateUrl: 'custom/'+viewName+'/html/requestItem.html', 
                                 controller: function ($scope, $mdDialog, $http) {
                                     let recordData = self.parentCtrl.item
-                                    console.log(recordData.pnx.display);
+                                    // console.log(recordData.pnx.display);
                                     $scope.biblionumber = biblionumber;
-                                    console.log(callnumber);
+                                    //console.log("call num:"+callnumber);
                                     $scope.callnumber = callnumber;
                                     $scope.itemnumber = itemnumber;
                                     $scope.userIsGuest = userData.isGuest();
                                     $scope.addata = recordData.pnx.addata;
-                                    console.log($scope.addata);
+                                    // console.log($scope.addata);
                                     $scope.title =  recordData.pnx.display.title[0];
 
                                     $scope.cancelRequest = function () {
@@ -205,9 +221,9 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                                 cache: false,
                                             }).then(function(response){
                                                     if (response.data != undefined) {
-                                                            console.log(response.data);
+                                                            // console.log(response.data);
                                                         if (response.data.state == "success") {
-                                                            console.log(response.data.state);
+                                                            // console.log(response.data.state);
                                                             $scope.request_succeed = true;
                                                         } else {
                                                             var errors = {

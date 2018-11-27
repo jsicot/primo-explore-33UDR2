@@ -1,6 +1,16 @@
+<div class="bar alert-bar zero-margin-bottom layout-align-center-center layout-row" ng-if="items && userIsGuest && isclosedstacks">
+    <div class="md-dialog-content">
+         Veuillez vous connecter pour placer des demandes de document.
+         <prm-authentication></prm-authentication>
+    </div>
+</div>
+
 <div ng-if="sfxholdings" ng-include src="'custom/33UDR2_VU1/html/prmViewOnlineAfter.html'"></div>
 
+
 <prm-spinner class="inline-loader half-transparent dark-on-light no-text" layout="row" ng-if="loading" layout-align="center center"></prm-spinner>
+
+
 
 <div ng-if="items.length > 0">
 <h3 class="section-title" style="margin-bottom: .75em !important;"><span translate="nui.aria.locationItems.locationItems"></span></h3>
@@ -64,7 +74,7 @@
 				<div layout-align="end" flex-xs="100" flex-sm="30">
 					<div ng-if="item.istatus" class="center"  layout="row" layout-wrap  >
 						<p ng-if='item.statusClass === "status-ondemand" && item.homebranch === "Bibliothèque Universitaire Centrale"' class="availability-status {{item.statusClass}}"> 						
-								<button  class="custom-button md-button zero-margin button-with-icon button-confirm md-primoExplore-theme md-ink-ripple" type="button" (click)="showRequestItem($event,'{{biblionumber}}','{{item.itemnumber}}', '{{item.itemcallnumber}}')" aria-label="Retirer ce document sous 1h à l'accueil de votre bibliothèque">
+								<button ng-disabled="{{userIsGuest}}"  class="custom-button md-button zero-margin button-with-icon button-confirm md-primoExplore-theme md-ink-ripple" type="button" ng-click="showRequestItem($event,biblionumber,item.itemnumber,item.itemcallnumber)" aria-label="Retirer ce document sous 1h à l'accueil de votre bibliothèque">
 								<prm-icon class="md-icon-button-custom" icon-type="svg" svg-icon-set="action" icon-definition="ic_add_shopping_cart_24px"></prm-icon>
 								Retrait 1h en bibliothèque
 								<md-tooltip md-direction="down" md-delay="400" class="multi-row-tooltip slide-tooltip-anim"><span class="item-description popover animate-popover">Retirer ce document sous 1h à l'accueil de votre bibliothèque</span></md-tooltip></button>
@@ -75,23 +85,11 @@
 						</p>
 
 					</div>
-<!--
-					<div layout="row" layout-align="center center" ng-repeat="service in item.listOfServices track by $index" ng-if="$ctrl.isLoggedIn()">
-						<prm-service-button ng-if="$ctrl.allowService()" [service]="service" (change-tab-event)="::$ctrl.onChangeTabEvent($event)" [parent-tab]="::$ctrl.tabId" [request-parameters]="$ctrl.getServiceAdditionalParams(item, service)" method="GET"></prm-service-button>
-						<div class="skewed-divider" ng-if="!$last"></div>
-					</div>
--->
+
 				</div>
 
 			</div>
 			
-<!--
-			<div class="align-self-stretch">
-				<md-button class="md-secondary item-expand-button" aria-label="{{'nui.aria.locationItems.expandcollapse' | translate}}">
-					<prm-icon ng-class="{'rotate-180': item.isExpanded}" icon-type="{{$ctrl.opacLocations.expandIcon.type}}" svg-icon-set="{{$ctrl.opacLocations.expandIcon.iconSet}}" icon-definition="{{$ctrl.opacLocations.expandIcon.icon}}"></prm-icon>
-				</md-button>
-			</div>
--->
 		</div>
 		<prm-location-item-after parent-ctrl="$ctrl"></prm-location-item-after>
 	</md-list-item>
@@ -130,7 +128,7 @@
 					</div>
 					<div ng-if='holding.location.indexOf("Magasin") > -1' flex flex-xs="100">
 							<p ng-if='holding.location.indexOf("Magasin") > -1 && holding.library === "Bibliothèque Universitaire Centrale"' class="availability-status {{item.statusClass}}"> 						
-									<button  class="custom-button md-button zero-margin button-with-icon button-confirm md-primoExplore-theme md-ink-ripple" type="button" (click)="showRequestItem($event,'{{biblionumber}}','','{{holding.callnumber}}')" aria-label="Obtenir ce document">
+									<button  ng-disabled="{{userIsGuest}}" class="custom-button md-button zero-margin button-with-icon button-confirm md-primoExplore-theme md-ink-ripple" type="button" ng-click="showRequestItem($event,biblionumber,'',holding.callnumber)" aria-label="Obtenir ce document">
 									<prm-icon class="md-icon-button-custom" icon-type="svg" svg-icon-set="action" icon-definition="ic_add_shopping_cart_24px"></prm-icon>
 									Retrait 1h en bibliothèque
 									<md-tooltip md-direction="down" md-delay="400" class="multi-row-tooltip slide-tooltip-anim"><span class="item-description popover animate-popover">Obtenir ce document ?</span></md-tooltip></button>
@@ -144,25 +142,9 @@
 					</div>
 				</div>
 
-				<div layout-align="end center" layout="row" layout-wrap flex-xs="100" flex-sm="30">
-					
-<!--
-					<div layout="row" layout-align="center center" ng-repeat="service in item.listOfServices track by $index" ng-if="$ctrl.isLoggedIn()">
-						<prm-service-button ng-if="$ctrl.allowService()" [service]="service" (change-tab-event)="::$ctrl.onChangeTabEvent($event)" [parent-tab]="::$ctrl.tabId" [request-parameters]="$ctrl.getServiceAdditionalParams(item, service)" method="GET"></prm-service-button>
-						<div class="skewed-divider" ng-if="!$last"></div>
-					</div>
--->
-				</div>
 
 			</div>
-			
-<!--
-			<div class="align-self-stretch">
-				<md-button class="md-secondary item-expand-button" aria-label="{{'nui.aria.locationItems.expandcollapse' | translate}}">
-					<prm-icon ng-class="{'rotate-180': item.isExpanded}" icon-type="{{$ctrl.opacLocations.expandIcon.type}}" svg-icon-set="{{$ctrl.opacLocations.expandIcon.iconSet}}" icon-definition="{{$ctrl.opacLocations.expandIcon.icon}}"></prm-icon>
-				</md-button>
-			</div>
--->
+
 		</div>
 		<prm-location-item-after parent-ctrl="$ctrl"></prm-location-item-after>
 	</md-list-item>

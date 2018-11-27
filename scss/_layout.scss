@@ -8,6 +8,7 @@ body,prm-topbar .md-button,.md-button {
 	text-transform:none;
 }
 
+
 a {
     &:hover,
     &:focus,
@@ -138,12 +139,8 @@ prm-alert-bar [translate="eshelf.signin.title"] {
 	line-height:normal;
 }
 
-.bar.alert-bar,.classic-input .search-scope,.prm-alert-border {
-	border-color:#d6d6d6;
-}
-
-.bar.alert-bar,.classic-input .search-scope,.prm-alert-bg {
-	background-color:#efefef;
+.bar prm-authentication .md-button {
+    color: #a5122a;
 }
 
 /*favorites back button*/
