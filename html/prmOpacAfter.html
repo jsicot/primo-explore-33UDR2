@@ -41,11 +41,11 @@
 					</div>
 				</div>
 				<div  flex flex-xs="100">
-					<div ng-if="item.location && item.statusClass !== 'status-ondemand'">
+					<div ng-if="item.location && (item.statusClass !== 'status-ondemand' || item.isfa)">
 						<p class="weak-text"><span translate="nui.item.brief.3"></span> {{item.location}}</p>
 						<md-tooltip>{{item.location}}</md-tooltip>
 					</div>
-					<div ng-if="item.location && item.statusClass === 'status-ondemand'">
+					<div ng-if="item.location && item.statusClass === 'status-ondemand' && !item.isfa">
 							<p class="weak-text"> Accueil de la bibliothèque</p>
 							<md-tooltip>Accueil de la bibliothèque</md-tooltip>
 						</div>
@@ -73,14 +73,14 @@
 
 				<div layout-align="end" flex-xs="100" flex-sm="30">
 					<div ng-if="item.istatus" class="center"  layout="row" layout-wrap  >
-						<p ng-if='item.statusClass === "status-ondemand" && item.homebranch === "Bibliothèque Universitaire Centrale" && item.isrequested == "false"' class="availability-status {{item.statusClass}}"> 						
+						<p ng-if='item.statusClass === "status-ondemand" && item.branchcode === "BU" && item.isrequested == "false" && !item.isfa' class="availability-status {{item.statusClass}}"> 						
 								<button ng-disabled="{{userIsGuest}}"  class="custom-button md-button zero-margin button-with-icon button-confirm md-primoExplore-theme md-ink-ripple" type="button" ng-click="showRequestItem($event,biblionumber,item.itemnumber,item.itemcallnumber,'',isavailableonshelf)" aria-label="Retirer ce document sous 1h à l'accueil de votre bibliothèque">
 								<prm-icon class="md-icon-button-custom" icon-type="svg" svg-icon-set="action" icon-definition="ic_add_shopping_cart_24px"></prm-icon>
 								Retrait 1h en bibliothèque
 								<md-tooltip md-direction="down" md-delay="400" class="multi-row-tooltip slide-tooltip-anim"><span class="item-description popover animate-popover">Retirer ce document sous 1h à l'accueil de votre bibliothèque</span></md-tooltip></button>
 						</p>
-						<p ng-if='item.statusClass === "status-ondemand" && item.homebranch === "Bibliothèque Universitaire Centrale" && item.isrequested == "true"' class="availability-status status-unavailable unavailable"> Actuellement consulté par un lecteur</p>
-						<p ng-if='item.statusClass === "status-ondemand" && item.homebranch !== "Bibliothèque Universitaire Centrale"' class="availability-status {{item.statusClass}}"> Demander à un bibliothécaire</p>
+						<p ng-if='item.statusClass === "status-ondemand" && item.branchcode === "BU" && item.isrequested == "true" && !item.isfa' class="availability-status status-unavailable unavailable"> En consultation par un lecteur</p>
+						<p ng-if='item.statusClass === "status-ondemand" && (item.branchcode !== "BU" || item.isfa)' class="availability-status {{item.statusClass}}"> Demander à un bibliothécaire</p>
 						<p ng-if='item.statusClass !== "status-ondemand"' class="availability-status {{item.statusClass}}"> {{item.istatus}}
 						 <md-tooltip>{{item.istatus}}</md-tooltip>			
 						</p>

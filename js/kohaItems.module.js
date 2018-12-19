@@ -42,7 +42,7 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                 var bn = obj.sourcerecordid[0];
                             }
                             if (bn && source == "33UDR2_KOHA") {
-                                var url = "https://catalogue.bu.univ-rennes2.fr/r2microws/json.getSru.php?index=rec.id&q=" + bn;
+                                var url = "https://cataloguepreprod.bu.univ-rennes2.fr/r2microws/json.getSru.php?index=rec.id&q=" + bn;
                                 var response = kohaitemsService.getKohaData(url).then(function (response) {
                                     if (response.data.record[0]) {
                                         //Book Items
