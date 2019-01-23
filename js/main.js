@@ -47,14 +47,14 @@ function add_custom_header(header_container)
 
 	if(header_container.length == 0)
 	{
-              var custom_header_html = '<link rel="stylesheet" id="r2-portalbar-css"  href="https://static.univ-rennes2.fr/barre-portail/jquery.barre-portail-R2.min.css" type="text/css" media="all" /><div class="custom-header"><header id="r2-portalbar"><nav role="navigation" aria-labelledby="block-nosportails-menu" id="block-nosportails" class="navbar-is-fixed-top container">                 <ul class="menu nos-portails"><li> <a href="https://www.univ-rennes2.fr" class="site-public">Université Rennes 2</a></li><li> <a href="https://ent.univ-rennes2.fr/etudiants" class="site-etudiant">étudiants</a></li><li> <a href="https://ent.univ-rennes2.fr/personnels" class="site-personnel">Personnels</a></li><li> <a href="https://international.univ-rennes2.fr/" class="site-internat">International website</a></li><li> <a href="https://www.univ-rennes2.fr/partenaires-pro" class="site-pro">Partenaires pro</a></li><li> <a href="https://www.bu.univ-rennes2.fr/" class="site-bu is-active" data-active-regexp="^(\\w+\\.bu|bu\\-test)\\.univ\\-rennes2\\.fr" class="site-bu">Bibliothèques</a></li><li> <a href="https://www.lairedu.fr/" class="site-webmedia">Webmedia</a></li></ul></nav></header></div>';
+    var custom_header_html = '<link rel="stylesheet" id="r2-portalbar-css"  href="https://static.univ-rennes2.fr/barre-portail/jquery.barre-portail-R2.min.css" type="text/css" media="all" /><div class="custom-header"><header id="r2-portalbar"><nav role="navigation" aria-labelledby="block-nosportails-menu" id="block-nosportails" class="navbar-is-fixed-top container"><ul class="menu nos-portails"><li> <a href="https://www.univ-rennes2.fr" class="site-public">Universit&eacute; Rennes 2</a></li><li> <a href="https://ent.univ-rennes2.fr/etudiants" class="site-etudiant">&eacute;tudiants</a></li><li> <a href="https://ent.univ-rennes2.fr/personnels" class="site-personnel">Personnels</a></li><li> <a href="https://international.univ-rennes2.fr/" class="site-internat">International website</a></li><li> <a href="https://www.univ-rennes2.fr/partenaires-pro" class="site-pro">Partenaires pro</a></li><li> <a href="https://www.bu.univ-rennes2.fr/" class="site-bu is-active" data-active-regexp="^(\\w+\\.bu|bu\\-test)\\.univ\\-rennes2\\.fr" class="site-bu">Biblioth&egrave;ques</a></li><li> <a href="https://www.lairedu.fr/" class="site-webmedia">Webmedia</a></li></ul></nav></header></div>';
 		var prm_explore_main = angular.element(document.querySelector('prm-explore-main'));
 		if(prm_explore_main.length == 1)
 		{
 			prm_explore_main.after(custom_header_html);
 			var header_container = angular.element(document.getElementsByClassName('custom-header'));
-                     angular.element(header_container).after(prm_explore_main);
-                     initR2PortalBar();
+      angular.element(header_container).after(prm_explore_main);
+      initR2PortalBar();
 		}
 		
 		var prm_full_view_page = angular.element(document.querySelector('prm-full-view-page'));
@@ -62,8 +62,8 @@ function add_custom_header(header_container)
 		{
 			prm_full_view_page.after(custom_header_html);
 			var header_container = angular.element(document.getElementsByClassName('custom-header'));
-                     header_container.after(prm_full_view_page);
-                     initR2PortalBar();
+      header_container.after(prm_full_view_page);
+      initR2PortalBar();
 		}
 		
 		var prm_services_page = angular.element(document.querySelector('prm-services-page'));
@@ -71,8 +71,8 @@ function add_custom_header(header_container)
 		{
 			prm_services_page.after(custom_header_html);
 			var header_container = angular.element(document.getElementsByClassName('custom-header'));
-                     header_container.after(prm_services_page);
-                     initR2PortalBar();
+      header_container.after(prm_services_page);
+      initR2PortalBar();
 		}		
 	}
 	else

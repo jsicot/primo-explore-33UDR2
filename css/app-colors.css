@@ -591,9 +591,18 @@ md-toolbar.default-toolbar:not(.md-menu-toolbar) {
 .prm-alert, .bar.alert-bar, .classic-input .search-scope {
   color: black; }
   .prm-alert-bg, .bar.alert-bar, .classic-input .search-scope {
-    background-color: #F7EDA3; }
+    	background: #ffa000;
+	        color: #fff;
+          font-size: 1.1em;
+          font-weight :600;
+          display: flex;
+          padding: 6px 24px;
+          flex-wrap: wrap;
+          align-items: center;
+          box-shadow: 0px 3px 5px -1px rgba(0,0,0,0.2), 0px 6px 10px 0px rgba(0,0,0,0.14), 0px 1px 18px 0px rgba(0,0,0,0.12);
+      }
   .prm-alert-border, .bar.alert-bar, .classic-input .search-scope {
-    border-color: #ede49e; }
+    border: none; }
 
 .prm-highlight, prm-breadcrumbs .md-chip.persistent-facet {
   background-color: #FFFCC4; }

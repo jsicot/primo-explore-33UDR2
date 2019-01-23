@@ -140,6 +140,7 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                             $scope.status = status;
                             $scope.userIsGuest = userData.isGuest();
 
+
                         }
                         if (journalholdings) {
                             $scope.kohaholdings = journalholdings;
@@ -175,7 +176,7 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                         }
 
                        
-                        $scope.showRequestItem = function ($event, biblionumber, itemnumber, callnumber, holdings, isavailableonshelf) {
+                        $scope.showRequestItem = ($event, biblionumber, itemnumber, callnumber, holdings, isavailableonshelf) => {
                             $mdDialog.show({
                                 parent: angular.element(document.body),
                                 clickOutsideToClose: true,
@@ -218,7 +219,6 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                                 },
                                                 params: {
                                                     biblionumber : biblionumber,
-                                                    uid : 'sicot_j',
                                                     itemnumber : itemnumber,
                                                     callnumber : callnumber,
                                                     type : recordData.pnx.addata.ristype['0'],

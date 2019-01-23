@@ -135,6 +135,15 @@ prm-favorites div > md-content > div.flex {
 }
 
 /*align alert bar "sign in" */
+
+.alert-bar{
+	background: #ffa000;
+	color: #fff;
+	font-size: 1.2em !important;
+	font-weight: 400 !important;
+	box-shadow: none !important;
+}
+
 prm-alert-bar [translate="eshelf.signin.title"] {
 	line-height:normal;
 }
