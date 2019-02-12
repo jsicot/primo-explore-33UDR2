@@ -1,10 +1,16 @@
 <md-tabs md-dynamic-height  class="tabs-as-app hidden-tabs" >
 	<md-tab label="Main">
 
-		<div class="bar alert-bar zero-margin-bottom layout-align-center-center layout-row" ng-if="items && userIsGuest && isclosedstacks">
+		<div class="bar alert-bar zero-margin-bottom layout-align-center-center layout-row" ng-if="items && userIsGuest && isclosedstacks && available_service">
 			<div class="md-dialog-content">
 				Veuillez vous identifier pour utiliser les services ci-dessous.
 				<prm-authentication></prm-authentication>
+			</div>
+		</div>
+
+		<div class="bar error-bar zero-margin-bottom layout-align-center-center layout-row" ng-if="available_service==false">
+			<div class="md-dialog-content">
+				{{returnMessage}}
 			</div>
 		</div>
 
@@ -73,10 +79,15 @@
 							<div layout-align="end" flex-xs="100" flex-sm="30">
 								<div ng-if="item.istatus" class="center"  layout="row" layout-wrap  >
 									<p ng-if='item.statusClass === "status-ondemand" && item.branchcode === "BU" && item.isrequested == "false" && !item.isfa' class="availability-status {{item.statusClass}}"> 														
-											<button ng-disabled="{{userIsGuest}}" class="custom-button md-button zero-margin button-with-icon button-confirm md-primoExplore-theme md-ink-ripple" type="button" ng-click="showRequestItem($event,biblionumber,item.itemnumber,item.itemcallnumber,'',isavailableonshelf)" aria-label="Retirer ce document sous 1h à l'accueil de votre bibliothèque">
+											<button ng-if="available_service" ng-disabled="{{userIsGuest}}" class="custom-button md-button zero-margin button-with-icon button-confirm md-primoExplore-theme md-ink-ripple" type="button" ng-click="showRequestItem($event,biblionumber,item.itemnumber,item.itemcallnumber,'',isavailableonshelf)" aria-label="Retirer ce document sous 1h à l'accueil de votre bibliothèque">
 												<prm-icon class="md-icon-button-custom" icon-type="svg" svg-icon-set="action" icon-definition="ic_add_shopping_cart_24px"></prm-icon>
 												<span ng-if="!userIsGuest">Retrait 1h BU Centrale</span>
 												<span ng-if="userIsGuest">Retrait 1h BU Centrale. Merci de vous identfier.</span>
+												<md-tooltip md-direction="down" md-delay="400" class="multi-row-tooltip slide-tooltip-anim"><span class="item-description popover animate-popover">Retirer ce document sous 1h à l'accueil de la BU Centrale. </span></md-tooltip>
+											</button>
+											<button ng-if="!available_service" ng-disabled="{{userIsGuest}}" class="custom-button md-button zero-margin button-with-icon button-confirm md-primoExplore-theme md-ink-ripple" type="button" aria-label="Retirer ce document sous 1h à l'accueil de votre bibliothèque">
+												<prm-icon class="md-icon-button-custom" icon-type="svg" svg-icon-set="action" icon-definition="ic_add_shopping_cart_24px"></prm-icon>
+												<span>Retrait 1h BU Centrale</span>
 												<md-tooltip md-direction="down" md-delay="400" class="multi-row-tooltip slide-tooltip-anim"><span class="item-description popover animate-popover">Retirer ce document sous 1h à l'accueil de la BU Centrale. </span></md-tooltip>
 											</button>
 									</p>

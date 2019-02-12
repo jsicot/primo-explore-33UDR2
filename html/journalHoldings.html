@@ -27,11 +27,16 @@
 					</div>
 					<div ng-if='holding.location.indexOf("Magasin") > -1' flex flex-xs="100">
 							<p ng-if='holding.location.indexOf("Magasin") > -1 && holding.library === "Bibliothèque Universitaire Centrale"' class="availability-status {{item.statusClass}}"> 						
-								<button  ng-disabled="{{userIsGuest}}" class="custom-button md-button zero-margin button-with-icon button-confirm md-primoExplore-theme md-ink-ripple" type="button" ng-click="showRequestItem($event,biblionumber,'',holding.callnumber,holding.holdings,false)" aria-label="Obtenir ce document">
+								<button  ng-if="available_service" ng-disabled="{{userIsGuest}}" class="custom-button md-button zero-margin button-with-icon button-confirm md-primoExplore-theme md-ink-ripple" type="button" ng-click="showRequestItem($event,biblionumber,'',holding.callnumber,holding.holdings,false)" aria-label="Retirer un numéro de cette revue sous 1h à l'accueil de la BU Centrale. ">
 									<prm-icon class="md-icon-button-custom" icon-type="svg" svg-icon-set="action" icon-definition="ic_add_shopping_cart_24px"></prm-icon>
 									<span ng-if="!userIsGuest">Retrait 1h BU Centrale</span>
 									<span ng-if="userIsGuest">Retrait 1h BU Centrale. Merci de vous identfier.</span>
-									<md-tooltip md-direction="down" md-delay="400" class="multi-row-tooltip slide-tooltip-anim"><span class="item-description popover animate-popover">Retirer ce document sous 1h à l'accueil de la BU Centrale. </span></md-tooltip>
+									<md-tooltip md-direction="down" md-delay="400" class="multi-row-tooltip slide-tooltip-anim"><span class="item-description popover animate-popover">Retirer un numéro de cette revue sous 1h à l'accueil de la BU Centrale. </span></md-tooltip>
+								</button>
+								<button  ng-if="!available_service" ng-disabled="true" class="custom-button md-button zero-margin button-with-icon button-confirm md-primoExplore-theme md-ink-ripple" type="button" aria-label="Retirer un numéro de cette revue sous 1h à l'accueil de la BU Centrale. ">
+									<prm-icon class="md-icon-button-custom" icon-type="svg" svg-icon-set="action" icon-definition="ic_add_shopping_cart_24px"></prm-icon>
+									<span>Retrait 1h BU Centrale</span>
+									<md-tooltip md-direction="down" md-delay="400" class="multi-row-tooltip slide-tooltip-anim"><span class="item-description popover animate-popover">Retirer un numéro de cette revue sous 1h à l'accueil de la BU Centrale. </span></md-tooltip>
 								</button>
 							</p>
 					</div>

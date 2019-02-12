@@ -1,4 +1,6 @@
-import { viewName } from './viewName';
+import {
+    viewName
+} from './viewName';
 
 angular.module('kohaItems', []).component('prmOpacAfter', {
     bindings: {
@@ -10,8 +12,8 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                 let self = this;
                 self.scope = $scope;
                 self.rootScope = $rootScope;
-               // console.log(self)
-               //console.log('rootScope')
+                // console.log(self)
+                //console.log('rootScope')
                 //console.log(self.rootScope)
                 // console.log('rootScope - userSessionManagerService')
                 // console.log(self.rootScope.$$childHead.$ctrl.userSessionManagerService)
@@ -51,16 +53,16 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                             $scope.kohaitems_loading = true;
                                             $scope.loading = false;
                                             var kohaitems = response.data.record[0].item
-                                        
-                                             var isclosedstacks = Object.keys(kohaitems).some(function(k) {
-                                               if(kohaitems[k].branchcode === "BU"){
-                                                return kohaitems[k].statusClass === "status-ondemand";
-                                               }
+
+                                            var isclosedstacks = Object.keys(kohaitems).some(function (k) {
+                                                if (kohaitems[k].branchcode === "BU") {
+                                                    return kohaitems[k].statusClass === "status-ondemand";
+                                                }
                                             });
                                             console.log(Object.values(kohaitems));
-                                            var isavailableonshelf = Object.keys(kohaitems).some(function(k) {
-                                                 return kohaitems[k].istatus === "Disponible";
-                                             });
+                                            var isavailableonshelf = Object.keys(kohaitems).some(function (k) {
+                                                return kohaitems[k].istatus === "Disponible";
+                                            });
                                             $scope.isclosedstacks = isclosedstacks;
                                             $scope.isavailableonshelf = isavailableonshelf;
                                             for (var i = 0; i < kohaitems.length; i++) {
@@ -68,7 +70,7 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                                     items.push(kohaitems[i]);
                                                     $scope.kohaitems_loading = false;
                                                     var itemstatus = kohaitems[i].istatus;
-                                                    if (itemstatus.startsWith("Emprunt")) {
+                                                    if (itemstatus.startsWith("Emprunté")) {
                                                         itemstatus = "Emprunt\u00e9";
                                                     }
                                                     if (!(branches.indexOf(kohaitems[i].homebranch) !== -1)) {
@@ -88,12 +90,12 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                                 }
                                             }
                                             var kohaholdings = [];
-                                            
-                                            var isclosedstacks = Object.keys(response.data.record[0].locations).some(function(k) {
-                                                 return response.data.record[0].locations[k].location === "En Magasin Périodiques";
-                                             });
- 
-                                             $scope.isclosedstacks = isclosedstacks;
+
+                                            var isclosedstacks = Object.keys(response.data.record[0].locations).some(function (k) {
+                                                return response.data.record[0].locations[k].location === "En Magasin Périodiques";
+                                            });
+
+                                            $scope.isclosedstacks = isclosedstacks;
 
                                             for (var i = 0; i < response.data.record[0].holdings.length; i++) {
                                                 var holding = response.data.record[0].holdings[i]
@@ -134,13 +136,40 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                             }
                         }
 
+                        //checking if service is opened
+                        var availServiceSvc = "https://cataloguepreprod.bu.univ-rennes2.fr/r2microws/getAuthorisedValues.php?category=FERMETURE_SERVICES";
+                        $http({
+                            method: 'JSONP',
+                            url: availServiceSvc,
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-From-ExL-API-Gateway': undefined
+                            },
+                            cache: false,
+                        }).then(function (response) {
+                            if (response.data != undefined) {
+                                console.log(response.data);
+                                if (response.data.COMMAG_BU != "") {
+                                    console.log(response.data.COMMAG_BU);
+                                    $scope.available_service = false;
+                                    $scope.returnMessage = response.data.COMMAG_BU;
+                                } else {
+                                    $scope.available_service = true;
+                                    $scope.returnMessage = "";
+                                }
+                            } else {
+                                $scope.returnMessage = "Le services est temporairement hors-service, veuillez réessayer ultérieurement.";
+                            }
+                        }, function (response) {
+                            $scope.returnMessage = "Le services est temporairement hors-service, veuillez réessayer ultérieurement.";
+                        });
+
+
                         if (items) {
                             $scope.items = items;
                             $scope.branches = branches;
                             $scope.status = status;
                             $scope.userIsGuest = userData.isGuest();
-
-
                         }
                         if (journalholdings) {
                             $scope.kohaholdings = journalholdings;
@@ -175,14 +204,14 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                             });
                         }
 
-                       
+
                         $scope.showRequestItem = ($event, biblionumber, itemnumber, callnumber, holdings, isavailableonshelf) => {
                             $mdDialog.show({
                                 parent: angular.element(document.body),
                                 clickOutsideToClose: true,
                                 fullscreen: false,
                                 targetEvent: $event,
-                                templateUrl: 'custom/'+viewName+'/html/requestItem.html', 
+                                templateUrl: 'custom/' + viewName + '/html/requestItem.html',
                                 controller: function ($scope, $mdDialog, $http) {
                                     let recordData = self.parentCtrl.item
                                     // console.log(recordData.pnx.display);
@@ -195,7 +224,7 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                     $scope.userIsGuest = userData.isGuest();
                                     $scope.addata = recordData.pnx.addata;
                                     // console.log($scope.addata);
-                                    $scope.title =  recordData.pnx.display.title[0];
+                                    $scope.title = recordData.pnx.display.title[0];
 
                                     $scope.cancelRequest = function () {
                                         $mdDialog.cancel();
@@ -205,50 +234,50 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                         volume: '',
                                         issue: '',
                                         year: '',
-                                        
+
                                     }
-                                    $scope.sendRequest = function (answer) {                   	                                        
-                                            var url = "https://cataloguepreprod.bu.univ-rennes2.fr/r2microws/requestItem.php";
-                                            var message = "\n\nMessage : " + $scope.request.message +"\n";
-                                             $http({
-                                                method: 'JSONP',
-                                                url: url,
-                                                headers: {
-                                                    'Content-Type': 'application/json',
-                                                    'X-From-ExL-API-Gateway': undefined
-                                                },
-                                                params: {
-                                                    biblionumber : biblionumber,
-                                                    itemnumber : itemnumber,
-                                                    callnumber : callnumber,
-                                                    type : recordData.pnx.addata.ristype['0'],
-                                                    volume :  $scope.request.volume,
-                                                    issue : $scope.request.issue,
-                                                    year : $scope.request.year,
-                                                    message : message
-                                                },
-                                                cache: false,
-                                            }).then(function(response){
-                                                    if (response.data != undefined) {
-                                                            // console.log(response.data);
-                                                        if (response.data.state == "success") {
-                                                            // console.log(response.data.state);
-                                                            $scope.request_succeed = true;
-                                                        } else {
-                                                            var errors = {
-                                                                    "LOGIN_FAILED" : "Vous devez être connecté pour pouvoir envoyer le message.",
-                                                                    "USER_NOT_FOUND" : "Erreur de connection, utilisateur non-trouvé.",
-                                                                    "MISSING_INFO_JOURNAL" : "Merci d'indiquer au moins un volume OU un numéro Et une année.",
-                                                                    "WS_CALL_FAILED" : "Le services est temporairement hors-service, veuillez réessayer ultérieurement."
-                                                            };
-                                                            $scope.returnMessage = errors[response.data.error];
-                                                        }
-                                                    } else {
-                                                            $scope.returnMessage = "Le services est temporairement hors-service, veuillez réessayer ultérieurement.";
-                                                    }
-                                                }, function(response){
-                                                    $scope.returnMessage = "Le services est temporairement hors-service, veuillez réessayer ultérieurement.";
-                                                });
+                                    $scope.sendRequest = function (answer) {
+                                        var url = "https://cataloguepreprod.bu.univ-rennes2.fr/r2microws/requestItem.php";
+                                        var message = "\n\nMessage : " + $scope.request.message + "\n";
+                                        $http({
+                                            method: 'JSONP',
+                                            url: url,
+                                            headers: {
+                                                'Content-Type': 'application/json',
+                                                'X-From-ExL-API-Gateway': undefined
+                                            },
+                                            params: {
+                                                biblionumber: biblionumber,
+                                                itemnumber: itemnumber,
+                                                callnumber: callnumber,
+                                                type: recordData.pnx.addata.ristype['0'],
+                                                volume: $scope.request.volume,
+                                                issue: $scope.request.issue,
+                                                year: $scope.request.year,
+                                                message: message
+                                            },
+                                            cache: false,
+                                        }).then(function (response) {
+                                            if (response.data != undefined) {
+                                                // console.log(response.data);
+                                                if (response.data.state == "success") {
+                                                    // console.log(response.data.state);
+                                                    $scope.request_succeed = true;
+                                                } else {
+                                                    var errors = {
+                                                        "LOGIN_FAILED": "Vous devez être connecté pour pouvoir envoyer le message.",
+                                                        "USER_NOT_FOUND": "Erreur de connection, utilisateur non-trouvé.",
+                                                        "MISSING_INFO_JOURNAL": "Merci d'indiquer au moins un volume OU un numéro Et une année.",
+                                                        "WS_CALL_FAILED": "Le services est temporairement hors-service, veuillez réessayer ultérieurement."
+                                                    };
+                                                    $scope.returnMessage = errors[response.data.error];
+                                                }
+                                            } else {
+                                                $scope.returnMessage = "Le services est temporairement hors-service, veuillez réessayer ultérieurement.";
+                                            }
+                                        }, function (response) {
+                                            $scope.returnMessage = "Le services est temporairement hors-service, veuillez réessayer ultérieurement.";
+                                        });
                                     }
                                 }
                             });
@@ -258,7 +287,7 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
             }
         };
     }],
-    templateUrl: 'custom/'+viewName+'/html/prmOpacAfter.html'
+    templateUrl: 'custom/' + viewName + '/html/prmOpacAfter.html'
 }).factory('kohaitemsService', ['$http', function ($http) {
     return {
         getKohaData: function getKohaData(url) {
