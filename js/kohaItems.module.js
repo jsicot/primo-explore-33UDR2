@@ -136,7 +136,7 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                             }
                         }
 
-                        //checking if service is opened
+                        //checking if service is opened/available
                         var availServiceSvc = "https://cataloguepreprod.bu.univ-rennes2.fr/r2microws/getAuthorisedValues.php?category=FERMETURE_SERVICES";
                         $http({
                             method: 'JSONP',
@@ -151,10 +151,10 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                 console.log(response.data);
                                 if (response.data.COMMAG_BU != "") {
                                     console.log(response.data.COMMAG_BU);
-                                    $scope.available_service = false;
+                                    $scope.avail_commagbu = false;
                                     $scope.returnMessage = response.data.COMMAG_BU;
                                 } else {
-                                    $scope.available_service = true;
+                                    $scope.avail_commagbu = true;
                                     $scope.returnMessage = "";
                                 }
                             } else {
