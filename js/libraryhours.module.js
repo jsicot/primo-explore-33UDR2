@@ -17,7 +17,7 @@ angular.module('libraryhours', []).component('prmSearchBookmarkFilterAfter', {
 					locals: {
 						items: $scope.items
 					},
-					controller: function($scope, $mdDialog, $http) {
+					controller: ['$scope', '$http', '$mdDialog', function controller($scope, $http, $mdDialog) {	
 						$scope.libhoursloading = true;
 						$scope.serhoursloading = true;
 						$http.post("https://www.bu.univ-rennes2.fr/views/ajax","view_name=libraries_views&view_display_id=hours_sidebar_libraries_tab&view_args=",{
@@ -51,7 +51,7 @@ angular.module('libraryhours', []).component('prmSearchBookmarkFilterAfter', {
 						$scope.closeDialog = function() {
 							$mdDialog.hide();
 						}
-					}
+					}]
 				});
 			}
 			

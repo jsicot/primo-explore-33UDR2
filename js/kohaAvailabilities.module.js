@@ -6,7 +6,7 @@ angular.module('kohaAvailabilities', []).component('prmBriefResultAfter', {
   bindings: {
     parentCtrl: '<'
   },
-  controller: ['$scope', '$http', '$element', 'kohaavailService', function controller($scope, $http, $element, kohaavailService) {
+  controller: ['$scope', '$http', '$element', function controller($scope, $http, $element) {
     this.$onInit = function () {
       if ($scope.$ctrl.parentCtrl.item) {
         $scope.kohaDisplay = false; /* default hides template */
@@ -36,8 +36,16 @@ angular.module('kohaAvailabilities', []).component('prmBriefResultAfter', {
 
           if (bn && source == "33UDR2_KOHA" && type != "journal") {
             var url = "https://catalogue.bu.univ-rennes2.fr/r2microws/json.getItems.php?biblionumber=" + bn;
-            var response = kohaavailService.getKohaData(url).then(function (response) {
-              if (response.data) {
+			 $http({
+                method: 'JSONP',
+                url: url,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-From-ExL-API-Gateway': undefined
+                },
+                cache: true,
+            }).then(function(response){
+                if (response.data != undefined) { 
                 var items = response.data;
                 $scope.kohaDisplay = true;
                 if (items.available != null) {
@@ -57,7 +65,15 @@ angular.module('kohaAvailabilities', []).component('prmBriefResultAfter', {
                 }
               } else {
                 var orderSvc = "https://catalogue.bu.univ-rennes2.fr/r2microws/getInfoOrder.php?biblionumber=" + bn;
-                var response = kohaavailService.getKohaData(orderSvc).then(function (response) {
+                $http({
+	                method: 'JSONP',
+	                url: url,
+	                headers: {
+	                    'Content-Type': 'application/json',
+	                    'X-From-ExL-API-Gateway': undefined
+	                },
+	                cache: true,
+            	}).then(function(response){
                   if (response.data.orders) {
                     console.log("notice acq");
                     var order = response.data.orders[0];
@@ -80,18 +96,4 @@ angular.module('kohaAvailabilities', []).component('prmBriefResultAfter', {
     };
   }],
   templateUrl: 'custom/' + viewName + '/html/prmBriefResultAfter.html'
-}).factory('kohaavailService', ['$http', function ($http) {
-  return {
-    getKohaData: function getKohaData(url) {
-      return $http({
-        method: 'JSONP',
-        url: url
-      });
-    }
-  };
-}]).run(function ($http) {
-  // Necessary for requests to succeed...not sure why
-  $http.defaults.headers.common = {
-    'X-From-ExL-API-Gateway': undefined
-  };
 });

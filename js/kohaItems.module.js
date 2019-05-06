@@ -6,7 +6,7 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
     bindings: {
         parentCtrl: '<'
     },
-    controller: ['$scope', '$rootScope', '$mdDialog', '$http', '$element', 'kohaitemsService', function controller($scope, $rootScope, $mdDialog, $http, $element, kohaitemsService) {
+    controller: ['$scope', '$rootScope', '$mdDialog', '$http', '$element', function controller($scope, $rootScope, $mdDialog, $http, $element) {
         this.$onInit = function () {
             if ($scope.$ctrl.parentCtrl.item) {
                 let self = this;
@@ -45,7 +45,15 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                             }
                             if (bn && source == "33UDR2_KOHA") {
                                 var url = "https://catalogue.bu.univ-rennes2.fr/r2microws/json.getSru.php?index=rec.id&q=" + bn;
-                                var response = kohaitemsService.getKohaData(url).then(function (response) {
+                                $http({
+					                method: 'JSONP',
+					                url: url,
+					                headers: {
+					                    'Content-Type': 'application/json',
+					                    'X-From-ExL-API-Gateway': undefined
+					                },
+					                cache: true,
+					            }).then(function(response){
                                     if (response.data.record[0]) {
                                         //Book Items
                                         $scope.biblionumber = bn;
@@ -212,7 +220,7 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                 fullscreen: false,
                                 targetEvent: $event,
                                 templateUrl: 'custom/' + viewName + '/html/requestItem.html',
-                                controller: function ($scope, $mdDialog, $http) {
+	                            controller: ['$scope', '$http', '$mdDialog', function controller($scope, $http, $mdDialog) {	                               
                                     let recordData = self.parentCtrl.item
                                     // console.log(recordData.pnx.display);
                                     $scope.biblionumber = biblionumber;
@@ -279,7 +287,7 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                             $scope.returnMessage = "Le services est temporairement hors-service, veuillez réessayer ultérieurement.";
                                         });
                                     }
-                                }
+                                }],	
                             });
                         };
                     }
@@ -288,18 +296,4 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
         };
     }],
     templateUrl: 'custom/' + viewName + '/html/prmOpacAfter.html'
-}).factory('kohaitemsService', ['$http', function ($http) {
-    return {
-        getKohaData: function getKohaData(url) {
-            return $http({
-                method: 'JSONP',
-                url: url
-            });
-        }
-    };
-}]).run(function ($http) {
-    // Necessary for requests to succeed...not sure why
-    $http.defaults.headers.common = {
-        'X-From-ExL-API-Gateway': undefined
-    };
 });

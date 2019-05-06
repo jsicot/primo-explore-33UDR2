@@ -13,7 +13,8 @@ angular.module('reportProblem', []).controller('prmSaveToFavoritesButtonAfterCon
 	                clickOutsideToClose: true,
 	                fullscreen: false,
 	                targetEvent: $event,
-	                templateUrl: 'custom/'+viewName+'/html/reportProblem.html', controller: function ($scope, $mdDialog, $http) {
+	                templateUrl: 'custom/'+viewName+'/html/reportProblem.html', 
+		            controller: ['$scope', '$http', '$mdDialog', function controller($scope, $http, $mdDialog) {    
 	                    let recordData = self.parentCtrl.item;
                         if (self.parentCtrl.userSessionManagerService.areaName == undefined || self.parentCtrl.userSessionManagerService.areaName.match(/^anonymous-/)) {
 							$scope.userLogged = false;
@@ -103,7 +104,7 @@ angular.module('reportProblem', []).controller('prmSaveToFavoritesButtonAfterCon
 						            });
 	                        }
 	                    }
-	                }
+	                }]
 	            });
 	        };
 	    

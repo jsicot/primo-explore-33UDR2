@@ -4,10 +4,18 @@ angular
   .module('kohaLists', [])
   .component('kohaLists', {
     templateUrl: 'custom/'+viewName+'/html/koha-lists.html',
-    controller: ['$scope', 'kohalistsService', function ($scope, kohalistsService) {
+    controller: ['$scope', '$http', function ($scope, $http) {
       $scope.loading = true;
       var url = "https://catalogue.bu.univ-rennes2.fr/r2microws/getPublicLists.php";
-      var response = kohalistsService.getLists(url).then(function (response) {
+      $http({
+                method: 'JSONP',
+                url: url,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-From-ExL-API-Gateway': undefined
+                },
+                cache: true,
+            }).then(function(response){
 	       $scope.loading = false;
 	       $scope.lists =response.data;
 	       console.log(response.data);
@@ -15,18 +23,4 @@ angular
         });
       
     }],
-  })
-  .factory('kohalistsService', ['$http', function ($http) {
-  return {
-    getLists: function getLists(url) {
-      return $http({
-        method: 'JSONP',
-        url: url
-      });
-    }
-  };
-}])
-.run(function ($http) {
-  // Necessary for requests to succeed...not sure why
-  $http.defaults.headers.common = { 'X-From-ExL-API-Gateway': undefined };
-});
+  });

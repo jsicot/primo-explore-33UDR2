@@ -9,19 +9,16 @@ import { reportProblem } from './reportProblem.module';
 import { getThumbnail } from './getThumbnail.module';
 import { kohaLists } from './koha-lists.module';
 
-	let app = angular.module('viewCustom', [
+  let app = angular.module('viewCustom', [
                                         'angularLoad',
                                         'kohaItems',
                                         'kohaAvailabilities',
                                         'sfxHoldings',
-                     										// 'googleAnalytics',
                                         'libraryhours',
                                         'getThumbnail',
                                         'kohaLists',
                                         'reportProblem'
-                                      ], function ($compileProvider) {
-		$compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|data):/);
-  });
+                                      ]);
 
 // app.run(['$templateCache', function($templateCache) {
 //   // $templateCache.put('components/search/topbar/userArea/libraryCard/library-card-menu.html','<md-button aria-label="{{$ctrl.getLibraryCardAriaLabel() | translate}}" class="md-icon-button button-over-dark" (click)="$ctrl.goToMyLibraryCard();"  aria-label="{{\'nui.menu.librarycard\' | translate}}" (keydown)="$ctrl.keydownSupport($event)"><md-tooltip md-delay="400"><span translate="nui.menu.librarycard"></span></md-tooltip><prm-icon [icon-type]="::$ctrl.topBarIcons.library.type" [svg-icon-set]="::$ctrl.topBarIcons.library.iconSet" [icon-definition]="::$ctrl.topBarIcons.library.icon"></prm-icon></md-button><prm-library-card-menu-after parent-ctrl="$ctrl"></prm-library-card-menu-after>');	
@@ -87,11 +84,11 @@ function add_custom_header(header_container)
 // load jquery
 app.component('prmTopBarBefore', {
 	bindings: {parentCtrl: '<'},
-	controller: function () {
+	controller: [function controller() {	
 		this.$onInit = function () {
 			loadScript("https://static.univ-rennes2.fr/bootstrap/3.1/js/jquery.js", jquery_loaded);
 		};
-	},
+	}]
 });
        
 function loadScript(url, callback)
@@ -197,7 +194,7 @@ app.controller('SearchBarAfterController', ['angularLoad', function (angularLoad
 }]);
 
 // change advanced search to jump to results
-app.controller('prmAdvancedSearchAfterController', function($scope) {
+app.controller('prmAdvancedSearchAfterController', ['$scope', function controller($scope) {
 // watch to see if advanced search is there
        var advancedSearchObs = new MutationObserver(function(mutations) {
               mutations.forEach(function(mutation) {
@@ -243,7 +240,7 @@ app.controller('prmAdvancedSearchAfterController', function($scope) {
               , attributes: false
               , characterData: false
        })
-});
+}]);
 
 //AngularJS' orderBy filter does just support arrays - no objects. So you have to write an own small filter, which does the sorting for you.
 app.filter('orderObjectBy', function(){
