@@ -44,7 +44,7 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                 var bn = obj.sourcerecordid[0];
                             }
                             if (bn && source == "33UDR2_KOHA") {
-                                var url = "https://cataloguepreprod.bu.univ-rennes2.fr/r2microws/json.getSru.php?index=rec.id&q=" + bn;
+                                var url = "https://catalogue.bu.univ-rennes2.fr/r2microws/json.getSru.php?index=rec.id&q=" + bn;
                                 var response = kohaitemsService.getKohaData(url).then(function (response) {
                                     if (response.data.record[0]) {
                                         //Book Items
@@ -137,7 +137,7 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                         }
 
                         //checking if service is opened/available
-                        var availServiceSvc = "https://cataloguepreprod.bu.univ-rennes2.fr/r2microws/getAuthorisedValues.php?category=FERMETURE_SERVICES";
+                        var availServiceSvc = "https://catalogue.bu.univ-rennes2.fr/r2microws/getAuthorisedValues.php?category=FERMETURE_SERVICES";
                         $http({
                             method: 'JSONP',
                             url: availServiceSvc,
@@ -237,8 +237,8 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
 
                                     }
                                     $scope.sendRequest = function (answer) {
-                                        var url = "https://cataloguepreprod.bu.univ-rennes2.fr/r2microws/requestItem.php";
-                                        var message = "\n\nMessage : " + $scope.request.message + "\n";
+                                        var url = "https://catalogue.bu.univ-rennes2.fr/r2microws/requestItem.php";
+                                        var message = "\n\n" + $scope.request.message + "\n";
                                         $http({
                                             method: 'JSONP',
                                             url: url,
