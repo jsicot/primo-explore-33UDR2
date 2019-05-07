@@ -14,7 +14,7 @@ angular.module('sfxHoldings', []).component('prmViewOnlineAfter', {
           var openurlSvc = openurl.replace("http://acceder.bu.univ-rennes2.fr/sfx_33puedb","https://catalogue.bu.univ-rennes2.fr/r2microws/getSfx.php");
           $http({
 				method: 'JSONP',
-				url: url,
+				url: openurlSvc,
 				headers: {
 					'Content-Type': 'application/json',
 					'X-From-ExL-API-Gateway': undefined

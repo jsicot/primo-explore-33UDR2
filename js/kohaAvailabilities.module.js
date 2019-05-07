@@ -67,7 +67,7 @@ angular.module('kohaAvailabilities', []).component('prmBriefResultAfter', {
                 var orderSvc = "https://catalogue.bu.univ-rennes2.fr/r2microws/getInfoOrder.php?biblionumber=" + bn;
                 $http({
 	                method: 'JSONP',
-	                url: url,
+	                url: orderSvc,
 	                headers: {
 	                    'Content-Type': 'application/json',
 	                    'X-From-ExL-API-Gateway': undefined
