@@ -20,7 +20,8 @@
 
             <div class="send-actions-content-item">
                 <md-content>
-                        <h4  ng-if="addata.ristype['0'] !== 'JOUR'">Votre demande concerne le document :</h4> 
+
+                        <h4  ng-if="addata.ristype['0'] !== 'JOUR'">Votre demande concerne :</h4> 
                         <h4  ng-if="addata.ristype['0'] === 'JOUR'">Votre demande concerne la revue : </h4> 
 
                     <div layout="row" ng-class="'layout-'+$ctrl.layoutPos">
@@ -35,7 +36,7 @@
                                         <span ng-if="!addata.cop">.&nbsp;</span>
                                         <span ng-if="addata.pub">{{addata.pub[0]}}.&nbsp;</span>
                                         <span ng-if="addata.date">{{addata.date[0]}}.</span>
-                                        <span ng-if="callnumber"> Cote&nbsp;:&nbsp;{{callnumber}}.</span>
+                                        <span ng-if="callnumber"><strong>Cote&nbsp;:&nbsp;{{callnumber}}.</strong> </span>
                                     </span>
                                     <span ng-if="addata.jtitle">
                                         <i>{{addata.jtitle[0]}}.&nbsp;</i>
@@ -43,48 +44,48 @@
                                         <span ng-if="!addata.cop">.&nbsp;</span>
                                         <span ng-if="addata.pub">{{addata.pub[0]}}.&nbsp;</span>
                                         <span ng-if="addata.issn">{{addata.issn[0]}}.&nbsp;</span>
-                                        <span ng-if="callnumber"> Cote&nbsp;:&nbsp;{{callnumber}}.</span>
+                                        <span ng-if="callnumber"><strong> Cote&nbsp;:&nbsp;{{callnumber}}.</strong> </span>
                                     </span>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <p ng-if="isavailableonshelf" class="isavailableonshelf">D'autres exemplaires semblent disponibles en rayon pour ce document, n'hésitez pas à emprunter ces derniers.</p>
+
                 </md-content>
             </div>
-        <form name="requestItemForm">
+        <form name="requestItemForm" class="padding-medium">
             <div class="md-dialog-content">
             <input ng-if="biblionumber" type="hidden" name="biblionumber" id="biblionumber" value="{{biblionumber}}" />
             <input ng-if="itemnumber" type="hidden" name="itemnumber" id="itemnumber" value="{{itemnumber}}" />
             <input ng-if="uid" type="hidden" name="uid" id="uid" value="{{uid}}" />
             <input ng-if="callnumber" type="hidden" name="callnumber" id="callnumber" value="{{callnumber}}" />
-                    <p ng-if="isavailableonshelf" style="opacity: 1; margin-top: 0px;color:tomato;">Des exemplaires en rayon semblent disponibles dans nos bibliothèques pour ce document, n'hésitez pas à emprunter ces derniers.</p>
 
 
-            <div ng-if="addata.ristype['0'] === 'JOUR'" class="padding-large layout-align-xs-strech layout-align-gt-xs-start-start layout-column" layout="column"
+            <div ng-if="addata.ristype['0'] === 'JOUR'" class="layout-align-xs-strech layout-align-gt-xs-start-start layout-column" layout="column"
                 layout-align-gt-xs="start start" layout-align-xs="strech">
                 <label><strong>Merci de préciser les éléments suivants :</strong> </label> 
 
-                <p ng-if="addata.ristype['0'] === 'JOUR'" class="weak-text">Pour rappel, les numéros disponibles sont : {{holdings}}</p>
 
                 <span ng-if="returnMessage" class="md-input-message-animation" style="opacity: 1; margin-top: 0px;color:tomato;">{{returnMessage}}</span>
                 
 
-                <div class="request-form-group layout-xs-column layout-row" layout="row" layout-xs="column">
+                <div class="request-form-group layout-sm-column layout-row" layout="row" layout-sm="column">
                     <!---->
-                    <div layout="row" layout-xs="column" class="request-form-group-item layout-xs-column layout-row">
+                    <div layout="row" layout-sm="column" class="request-form-group-item layout-sm-column layout-row">
                         <md-input-container class="underlined-input md-primoExplore-theme" ng-class="{'md-required':$ctrl.field.mandatory, '' :$ctrl.field.css}">
-                            <label class="" for="volume">Volume(s)</label>
-                            <input type="text" name="volume" ng-model="request.volume"  size="6" maxlength="" class="ng-pristine ng-untouched md-input ng-empty ng-valid-pattern ng-valid-maxlength ng-valid ng-valid-required" aria-invalid="false">
+                            <label class="" for="volume">Volume</label>
+                            <input type="text" name="volume" ng-model="request.volume"  size="15" maxlength="" class="ng-pristine ng-untouched md-input ng-empty ng-valid-pattern ng-valid-maxlength ng-valid ng-valid-required" aria-invalid="false">
                             <div class="md-errors-spacer"></div>
                             <!---->
                         </md-input-container>
                     </div>
                     <!---->
 
-                    <div layout="row" layout-xs="column" class="request-form-group-item layout-xs-column layout-row">
+                    <div layout="row" layout-sm="column" class="request-form-group-item layout-sm-column layout-row">
                         <md-input-container class="underlined-input md-primoExplore-theme" ng-class="{'md-required':$ctrl.field.mandatory, '' :$ctrl.field.css}">
-                            <label class="" for="issue">Numéro(s)</label>
-                            <input type="text" name="issue" ng-model="request.issue" size="6" maxlength="" class="ng-pristine ng-untouched md-input ng-empty ng-valid-pattern ng-valid-maxlength ng-valid ng-valid-required" aria-invalid="false">
+                            <label class="" for="issue">Numéro</label>
+                            <input type="text" name="issue" ng-model="request.issue" size="15" maxlength="" class="ng-pristine ng-untouched md-input ng-empty ng-valid-pattern ng-valid-maxlength ng-valid ng-valid-required" aria-invalid="false">
                             <div class="md-errors-spacer"></div>
                             <!---->
                         </md-input-container>
@@ -98,18 +99,18 @@
                             
                         </md-input-container>
                     </div>
+                 </div>
+                 <p ng-if="addata.ristype['0'] === 'JOUR'" class="weak-text isavailableonshelf">Pour rappel, les numéros disponibles vont du : {{holdings}}</p>
 
                 </div>
-                 <div class="request-form-group layout-xs-column layout-row" layout="row" layout-xs="column">
-                    <div layout="row" class="layout-row" style="">
+                 <div class=" request-form-group layout-column" layout="column">
                     <md-input-container class="underlined-input md-primoExplore-theme">
-                        <label  for="message"><span>Message</span></label>
-                        <textarea class="ng-pristine ng-untouched ng-valid md-input ng-empty ng-valid-pattern ng-valid-maxlength" name="message"ng-model="request.message"  placeholder=""  md-maxlength="1000" ></textarea>
+                        <label for="message"><span>Si besoin, précisez votre demande :</span></label>
+                        <textarea class="ng-pristine ng-untouched ng-valid md-input ng-empty ng-valid-pattern ng-valid-maxlength" name="message"ng-model="request.message"  placeholder=""  md-maxlength="400" ></textarea>
                        <div class="md-errors-spacer"></div>
                      </md-input-container>
-                     </div>
                 </div>
-            </div>
+        
             </div>
         </form>
     </md-dialog-content>
@@ -125,9 +126,12 @@
 
     <md-dialog-content ng-if="request_succeed && !userIsGuest">
         <div class="md-dialog-content">
-        <p>Votre demande a bien été prise en compte, elle est cours de traitement.</p>
-        <p>Vous recevrez très prochainement un message vous informant de la disponiblité du document à l'accueil de la bibliothèque, vous aurez alors trois jours pour venir le retirer.</p>
-        <p>Excellente journée et à très bientôt dans nos bibliothèques.</p>
+      <p><strong>Votre demande a bien été enregistrée.</strong></p>
+        <p>Vous recevrez très prochainement <strong>une première confirmation par e-mail</strong> annonçant sa prise en charge par nos services,<br \> 
+            puis <strong>une seconde</strong> vous informant de la disponibilité du document.<br \> 
+            <strong>Ne vous déplacez pas avant de recevoir cette dernière.</strong><br \>
+            Les documents restent accessibles pendant <strong>3 jours à l’accueil de la BU centrale.</strong> </p>
+        <p>Très bonne journée et à bientôt dans nos bibliothèques.</p>
     </div>
     </md-dialog-content>
 

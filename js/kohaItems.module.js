@@ -63,7 +63,7 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                             var kohaitems = response.data.record[0].item
 
                                             var isclosedstacks = Object.keys(kohaitems).some(function (k) {
-                                                if (kohaitems[k].branchcode === "BU") {
+                                                if (kohaitems[k].branchcode === "BU" && kohaitems[k].isfa === false) {
                                                     return kohaitems[k].statusClass === "status-ondemand";
                                                 }
                                             });
@@ -178,10 +178,12 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                             $scope.branches = branches;
                             $scope.status = status;
                             $scope.userIsGuest = userData.isGuest();
+                            //$scope.userIsGuest = false;
                         }
                         if (journalholdings) {
                             $scope.kohaholdings = journalholdings;
                             $scope.userIsGuest = userData.isGuest();
+                            //$scope.userIsGuest = false;
                         }
 
                         var delivery = $scope.$ctrl.parentCtrl.item.delivery;
@@ -230,6 +232,7 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                     $scope.itemnumber = itemnumber;
                                     $scope.isavailableonshelf = isavailableonshelf;
                                     $scope.userIsGuest = userData.isGuest();
+                                    //$scope.userIsGuest = false;
                                     $scope.addata = recordData.pnx.addata;
                                     // console.log($scope.addata);
                                     $scope.title = recordData.pnx.display.title[0];
@@ -246,7 +249,7 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                     }
                                     $scope.sendRequest = function (answer) {
                                         var url = "https://catalogue.bu.univ-rennes2.fr/r2microws/requestItem.php";
-                                        var message = "\n\n" + $scope.request.message + "\n";
+                                        var message = "\n" + $scope.request.message + "\n";
                                         $http({
                                             method: 'JSONP',
                                             url: url,
@@ -273,18 +276,18 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                                     $scope.request_succeed = true;
                                                 } else {
                                                     var errors = {
-                                                        "LOGIN_FAILED": "Vous devez être connecté pour pouvoir envoyer le message.",
-                                                        "USER_NOT_FOUND": "Erreur de connection, utilisateur non-trouvé.",
-                                                        "MISSING_INFO_JOURNAL": "Merci d'indiquer au moins un volume OU un numéro Et une année.",
-                                                        "WS_CALL_FAILED": "Le services est temporairement hors-service, veuillez réessayer ultérieurement."
+                                                        "LOGIN_FAILED": "Vous devez &ecirc;tre connect&eacutes; pour pouvoir envoyer le message.",
+                                                        "USER_NOT_FOUND": "Erreur de connection, utilisateur non-trouv&eacutes;.",
+                                                        "MISSING_INFO_JOURNAL": "Merci d'indiquer au moins un volume OU un num&eacutes;ro ET une ann&eacutes;e.",
+                                                        "WS_CALL_FAILED": "Le service est temporairement hors-service, veuillez r&eacute;essayer ult&eacute;rieurement."
                                                     };
                                                     $scope.returnMessage = errors[response.data.error];
                                                 }
                                             } else {
-                                                $scope.returnMessage = "Le services est temporairement hors-service, veuillez réessayer ultérieurement.";
+                                                $scope.returnMessage = "Le services est temporairement hors-service, veuillez r&eacute;essayer ult&eacute;rieurement.";
                                             }
                                         }, function (response) {
-                                            $scope.returnMessage = "Le services est temporairement hors-service, veuillez réessayer ultérieurement.";
+                                            $scope.returnMessage = "Le services est temporairement hors-service, veuillez r&eacute;essayer ult&eacute;rieurement.";
                                         });
                                     }
                                 }],	
