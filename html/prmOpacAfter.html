@@ -1,13 +1,12 @@
+<div class="bar alert-bar zero-margin-bottom layout-align-center-center layout-row" ng-if="items && userIsGuest && isclosedstacks && avail_commagbu">
+	<div class="md-dialog-content">
+		Veuillez vous identifier pour utiliser les services ci-dessous.
+		<prm-authentication></prm-authentication>
+	</div>
+</div>
+
 <md-tabs md-dynamic-height  class="tabs-as-app hidden-tabs" >
 	<md-tab label="Main">
-
-		<div class="bar alert-bar zero-margin-bottom layout-align-center-center layout-row" ng-if="items && userIsGuest && isclosedstacks && avail_commagbu">
-			<div class="md-dialog-content">
-				Veuillez vous identifier pour utiliser les services ci-dessous.
-				<prm-authentication></prm-authentication>
-			</div>
-		</div>
-
 		<div class="bar error-bar zero-margin-bottom layout-align-center-center layout-row" ng-if="avail_commagbu==false && isclosedstacks">
 			<div class="md-dialog-content">
 				{{returnMessage}}
