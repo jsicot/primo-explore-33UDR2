@@ -25,6 +25,11 @@ prm-search-result-availability-line {
 
 }
 
+.isavailableonshelf {
+  font-size: 105%;
+  color: $getit_green;
+  }
+
 .prm-positive, .status-available, [class*="available"],
 [class*="FT"],
 .not_restricted,

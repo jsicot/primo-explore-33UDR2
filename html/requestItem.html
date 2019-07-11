@@ -1,17 +1,142 @@
-<md-dialog id="requestItem" aria-label="Comment obtenir ce document">
-        <md-toolbar>
+<md-dialog id="requestItem" aria-label="Obtenir le document" ng-hide="hideForm">
+    <md-toolbar>
         <div class="md-toolbar-tools">
-            <h2><span>Comment obtenir ce document</span></h2>
+            <h2><span>Obtenir le document</span></h2>
             <span flex></span>
-            <md-button class="md-icon-button" ng-click="cancelReport()">
+            <md-button class="md-icon-button" ng-click="cancelRequest()">
                 <md-icon md-svg-icon="navigation:ic_close_24px" aria-label="Close dialog"></md-icon>
             </md-button>
         </div>
     </md-toolbar>
-    <md-dialog-content>
-        <div class="md-dialog-content">
-<p>Les ouvrages qui apparaissent dans les résultats avec une cote précédée de la localisation « <strong>En magasin </strong>» peuvent être demandés <strong>pour la consultation ou l'emprunt</strong>.</p><p><strong>Où et comment faire ma demande ?</strong></p><ul><li>À l'accueil de la BU centrale</li><li>Relever le nom de l’auteur, le titre et la cote du livre dans le catalogue</li><li>Remplir une fiche en 2 exemplaires et la déposer dans la corbeille prévue à cet effet&nbsp;</li><li>Le document sera mis de côté à votre nom au plus tard 1 heure après votre demande et conservé pendant 3 jours</li></ul><p><strong>À noter :</strong></p><ul><li>Les ouvrages édités avant 1915 seront consultés sur place ;</li><li>Pas de mise à disposition des documents entre 12h et 14h ; vos demandes sont prises jusqu'à 19h (en période d'ouverture normale) ;</li><li>Les ouvrages indiqués “En magasin” dans les&nbsp;bibliothèques autres que la BU centrale sont à demander à l’accueil de la bibliothèque concernée.</li></ul>
 
+    <md-dialog-content ng-if="userIsGuest">
+        <div class="md-dialog-content">
+            Vous devez être connecté pour utiliser ce service.
+            <prm-authentication></prm-authentication>
         </div>
-	</md-dialog-content>
-   </md-dialog>
+    </md-dialog-content>
+
+    <md-dialog-content ng-if="!request_succeed && !userIsGuest">
+
+            <div class="send-actions-content-item">
+                <md-content>
+
+                        <h4  ng-if="addata.ristype['0'] !== 'JOUR'">Votre demande concerne :</h4> 
+                        <h4  ng-if="addata.ristype['0'] === 'JOUR'">Votre demande concerne la revue : </h4> 
+
+                    <div layout="row" ng-class="'layout-'+$ctrl.layoutPos">
+
+                        <div data-tab-pane="cite" flex>
+                            <div layout="column" layout-padding layout-align="start center">
+                                <div class="form-focus" layout-padding layout="row" layout-align="center center">
+                                    <span ng-if="addata.btitle">
+                                        <span ng-if="addata.aulast">{{addata.aulast[0]}}<span ng-if="addata.aufirst">,&nbsp;{{addata.aufirst[0]}}</span>.&nbsp;</span>
+                                        <i>{{addata.btitle[0]}}.&nbsp;</i>
+                                        <span ng-if="addata.cop">{{addata.cop[0]}}&nbsp;:&nbsp;</span>
+                                        <span ng-if="!addata.cop">.&nbsp;</span>
+                                        <span ng-if="addata.pub">{{addata.pub[0]}}.&nbsp;</span>
+                                        <span ng-if="addata.date">{{addata.date[0]}}.</span>
+                                        <span ng-if="callnumber"><strong>Cote&nbsp;:&nbsp;{{callnumber}}.</strong> </span>
+                                    </span>
+                                    <span ng-if="addata.jtitle">
+                                        <i>{{addata.jtitle[0]}}.&nbsp;</i>
+                                        <span ng-if="addata.cop">{{addata.cop[0]}}&nbsp;:&nbsp;</span>
+                                        <span ng-if="!addata.cop">.&nbsp;</span>
+                                        <span ng-if="addata.pub">{{addata.pub[0]}}.&nbsp;</span>
+                                        <span ng-if="addata.issn">{{addata.issn[0]}}.&nbsp;</span>
+                                        <span ng-if="callnumber"><strong> Cote&nbsp;:&nbsp;{{callnumber}}.</strong> </span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p ng-if="isavailableonshelf" class="isavailableonshelf">D'autres exemplaires semblent disponibles en rayon pour ce document, n'hésitez pas à emprunter ces derniers.</p>
+
+                </md-content>
+            </div>
+        <form name="requestItemForm" class="padding-medium">
+            <div class="md-dialog-content">
+            <input ng-if="biblionumber" type="hidden" name="biblionumber" id="biblionumber" value="{{biblionumber}}" />
+            <input ng-if="itemnumber" type="hidden" name="itemnumber" id="itemnumber" value="{{itemnumber}}" />
+            <input ng-if="uid" type="hidden" name="uid" id="uid" value="{{uid}}" />
+            <input ng-if="callnumber" type="hidden" name="callnumber" id="callnumber" value="{{callnumber}}" />
+
+
+            <div ng-if="addata.ristype['0'] === 'JOUR'" class="layout-align-xs-strech layout-align-gt-xs-start-start layout-column" layout="column"
+                layout-align-gt-xs="start start" layout-align-xs="strech">
+                <label><strong>Merci de préciser les éléments suivants :</strong> </label> 
+
+
+                <span ng-if="returnMessage" class="md-input-message-animation" style="opacity: 1; margin-top: 0px;color:tomato;">{{returnMessage}}</span>
+                
+
+                <div class="request-form-group layout-sm-column layout-row" layout="row" layout-sm="column">
+                    <!---->
+                    <div layout="row" layout-sm="column" class="request-form-group-item layout-sm-column layout-row">
+                        <md-input-container class="underlined-input md-primoExplore-theme" ng-class="{'md-required':$ctrl.field.mandatory, '' :$ctrl.field.css}">
+                            <label class="" for="volume">Volume</label>
+                            <input type="text" name="volume" ng-model="request.volume"  size="15" maxlength="" class="ng-pristine ng-untouched md-input ng-empty ng-valid-pattern ng-valid-maxlength ng-valid ng-valid-required" aria-invalid="false">
+                            <div class="md-errors-spacer"></div>
+                            <!---->
+                        </md-input-container>
+                    </div>
+                    <!---->
+
+                    <div layout="row" layout-sm="column" class="request-form-group-item layout-sm-column layout-row">
+                        <md-input-container class="underlined-input md-primoExplore-theme" ng-class="{'md-required':$ctrl.field.mandatory, '' :$ctrl.field.css}">
+                            <label class="" for="issue">Numéro</label>
+                            <input type="text" name="issue" ng-model="request.issue" size="15" maxlength="" class="ng-pristine ng-untouched md-input ng-empty ng-valid-pattern ng-valid-maxlength ng-valid ng-valid-required" aria-invalid="false">
+                            <div class="md-errors-spacer"></div>
+                            <!---->
+                        </md-input-container>
+                    </div>
+                    <!---->
+                    <div layout="row" class="layout-row" style="">
+                        <md-input-container class="underlined-input md-primoExplore-theme">
+                            <label for="year">Année</label>
+                            <input type="text" maxlength="4" size="4" class="ng-pristine ng-untouched ng-valid md-input ng-empty ng-valid-pattern ng-valid-maxlength" name="year" ng-model="request.year" aria-invalid="false">
+                            <div class="md-errors-spacer"></div>
+                            
+                        </md-input-container>
+                    </div>
+                 </div>
+                 <p ng-if="addata.ristype['0'] === 'JOUR'" class="weak-text isavailableonshelf">Pour rappel, les numéros disponibles vont du : {{holdings}}</p>
+
+                </div>
+                 <div class=" request-form-group layout-column" layout="column">
+                    <md-input-container class="underlined-input md-primoExplore-theme">
+                        <label for="message"><span>Si besoin, précisez votre demande :</span></label>
+                        <textarea class="ng-pristine ng-untouched ng-valid md-input ng-empty ng-valid-pattern ng-valid-maxlength" name="message"ng-model="request.message"  placeholder=""  md-maxlength="400" ></textarea>
+                       <div class="md-errors-spacer"></div>
+                     </md-input-container>
+                </div>
+        
+            </div>
+        </form>
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row" ng-if="!request_succeed && !userIsGuest">
+        <md-button class="md-button md-secondary" ng-click="cancelRequest()">Annuler</md-button>
+        <span flex></span>
+        <md-button class="button-with-icon button-confirm md-button md-primoExplore-theme md-ink-ripple" ng-click="sendRequest()">
+            <prm-icon icon-type="svg" svg-icon-set="action" icon-definition="ic_done_24px"></prm-icon>
+            Confirmer votre demande
+        </md-button>
+    </md-dialog-actions>
+
+    <md-dialog-content ng-if="request_succeed && !userIsGuest">
+        <div class="md-dialog-content">
+      <p><strong>Votre demande a bien été enregistrée.</strong></p>
+        <p>Vous recevrez très prochainement <strong>une première confirmation par e-mail</strong> annonçant sa prise en charge par nos services,<br \> 
+            puis <strong>une seconde</strong> vous informant de la disponibilité du document.<br \> 
+            <strong>Ne vous déplacez pas avant de recevoir cette dernière.</strong><br \>
+            Les documents restent accessibles pendant <strong>3 jours à l’accueil de la BU centrale.</strong> </p>
+        <p>Très bonne journée et à bientôt dans nos bibliothèques.</p>
+    </div>
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row" ng-if="request_succeed && !userIsGuest">
+        <md-button class="button-with-icon button-confirm md-button md-primoExplore-theme md-ink-ripple" ng-click="cancelRequest()">Fermer</md-button>
+    </md-dialog-actions>
+
+</md-dialog>   

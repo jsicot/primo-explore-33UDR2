@@ -1,6 +1,8 @@
+import { viewName } from './viewName';
+
 angular.module('getThumbnail', []).component('prmSearchResultThumbnailContainerAfter', {
   bindings: { parentCtrl: '<' },
-  controller: ['$scope', '$http', '$element', 'thumbnailService', function controller($scope, $http, $element, thumbnailService) { 
+  controller: ['$scope', '$http', '$element', function controller($scope, $http, $element) { 
   this.$onInit = function () {
   	$scope.kohaDisplay = false; /* default hides template */
     if($scope.$ctrl.parentCtrl.item) { 
@@ -10,7 +12,7 @@ angular.module('getThumbnail', []).component('prmSearchResultThumbnailContainerA
         console.log(recid)
         var ids = obj.sourcerecordid;
         var total_ids = ids.length;
-       if (total_ids > 1){
+       if (total_ids > 1){ 
 		    var bn = [];
 	        angular.forEach(ids, function(value, key) {
 				if(value.startsWith("$$V") && value.includes("33UDR2_KOHA")){
@@ -31,7 +33,15 @@ angular.module('getThumbnail', []).component('prmSearchResultThumbnailContainerA
         var type = $scope.$ctrl.parentCtrl.item.pnx.display.type[0];
         if (bn && source == "33UDR2_KOHA" && type != "journal") {
           var url = "https://catalogue.bu.univ-rennes2.fr/r2microws/getCover.php?biblionumbers[]=" + bn;
-          var response = thumbnailService.getThumbSrc(url).then(function (response) {
+          $http({
+                method: 'JSONP',
+                url: url,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-From-ExL-API-Gateway': undefined
+                },
+                cache: true,
+            }).then(function(response){
 	         if(response.data){
 	            var thumb = response.data[0].cover;
 	           if(thumb && thumb.includes("no_img")){
@@ -48,18 +58,6 @@ angular.module('getThumbnail', []).component('prmSearchResultThumbnailContainerA
      } 
     };
   }],
-  templateUrl: 'custom/33UDR2_VU1/html/prmSearchResultThumbnailContainerAfter.html'
-}).factory('thumbnailService', ['$http', function ($http) {
-  return {
-    getThumbSrc: function getThumbSrc(url) {
-      return $http({
-        method: 'JSONP',
-        url: url
-      });
-    }
-  };
-}]).run(function ($http) {
-  // Necessary for requests to succeed...not sure why
-  $http.defaults.headers.common = { 'X-From-ExL-API-Gateway': undefined };
+  templateUrl: 'custom/'+viewName+'/html/prmSearchResultThumbnailContainerAfter.html'
 });
 

@@ -24,12 +24,19 @@
     color: white; 
     background-color: #774E9A;
     border-radius: 0;}
+  .md-button.button-confirm.service {
+    color: white; 
+    background-color: #cc0070;
+    border-radius: 0;}
   .service-form-static-panel button.button-confirm prm-icon + span, .service-form-static-panel button.button-confirm prm-icon svg path {
     color: #774E9A; }
     .md-button.button-confirm:hover:not([disabled]), .service-form-static-panel button.button-confirm prm-icon + span:hover:not([disabled]), .service-form-static-panel button.button-confirm prm-icon svg path:hover:not([disabled]), .md-button.button-confirm:focus:not([disabled]), .service-form-static-panel button.button-confirm prm-icon + span:focus:not([disabled]), .service-form-static-panel button.button-confirm prm-icon svg path:focus:not([disabled]), .md-button.button-confirm.hovered:not([disabled]), .service-form-static-panel button.button-confirm prm-icon + span.hovered:not([disabled]), .service-form-static-panel button.button-confirm prm-icon svg path.hovered:not([disabled]), .md-button.button-confirm.md-focused:not([disabled]), .service-form-static-panel button.button-confirm prm-icon + span.md-focused:not([disabled]), .service-form-static-panel button.button-confirm prm-icon svg path.md-focused:not([disabled]), .md-button.button-confirm._md-focused:not([disabled]), .service-form-static-panel button.button-confirm prm-icon + span._md-focused:not([disabled]), .service-form-static-panel button.button-confirm prm-icon svg path._md-focused:not([disabled]) {
       color: #432260;
       background-color: rgba(119, 78, 154, 0.1); }
-    .light-on-dark-dialog .md-button.button-confirm, .light-on-dark-dialog .service-form-static-panel button.button-confirm prm-icon + span, .service-form-static-panel button.button-confirm .light-on-dark-dialog prm-icon + span, .light-on-dark-dialog .service-form-static-panel button.button-confirm prm-icon svg path, .service-form-static-panel button.button-confirm prm-icon svg .light-on-dark-dialog path {
+      .md-button.button-confirm.service:hover:not([disabled]), .service-form-static-panel button.button-confirm.service prm-icon + span:hover:not([disabled]), .service-form-static-panel button.button-confirm.service prm-icon svg path:hover:not([disabled]), .md-button.button-confirm.service:focus:not([disabled]), .service-form-static-panel button.button-confirm.service prm-icon + span:focus:not([disabled]), .service-form-static-panel button.button-confirm.service prm-icon svg path:focus:not([disabled]), .md-button.button-confirm.service.hovered:not([disabled]), .service-form-static-panel button.button-confirm.service prm-icon + span.hovered:not([disabled]), .service-form-static-panel button.button-confirm.service prm-icon svg path.hovered:not([disabled]), .md-button.button-confirm.service.md-focused:not([disabled]), .service-form-static-panel button.button-confirm.service prm-icon + span.md-focused:not([disabled]), .service-form-static-panel button.button-confirm.service prm-icon svg path.md-focused:not([disabled]), .md-button.button-confirm.service._md-focused:not([disabled]), .service-form-static-panel button.button-confirm.service prm-icon + span._md-focused:not([disabled]), .service-form-static-panel button.button-confirm.service prm-icon svg path._md-focused:not([disabled]) {
+        color: #960554;
+        background-color: rgba(154, 78, 144, 0.1); }
+    .light-on-dark-dialog .md-button.button-confirm, .light-on-dark-dialog .service-form-static-panel button.button-confirm prm-icon + span, .service-form-static-panel button.button-confirm .light-on-dark-dialog prm-icon + span, .light-on-dark-dialog .service-form-static-panel button.button-confirm prm-icon svg path, .service-form-static-panel button.button-confirm prm-icon svg .light-on-dark-dialog path, .text-white {
       color: #FFF; }
       .light-on-dark-dialog .md-button.button-confirm:hover:not([disabled]), .light-on-dark-dialog .service-form-static-panel button.button-confirm prm-icon + span:hover:not([disabled]), .service-form-static-panel button.button-confirm .light-on-dark-dialog prm-icon + span:hover:not([disabled]), .light-on-dark-dialog .service-form-static-panel button.button-confirm prm-icon svg path:hover:not([disabled]), .service-form-static-panel button.button-confirm prm-icon svg .light-on-dark-dialog path:hover:not([disabled]), .light-on-dark-dialog .md-button.button-confirm:focus:not([disabled]), .light-on-dark-dialog .service-form-static-panel button.button-confirm prm-icon + span:focus:not([disabled]), .service-form-static-panel button.button-confirm .light-on-dark-dialog prm-icon + span:focus:not([disabled]), .light-on-dark-dialog .service-form-static-panel button.button-confirm prm-icon svg path:focus:not([disabled]), .service-form-static-panel button.button-confirm prm-icon svg .light-on-dark-dialog path:focus:not([disabled]), .light-on-dark-dialog .md-button.button-confirm.hovered:not([disabled]), .light-on-dark-dialog .service-form-static-panel button.button-confirm prm-icon + span.hovered:not([disabled]), .service-form-static-panel button.button-confirm .light-on-dark-dialog prm-icon + span.hovered:not([disabled]), .light-on-dark-dialog .service-form-static-panel button.button-confirm prm-icon svg path.hovered:not([disabled]), .service-form-static-panel button.button-confirm prm-icon svg .light-on-dark-dialog path.hovered:not([disabled]), .light-on-dark-dialog .md-button.button-confirm.md-focused:not([disabled]), .light-on-dark-dialog .service-form-static-panel button.button-confirm prm-icon + span.md-focused:not([disabled]), .service-form-static-panel button.button-confirm .light-on-dark-dialog prm-icon + span.md-focused:not([disabled]), .light-on-dark-dialog .service-form-static-panel button.button-confirm prm-icon svg path.md-focused:not([disabled]), .service-form-static-panel button.button-confirm prm-icon svg .light-on-dark-dialog path.md-focused:not([disabled]), .light-on-dark-dialog .md-button.button-confirm._md-focused:not([disabled]), .light-on-dark-dialog .service-form-static-panel button.button-confirm prm-icon + span._md-focused:not([disabled]), .service-form-static-panel button.button-confirm .light-on-dark-dialog prm-icon + span._md-focused:not([disabled]), .light-on-dark-dialog .service-form-static-panel button.button-confirm prm-icon svg path._md-focused:not([disabled]), .service-form-static-panel button.button-confirm prm-icon svg .light-on-dark-dialog path._md-focused:not([disabled]) {
         color: #FFF;
@@ -141,7 +148,8 @@
     box-shadow: 0 2px 8px -4px rgba(0, 0, 0, 0.26); }
   .md-button[disabled="disabled"] {
     color: #ccc !important;
-    cursor: not-allowed; }
+    cursor: not-allowed; 
+    opacity: 0.4}
   .md-button.button-as-link, .bar prm-authentication .md-button {
     text-transform: none;
     font-size: 1em;
@@ -590,9 +598,18 @@ md-toolbar.default-toolbar:not(.md-menu-toolbar) {
 .prm-alert, .bar.alert-bar, .classic-input .search-scope {
   color: black; }
   .prm-alert-bg, .bar.alert-bar, .classic-input .search-scope {
-    background-color: #F7EDA3; }
+    	background: #ffa000;
+	        color: #fff;
+          font-size: 1.1em;
+          font-weight :600;
+          display: flex;
+          padding: 6px 24px;
+          flex-wrap: wrap;
+          align-items: center;
+          box-shadow: 0px 3px 5px -1px rgba(0,0,0,0.2), 0px 6px 10px 0px rgba(0,0,0,0.14), 0px 1px 18px 0px rgba(0,0,0,0.12);
+      }
   .prm-alert-border, .bar.alert-bar, .classic-input .search-scope {
-    border-color: #ede49e; }
+    border: none; }
 
 .prm-highlight, prm-breadcrumbs .md-chip.persistent-facet {
   background-color: #FFFCC4; }
