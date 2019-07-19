@@ -7,7 +7,7 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
         parentCtrl: '<'
     },
     controller: ['$scope', '$rootScope', '$mdDialog', '$http', '$element', function controller($scope, $rootScope, $mdDialog, $http, $element) {
-        this.$onInit = function () {
+        this.$onInit = function() {
             if ($scope.$ctrl.parentCtrl.item) {
                 let self = this;
                 self.scope = $scope;
@@ -46,14 +46,14 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                             if (bn && source == "33UDR2_KOHA") {
                                 var url = "https://catalogue.bu.univ-rennes2.fr/r2microws/json.getSru.php?index=rec.id&q=" + bn;
                                 $http({
-					                method: 'JSONP',
-					                url: url,
-					                headers: {
-					                    'Content-Type': 'application/json',
-					                    'X-From-ExL-API-Gateway': undefined
-					                },
-					                cache: true,
-					            }).then(function(response){
+                                    method: 'JSONP',
+                                    url: url,
+                                    headers: {
+                                        'Content-Type': 'application/json',
+                                        'X-From-ExL-API-Gateway': undefined
+                                    },
+                                    cache: true,
+                                }).then(function(response) {
                                     if (response.data.record[0]) {
                                         //Book Items
                                         $scope.biblionumber = bn;
@@ -62,13 +62,13 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                             $scope.loading = false;
                                             var kohaitems = response.data.record[0].item
 
-                                            var isclosedstacks = Object.keys(kohaitems).some(function (k) {
+                                            var isclosedstacks = Object.keys(kohaitems).some(function(k) {
                                                 if (kohaitems[k].branchcode === "BU" && kohaitems[k].isfa === false) {
                                                     return kohaitems[k].statusClass === "status-ondemand";
                                                 }
                                             });
                                             console.log(Object.values(kohaitems));
-                                            var isavailableonshelf = Object.keys(kohaitems).some(function (k) {
+                                            var isavailableonshelf = Object.keys(kohaitems).some(function(k) {
                                                 return kohaitems[k].istatus === "Disponible";
                                             });
                                             $scope.isclosedstacks = isclosedstacks;
@@ -99,7 +99,7 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                             }
                                             var kohaholdings = [];
 
-                                            var isclosedstacks = Object.keys(response.data.record[0].locations).some(function (k) {
+                                            var isclosedstacks = Object.keys(response.data.record[0].locations).some(function(k) {
                                                 return response.data.record[0].locations[k].location === "En Magasin Périodiques";
                                             });
 
@@ -107,7 +107,7 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
 
                                             for (var i = 0; i < response.data.record[0].holdings.length; i++) {
                                                 var holding = response.data.record[0].holdings[i]
-                                                // console.log(response.data.record[0]);
+                                                    // console.log(response.data.record[0]);
                                                 kohaholdings[i] = {
                                                     "library": holding["rcr"],
                                                     "holdings": holding["holdings"]
@@ -136,7 +136,7 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                             }
                                         }
                                     }
-                                }, function (response) {
+                                }, function(response) {
                                     $scope.loading = false;
                                 });
                             } else {
@@ -154,7 +154,7 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                 'X-From-ExL-API-Gateway': undefined
                             },
                             cache: false,
-                        }).then(function (response) {
+                        }).then(function(response) {
                             if (response.data != undefined) {
                                 console.log(response.data);
                                 if (response.data.COMMAG_BU != "") {
@@ -168,7 +168,7 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                             } else {
                                 $scope.returnMessage = "Le services est temporairement hors-service, veuillez réessayer ultérieurement.";
                             }
-                        }, function (response) {
+                        }, function(response) {
                             $scope.returnMessage = "Le services est temporairement hors-service, veuillez réessayer ultérieurement.";
                         });
 
@@ -199,7 +199,7 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                         if (openurl != undefined) {
                             $scope.sfxloading = true;
                             $scope.proxifiedurl = openurl.replace("http://acceder.bu.univ-rennes2.fr/sfx_33puedb", "https://catalogue.bu.univ-rennes2.fr/r2microws/getSfx.php");
-                            $http.jsonp($scope.proxifiedurl).then(function (response) {
+                            $http.jsonp($scope.proxifiedurl).then(function(response) {
                                 if (response.data.error == undefined) {
                                     var keys = Object.keys(response.data);
                                     var len = keys.length;
@@ -209,7 +209,7 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                         $scope.sfxloading = false;
                                     }
                                 }
-                            }, function (response) {
+                            }, function(response) {
                                 $scope.sfxloading = false;
                             });
                         }
@@ -222,9 +222,9 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                 fullscreen: false,
                                 targetEvent: $event,
                                 templateUrl: 'custom/' + viewName + '/html/requestItem.html',
-	                            controller: ['$scope', '$http', '$mdDialog', function controller($scope, $http, $mdDialog) {	                               
+                                controller: ['$scope', '$http', '$mdDialog', function controller($scope, $http, $mdDialog) {
                                     let recordData = self.parentCtrl.item
-                                    // console.log(recordData.pnx.display);
+                                        // console.log(recordData.pnx.display);
                                     $scope.biblionumber = biblionumber;
                                     $scope.holdings = holdings;
                                     //console.log("call num:"+callnumber);
@@ -237,8 +237,12 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                     // console.log($scope.addata);
                                     $scope.title = recordData.pnx.display.title[0];
 
-                                    $scope.cancelRequest = function () {
+                                    $scope.cancelRequest = function() {
                                         $mdDialog.cancel();
+                                    }
+                                    $scope.closeRequest = function() {
+                                        $mdDialog.cancel();
+                                        location.reload();
                                     }
                                     $scope.request = {
                                         message: '',
@@ -247,14 +251,14 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                         year: '',
 
                                     }
-                                    $scope.sendRequest = function (answer) {
+                                    $scope.sendRequest = function(answer) {
                                         var url = "https://catalogue.bu.univ-rennes2.fr/r2microws/requestItem.php";
                                         var message = "\n" + $scope.request.message + "\n";
                                         $http({
                                             method: 'JSONP',
                                             url: url,
                                             headers: {
-                                                'Content-Type' : 'application/json; charset=UTF-8',
+                                                'Content-Type': 'application/json; charset=UTF-8',
                                                 'X-From-ExL-API-Gateway': undefined
                                             },
                                             params: {
@@ -268,7 +272,7 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                                 message: message
                                             },
                                             cache: false,
-                                        }).then(function (response) {
+                                        }).then(function(response) {
                                             if (response.data != undefined) {
                                                 // console.log(response.data);
                                                 if (response.data.state == "success") {
@@ -288,11 +292,11 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                             } else {
                                                 $scope.returnMessage = "Le service est temporairement hors-service, veuillez réessayer ultérieurement.";
                                             }
-                                        }, function (response) {
+                                        }, function(response) {
                                             $scope.returnMessage = "Le service est temporairement hors-service, veuillez réessayer ultérieurement.";
                                         });
                                     }
-                                }],	
+                                }],
                             });
                         };
                     }
