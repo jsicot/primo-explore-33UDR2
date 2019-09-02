@@ -1,5 +1,9 @@
 /*Direct linking stuff*/
+
+
 /*make "view details" remain visible on record mouseover*/
+
+
 /*
 prm-search-result-availability-line {
 	z-index: 10;
@@ -7,30 +11,30 @@ prm-search-result-availability-line {
 */
 
 .check-avail-link {
-  color: $getit_green;
-  }
-
-.status-maybe {
-    
+    color: $getit_green;
 }
+
+.status-maybe {}
 
 .status-ondemand {
-  color: #cc0070;    
+    color: #cc0070;
 }
+
 //the class must be after status-maybe to avoid that the latter will override definitions of the former
- .callnum {
+.callnum {
     font-weight: 700 !important;
 }
-.status-unavailable {
 
-}
+.status-unavailable {}
 
 .isavailableonshelf {
-  font-size: 105%;
-  color: $getit_green;
-  }
+    font-size: 105%;
+    color: $getit_green;
+}
 
-.prm-positive, .status-available, [class*="available"],
+.prm-positive,
+.status-available,
+[class*="available"],
 [class*="FT"],
 .not_restricted,
 .ext_not_restricted,
@@ -38,93 +42,101 @@ prm-search-result-availability-line {
 .fulltext_linktorsrc,
 .fulltext_newspaper,
 .fulltext_linktorsrc_newspaper {
-  font-weight: normal; }
+    font-weight: normal;
+}
 
 // set element size
 // pass a value to set it's size
 @mixin setSize($iconSize) {
-	height: $iconSize;
-	width: $iconSize;
-	min-height: $iconSize;
-	min-width: $iconSize;
+    height: $iconSize;
+    width: $iconSize;
+    min-height: $iconSize;
+    min-width: $iconSize;
 }
 
 @mixin rtl-prop($ltr-prop, $rtl-prop, $value, $reset-value) {
-  #{$ltr-prop}: $value;
-  [dir=rtl] & {
-    #{$ltr-prop}: $reset-value;
-    #{$rtl-prop}: $value;
-  }
+    #{$ltr-prop}: $value;
+    [dir=rtl] & {
+        #{$ltr-prop}: $reset-value;
+        #{$rtl-prop}: $value;
+    }
 }
 
 prm-search-result-availability-koha {
-  line-height: 1.2em;
-  display: block;
-  &:before {
-    content: "";
+    line-height: 1.2em;
     display: block;
-    height: .5em;
-    width: 100%;
-  }
-
-  [availability-type] {
-    color: transparentize(#3a3a3a, .6);
-    flex-shrink: 0;
-    // margin-right: .35em;
-
-    @include rtl-prop(margin-right, margin-left,.35em, 0);
-
-    md-icon {
-      @include setSize(15px);
-      position: relative;
+    &:before {
+        content: "";
+        display: block;
+        height: .5em;
+        width: 100%;
     }
-  }
-
-  span {
-    white-space: normal;
-    display: inline;
-
-    &:not(.availability-status){
-      [dir="rtl"] & {
-        display: inline-flex;
-      }
-    }
-
-    + span {
-      [dir="rtl"] & {
-        padding-right:  .2em;
-      }
-    }
-  }
-  .availability-status {
-    span {
-      // display: inline-block;
-      &:first-child {
-        + .locations-link:before {
-            content: "\00a0";
+    [availability-type] {
+        color: transparentize(#3a3a3a, .6);
+        flex-shrink: 0;
+        // margin-right: .35em;
+        @include rtl-prop(margin-right, margin-left, .35em, 0);
+        md-icon {
+            @include setSize(15px);
+            position: relative;
         }
-      }
     }
-    
-  }
-
-  prm-spinner {
-    position: relative;
-    transition: transform .3s 0s cubic-bezier(0.680, -0.550, 0.265, 1.550);;
-    transform: scale(.8);
-    margin-left: .2em;
-    // transform-origin: 0 50%;
-    // left: 2.8em;
-    top: 1px;
-    &.hidden {
-      transform: scale(0);
+    span {
+        white-space: normal;
+        display: inline;
+        &:not(.availability-status) {
+            [dir="rtl"] & {
+                display: inline-flex;
+            }
+        }
+        +span {
+            [dir="rtl"] & {
+                padding-right: .2em;
+            }
+        }
     }
-  }
-  prm-brief-result +&  {
-      position: relative;
-      // top: -4px;
-  }
-
+    .availability-status {
+        span {
+            // display: inline-block;
+            &:first-child {
+                +.locations-link:before {
+                    content: "\00a0";
+                }
+            }
+        }
+    }
+    prm-spinner {
+        position: relative;
+        transition: transform .3s 0s cubic-bezier(0.680, -0.550, 0.265, 1.550);
+        ;
+        transform: scale(.8);
+        margin-left: .2em;
+        // transform-origin: 0 50%;
+        // left: 2.8em;
+        top: 1px;
+        &.hidden {
+            transform: scale(0);
+        }
+    }
+    prm-brief-result+& {
+        position: relative;
+        // top: -4px;
+    }
 }
 
-h4.homebranch {white-space: normal!important;}
+h4.homebranch {
+    white-space: normal!important;
+}
+
+.course-info-icon {
+    color: #bd9a55!important;
+}
+
+.course-info {
+    padding: 4px 0 0;
+}
+
+.course-info span {
+    font-weight: 600;
+    font-size: 12px;
+}

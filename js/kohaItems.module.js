@@ -68,6 +68,28 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                                 }
                                             });
                                             console.log(Object.values(kohaitems));
+
+                                            Object.keys(kohaitems).some(function(k) {
+                                                var itemnumber = kohaitems[k].itemnumber;
+                                                var coursesSvc = "https://cataloguepreprod.bu.univ-rennes2.fr/api/v1/contrib/course/item/" + itemnumber;
+                                                $http({
+                                                    method: 'GET',
+                                                    url: coursesSvc,
+                                                    headers: {
+                                                        'Content-Type': 'application/json',
+                                                        'X-From-ExL-API-Gateway': undefined
+                                                    },
+                                                    cache: false,
+                                                }).then(function(response) {
+                                                    if (response.data != undefined) {
+                                                        var CR = response.data;
+                                                        for (var i = 0; i < CR.length; i++) {
+                                                            console.log(CR[i].course.course_name);
+                                                            return kohaitems[k].courses = CR;
+                                                        }
+                                                    }
+                                                }, function(response) {});
+                                            });
                                             var isavailableonshelf = Object.keys(kohaitems).some(function(k) {
                                                 return kohaitems[k].istatus === "Disponible";
                                             });
@@ -175,6 +197,8 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
 
                         if (items) {
                             $scope.items = items;
+                            console.log(items);
+
                             $scope.branches = branches;
                             $scope.status = status;
                             $scope.userIsGuest = userData.isGuest();

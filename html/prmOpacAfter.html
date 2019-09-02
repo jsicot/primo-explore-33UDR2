@@ -1,113 +1,126 @@
 <div class="bar alert-bar zero-margin-bottom layout-align-center-center layout-row" ng-if="items && userIsGuest && isclosedstacks && avail_commagbu">
-	<div class="md-dialog-content">
-		Veuillez vous identifier pour utiliser les services ci-dessous.
-		<prm-authentication></prm-authentication>
-	</div>
+    <div class="md-dialog-content">
+        Veuillez vous identifier pour utiliser les services ci-dessous.
+        <prm-authentication></prm-authentication>
+    </div>
 </div>
 
-<md-tabs md-dynamic-height  class="tabs-as-app hidden-tabs" >
-	<md-tab label="Main">
-		<div class="bar error-bar zero-margin-bottom layout-align-center-center layout-row" ng-if="avail_commagbu==false && isclosedstacks">
-			<div class="md-dialog-content">
-				{{returnMessage}}
-			</div>
-		</div>
+<md-tabs md-dynamic-height class="tabs-as-app hidden-tabs">
+    <md-tab label="Main">
+        <div class="bar error-bar zero-margin-bottom layout-align-center-center layout-row" ng-if="avail_commagbu==false && isclosedstacks">
+            <div class="md-dialog-content">
+                {{returnMessage}}
+            </div>
+        </div>
 
-		<div ng-if="sfxholdings" ng-include src="'custom/33UDR2_VU1/html/prmViewOnlineAfter.html'"></div>
-		<prm-spinner class="inline-loader half-transparent dark-on-light no-text" layout="row" ng-if="loading" layout-align="center center"></prm-spinner>
+        <div ng-if="sfxholdings" ng-include src="'custom/33UDR2_VU1/html/prmViewOnlineAfter.html'"></div>
+        <prm-spinner class="inline-loader half-transparent dark-on-light no-text" layout="row" ng-if="loading" layout-align="center center"></prm-spinner>
 
 
-<prm-locations-custom ng-if="items.length > 0 ">
-		
-			<div layout="row" layout-align="space-between center" class="layout-align-space-between-center layout-row">
-				<h3 class="section-title"><span translate="nui.aria.locationItems.locationItems"></span></h3>
-			</div>
-			<div  class="bar filter-bar animate-horizontal-swap margin-bottom-small layout-fill layout-wrap layout-align-start-center layout-row" layout="row" layout-align="start center" layout-wrap="" style="padding: .5em 1em; position: relative; border-radius: 3px;" layout-fill="">
-				<md-input-container layout="row" layout-align="start" class="zero-padding margin-right-small md-primoExplore-theme layout-align-start-stretch layout-row"><!---->
-					<md-select ng-model="selection" placeholder="Bibliothèque" class="borderless ng-pristine ng-untouched ng-valid md-primoExplore-theme ng-empty" tabindex="0" aria-label="Location" role="listbox" aria-expanded="false" aria-multiselectable="false" aria-disabled="false" aria-invalid="false">
-						<md-option ng-value="item" ng-repeat="item in branches | orderBy:['item'] ">{{item}}</md-option>
-					</md-select>
-				</md-input-container>
-				<md-input-container layout="row" layout-align="start" class="zero-padding margin-right-small md-primoExplore-theme layout-align-start-stretch layout-row"><!---->
-					<md-select ng-model="availability" placeholder="Disponibilité" class="borderless ng-pristine ng-untouched ng-valid md-primoExplore-theme ng-empty" tabindex="0" aria-label="Status" role="listbox" aria-expanded="false" aria-multiselectable="false" aria-disabled="false" aria-invalid="false">
-						<md-option ng-value="item" ng-repeat="item in status | orderBy:['item'] ">{{item}}</md-option>
-					</md-select>
-				</md-input-container>
-			</div>
+        <prm-locations-custom ng-if="items.length > 0 ">
 
-			<prm-spinner class="inline-loader half-transparent dark-on-light no-text" layout="row" ng-if="kohaitems_loading" layout-align="center center"></prm-spinner>
+            <div>
+                <h3 class="section-title"><span translate="nui.aria.locationItems.locationItems"></span></h3>
+            </div>
+            <div class="bar filter-bar animate-horizontal-swap margin-bottom-small layout-fill layout-wrap layout-align-start-center layout-row" layout="row" layout-align="start center" layout-wrap="" style="padding: .5em 1em; position: relative; border-radius: 3px;"
+                layout-fill="">
+                <md-input-container layout="row" layout-align="start" class="zero-padding margin-right-small md-primoExplore-theme layout-align-start-stretch layout-row">
+                    <!---->
+                    <md-select ng-model="selection" placeholder="Bibliothèque" class="borderless ng-pristine ng-untouched ng-valid md-primoExplore-theme ng-empty" tabindex="0" aria-label="Location" role="listbox" aria-expanded="false" aria-multiselectable="false" aria-disabled="false"
+                        aria-invalid="false">
+                        <md-option ng-value="item" ng-repeat="item in branches | orderBy:['item'] ">{{item}}</md-option>
+                    </md-select>
+                </md-input-container>
+                <md-input-container layout="row" layout-align="start" class="zero-padding margin-right-small md-primoExplore-theme layout-align-start-stretch layout-row">
+                    <!---->
+                    <md-select ng-model="availability" placeholder="Disponibilité" class="borderless ng-pristine ng-untouched ng-valid md-primoExplore-theme ng-empty" tabindex="0" aria-label="Status" role="listbox" aria-expanded="false" aria-multiselectable="false" aria-disabled="false"
+                        aria-invalid="false">
+                        <md-option ng-value="item" ng-repeat="item in status | orderBy:['item'] ">{{item}}</md-option>
+                    </md-select>
+                </md-input-container>
+            </div>
 
-			<div layout="row" layout-align="space-between center" class="layout-align-space-between-center layout-row">
-				<md-list ng-if="items"  layout="column" class="separate-list-items margin-left-medium">
-					<md-list-item ng-repeat="item in items | filter:{'homebranch':selection, 'istatus':availability} | orderBy:['branchrank','itemcallnumber'] " class="md-2-line">
-						<div layout="row" flex>
-							<div class="md-list-item-text" layout="row" layout-wrap flex><div flex flex-xs="100">
-								<div ng-if="item.homebranch">
-									<h4 class="homebranch"><span translate="nui.item.brief.1"></span> {{item.homebranch}}</h4>
-									<md-tooltip>{{item.homebranch}}</md-tooltip>
-								</div>
-							</div>
-							<div  flex flex-xs="100">
-								<div ng-if="item.location && (item.statusClass !== 'status-ondemand' || item.isfa)">
-									<p class="weak-text"><span translate="nui.item.brief.3"></span> {{item.location}}</p>
-									<md-tooltip>{{item.location}}</md-tooltip>
-								</div>
-								<div ng-if="item.location && item.statusClass === 'status-ondemand' && !item.isfa">
-									<p class="weak-text"> Accueil de la bibliothèque</p>
-									<md-tooltip>Accueil de la bibliothèque</md-tooltip>
-								</div>
-								<div ng-if="item.itemcallnumber">
-									<p class="callnum"><span translate="nui.item.brief.4"></span> {{item.itemcallnumber}}</p>
-									<md-tooltip>{{item.itemcallnumber}}</md-tooltip>
-								</div>
-								<div ng-if="item.copynumber">
-									<p class="weak-text"><span translate="nui.item.brief.3"></span> {{item.copynumber}}</p>
-									<md-tooltip>{{item.copynumber}}</md-tooltip>
-								</div>
-								<div ng-if="item.isExpanded">
-									<div ng-repeat="full in item.fullItemFields track by $index">
-										<p>{{full}}</p>
-										<md-tooltip>{{item.fullItemValues[$index]}}</md-tooltip>
-									</div>
-								</div>
-							</div>
-							<div ng-if="item.itemnotes" flex flex-xs="100">
-								<p class="weak-text small"><span>Note : </span>{{item.itemnotes}}</p>
-							</div>
+            <prm-spinner class="inline-loader half-transparent dark-on-light no-text" layout="row" ng-if="kohaitems_loading" layout-align="center center"></prm-spinner>
 
-							<div layout-align="end" flex-xs="100" flex-sm="30">
-								<div ng-if="item.istatus" class="center"  layout="row" layout-wrap  >
-									<p ng-if='item.statusClass === "status-ondemand" && item.branchcode === "BU" && item.isrequested == "false" && !item.isfa' class="availability-status {{item.statusClass}}"> 														
-											<button ng-if="avail_commagbu" ng-disabled="{{userIsGuest}}" class="custom-button md-button zero-margin button-with-icon button-confirm service md-primoExplore-theme md-ink-ripple" type="button" ng-click="showRequestItem($event,biblionumber,item.itemnumber,item.itemcallnumber,'',isavailableonshelf)" aria-label="Retirer ce document sous 1h à l'accueil de votre bibliothèque">
+            <div>
+                <md-list ng-if="items" layout="column" class="separate-list-items margin-left-medium">
+                    <md-list-item ng-repeat="item in items | filter:{'homebranch':selection, 'istatus':availability} | orderBy:['branchrank','itemcallnumber'] " class="md-2-line">
+                        <div layout="row" flex>
+                            <div class="md-list-item-text" layout="row" layout-wrap flex>
+                                <div flex flex-xs="100">
+                                    <div ng-if="item.homebranch">
+                                        <h4 class="homebranch"><span translate="nui.item.brief.1"></span> {{item.homebranch}}</h4>
+                                        <md-tooltip>{{item.homebranch}}</md-tooltip>
+                                    </div>
+                                </div>
+                                <div flex flex-xs="100">
+                                    <div ng-if="item.location && (item.statusClass !== 'status-ondemand' || item.isfa)">
+                                        <p class="weak-text"><span translate="nui.item.brief.3"></span> {{item.location}}</p>
+                                        <md-tooltip>{{item.location}}</md-tooltip>
+                                    </div>
+                                    <div ng-if="item.location && item.statusClass === 'status-ondemand' && !item.isfa">
+                                        <p class="weak-text"> Accueil de la bibliothèque</p>
+                                        <md-tooltip>Accueil de la bibliothèque</md-tooltip>
+                                    </div>
+                                    <div ng-if="item.itemcallnumber">
+                                        <p class="callnum"><span translate="nui.item.brief.4"></span> {{item.itemcallnumber}}</p>
+                                        <md-tooltip>{{item.itemcallnumber}}</md-tooltip>
+                                    </div>
+                                    <div ng-if="item.copynumber">
+                                        <p class="weak-text"><span translate="nui.item.brief.3"></span> {{item.copynumber}}</p>
+                                        <md-tooltip>{{item.copynumber}}</md-tooltip>
+                                    </div>
+                                    <div ng-if="item.isExpanded">
+                                        <div ng-repeat="full in item.fullItemFields track by $index">
+                                            <p>{{full}}</p>
+                                            <md-tooltip>{{item.fullItemValues[$index]}}</md-tooltip>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div ng-if="item.courses" flex flex-xs="100">
+                                    <div class="small" ng-repeat="courses in item.courses">
+                                        <prm-icon class="md-icon-button-custom course-info-icon" icon-type="svg" svg-icon-set="action" icon-definition="ic_star_rate_24px"></prm-icon>
+                                        <a href="https://cataloguepreprod.bu.univ-rennes2.fr/cgi-bin/koha/opac-course-details.pl?course_id={{courses.course.course_id}}">{{courses.course.course_name}}</a>
+                                    </div>
+                                </div>
+
+                                <div ng-if="item.itemnotes" flex flex-xs="100">
+                                    <p class="weak-text small"><span>Note : </span>{{item.itemnotes}}</p>
+                                </div>
+
+                                <div layout-align="end" flex-xs="100">
+                                    <div ng-if="item.istatus" class="center" layout="row" layout-wrap>
+                                        <p ng-if='item.statusClass === "status-ondemand" && item.branchcode === "BU" && item.isrequested == "false" && !item.isfa' class="availability-status {{item.statusClass}}">
+                                            <button ng-if="avail_commagbu" ng-disabled="{{userIsGuest}}" class="custom-button md-button zero-margin button-with-icon button-confirm service md-primoExplore-theme md-ink-ripple" type="button" ng-click="showRequestItem($event,biblionumber,item.itemnumber,item.itemcallnumber,'',isavailableonshelf)"
+                                                aria-label="Retirer ce document sous 1h à l'accueil de votre bibliothèque">
 												<prm-icon class="md-icon-button-custom" icon-type="svg" svg-icon-set="action" icon-definition="ic_add_shopping_cart_24px"></prm-icon>
 												<span ng-if="!userIsGuest">{{item.istatus}}</span>
 												<span ng-if="userIsGuest">{{item.istatus}}. Se connecter</span>
 												<md-tooltip md-direction="down" md-delay="400" class="multi-row-tooltip slide-tooltip-anim"><span class="item-description popover">Retirer ce document sous 1h à l'accueil de la BU Centrale pendant les horaires d'ouverture du service (lu-ve : 8h30-12h et 14h-19h et Sa : 9h-12h et 14h-16h). </span></md-tooltip>
 											</button>
-											<button ng-if="!avail_commagbu" ng-disabled="true" class="custom-button md-button zero-margin button-with-icon button-confirm service md-primoExplore-theme md-ink-ripple" type="button" aria-label="Retirer ce document sous 1h à l'accueil de votre bibliothèque">
+                                            <button ng-if="!avail_commagbu" ng-disabled="true" class="custom-button md-button zero-margin button-with-icon button-confirm service md-primoExplore-theme md-ink-ripple" type="button" aria-label="Retirer ce document sous 1h à l'accueil de votre bibliothèque">
 												<prm-icon class="md-icon-button-custom" icon-type="svg" svg-icon-set="action" icon-definition="ic_add_shopping_cart_24px"></prm-icon>
 												<span>Retrait 1h BU Centrale</span>
 												<md-tooltip md-direction="down" md-delay="400" class="multi-row-tooltip slide-tooltip-anim"><span class="item-description popover">Retirer ce document sous 1h à l'accueil de la BU Centrale. </span></md-tooltip>
 											</button>
-									</p>
-									<p ng-if='item.statusClass === "status-ondemand" && item.branchcode === "BU" && item.isrequested == "true" && !item.isfa' class="availability-status status-unavailable unavailable"> En consultation par un lecteur</p>
-									<p ng-if='item.statusClass === "status-ondemand" && (item.branchcode !== "BU" || item.isfa)' class="availability-status {{item.statusClass}}"> Demander à un bibliothécaire</p>
-									<p ng-if='item.statusClass !== "status-ondemand"' class="availability-status {{item.statusClass}}"> {{item.istatus}}
-									<md-tooltip>{{item.istatus}}</md-tooltip>			
-									</p>
-								</div>
-							</div>
-						</div>
-					</div>
-					<prm-location-item-after parent-ctrl="$ctrl"></prm-location-item-after>
-				</md-list-item>
-			</md-list>
-		</div>
-</prm-locations-custom>
-<div ng-if="kohaholdings" ng-include src="'custom/33UDR2_VU1/html/journalHoldings.html'"></div>
+                                        </p>
+                                        <p ng-if='item.statusClass === "status-ondemand" && item.branchcode === "BU" && item.isrequested == "true" && !item.isfa' class="availability-status status-unavailable unavailable"> En consultation par un lecteur</p>
+                                        <p ng-if='item.statusClass === "status-ondemand" && (item.branchcode !== "BU" || item.isfa)' class="availability-status {{item.statusClass}}"> Demander à un bibliothécaire</p>
+                                        <p ng-if='item.statusClass !== "status-ondemand"' class="availability-status {{item.statusClass}}"> {{item.istatus}}
+                                            <md-tooltip>{{item.istatus}}</md-tooltip>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <prm-location-item-after parent-ctrl="$ctrl"></prm-location-item-after>
+                    </md-list-item>
+                </md-list>
+            </div>
+        </prm-locations-custom>
+        <div ng-if="kohaholdings" ng-include src="'custom/33UDR2_VU1/html/journalHoldings.html'"></div>
 
 
 
-</md-tab>
+    </md-tab>
 </md-tabs>
-
