@@ -1,0 +1,72 @@
+<prm-explore-main></prm-explore-main>
+<md-content class="main _md md-primoExplore-theme layout-align-center-start" flex layout-padding>
+    <div flex layout="row" layout-xs="column">
+        <md-card flex>
+            <md-card-title>
+                <md-card-title-text>
+                    <span class="md-headline">{{ title }}</span>
+                </md-card-title-text>
+            </md-card-title>
+            <md-card-content>
+                <p class="md-subhead">{{ body }}</p>
+            </md-card-content>
+            <md-card-actions ng-if="links" layout="row">
+                <div ng-repeat="link in links">
+                    <a ng-href="{{ link.url }}">
+                        <md-button>{{ link.name }}</md-button>
+                    </a>
+                </div>
+            </md-card-actions>
+        </md-card>
+    </div>
+    <section section="courses" class="md-padding" layout="row" layout-xs="column" layout-align="center" flex>
+        <div ng-repeat="list in courseLists" flex>
+            <md-card>
+                <md-card-title layout="row" layout-xs="column">
+                    <md-card-title-text flex>
+                        <span class="md-headline">{{ list.title }}</span>
+                        <span ng-if="list.courses.length > 0" class="md-title">{{ list.courses.length }} courses</span>
+                        <span ng-if="list.courses.length === 0" class="md-title">No courses found.</span>
+                    </md-card-title-text>
+                    <md-card-title-text flex layout="row">
+                        <md-input-container flex>
+                            <label>Show only:</label>
+                            <md-select ng-model="list.departmentFilter">
+                                <md-option ng-repeat="department in list.departments" value="{{ department }}" ng-selected="$first">
+                                    {{ department }}
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
+                        <md-input-container flex>
+                            <label>Sort by:</label>
+                            <md-select ng-model="list.sortType">
+                                <md-option value="course_number">course number</md-option>
+                                <md-option value="course_name">course name</md-option>
+                                <md-option value="instructors[0].last_name">instructor</md-option>
+                            </md-select>
+                        </md-input-container>
+                    </md-card-title-text>
+                </md-card-title>
+                <md-card-content ng-if="list.courses.length > 0">
+                    <md-list flex>
+                        <md-list-item class="md-3-line" ng-if="list.departmentFilter === 'all' || course.department === list.departmentFilter" ng-repeat="course in list.courses | orderBy : list.sortType" ui-sref="reserves({cid : course.course_id, group: group, vid: vid})">
+                            <div class="md-list-item-text" layout="column">
+                                <ng-template ng-if="list.sortType !== 'course_name'">
+                                    <h3>{{ course.course_number }}</h3>
+                                    <h4>{{ course.course_name }}</h4>
+                                </ng-template>
+                                <ng-template ng-if="list.sortType === 'course_name'">
+                                    <h3>{{ course.name }}</h3>
+                                    <h4>{{ course.course_number }}</h4>
+                                </ng-template>
+                                <p ng-repeat="instructor in course.instructors" ng-if="course.instructors" class="md-title animate-if">
+                                    {{ instructor.last_name }}, {{ instructor.first_name }}
+                                </p>
+                            </div>
+                        </md-list-item>
+                    </md-list>
+                </md-card-content>
+            </md-card>
+        </div>
+    </section>
+</md-content>

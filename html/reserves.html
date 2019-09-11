@@ -1,0 +1,97 @@
+<prm-explore-main></prm-explore-main>
+<md-content class="main _md md-primoExplore-theme padded-container facet-to-left layout-align-center-start layout-row flex" flex layout-padding layout-align="center start">
+    <div flex layout="row" class="layout-row">
+        <div flex="0" flex-md="0" flex-lg="10" flex-xl="20" ng-class="{'flex-lgPlus-15': $ctrl.mediaQueries.lgPlus}"></div>
+        <section section="reserves" class="flex">
+
+            <!-- <md-card ng-if="!course" ng-cloak>
+                <md-card-title>
+                    <md-card-title-text>
+                        <span class="md-headline">Course not found.</span>
+                    </md-card-title-text>
+                </md-card-title>
+            </md-card> -->
+
+            <md-card ng-if="course" class="animate-if" flex>
+                <md-card-title layout="row" layout-xs="column">
+                    <md-card-title-text flex flex-lg="80" flex-xl="80" flex-md="80" flex-xs="100">
+                        <span class="md-headline">{{ course.course_number }} - {{ course.course_name }}</span>
+                        <span ng-repeat="instructor in instructors" ng-if="instructors" class="md-title animate-if">{{ instructor.last_name }}, {{ instructor.first_name }}</span>
+                    </md-card-title-text>
+                    <md-card-title-text flex>
+                        <md-input-container>
+                            <label>Trier&nbsp;:</label>
+                            <md-select ng-model="course.sortType">
+                                <md-option ng-repeat="sortType in course.sortTypes" value="{{ sortType }}" ng-selected="$first">
+                                    {{ sortType }}
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
+                    </md-card-title-text>
+                </md-card-title>
+            </md-card>
+
+
+            <!-- <md-list class="results-container" ng-if="reserves" layout="column">
+                <md-list-item ng-repeat="item in reserves | orderBy : course.sortType" class="list-item-primary-content result-item-primary-content">
+                    <div class="result-item-image" layout="column">
+                        <div class="media-content-images">
+                            <div class="media-thumbnail">
+                                <div class="media-content-images">
+                                    <div class="media-thumbnail">
+                                        <img class="main-img fan-img-1" ng-src="{{ item.cover }}">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-selector-spacer"></div>
+                    <div class="result-item-text">
+                        <h3 class="item-title">
+                            <span></span>
+                        </h3>
+                    </div>
+                </md-list-item>
+            </md-list> -->
+
+
+            <md-list class="results-container" layout="column">
+
+                <md-list-item class="list-item-wrapper" ng-repeat="item in reserves | orderBy : course.sortType" ng-class="{'menu-open':$ctrl.isExpanded($index), 'item-expanded':$ctrl.isExpanded($index), 'last-item': $last}">
+
+
+
+                    <div class="list-item">
+
+                        <div class="result-item-image" layout="column">
+                            <div class="media-content-images">
+                                <div class="media-thumbnail">
+                                    <div class="media-content-images">
+                                        <div class="media-thumbnail">
+                                            <img class="main-img fan-img-1" ng-src="{{ item.cover }}">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-selector-spacer"></div>
+                        <div class="result-item-text">
+                            <h3 class="item-title">
+                                <span>{{item.title}}</span>
+                            </h3>
+                        </div>
+                    </div>
+
+
+                </md-list-item>
+                <prm-spinner ng-if="$ctrl.resultsExists && $ctrl.searchInProgress" class="half-transparent no-text bottom-loader" layout="row" layout-align="center end" layout-margin></prm-spinner>
+            </md-list>
+
+            <!-- <md-card-content ng-if="!reserves" class="animate-if">
+                No reserves found for this course.
+            </md-card-content> -->
+
+        </section>
+        <div flex="0" flex-md="0" flex-lg="10" flex-xl="20" ng-class="{'flex-lgPlus-15': $ctrl.mediaQueries.lgPlus}"></div>
+    </div>
+</md-content>
