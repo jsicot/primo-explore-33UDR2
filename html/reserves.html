@@ -1,97 +1,206 @@
 <prm-explore-main></prm-explore-main>
-<md-content class="main _md md-primoExplore-theme padded-container facet-to-left layout-align-center-start layout-row flex" flex layout-padding layout-align="center start">
+<md-toolbar class="default-toolbar zero-padding _md md-primoExplore-theme">
+    <div class="md-toolbar-tools zero-padding layout-row" layout="row">
+        <div flex="0" flex-md="0" flex-lg="15" flex-xl="20" class="flex-xl-20 flex-md-0 flex-lg-15 flex-0"></div>
+        <!----><a ng-href="/primo-explore/courses?vid=33UDR2_VU1&lang=fr_FR"><button class="back-button has-text md-button md-primoExplore-theme md-ink-ripple" type="button" aria-label="" >
+            <prm-icon icon-type="svg" svg-icon-set="primo-ui" icon-definition="chevron-left"></prm-icon>
+            <span>Retour à la liste des biblioCours et biblioConcours</span>
+            <div class="md-ripple-container" style=""></div>
+        </button></a
+        <!---->
+        <!---->
+    </div>
+</md-toolbar>
+<md-content class="main _md md-primoExplore-theme layout-align-center-start flex">
     <div flex layout="row" class="layout-row">
         <div flex="0" flex-md="0" flex-lg="10" flex-xl="20" ng-class="{'flex-lgPlus-15': $ctrl.mediaQueries.lgPlus}"></div>
-        <section section="reserves" class="flex">
+        <section section="reserves" class="reserves flex">
 
-            <!-- <md-card ng-if="!course" ng-cloak>
-                <md-card-title>
-                    <md-card-title-text>
-                        <span class="md-headline">Course not found.</span>
-                    </md-card-title-text>
-                </md-card-title>
-            </md-card> -->
+        
 
             <md-card ng-if="course" class="animate-if" flex>
                 <md-card-title layout="row" layout-xs="column">
                     <md-card-title-text flex flex-lg="80" flex-xl="80" flex-md="80" flex-xs="100">
-                        <span class="md-headline">{{ course.course_number }} - {{ course.course_name }}</span>
+                        <div class="course-info-mark">
+                            <prm-icon class="course-info-mark-icon" icon-type="svg" svg-icon-set="primo-ui" icon-definition="mdi-teach">
+                            </prm-icon>
+                            <span>{{ course.department }}</span>
+                        </div>
+                        <span class="md-headline"><span ng-if="course.section"><strong>{{course.section}} / </strong></span>
+                        <span ng-if="course.course_name">{{course.course_name}}</span></span>
                         <span ng-repeat="instructor in instructors" ng-if="instructors" class="md-title animate-if">{{ instructor.last_name }}, {{ instructor.first_name }}</span>
                     </md-card-title-text>
                     <md-card-title-text flex>
-                        <md-input-container>
+                        <!-- <md-input-container>
                             <label>Trier&nbsp;:</label>
                             <md-select ng-model="course.sortType">
                                 <md-option ng-repeat="sortType in course.sortTypes" value="{{ sortType }}" ng-selected="$first">
                                     {{ sortType }}
                                 </md-option>
                             </md-select>
-                        </md-input-container>
+                        </md-input-container> -->
+
+                        <md-input-container flex>
+                                <label>Trier&nbsp;:</label>
+                                <md-select ng-model="course.sortType">
+                                    <md-option value="title">Titre</md-option>
+                                    <md-option value="biblioitem.publicationyear">Année de publication</md-option>
+                                </md-select>
+                            </md-input-container>
                     </md-card-title-text>
                 </md-card-title>
             </md-card>
-
-
-            <!-- <md-list class="results-container" ng-if="reserves" layout="column">
-                <md-list-item ng-repeat="item in reserves | orderBy : course.sortType" class="list-item-primary-content result-item-primary-content">
-                    <div class="result-item-image" layout="column">
-                        <div class="media-content-images">
-                            <div class="media-thumbnail">
-                                <div class="media-content-images">
-                                    <div class="media-thumbnail">
-                                        <img class="main-img fan-img-1" ng-src="{{ item.cover }}">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="text-selector-spacer"></div>
-                    <div class="result-item-text">
-                        <h3 class="item-title">
-                            <span></span>
-                        </h3>
-                    </div>
-                </md-list-item>
-            </md-list> -->
-
-
             <md-list class="results-container" layout="column">
 
-                <md-list-item class="list-item-wrapper" ng-repeat="item in reserves | orderBy : course.sortType" ng-class="{'menu-open':$ctrl.isExpanded($index), 'item-expanded':$ctrl.isExpanded($index), 'last-item': $last}">
+                <div class="list-items-list pages-separated-with-gaps layout-column">
+
+                    <md-list-item class="list-item-wrapper" ng-repeat="item in reserves | orderBy : course.sortType">
 
 
-
-                    <div class="list-item">
-
-                        <div class="result-item-image" layout="column">
-                            <div class="media-content-images">
-                                <div class="media-thumbnail">
+                        <div class="brief-result-container list-item">
+                            <div class="list-item-primary-content result-item-primary-content layout-row" data-recordid="33UDR2_KOHA{{item.biblionumber}}" id="SEARCH_RESULT_RECORDID_33UDR2_KOHA{{item.biblionumber}}" layout="row" role="button" tabindex="0">
+                                <!---->
+                                </span>
+                                <!---->
+                                <!---->
+                                <!---->
+                                <div class="result-item-image layout-column" layout="column">
                                     <div class="media-content-images">
                                         <div class="media-thumbnail">
-                                            <img class="main-img fan-img-1" ng-src="{{ item.cover }}">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="text-selector-spacer"></div>
-                        <div class="result-item-text">
-                            <h3 class="item-title">
-                                <span>{{item.title}}</span>
-                            </h3>
-                        </div>
-                    </div>
-
-
-                </md-list-item>
-                <prm-spinner ng-if="$ctrl.resultsExists && $ctrl.searchInProgress" class="half-transparent no-text bottom-loader" layout="row" layout-align="center end" layout-margin></prm-spinner>
-            </md-list>
-
-            <!-- <md-card-content ng-if="!reserves" class="animate-if">
-                No reserves found for this course.
-            </md-card-content> -->
-
-        </section>
-        <div flex="0" flex-md="0" flex-lg="10" flex-xl="20" ng-class="{'flex-lgPlus-15': $ctrl.mediaQueries.lgPlus}"></div>
+                                            <a tabindex="-1" ng-href="{{item.link}}" class="a-tag-as-wrapper md-primoExplore-theme">
+                                                <div class="media-content-images" ng-if="item.cover">
+                                                    <!---->
+                                                    <!---->
+                                                    <!----><img class="main-img fan-img-1" ng-src="{{item.cover}}" aria-label="Versions multiples Image" alt="" onload="this.style.display=''">
+                                                    <!---->
+                                                    <!---->
+                                                    <!---->
+                                                    <!---->
+                                                    <div ng-if="$ctrl.links" ng-init="$ctrl.go()" class="" style=""></div>
+                                                    <!---->
+                                                </div>
+                                            </a>
     </div>
-</md-content>
+    </div>
+    </div>
+    <!---->
+    <div class="text-selector-spacer"></div>
+    <div class="result-item-text layout-fill layout-column flex" layout="column" layout-fill="" flex="">
+        <div class="media-content-type align-self-start">
+            <!----><span>{{item.biblioitem.itemtype}}</span>
+            <!---->
+            <!---->
+        </div>
+        <!---->
+        <div class="result-item-details layout-column" layout="column">
+            <!---->
+            <h3 class="item-title">
+                <!---->
+                <a ng-href="{{item.link}}" class="md-primoExplore-theme">
+                    <!----><span><!---->{{item.title}}<span class="media-delimiter ng-hide" aria-hidden="true"> .</span>
+                    <!---->
+                    <!---->
+                    <!---->
+                    <!---->
+                    </span>
+                    <!---->
+                </a>
+                <!---->
+                <!---->
+            </h3>
+            <!---->
+            <div class="item-detail">
+                <!----><span><span class="media-delimiter ng-hide" aria-hidden="true"> </span>
+                <!----><span><span >{{item.author}}</span>
+                <!---->
+                <span class="media-delimiter ng-hide" aria-hidden="true"> </span></span>
+                <!---->
+                </span>
+                <!---->
+            </div>
+            <!---->
+            <div class="item-detail">
+                <!----><span><span class="media-delimiter ng-hide"  aria-hidden="true"> . </span>
+                <!----><span><span>{{item.biblioitem.publishercode}}</span>
+                <!---->
+                <span class="media-delimiter ng-hide"> . </span></span>
+                <!---->
+                </span>
+                <!----><span><span class="media-delimiter"  aria-hidden="false"> . </span>
+                <!----><span data-field-selector="creationdate"></span><span>{{item.biblioitem.publicationyear}}</span>
+                <!---->
+                <span class="media-delimiter ng-hide" aria-hidden="true"> . </span></span>
+                <!---->
+                </span>
+                <!---->
+            </div>
+            <!---->
+        </div>
+        <!---->
+        <!---->
+        <!---->
+        <!---->
+        <!---->
+        <!---->
+        <!---->
+
+        <div class="result-availability-koha" ng-if="item.availability">
+
+
+
+            <div layout="row" layout-align="start start" class="layout-align-start-start layout-row">
+                <!---->
+                <div layout="flex" class="layout-row">
+                    <!---->
+                    <!---->
+                    <prm-icon availability-type="" icon-type="svg" svg-icon-set="primo-ui" icon-definition="book-open"></prm-icon>
+                    <!---->
+                    <a class="neutralized-button md-button md-primoExplore-theme " ng-href="{{item.link}}" aria-label="{{item.availability.status}} {{item.availability.homebranch}}" title="{{item.availability.status}} {{item.availability.homebranch}}">
+                        <span class="button-content">
+                                      <span ng-if="item.availability.status" class="availability-status {{item.availability.class}}" ng-class="{'text-rtl': $ctrl.switchToLtrString()}">{{item.availability.status}} 
+                                          <span ng-if="item.availability.homebranch"  class="best-location-library-code locations-link">{{item.availability.homebranch}}</span>
+                        <span ng-if="item.availability.location" class="best-location-sub-location locations-link">{{item.availability.location}}</span>
+                        <span ng-if="item.availability.itemcallnumber" class="best-location-delivery locations-link">{{item.availability.itemcallnumber}}</span>
+                        <span ng-if="item.availability.total > 0" ng-bind-html="&nbsp;"></span>
+                        <span ng-if="item.availability.total > 0">et {{item.availability.total}} autre<span ng-if="item.availability.total > 1">s</span> exemplaire<span ng-if="item.availability.total > 1">s</span></span>
+                        </span>
+                        <!---->
+                        <!---->
+                        <!---->
+                        </span>
+
+                        <!---->
+                    </a>
+                </div>
+                <!---->
+            </div>
+            <!---->
+
+        </div>
+    </div>
+    </div>
+    <!---->
+    <!---->
+    <!---->
+    </div>
+
+    </md-list-item>
+    </div>
+    </md-list>
+
+    <!-- <md-card ng-if="!course" ng-cloak>
+        <md-card-title>
+            <md-card-title-text>
+                <span class="md-headline">Au résultat trouvé.</span>
+            </md-card-title-text>
+        </md-card-title>
+    </md-card>
+
+    <md-card-content ng-if="!reserves" class="animate-if">
+        Aucun document présent dans cette liste.
+    </md-card-content> -->
+
+    </section>
+    <div flex="0" flex-md="0" flex-lg="10" flex-xl="20" ng-class="{'flex-lgPlus-15': $ctrl.mediaQueries.lgPlus}"></div>
+    </div>
+    </md-content>

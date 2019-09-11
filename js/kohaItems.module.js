@@ -24,6 +24,7 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                 var obj = $scope.$ctrl.parentCtrl.item.pnx.control;
                 var openurl;
                 //init loading
+                $scope.vid = viewName;
                 $scope.loading = true;
                 if (obj.hasOwnProperty("sourcerecordid") && obj.hasOwnProperty("sourceid")) {
                     var recid = obj.recordid[0];

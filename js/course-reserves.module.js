@@ -43,11 +43,11 @@ angular.module('courseReserves', ['ui.router']).config(['$stateProvider',
                         reservesService.getCourse($stateParams.cid).then(
                             course => {
                                 $scope.course = course
-                                $scope.course.sortTypes = ['title', 'author']
+                                $scope.course.sortTypes = ['title', 'biblioitem.publicationyear']
                                 $scope.reserves = reservesService.makeArray(course.biblios)
                                 $scope.reserves.map(
                                     item => {
-                                        console.log(item)
+                                        item.titre = item.title
                                         item.link = reservesService.getLink(item.biblionumber, $scope.vid)
                                             //item.availability = reservesService.getAvailability(bib, item.type)
                                         reservesService.getCover(item.biblionumber).then(function(data) {
@@ -55,12 +55,22 @@ angular.module('courseReserves', ['ui.router']).config(['$stateProvider',
                                             if (data) {
                                                 item.cover = data[0].cover;
                                                 if (item.cover && item.cover.includes("no_img")) {
-                                                    item.cover = '';
+                                                    item.cover = 'img/icon_book.png';
                                                 }
                                             }
                                         }).catch(function(err) {
                                             // handle errors here if needed
                                         });
+                                        reservesService.getAvailability(item.biblionumber).then(function(data) {
+                                            // no need to call user.data, service handles this
+                                            if (data) {
+                                                item.availability = data;
+                                            }
+                                        }).catch(function(err) {
+                                            // handle errors here if needed
+                                        });
+                                        console.log(item);
+
                                     }
                                 )
                             }
@@ -82,9 +92,7 @@ angular.module('courseReserves', ['ui.router']).config(['$stateProvider',
                     return Array.isArray(property) ? property : property ? [property] : false
                 },
                 /**
-                 * Queries the Alma API to retrieve a list of courses based on a search filter.
-                 * Requires a server-side wrapper function defined in URLs.courses.
-                 * @param  {string} filter the search filter, e.g. 'searchableid~res'
+                 * Queries the koha API to retrieve a list of courses 
                  * @return {promise}         list of matching courses
                  */
                 getCourses: function() {
@@ -102,7 +110,7 @@ angular.module('courseReserves', ['ui.router']).config(['$stateProvider',
                  * @return {array}          array of department codes, e.g. ['BIO', 'CHEM' ...
                  */
                 getDepartments: function(courses) {
-                    let departments = new Set().add('all')
+                    let departments = new Set().add('Tout')
                     courses.map(course => departments.add(this.getCourseDepartment(course)))
                     return Array.from(departments)
                 },
@@ -122,13 +130,11 @@ angular.module('courseReserves', ['ui.router']).config(['$stateProvider',
         function($http, URLs) {
             return {
                 /**
-                 * Queries the Alma API to retrieve a course object using its cid.
-                 * Requires a server-side wrapper function defined in URLs.reserves.
+                 * Queries the Koha API to retrieve a course object using its course id.
                  * @param  {string} cid course ID
                  * @return {promise}     course object
                  */
                 getCourse: function(cid) {
-
                     return $http({
                         method: 'GET',
                         url: URLs.course + cid,
@@ -145,73 +151,24 @@ angular.module('courseReserves', ['ui.router']).config(['$stateProvider',
                     return Array.isArray(property) ? property : property ? [property] : false
                 },
                 /**
-                 * Gets the value of a MARC field in a bib.
-                 * Returns an array or false if field was not found.
-                 * Common fields:
-                 * ISBN (020)
-                 * Notes (500)
-                 * @param  {object} bib       bib object returned from getBib()
-                 * @param  {string} fieldName name or number of the MARC field to find
-                 * @return {array}            values(s) of the field
+                 * Get the availability of an item using Koha api.
+                 * @param  {object} biblionumber  biblionumber
+                 * @return {promise}     availability object
                  */
-                getMarcField: function(bib, fieldName) {
-                    let field = bib.record.datafield.find(field => field['@attributes'].tag === fieldName)
-                    return field ? this.makeArray(field.subfield) : false
-                },
-                /**
-                 * Get the availability of an item using a bib's AVA or AVE field.
-                 * E-resources use AVE, while physical resources use AVA.
-                 * Links to external resources will have type 'E_CR'.
-                 * @param  {object} bib       bib object returned from getBib()
-                 * @param  {string} type      type of the item, e.g. 'BK' for books
-                 * @return {string}           'unavailable' or 'available'
-                 */
-                getAvailability: function(bib, type) {
-                    if (type === 'E_CR') return 'link'
-                    let physicalHoldings = this.getMarcField(bib, 'AVA')
-                    let electronicHoldings = this.getMarcField(bib, 'AVE')
-                    if (physicalHoldings) return physicalHoldings.filter(field => /(una|a)vailable/i.test(field))[0].toLowerCase()
-                    else if (electronicHoldings) return electronicHoldings.filter(field => /(una|a)vailable/i.test(field))[0].toLowerCase()
-                },
-                /**
-                 * Generate CSS to match an item's availability status.
-                 * @param  {object} bib       bib object returned from getBib()
-                 * @param  {string} type      type of the item, e.g. 'BK' for books
-                 * @return {object}           CSS to apply using ng-style
-                 */
-                getAvailabilityStyle: function(bib, type) {
-                    let availability = this.getAvailability(bib, type)
-                    switch (availability) {
-                        case 'available':
-                            return { color: 'green' }
-                        case 'link':
-                            return { color: 'dodgerblue' }
-                        default:
-                            return { color: 'orange' }
-                    }
-                },
-                /**
-                 * Get the loan type of an item by matching a bib's AVA field to a list.
-                 * External resources (e.g. e-books) won't have this value.
-                 * Requires a lookup table of codes defined in loanCodes.
-                 * @param  {object} bib       bib object returned from getBib()
-                 * @return {string}           a description of the loan, e.g. '3-hour loan'
-                 */
-                getLoanType: function(bib) {
-                    let holdings = this.getMarcField(bib, 'AVA')
-                    if (holdings) {
-                        for (let field of holdings) {
-                            if (loanCodes.hasOwnProperty(field)) return loanCodes[field]
-                        }
-                    }
-                    return 'external resource'
+                getAvailability: function(biblionumber) {
+                    return $http({
+                        method: 'JSONP',
+                        url: URLs.avail,
+                        params: { 'biblionumber': biblionumber },
+                        cache: true
+                    }).then(function(response) {
+                        // this will ensure that we get clear data in our service response
+                        return response.data;
+                    });
                 },
                 /**
                  * Get a link to view an item.
-                 * External resources will use the MARC 500 (notes) field as a URL.
-                 * E-books and physical books will link to a search for the item in Primo.
                  * @param  {object} bib       bib object returned from getBib()
-                 * @param  {string} type      type of the item, e.g. 'BK' for books
                  * @param  {string} vid       view name, e.g. LCC
                  * @return {string}           URL to the item
                  */
@@ -228,9 +185,9 @@ angular.module('courseReserves', ['ui.router']).config(['$stateProvider',
                         method: 'JSONP',
                         url: URLs.covers + biblionumber,
                         cache: true
-                    }).then(function(data) {
+                    }).then(function(response) {
                         // this will ensure that we get clear data in our service response
-                        return data.data;
+                        return response.data;
                     });
                 }
             }

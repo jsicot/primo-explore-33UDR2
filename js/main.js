@@ -78,7 +78,7 @@ function add_custom_header(header_container) {
 
 app.constant('courseLists', [{
     group: "burennes2",
-    title: "BiblioCours",
+    title: "BiblioCours & BiblioConcours",
     filter: "",
     sortType: "name"
 }]);
@@ -91,6 +91,7 @@ app.constant('URLs', {
     covers: 'https://catalogue.bu.univ-rennes2.fr/r2microws/getCover.php?biblionumbers[]=',
     fallback: 'https://na01.alma.exlibrisgroup.com/view/delivery/thumbnail/01ALLIANCE_LCC/'
 });
+
 
 
 // load jquery

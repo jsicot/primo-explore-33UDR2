@@ -1,274 +1,322 @@
-html,body {
-	background:#FFF;
-	color:#333;
+html,
+body {
+    background: #FFF;
+    color: #333;
 }
+
 
 /*Change top bar from up.case to low.case and for buttons etc journal*/
-body,prm-topbar .md-button,.md-button {
-	text-transform:none;
-}
 
+body,
+prm-topbar .md-button,
+.md-button {
+    text-transform: none;
+}
 
 a {
     &:hover,
     &:focus,
     &.hover {
-       box-shadow:none;
+        box-shadow: none;
     }
-      
+}
+
+prm-search-bar div.advanced-search-backdrop {
+    background: #8981B5;
+}
+
+prm-atoz-search-bar .search-switch-buttons .md-button.switch-to-simple,
+prm-browse-search-bar .search-switch-buttons .md-button.switch-to-simple,
+prm-newspapers-search-bar .search-switch-buttons .md-button.switch-to-simple,
+prm-search-bar .search-switch-buttons .md-button.switch-to-simple,
+prm-tags-search-bar .search-switch-buttons .md-button.switch-to-simple {
+    color: #FFF;
 }
 
 
-prm-search-bar div.advanced-search-backdrop {background: #8981B5;}
-prm-atoz-search-bar .search-switch-buttons .md-button.switch-to-simple, prm-browse-search-bar .search-switch-buttons .md-button.switch-to-simple, prm-newspapers-search-bar .search-switch-buttons .md-button.switch-to-simple, prm-search-bar .search-switch-buttons .md-button.switch-to-simple, prm-tags-search-bar .search-switch-buttons .md-button.switch-to-simple{color: #FFF;}
-
 /*make logo area bit better journal*/
+
 prm-logo {
- height: 129.5px !important;
+    height: 129.5px !important;
 }
 
 @media screen and (max-width:1280px) {
-	prm-logo {
-		height: 70px !important;
-		padding: 5px;
-	}
+    prm-logo {
+        height: 70px !important;
+        padding: 5px;
+    }
 }
-prm-spinner.half-transparent .diamond {color:#764d99;background: #764d99;}
+
+prm-spinner.half-transparent .diamond {
+    color: #764d99;
+    background: #764d99;
+}
+
 prm-main-menu[menu-type=menu] .top-nav-bar-links {
-	position:relative;
+    position: relative;
 }
 
 div.full-view-inner-container {
-	background:#FFF;
+    background: #FFF;
 }
 
 prm-brief-result-container .list-item-primary-content {
-	background:#FFF;
+    background: #FFF;
 }
 
 prm-topbar prm-logo {
-	z-index:10;
-	height:100%;
-	max-width:454px;
+    z-index: 10;
+    height: 100%;
+    max-width: 454px;
 }
 
 prm-main-menu[menu-type="menu"] .top-nav-bar-links {
-	margin-left:2px;
+    margin-left: 2px;
 }
 
 prm-main-menu[menu-type="menu"] .md-button {
-	min-width:115px;
+    min-width: 115px;
 }
 
 prm-main-menu[menu-type="menu"] .md-button span.item-content {
-	text-transform:uppercase;
+    text-transform: uppercase;
 }
 
 prm-topbar {
-	height:60px;
+    height: 60px;
 }
 
 prm-main-menu[menu-type=menu] .md-button span.item-content {
-	font-size:1.25em;
-	font-weight:400;
+    font-size: 1.25em;
+    font-weight: 400;
 }
+
 
 /*move first advanced search box to line up labels/inputs*/
-#advanced-search > form > div > div.layout-xs-column.layout-row.flex > md-card.zero-margin.marginless-inputs.padded-container._md.md-primoExplore-theme.layout-align-start-start.layout-column.flex > div.layout-full-width.layout-align-start-start.layout-column > div:nth-child(1) {
-	margin-left:11.7%;
-	width:88.3%;
-	min-width:88.3%;
+
+#advanced-search>form>div>div.layout-xs-column.layout-row.flex>md-card.zero-margin.marginless-inputs.padded-container._md.md-primoExplore-theme.layout-align-start-start.layout-column.flex>div.layout-full-width.layout-align-start-start.layout-column>div:nth-child(1) {
+    margin-left: 11.7%;
+    width: 88.3%;
+    min-width: 88.3%;
 }
 
-prm-view-online > div > a > prm-icon [aria-label="icon-open-in-new"] {
-	margin-left:.5em;
+prm-view-online>div>a>prm-icon [aria-label="icon-open-in-new"] {
+    margin-left: .5em;
 }
 
 
 /*mobile stuff - menu, etc*/
+
 md-backdrop._md-dialog-backdrop {
-	z-index:80;
+    z-index: 80;
 }
 
 prm-main-menu md-card.transparent-card:nth-child(2) {
-	display:flex;
+    display: flex;
 }
 
-prm-main-menu div > prm-authentication {
-	padding-left:.8em;
+prm-main-menu div>prm-authentication {
+    padding-left: .8em;
 }
-
 
 
 /*adjust "sort by" in favourites*/
+
 prm-favorites md-tabs-wrapper {
-	position:absolute;
-	width:80%;
+    position: absolute;
+    width: 80%;
 }
 
 prm-favorites .section-title {
-	margin-top:-6em;
-	margin-left:-11em;
-	position:absolute;
+    margin-top: -6em;
+    margin-left: -11em;
+    position: absolute;
 }
 
 prm-favorites [translate="nui.favorites.sortby"] {
-	font-size:13px;
-	font-weight:600;
+    font-size: 13px;
+    font-weight: 600;
 }
 
 prm-favorites .static-select.empty-select-on-init.md-primoExplore-theme.layout-row.md-input-has-value {
-	font-size:14px;
-	padding-bottom:.15em;
+    font-size: 14px;
+    padding-bottom: .15em;
 }
 
 prm-favorites .main._md.md-primoExplore-theme.layout-align-center-start.layout-row.flex.padded-container {
-	padding-top:5em;
+    padding-top: 5em;
 }
 
 prm-favorites md-tabs.md-dynamic-height md-tabs-content-wrapper {
-	margin-top:3em;
+    margin-top: 3em;
 }
 
-prm-favorites div > md-content > div.flex {
-	margin-top:-3em;
+prm-favorites div>md-content>div.flex {
+    margin-top: -3em;
 }
+
 
 /*align alert bar "sign in" */
 
-.alert-bar{
-	background: #ffa000;
-	color: #fff;
-	font-size: 1.2em !important;
-	font-weight: 400 !important;
-	box-shadow: none !important;
+.alert-bar {
+    background: #ffa000;
+    color: #fff;
+    font-size: 1.2em !important;
+    font-weight: 400 !important;
+    box-shadow: none !important;
 }
 
 prm-alert-bar [translate="eshelf.signin.title"] {
-	line-height:normal;
+    line-height: normal;
 }
 
 .bar prm-authentication .md-button {
     color: #a5122a;
 }
 
+
 /*favorites back button*/
+
 a#back_button {
-	padding-top:.3em;
-	font-weight:300;
-	font-size:1em;
-	margin-right:.5em;
-	padding-left:.5em;
-	color:grey;
-	right:23%;
-	position:absolute;
-	box-shadow:none;
-	padding-right:.5em;
+    padding-top: .3em;
+    font-weight: 300;
+    font-size: 1em;
+    margin-right: .5em;
+    padding-left: .5em;
+    color: grey;
+    right: 23%;
+    position: absolute;
+    box-shadow: none;
+    padding-right: .5em;
 }
 
-#back_button > md-icon {
-	height:28px;
-	width:28px;
-	margin-right:.5em;
+#back_button>md-icon {
+    height: 28px;
+    width: 28px;
+    margin-right: .5em;
 }
+
 
 /*allow clicking while autocomplete box is open*/
+
 .md-scroll-mask {
-	position:initial;
+    position: initial;
 }
 
+
 /*no search results*/
+
 #sort_by_dropdown_wrapper.no_results {
-	display:none;
+    display: none;
 }
 
 prm-no-search-result md-card.default-card.zero-margin._md.md-primoExplore-theme {
-	margin-top:4.5em!important;
+    margin-top: 4.5em!important;
 }
 
 .pinDummy.animating {
-	top:6em!important;
-	left:calc(100% - 7.2em)!important;
+    top: 6em!important;
+    left: calc(100% - 7.2em)!important;
 }
+
 
 /*make main menu hovers sentence case*/
-md-tooltip > div._md-content._md._md-show:first-letter {
-	text-transform:uppercase;
+
+md-tooltip>div._md-content._md._md-show:first-letter {
+    text-transform: uppercase;
 }
+
 
 /*hide "sign in" link on search results alert bar */
+
 prm-alert-bar prm-authentication {
-	display:none;
+    display: none;
 }
+
 
 /*hide duplicate wording under main menu elipses*/
+
 prm-main-menu md-card-title-text .md-subhead {
-	display:none;
+    display: none;
 }
+
 
 /*fix search options dropdown width*/
+
 prm-search-bar div.search-options.flex-sm-40.visible {
-	max-width:11.7em;
-	width:11.7em;
+    max-width: 11.7em;
+    width: 11.7em;
 }
+
 
 /*fix size of advanced search options dropdowns*/
+
 prm-advanced-search md-card.zero-margin.marginless-inputs.padded-container._md.md-primoExplore-theme.layout-column.flex-gt-sm-30.flex {
-	width:11.7em;
-	max-width:13.8em;
+    width: 11.7em;
+    max-width: 13.8em;
 }
+
 
 /*show favorites sort in ipad view*/
+
 #favoritesLabels {
-	display:block!important;
+    display: block!important;
 }
+
 
 /*bookmark filter tidyup*/
+
 prm-search-bookmark-filter a:hover {
-	box-shadow:none;
+    box-shadow: none;
 }
 
+
 /*direct linking - background color while waiting for stuff to load*/
+
 prm-search-result-list div.list-item-wrapper {
-	background-color:#fff;
+    background-color: #fff;
 }
 
 #view_deets {
-	margin-top:.5em;
+    margin-top: .5em;
 }
+
 
 /*hide exlibris default icons*/
+
 .fallback-img {
-/* display: none; */
+    /* display: none; */
 }
+
 
 /*central floor info*/
+
 .cenFloor {
-	padding-left:5px;
-	font-weight:700;
+    padding-left: 5px;
+    font-weight: 700;
 }
 
-prm-advanced-search div.date-range-inputs.animate-input.layout-row > md-input-container > md-select > md-select-value > span._md-select-icon {
-	width:15px;
+prm-advanced-search div.date-range-inputs.animate-input.layout-row>md-input-container>md-select>md-select-value>span._md-select-icon {
+    width: 15px;
 }
 
 .peer-reviewed-mark {
-	padding:4px 0 0;
+    padding: 4px 0 0;
 }
 
-prm-full-view prm-brief-result > h3.item-title {
-	max-width:87%!important;
+prm-full-view prm-brief-result>h3.item-title {
+    max-width: 87%!important;
 }
 
 prm-citation-trails-item.active-item .item-title {
     line-height: 1em;
 }
+
 prm-brief-result .item-title span {
-	color: #3274c6;
+    color: #3274c6;
 }
 
 prm-search-result-frbr-line {
-	padding-top: 0.5em;
-	padding-bottom: 0.5em;
-	
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
 }

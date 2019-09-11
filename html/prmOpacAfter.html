@@ -79,10 +79,10 @@
                                 </div>
                                 <div ng-if="item.courses" flex flex-sm="100" flex-xs="100">
                                     <div class="small" ng-repeat="courses in item.courses">
-                                        <prm-icon class="md-icon-button-custom course-info-icon" icon-type="svg" svg-icon-set="action" icon-definition="ic_star_rate_24px"></prm-icon>
+                                        <prm-icon class="md-icon-button-custom course-info-mark-icon" icon-type="svg" svg-icon-set="primo-ui" icon-definition="mdi-teach"></prm-icon>
                                         <span ng-if="courses.course.department"><strong>{{courses.course.department}}&nbsp;/&nbsp;</strong></span>
                                         <span ng-if="courses.course.section"><strong>{{courses.course.section}} / </strong></span>
-                                        <span ng-if="courses.course.course_name"><a href="https://cataloguepreprod.bu.univ-rennes2.fr/cgi-bin/koha/opac-course-details.pl?course_id={{courses.course.course_id}}">{{courses.course.course_name}}</a></span>
+                                        <span ng-if="courses.course.course_name"><a href="/primo-explore/reserves/{{courses.course.course_id}}?vid={{vid}}&lang=fr_FR">{{courses.course.course_name}}</a></span>
                                     </div>
                                 </div>
 

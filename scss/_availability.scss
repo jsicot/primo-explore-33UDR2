@@ -62,7 +62,8 @@ prm-search-result-availability-line {
     }
 }
 
-prm-search-result-availability-koha {
+prm-search-result-availability-koha,
+.result-availability-koha {
     line-height: 1.2em;
     display: block;
     &:before {
