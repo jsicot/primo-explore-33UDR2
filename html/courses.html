@@ -36,9 +36,13 @@
                         <md-card-title-text flex layout="row">
 
                             <md-card-title-text flex layout="column">
-                                <label>Rechercher&nbsp;: <input aria-label="Rechercher" class="course-search" name="textField" ng-model="searchText" class="ng-pristine ng-valid md-input ng-empty ng-touched">
-                                            </label>
-
+                                <div layout="row" layout-sm="column" class="layout-sm-column layout-row">
+                                    <md-input-container class="underlined-input md-primoExplore-theme">
+                                        <label class="" for="course-search">Rechercher une liste</label>
+                                        <input type="text" name="course-search" id="course-search" size="50" ng-model="searchText" class="course-search ng-pristine ng-untouched md-input ng-empty ">
+                                        <!---->
+                                    </md-input-container>
+                                </div>
                                 <md-card-title-text flex layout="row">
                                     <md-input-container flex>
                                         <label>Filtrer :</label>
