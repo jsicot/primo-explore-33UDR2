@@ -79,6 +79,36 @@ angular.module('courseReserves', ['ui.router']).config(['$stateProvider',
                 })
         }
     ])
+    .component('prmResourceRecommenderAfter', {
+        bindings: {
+            parentCtrl: '<'
+        },
+        templateUrl: 'custom/' + viewName + '/html/courses_recommander.html',
+        controller: ['$scope', '$rootScope', '$location', '$http', '$element', 'coursesService', function controller($scope, $rootScope, $location, $http, $element, coursesService, ) {
+            this.$onInit = function() {
+                var query = $location.search().query
+                var queries = Object.prototype.toString.call(query) === '[object Array]' ? query : query ? [query] : false
+                console.log(queries);
+                var q = queries.map(part => {
+                    let terms = part.split(',')
+                    let string = terms[2].normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[\s]+/g, "%25") || ''
+                    return '%25' + string + '%25'
+                }).join('')
+                console.log(q);
+                coursesService.getCourses(q).then(function(data) {
+                    // no need to call user.data, service handles this
+                    if (data) {
+                        $scope.courses = data[0];
+                        console.log($scope.courses);
+                        $element.parent().removeClass("ng-hide");
+
+                    }
+                }).catch(function(err) {
+                    // handle errors here if needed
+                });
+            };
+        }]
+    })
     .factory('coursesService', ['$http', 'URLs',
         function($http, URLs) {
             return {

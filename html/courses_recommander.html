@@ -1,0 +1,22 @@
+<div layout="column">
+    <md-card-content ng-if="courses">
+        <md-list flex>
+            <md-list-item class="md-3-line" ui-sref="reserves({cid : course.course_id, group: group, vid: vid})">
+                <div class="md-list-item-text" layout="column" flex>
+                    <div class="course-info-mark">
+                        <prm-icon class="course-info-mark-icon" icon-type="svg" svg-icon-set="primo-ui" icon-definition="mdi-teach">
+                        </prm-icon>
+                        <span>Liste de lecture recommandée</span>
+                    </div>
+                    <div>
+
+                        <h3><span ng-if="courses.section"><strong>{{courses.section}} / </strong></span>
+                            <span ng-if="courses.course_name">{{courses.course_name}}</span>
+                        </h3>
+                        <p>{{courses.public_note}}</p>
+                    </div>
+                </div>
+            </md-list-item>
+        </md-list>
+    </md-card-content>
+</div>
