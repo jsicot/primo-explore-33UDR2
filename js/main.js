@@ -78,13 +78,20 @@ function add_custom_header(header_container) {
 
 app.constant('courseLists', [{
     group: "burennes2",
-    title: "BiblioCours & BiblioConcours",
-    filter: "",
+    title: "Préparer un cours ou un concours",
+    description: "Ceci est un texte pour présenter la section",
+    filter: "CO_",
+    sortType: "name"
+}, {
+    group: "burennes2",
+    title: "Listes Thématiques",
+    description: "Ceci est un texte pour présenter la section",
+    filter: "THEMA_",
     sortType: "name"
 }]);
 
 app.constant('URLs', {
-    courses: 'https://cataloguepreprod.bu.univ-rennes2.fr/api/v1/contrib/course/list',
+    courses: 'https://cataloguepreprod.bu.univ-rennes2.fr/api/v1/contrib/course/search/',
     course: 'https://cataloguepreprod.bu.univ-rennes2.fr/api/v1/contrib/course/biblios/',
     bibs: 'https://cataloguepreprod.bu.univ-rennes2.fr/r2microws/json.getSru.php?index=rec.id',
     avail: "https://catalogue.bu.univ-rennes2.fr/r2microws/json.getItems.php",

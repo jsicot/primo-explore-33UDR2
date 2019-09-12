@@ -12,12 +12,12 @@ angular.module('courseReserves', ['ui.router']).config(['$stateProvider',
                     controller: ['$scope', '$stateParams', 'coursesService', 'courseLists', function controller($scope, $stateParams, coursesService, courseLists) {
                         $scope.vid = $stateParams.vid
                         $scope.group = $stateParams.group
-                        $scope.title = "Réserves de cours"
+                        $scope.title = "Listes de lecture"
                         $scope.body = "Lorem ipsum...."
                             //$scope.policyInfo = policyInfo.filter(info => info.group === $stateParams.group)
                         $scope.courseLists = courseLists.filter(list => list.group === 'burennes2')
                         $scope.courseLists.map(
-                            list => coursesService.getCourses().then(
+                            list => coursesService.getCourses(list.filter).then(
                                 courses => {
                                     list.courses = courses
                                     console.log(list.courses)
@@ -95,10 +95,10 @@ angular.module('courseReserves', ['ui.router']).config(['$stateProvider',
                  * Queries the koha API to retrieve a list of courses 
                  * @return {promise}         list of matching courses
                  */
-                getCourses: function() {
+                getCourses: function(filter) {
                     return $http({
                         method: 'GET',
-                        url: URLs.courses,
+                        url: URLs.courses + filter,
                         // params: { 'filter': filter },
                         cache: true
                     }).then(response => response.data)

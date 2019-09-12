@@ -4,7 +4,7 @@
         <div flex="0" flex-md="0" flex-lg="15" flex-xl="20" class="flex-xl-20 flex-md-0 flex-lg-15 flex-0"></div>
         <!----><a ng-href="/primo-explore/courses?vid=33UDR2_VU1&lang=fr_FR"><button class="back-button has-text md-button md-primoExplore-theme md-ink-ripple" type="button" aria-label="" >
             <prm-icon icon-type="svg" svg-icon-set="primo-ui" icon-definition="chevron-left"></prm-icon>
-            <span>Retour à la liste des biblioCours et biblioConcours</span>
+            <span>Toutes les listes</span>
             <div class="md-ripple-container" style=""></div>
         </button></a
         <!---->
@@ -28,7 +28,6 @@
                         </div>
                         <span class="md-headline"><span ng-if="course.section"><strong>{{course.section}} / </strong></span>
                         <span ng-if="course.course_name">{{course.course_name}}</span></span>
-                        <span ng-repeat="instructor in instructors" ng-if="instructors" class="md-title animate-if">{{ instructor.last_name }}, {{ instructor.first_name }}</span>
                     </md-card-title-text>
                     <md-card-title-text flex>
                         <!-- <md-input-container>
@@ -39,7 +38,6 @@
                                 </md-option>
                             </md-select>
                         </md-input-container> -->
-
                         <md-input-container flex>
                                 <label>Trier&nbsp;:</label>
                                 <md-select ng-model="course.sortType">
