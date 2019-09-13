@@ -95,8 +95,7 @@ app.constant('URLs', {
     course: 'https://cataloguepreprod.bu.univ-rennes2.fr/api/v1/contrib/course/biblios/',
     bibs: 'https://cataloguepreprod.bu.univ-rennes2.fr/r2microws/json.getSru.php?index=rec.id',
     avail: "https://catalogue.bu.univ-rennes2.fr/r2microws/json.getItems.php",
-    covers: 'https://catalogue.bu.univ-rennes2.fr/r2microws/getCover.php?biblionumbers[]=',
-    fallback: 'https://na01.alma.exlibrisgroup.com/view/delivery/thumbnail/01ALLIANCE_LCC/'
+    covers: 'https://catalogue.bu.univ-rennes2.fr/r2microws/getCover.php?biblionumbers[]='
 });
 
 

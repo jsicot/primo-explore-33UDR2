@@ -1,12 +1,12 @@
 <div layout="column">
     <md-card-content ng-if="courses">
         <md-list flex>
-            <md-list-item class="md-3-line" ui-sref="reserves({cid : course.course_id, group: group, vid: vid})">
+            <md-list-item class="md-3-line course-recommander" ui-sref="reserves({cid : courses.course_id,  vid: vid})">
                 <div class="md-list-item-text" layout="column" flex>
                     <div class="course-info-mark">
                         <prm-icon class="course-info-mark-icon" icon-type="svg" svg-icon-set="primo-ui" icon-definition="mdi-teach">
                         </prm-icon>
-                        <span>Liste de lecture recommandée</span>
+                        <span>Liste de lecture recommandée </span>
                     </div>
                     <div>
 

@@ -43,7 +43,7 @@ angular.module('courseReserves', ['ui.router']).config(['$stateProvider',
                         reservesService.getCourse($stateParams.cid).then(
                             course => {
                                 $scope.course = course
-                                $scope.course.sortTypes = ['title', 'biblioitem.publicationyear']
+                                    // $scope.course.sortTypes = ['title', 'biblioitem.publicationyear : reverse']
                                 $scope.reserves = reservesService.makeArray(course.biblios)
                                 $scope.reserves.map(
                                     item => {
@@ -99,6 +99,7 @@ angular.module('courseReserves', ['ui.router']).config(['$stateProvider',
                     // no need to call user.data, service handles this
                     if (data) {
                         $scope.courses = data[0];
+                        $scope.vid = viewName;
                         console.log($scope.courses);
                         $element.parent().removeClass("ng-hide");
 

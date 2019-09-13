@@ -4,7 +4,7 @@
         <div flex="0" flex-md="0" flex-lg="15" flex-xl="20" class="flex-xl-20 flex-md-0 flex-lg-15 flex-0"></div>
         <!----><a ng-href="/primo-explore/courses?vid=33UDR2_VU1&lang=fr_FR"><button class="back-button has-text md-button md-primoExplore-theme md-ink-ripple" type="button" aria-label="" >
             <prm-icon icon-type="svg" svg-icon-set="primo-ui" icon-definition="chevron-left"></prm-icon>
-            <span>Toutes les listes</span>
+            <span>Toutes les listes de lecture</span>
             <div class="md-ripple-container" style=""></div>
         </button></a
         <!---->
@@ -30,29 +30,29 @@
                         <span ng-if="course.course_name">{{course.course_name}}</span></span>
                     </md-card-title-text>
                     <md-card-title-text flex>
-                        <!-- <md-input-container>
-                            <label>Trier&nbsp;:</label>
-                            <md-select ng-model="course.sortType">
-                                <md-option ng-repeat="sortType in course.sortTypes" value="{{ sortType }}" ng-selected="$first">
-                                    {{ sortType }}
-                                </md-option>
-                            </md-select>
-                        </md-input-container> -->
+                        <div layout="row" layout-sm="column" class="layout-sm-column layout-row">
+                                <md-input-container class="underlined-input md-primoExplore-theme">
+                                    <label class="" for="reserve-search">Rechercher dans la liste</label>
+                                    <input type="text" name="reserve-search" id="reserve-search" size="50" ng-model="searchDoc" class="course-search ng-pristine ng-untouched md-input ng-empty ">
+                                    <!---->
+                                </md-input-container>
+                            </div>
                         <md-input-container flex>
                                 <label>Trier&nbsp;:</label>
                                 <md-select ng-model="course.sortType">
                                     <md-option value="title">Titre</md-option>
-                                    <md-option value="biblioitem.publicationyear">Année de publication</md-option>
+                                    <md-option value="-biblioitem.publicationyear">Année de publication</md-option>
                                 </md-select>
                             </md-input-container>
                     </md-card-title-text>
                 </md-card-title>
-            </md-card>
+           
+           <md-card-content ng-if="reserves.length > 0">
             <md-list class="results-container" layout="column">
 
                 <div class="list-items-list pages-separated-with-gaps layout-column">
 
-                    <md-list-item class="list-item-wrapper" ng-repeat="item in reserves | orderBy : course.sortType">
+                    <md-list-item class="list-item-wrapper" ng-repeat="item in reserves | orderBy : course.sortType | filter : searchDoc">
 
 
                         <div class="brief-result-container list-item">
@@ -185,6 +185,8 @@
     </md-list-item>
     </div>
     </md-list>
+    </md-card-content>
+    </md-card>
 
     <!-- <md-card ng-if="!course" ng-cloak>
         <md-card-title>
