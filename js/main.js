@@ -93,7 +93,7 @@ app.constant('courseLists', [{
 app.constant('URLs', {
     courses: 'https://cataloguepreprod.bu.univ-rennes2.fr/api/v1/contrib/course/search/',
     course: 'https://cataloguepreprod.bu.univ-rennes2.fr/api/v1/contrib/course/biblios/',
-    bibs: 'https://cataloguepreprod.bu.univ-rennes2.fr/r2microws/json.getSru.php?index=rec.id',
+    bibs: 'https://api-eu.hosted.exlibrisgroup.com/primo/v1/search',
     avail: "https://catalogue.bu.univ-rennes2.fr/r2microws/json.getItems.php",
     covers: 'https://catalogue.bu.univ-rennes2.fr/r2microws/getCover.php?biblionumbers[]='
 });

@@ -11,12 +11,15 @@
         <!---->
     </div>
 </md-toolbar>
+
+
+
+
 <md-content class="main _md md-primoExplore-theme layout-align-center-start flex">
     <div flex layout="row" class="layout-row">
         <div flex="0" flex-md="0" flex-lg="10" flex-xl="20" ng-class="{'flex-lgPlus-15': $ctrl.mediaQueries.lgPlus}"></div>
         <section section="reserves" class="reserves flex">
 
-        
 
             <md-card ng-if="course" class="animate-if" flex>
                 <md-card-title layout="row" layout-xs="column">
@@ -48,6 +51,9 @@
                 </md-card-title>
            
            <md-card-content ng-if="reserves.length > 0">
+
+
+                    
             <md-list class="results-container" layout="column">
 
                 <div class="list-items-list pages-separated-with-gaps layout-column">
@@ -176,6 +182,8 @@
 
         </div>
     </div>
+    <prm-save-to-favorites-button [item]="item.pitem" [index]="1" [is-favorites]="::$ctrl.isFavorites"></prm-save-to-favorites-button>
+
     </div>
     <!---->
     <!---->

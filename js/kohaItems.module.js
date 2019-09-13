@@ -83,11 +83,12 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                                     cache: false,
                                                 }).then(function(response) {
                                                     if (response.data != undefined) {
+                                                        console.log(response.data);
                                                         var CR = response.data;
                                                         for (var i = 0; i < CR.length; i++) {
                                                             console.log(CR[i].course.course_name);
                                                             kohaitems[k].courses = CR;
-                                                            if (CR[i].public_note) {
+                                                            if (CR[i].public_note && CR[i].course.enabled === 'yes') {
                                                                 kohaitems[k].itemnotes = CR[i].public_note;
                                                             }
                                                             return kohaitems[k];

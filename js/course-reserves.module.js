@@ -61,6 +61,12 @@ angular.module('courseReserves', ['ui.router']).config(['$stateProvider',
                                         }).catch(function(err) {
                                             // handle errors here if needed
                                         });
+                                        reservesService.getBib(item.biblionumber).then(
+                                            results => {
+                                                console.log(results.docs);
+                                                item.pitem = results.docs[0]
+                                            }
+                                        )
                                         reservesService.getAvailability(item.biblionumber).then(function(data) {
                                             // no need to call user.data, service handles this
                                             if (data) {
@@ -75,6 +81,10 @@ angular.module('courseReserves', ['ui.router']).config(['$stateProvider',
                                 )
                             }
                         )
+
+
+
+                        // 
                     }]
                 })
         }
@@ -198,8 +208,22 @@ angular.module('courseReserves', ['ui.router']).config(['$stateProvider',
                     });
                 },
                 /**
+                 * Queries the Alma API to retrieve a bib using an item's MMSID.
+                 * Requires a server-side wrapper function defined in URLs.bibs.
+                 * @param  {string} mmsid item MMSID
+                 * @return {promise}       bib object
+                 */
+                getBib: function(biblionumber) {
+                    return $http({
+                        method: 'GET',
+                        url: `https://api-eu.hosted.exlibrisgroup.com/primo/v1/search?vid=33UDR2_VU1&scope=default_scope&q=rid%2Cexact%2C33UDR2_KOHA${biblionumber}&lang=fr_FR&offset=0&limit=1&sort=rank&pcAvailability=true&getMore=0&conVoc=true&inst=33UDR2&apikey=l8xxf37539586c204ebc88a175dec50c155e`,
+                        // params: { 'q': id },
+                        cache: true
+                    }).then(response => response.data)
+                },
+                /**
                  * Get a link to view an item.
-                 * @param  {object} bib       bib object returned from getBib()
+                 * @param  {object} bib       bib 
                  * @param  {string} vid       view name, e.g. LCC
                  * @return {string}           URL to the item
                  */
