@@ -224,8 +224,7 @@ angular.module('courseReserves', ['ui.router']).config(['$stateProvider',
                             'offset': '0',
                             'limit': '1',
                             'sort': 'rank',
-                            'apikey': EXL.apikey,
-
+                            'apikey': EXL.apikey
                         },
                         cache: true
                     }).then(response => response.data)

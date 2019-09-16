@@ -83,7 +83,7 @@
                                             <prm-icon class="md-icon-button-custom course-info-mark-icon" icon-type="svg" svg-icon-set="primo-ui" icon-definition="mdi-teach"></prm-icon>
                                             <span ng-if="courses.course.department"><strong>{{courses.course.department}}&nbsp;/&nbsp;</strong></span>
                                             <span ng-if="courses.course.section"><strong>{{courses.course.section}} / </strong></span>
-                                            <span ng-if="courses.course.course_name"><a href="/primo-explore/reserves/{{courses.course.course_id}}?vid={{vid}}&lang=fr_FR">{{courses.course.course_name}}</a></span>
+                                            <span ng-if="courses.course.course_name"><a tabindex="-1" (click)="$ctrl.closeDialog()" ui-sref="reserves({cid : courses.course.course_id,  vid: vid})" class="arrow-link md-primoExplore-theme"  ui-sref-opts="{reload: true}">{{courses.course.course_name}}</a></span>
                                         </div>
                                     </div>
                                 </div>

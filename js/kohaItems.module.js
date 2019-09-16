@@ -24,6 +24,14 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                 var obj = $scope.$ctrl.parentCtrl.item.pnx.control;
                 var openurl;
                 //init loading
+                let vm = this;
+                vm.closeDialog = closeDialog;
+                vm.parentCtrl.closeDialog = closeDialog;
+
+                function closeDialog() {
+                    $mdDialog.hide();
+
+                }
                 $scope.vid = viewName;
                 $scope.loading = true;
                 if (obj.hasOwnProperty("sourcerecordid") && obj.hasOwnProperty("sourceid")) {
