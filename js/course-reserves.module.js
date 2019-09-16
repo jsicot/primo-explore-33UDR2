@@ -140,7 +140,6 @@ angular.module('courseReserves', ['ui.router']).config(['$stateProvider',
                     return $http({
                         method: 'GET',
                         url: URLs.courses + filter,
-                        // params: { 'filter': filter },
                         cache: true
                     }).then(response => response.data)
                 },
@@ -167,8 +166,8 @@ angular.module('courseReserves', ['ui.router']).config(['$stateProvider',
             }
         }
     ])
-    .factory('reservesService', ['$http', 'URLs',
-        function($http, URLs) {
+    .factory('reservesService', ['$http', 'URLs', 'EXL',
+        function($http, URLs, EXL) {
             return {
                 /**
                  * Queries the Koha API to retrieve a course object using its course id.
@@ -216,8 +215,18 @@ angular.module('courseReserves', ['ui.router']).config(['$stateProvider',
                 getBib: function(biblionumber) {
                     return $http({
                         method: 'GET',
-                        url: `https://api-eu.hosted.exlibrisgroup.com/primo/v1/search?vid=33UDR2_VU1&scope=default_scope&q=rid%2Cexact%2C33UDR2_KOHA${biblionumber}&lang=fr_FR&offset=0&limit=1&sort=rank&pcAvailability=true&getMore=0&conVoc=true&inst=33UDR2&apikey=l8xxf37539586c204ebc88a175dec50c155e`,
-                        // params: { 'q': id },
+                        url: URLs.bibs,
+                        params: {
+                            'vid': '33UDR2_VU1',
+                            'scope': 'default_scope',
+                            'q': `rid,exact,33UDR2_KOHA${biblionumber}`,
+                            'lang': 'fr_FR',
+                            'offset': '0',
+                            'limit': '1',
+                            'sort': 'rank',
+                            'apikey': EXL.apikey,
+
+                        },
                         cache: true
                     }).then(response => response.data)
                 },

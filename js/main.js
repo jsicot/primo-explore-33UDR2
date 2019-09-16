@@ -98,6 +98,10 @@ app.constant('URLs', {
     covers: 'https://catalogue.bu.univ-rennes2.fr/r2microws/getCover.php?biblionumbers[]='
 });
 
+app.constant('EXL', {
+    apikey: YOUR_API_KEY,
+});
+
 
 
 // load jquery
