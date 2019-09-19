@@ -13,7 +13,7 @@ angular.module('courseReserves', ['ui.router']).config(['$stateProvider',
                         $scope.vid = $stateParams.vid
                         $scope.group = $stateParams.group
                         $scope.title = "Listes de lecture"
-                        $scope.body = "Lorem ipsum...."
+                        $scope.body = "Retrouvez les bibliographies de vos questions de cours ou de concours : ces listes vous permettent d'aller à l'essentiel et facilitent vos recherches dans les bibliothèques. Découvrez aussi les sélections thématiques des bibliothécaires."
                             //$scope.policyInfo = policyInfo.filter(info => info.group === $stateParams.group)
                         $scope.courseLists = courseLists.filter(list => list.group === 'burennes2')
                         $scope.courseLists.map(
@@ -61,7 +61,7 @@ angular.module('courseReserves', ['ui.router']).config(['$stateProvider',
                                         }).catch(function(err) {
                                             // handle errors here if needed
                                         });
-                                        reservesService.getBib(item.biblionumber).then(
+                                        reservesService.getBib(item.biblionumber, $stateParams.vid).then(
                                             results => {
                                                 console.log(results.docs);
                                                 item.pitem = results.docs[0]
@@ -81,10 +81,6 @@ angular.module('courseReserves', ['ui.router']).config(['$stateProvider',
                                 )
                             }
                         )
-
-
-
-                        // 
                     }]
                 })
         }
@@ -212,12 +208,12 @@ angular.module('courseReserves', ['ui.router']).config(['$stateProvider',
                  * @param  {string} mmsid item MMSID
                  * @return {promise}       bib object
                  */
-                getBib: function(biblionumber) {
+                getBib: function(biblionumber, vid) {
                     return $http({
                         method: 'GET',
                         url: URLs.bibs,
                         params: {
-                            'vid': '33UDR2_VU1',
+                            'vid': `${vid}`,
                             'scope': 'default_scope',
                             'q': `rid,exact,33UDR2_KOHA${biblionumber}`,
                             'lang': 'fr_FR',

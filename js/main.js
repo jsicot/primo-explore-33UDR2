@@ -78,14 +78,14 @@ function add_custom_header(header_container) {
 
 app.constant('courseLists', [{
     group: "burennes2",
-    title: "Préparer un cours ou un concours",
-    description: "Ceci est un texte pour présenter la section",
+    title: "Pour un cours",
+    description: "",
     filter: "CO_",
     sortType: "name"
 }, {
     group: "burennes2",
-    title: "Listes Thématiques",
-    description: "Ceci est un texte pour présenter la section",
+    title: "Autour d'une thématique",
+    description: "",
     filter: "THEMA_",
     sortType: "name"
 }]);
@@ -99,10 +99,8 @@ app.constant('URLs', {
 });
 
 app.constant('EXL', {
-    apikey: YOUR_API_KEY,
+    apikey: 'YOUR_API_KEY',
 });
-
-
 
 // load jquery
 app.component('prmTopBarBefore', {
@@ -194,6 +192,7 @@ app.config(['$sceDelegateProvider', function($sceDelegateProvider) {
     urlWhitelist.push('https://cataloguepreprod.bu.univ-rennes2**');
     urlWhitelist.push('http://sfx-univ-rennes2.hosted.exlibrisgroup**');
     urlWhitelist.push('https://**.image.tmdb.org**');
+    urlWhitelist.push('https://cas.univ-rennes2**');
     $sceDelegateProvider.resourceUrlWhitelist(urlWhitelist);
 }]);
 

@@ -60,7 +60,8 @@ angular.module('kohaAvailabilities', []).component('prmBriefResultAfter', {
                                     $scope.class = items.class;
                                     $scope.callnumber = items.itemcallnumber;
                                     $scope.otherLocations = (items.total - 1);
-                                    $scope.courses = items.courses;
+                                    $scope.courses_co = items.courses_co;
+                                    $scope.courses_thema = items.courses_thema;
 
                                 } else {
                                     console.log("it's false");

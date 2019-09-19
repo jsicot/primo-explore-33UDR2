@@ -1,5 +1,5 @@
 <prm-explore-main></prm-explore-main>
-<md-toolbar class="default-toolbar zero-padding _md md-primoExplore-theme">
+<md-toolbar class="courses default-toolbar zero-padding _md md-primoExplore-theme">
     <div flex layout="row" class="layout-row">
         <div flex="0" flex-md="0" flex-lg="10" flex-xl="10" ng-class="{'flex-lgPlus-15': $ctrl.mediaQueries.lgPlus}"></div>
 
@@ -13,7 +13,7 @@
                         </md-card-title-text>
                     </md-card-title>
                     <md-card-content>
-                        <p class="md-subhead sm-padding">{{ body }}</p>
+                        <p class="md-subhead md-padding">{{ body }}</p>
                     </md-card-content>
                     <!-- <md-card-actions layout="row">
                 <div>
@@ -33,6 +33,7 @@
                                 <!-- -->
                                 <span ng-if="list.courses.length === 0" class="md-title ">Aucun résultat trouvé.</span>
                                 <p class=" md-subhead lg-padding">{{ list.description }}</p>
+                                <div ng-if="list.courses.length > 0" class="">{{ list.courses.length }} listes</div>
                             </md-card-title-text>
 
                             <md-card-title-text flex layout="row">
@@ -66,14 +67,17 @@
                             </md-card-title-text>
                         </md-card-title>
                         <md-card-content ng-if="list.courses.length > 0">
-                            <div ng-if="list.courses.length > 0" class="">{{ list.courses.length }} listes</div>
+
                             <md-list flex>
                                 <md-list-item class="md-3-line" ng-if="list.departmentFilter === 'Tout' || course.department === list.departmentFilter" ng-repeat="course in list.courses | orderBy : list.sortType | filter:searchText" ui-sref="reserves({cid : course.course_id, group: group, vid: vid})">
                                     <div class="md-list-item-text" layout="column" flex>
                                         <div class="course-info-mark">
-                                            <prm-icon class="course-info-mark-icon" icon-type="svg" svg-icon-set="primo-ui" icon-definition="mdi-teach">
-                                            </prm-icon>
-                                            <span>{{ course.department }}</span>
+                                            <prm-icon ng-if="list.filter === 'CO_'" class="course-info-mark-icon" icon-type="svg" svg-icon-set="primo-ui" icon-definition="mdi-teach"> </prm-icon>
+
+                                            <prm-icon ng-if="list.filter === 'THEMA_'" class="course-info-mark-icon" icon-type="svg" svg-icon-set="action" icon-definition="ic_stars_24px"> </prm-icon>
+
+
+                                            <span>   {{ course.department }}</span>
                                         </div>
                                         <div>
 

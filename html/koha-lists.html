@@ -1,16 +1,23 @@
-<div layout="row" layout-align="center center" class="padding-top-large layout-align-center-center layout-row"><prm-spinner class="inline-loader display-inline dark-on-light half-transparent column center" ng-if="loading"></prm-spinner></div>
+<div layout="row" layout-align="center center" class="padding-top-large layout-align-center-center layout-row">
+    <prm-spinner class="inline-loader display-inline dark-on-light half-transparent column center" ng-if="loading"></prm-spinner>
+</div>
 
 
 
 <div ng-if="lists" ng-repeat="l in lists" class="kohalists">
-<h2><a class="arrow-link md-primoExplore-theme" href="https://catalogue.bu.univ-rennes2.fr/cgi-bin/koha/opac-shelves.pl?op=view&shelfnumber={{l.id}}&sortfield=title">{{l.name}} <prm-icon class="padding-right-small" icon-type="svg" svg-icon-set="action" icon-definition="ic_open_in_new_24px"></prm-icon-after></prm-icon></a></h2>
-<div class="flexRow" >
-<div class="flexItem" ng-repeat="i in l.items">
-	<a ng-if="i.cover" href="/primo-explore/fulldisplay?docid=33UDR2_KOHA{{i.biblionumber}}&context=L&vid=33UDR2_VU1&search_scope=default_scope&tab=default_tab&lang=fr_FR"><img src="{{i.cover}}" alt="{{i.title}}" title="{{i.title}}" border="0"></a><md-tooltip>{{i.title}}. {{i.author}}. {{i.publicationyear}}</md-tooltip>
-</div>
+    <h2><a class="arrow-link md-primoExplore-theme" href="https://catalogue.bu.univ-rennes2.fr/cgi-bin/koha/opac-shelves.pl?op=view&shelfnumber={{l.id}}&sortfield=title">{{l.name}} <prm-icon class="padding-right-small" icon-type="svg" svg-icon-set="action" icon-definition="ic_open_in_new_24px"></prm-icon-after></prm-icon></a></h2>
+    <div class="flexRow">
+        <div class="flexItem" ng-repeat="i in l.items">
+            <a ng-if="i.cover" href="/primo-explore/fulldisplay?docid=33UDR2_KOHA{{i.biblionumber}}&context=L&vid={{vid}}&search_scope=default_scope&tab=default_tab&lang=fr_FR"><img src="{{i.cover}}" alt="{{i.title}}" title="{{i.title}}" border="0"></a>
+            <md-tooltip>{{i.title}}. {{i.author}}. {{i.publicationyear}}</md-tooltip>
+        </div>
+
+    </div>
 
 </div>
 
+<div ng-if="lists" layout="row" layout-align="center center" class="padding-top-large layout-align-center-center layout-row">
+    <!----><a class="button-confirm button-large md-button md-primoExplore-theme md-ink-ripple" target="_blank" href="https://catalogue.bu.univ-rennes2.fr/cgi-bin/koha/opac-shelves.pl?op=list&category=2">Toutes les listes de lecture<div class="md-ripple-container" style=""></div></a>
+    <!---->
+    <prm-spinner class="inline-loader display-inline dark-on-light half-transparent column center" ng-if="loading"></prm-spinner>
 </div>
-
-<div ng-if="lists" layout="row" layout-align="center center" class="padding-top-large layout-align-center-center layout-row"><!----><a class="button-confirm button-large md-button md-primoExplore-theme md-ink-ripple" target="_blank" href="https://catalogue.bu.univ-rennes2.fr/cgi-bin/koha/opac-shelves.pl?op=list&category=2">Toutes les listes de lecture<div class="md-ripple-container" style=""></div></a><!----><prm-spinner class="inline-loader display-inline dark-on-light half-transparent column center" ng-if="loading"></prm-spinner></div>

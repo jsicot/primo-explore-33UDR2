@@ -1,8 +1,8 @@
 <prm-explore-main></prm-explore-main>
-<md-toolbar class="default-toolbar zero-padding _md md-primoExplore-theme">
+<md-toolbar class=" default-toolbar zero-padding _md md-primoExplore-theme">
     <div class="md-toolbar-tools zero-padding layout-row" layout="row">
         <div flex="0" flex-md="0" flex-lg="15" flex-xl="20" class="flex-xl-20 flex-md-0 flex-lg-15 flex-0"></div>
-        <a ng-href="/primo-explore/courses?vid=33UDR2_VU1&lang=fr_FR">
+        <a ng-href="/primo-explore/courses?vid={{vid}}&lang=fr_FR">
             <button class="back-button has-text md-button md-primoExplore-theme md-ink-ripple" type="button" aria-label="">
                     <prm-icon icon-type="svg" svg-icon-set="primo-ui" icon-definition="chevron-left"></prm-icon>
                     <span>Toutes les listes de lecture</span>
@@ -12,7 +12,7 @@
     </div>
 </md-toolbar>
 
-<md-content class="main _md md-primoExplore-theme layout-align-center-start flex">
+<md-content class=" main _md md-primoExplore-theme layout-align-center-start flex">
 
     <div flex layout="row" class="layout-row">
         <div flex="0" flex-md="0" flex-lg="10" flex-xl="20" ng-class="{'flex-lgPlus-15': $ctrl.mediaQueries.lgPlus}"></div>
@@ -64,7 +64,7 @@
                                         <!---->
                                         <span class="list-item-count"><span>{{$index+1}}</span></span>
                                         <!---->
-                                        <div class="result-item-image layout-column" layout="column">
+                                        <div class="result-item-image layout-column" layout="column" ng-if="!$ctrl.mediaQueries.xs">
                                             <div class="media-content-images">
                                                 <div class="media-thumbnail">
                                                     <a tabindex="-1" ng-href="{{item.link}}" class="a-tag-as-wrapper md-primoExplore-theme">
@@ -79,7 +79,7 @@
                                             </div>
                                         </div>
                                         <div class="text-selector-spacer"></div>
-                                        <div class="result-item-text layout-fill layout-column flex" layout="column" layout-fill="" flex="">
+                                        <div class="result-item-text layout-fill layout-column flex" layout="column" layout-fill="" flex="80">
                                             <div class="media-content-type align-self-start">
                                                 <!----><span>{{item.biblioitem.itemtype}}</span>
                                                 <!---->
@@ -194,6 +194,6 @@
     </md-card-content> -->
 
         </section>
-        <div flex="0 " flex-md="0 " flex-lg="10 " flex-xl="20 " ng-class="{ 'flex-lgPlus-15': $ctrl.mediaQueries.lgPlus} "></div>
+        <div flex="0" flex-md="0" flex-lg="15" flex-xl="20" class="flex-xl-20 flex-md-0 flex-lg-15 flex-0"></div>
     </div>
 </md-content>

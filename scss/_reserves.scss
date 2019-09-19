@@ -2,6 +2,29 @@
     background-color: #f3f3f3;
 }
 
+.courses md-list,
+.courses md-list-item._md-button-wrap>div.md-button:first-child {
+    padding: 0;
+}
+
+.courses .md-headline,
+.reserves .md-headline {
+    font-size: 30px;
+    font-weight: 300;
+    line-height: 38px;
+    padding: 5px;
+}
+
+.courses md-card md-card-title {
+    padding: 24px 16px 16px;
+    background-color: #f0f0f0;
+}
+
+.courses md-list-item.md-3-line,
+md-list-item.md-3-line>._md-no-style {
+    border-bottom: 1px dotted #f0f0f0;
+}
+
 $actionButtonSize: 38px;
 $actionButtonMargin: 4px;
 .brief-result-container {
@@ -147,14 +170,23 @@ $actionButtonMargin: 4px;
 
 // a tweak to make "page #" headers appear above the result items, and the same time not occupy vertical space, because this space is being calculated when the item gets expanded. To remove the tweak, remove the class '.pages-separated-with-gaps' from '.list-items-list' element.
 ///// this tweak is now in _search-result-list.scss
-.peer-reviewed-mark-icon,
-.course-info-mark-icon {
+.peer-reviewed-mark-icon {
     color: #8359d4 !important;
     & md-icon {
         width: 18px;
         height: 18px;
         min-width: 18px;
         min-height: 18px;
+    }
+}
+
+.course-info-mark-icon {
+    color: #b38e45 !important;
+    & md-icon {
+        width: 24px;
+        height: 24px;
+        min-width: 24px;
+        min-height: 24px;
     }
 }
 
