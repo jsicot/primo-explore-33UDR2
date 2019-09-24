@@ -19,6 +19,7 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                     // console.log(self.rootScope.$$childHead.$ctrl.userSessionManagerService)
                     // console.log(self.rootScope.$$childHead.$ctrl.userSessionManagerService.isGuest())
                     let userData = self.rootScope.$$childHead.$ctrl.userSessionManagerService;
+                    console.log(userData);
                     //console.log(self.rootScope.$$childHead.$ctrl.userSessionManagerService.getUserLanguage())
                     //console.log(self.rootScope.$$childHead.$ctrl.userSessionManagerService.i18nService.getLanguage() )
                     var obj = $scope.$ctrl.parentCtrl.item.pnx.control;
@@ -185,10 +186,6 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                             $http({
                                 method: 'JSONP',
                                 url: availServiceSvc,
-                                headers: {
-                                    'Content-Type': 'application/json',
-                                    'X-From-ExL-API-Gateway': undefined
-                                },
                                 cache: false,
                             }).then(function(response) {
                                 if (response.data != undefined) {
@@ -221,7 +218,7 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                             if (journalholdings) {
                                 $scope.kohaholdings = journalholdings;
                                 $scope.userIsGuest = userData.isGuest();
-                                //$scope.userIsGuest = false;
+                                // $scope.userIsGuest = false;
                             }
 
                             var delivery = $scope.$ctrl.parentCtrl.item.delivery;
@@ -270,7 +267,7 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                         $scope.itemnumber = itemnumber;
                                         $scope.isavailableonshelf = isavailableonshelf;
                                         $scope.userIsGuest = userData.isGuest();
-                                        //$scope.userIsGuest = false;
+                                        // $scope.userIsGuest = false;
                                         $scope.addata = recordData.pnx.addata;
                                         // console.log($scope.addata);
                                         $scope.title = recordData.pnx.display.title[0];
@@ -305,18 +302,19 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
 
                                             var prefixSvc = "https://cataloguepreprod.bu.univ-rennes2.fr/api/v1/contrib/wrm/request?";
                                             var querystring = kohaitemsService.encodeQueryData(data);
-                                            var svc = prefixSvc + querystring;
+                                            var url = prefixSvc + querystring;
 
-                                            var url = "https://cas.univ-rennes2.fr/login?service=" + encodeURIComponent(svc);
+                                            //var url = "https://cas.univ-rennes2.fr/login?service=" + encodeURIComponent(svc) ;
                                             //Example : "https://cas.univ-rennes2.fr/login?service=https%3A%2F%2Fcataloguepreprod.bu.univ-rennes2.fr%2Fapi%2Fv1%2Fcontrib%2Fwrm%2Frequest%3Fbiblionumber%3D171221%26callnumber%3DZP%2B39%26type%3DJOUR%26volume%3D2%26issue%3D25%26year%3D1996"
                                             console.log(url);
                                             $http({
-                                                method: 'GET',
+                                                method: 'JSONP',
                                                 url: url,
                                                 cache: false,
+                                                withCredentials: true
                                             }).then(function(response) {
                                                 if (response.data != undefined) {
-                                                    // console.log(response.data);
+                                                    console.log(response.data);
                                                     if (response.data.state == "success") {
                                                         // console.log(response.data.state);
                                                         $scope.request_succeed = true;
