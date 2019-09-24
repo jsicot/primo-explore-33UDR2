@@ -222,7 +222,11 @@ angular.module('courseReserves', ['ui.router']).config(['$stateProvider',
                             'sort': 'rank',
                             'apikey': EXL.apikey
                         },
-                        cache: true
+                        cache: true,
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-From-ExL-API-Gateway': undefined
+                        }
                     }).then(response => response.data)
                 },
                 /**

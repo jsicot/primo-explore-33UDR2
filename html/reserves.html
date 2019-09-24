@@ -17,8 +17,6 @@
     <div flex layout="row" class="layout-row">
         <div flex="0" flex-md="0" flex-lg="10" flex-xl="20" ng-class="{'flex-lgPlus-15': $ctrl.mediaQueries.lgPlus}"></div>
         <section section="reserves" class="reserves flex">
-
-
             <md-card ng-if="course" class="animate-if" flex>
                 <!-- <prm-spinner ng-if="reserves" class="half-transparent no-text bottom-loader" layout="row" layout-align="center end" layout-margin></prm-spinner> -->
 
@@ -167,6 +165,8 @@
                                         <div class="result-item-text" layout="column" layout-fill flex>
                                             <div class="result-item-actions" layout="row" ng-keydown="$ctrl.keyDownSupport($event)">
                                                 <prm-save-to-favorites-button [item]="item.pitem" [index]="$index+1"></prm-save-to-favorites-button>
+
+                                                <button class="md-icon-button custom-button unpin-button md-button md-primoExplore-theme md-ink-ripple unpinned" type="button" ng-transclude="" ng-if="$ctrl.showPin()" ng-class="{'unpinned':$ctrl.showPin()}" aria-label="Dé-sélectionner la notice 1" ng-click="$event.stopPropagation();$event.preventDefault();$ctrl.updateFavorites($event);"><prm-icon [icon-type]="::$ctrl.actionsIcons.unPin.type" [svg-icon-set]="::$ctrl.actionsIcons.unPin.iconSet" [icon-definition]="::$ctrl.actionsIcons.unPin.icon"><!----><div class="md-ripple-container"></div></button>
                                             </div>
                                         </div>
                                     </div>

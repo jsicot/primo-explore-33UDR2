@@ -1,27 +1,23 @@
-<div layout="column">
-    <md-card class="courses">
-        <div class="resource-header layout-align-center-start layout-column" layout="column" layout-align="center start">Liste de lecture recommandée</div>
-        <md-card-content ng-if="courses">
-            <md-list flex>
-                <md-list-item class="md-3-line course-recommander" ui-sref="reserves({cid : courses.course_id,  vid: vid})">
-                    <div class="md-list-item-text" layout="column" flex>
+<md-card class="courses _md md-primoExplore-theme" ng-if="courses">
+    <div class="resource-header layout-align-center-start layout-column" layout="column" layout-align="center start">Liste de lecture recommandée</div>
+    <md-card-content>
+        <md-list flex>
+            <md-list-item class="md-3-line course-recommander" ui-sref="reserves({cid : courses.course_id,  vid: vid})">
+                <div class="md-list-item-text" layout="column" flex>
+                    <div class="course-info-mark">
+                        <prm-icon ng-if="courses.course_number.indexOf('CO_') > -1" class="course-info-mark-icon" icon-type="svg" svg-icon-set="primo-ui" icon-definition="mdi-teach"> </prm-icon>
 
-                        <div class="course-info-mark">
-                            <prm-icon ng-if="courses.course_number.indexOf('CO_') > -1" class="course-info-mark-icon" icon-type="svg" svg-icon-set="primo-ui" icon-definition="mdi-teach"> </prm-icon>
-
-                            <prm-icon ng-if="courses.course_number.indexOf('THEMA_') > -1" class="course-info-mark-icon" icon-type="svg" svg-icon-set="action" icon-definition="ic_stars_24px"> </prm-icon>
-                            <span>{{courses.department}}</span>
-                        </div>
-                        <div>
-
-                            <h3><span ng-if="courses.section"><strong>{{courses.section}} / </strong></span>
-                                <span ng-if="courses.course_name">{{courses.course_name}}</span>
-                            </h3>
-                            <p>{{courses.public_note}}</p>
-                        </div>
+                        <prm-icon ng-if="courses.course_number.indexOf('THEMA_') > -1" class="course-info-mark-icon" icon-type="svg" svg-icon-set="action" icon-definition="ic_stars_24px"> </prm-icon>
+                        <span>{{courses.department}}</span>
                     </div>
-                </md-list-item>
-            </md-list>
-        </md-card-content>
-    </md-card>
-</div>
+                    <div>
+                        <h3><span ng-if="courses.section"><strong>{{courses.section}} / </strong></span>
+                            <span ng-if="courses.course_name">{{courses.course_name}}</span>
+                        </h3>
+                        <p>{{courses.public_note}}</p>
+                    </div>
+                </div>
+            </md-list-item>
+        </md-list>
+    </md-card-content>
+</md-card>

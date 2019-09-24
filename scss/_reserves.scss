@@ -2,6 +2,16 @@
     background-color: #f3f3f3;
 }
 
+prm-brief-result .course-info-mark span {
+    color: darkgoldenrod;
+    padding: 2px;
+    font-weight: 700;
+}
+
+md-card.courses {
+    margin-top: 10px;
+}
+
 .courses md-list,
 .courses md-list-item._md-button-wrap>div.md-button:first-child {
     padding: 0;
