@@ -9,9 +9,11 @@ import { reportProblem } from './reportProblem.module';
 import { getThumbnail } from './getThumbnail.module';
 import { kohaLists } from './koha-lists.module';
 import { courseReserves } from './course-reserves.module';
+import { recommander } from './recommander.module';
 
 let app = angular.module('viewCustom', [
     'courseReserves',
+    'recommander',
     'angularLoad',
     'kohaItems',
     'kohaAvailabilities',
@@ -95,11 +97,12 @@ app.constant('URLs', {
     course: 'https://cataloguepreprod.bu.univ-rennes2.fr/api/v1/contrib/course/biblios/',
     bibs: 'https://api-eu.hosted.exlibrisgroup.com/primo/v1/search',
     avail: "https://catalogue.bu.univ-rennes2.fr/r2microws/json.getItems.php",
-    covers: 'https://catalogue.bu.univ-rennes2.fr/r2microws/getCover.php?biblionumbers[]='
+    covers: 'https://catalogue.bu.univ-rennes2.fr/r2microws/getCover.php?biblionumbers[]=',
+    wwwbu: 'https://cataloguepreprod.bu.univ-rennes2.fr/r2microws/proxySolrPHP/solrproxy.php'
 });
 
 app.constant('EXL', {
-    apikey: 'YOUR_API_KEY',
+    apikey: 'l8xxf37539586c204ebc88a175dec50c155e'
 });
 
 // load jquery
