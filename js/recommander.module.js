@@ -40,9 +40,10 @@ angular.module('recommander', []).component('prmResourceRecommenderAfter', {
                 recoService.searchWwwbu(query).then(function(response) {
                     // no need to call user.data, service handles this
                     if (response.response.docs) {
-                        $scope.databases = recoService.makeArray(response.response.docs)
+                        $element.parent().removeClass("ng-hide");
+                        $scope.recommandations = recoService.makeArray(response.response.docs)
 
-                        $scope.databases.map(
+                        $scope.recommandations.map(
                             resource => {
                                 resource.url = resource.ss_search_api_url
                                 if (resource.tm_field_link$url) {
@@ -57,7 +58,7 @@ angular.module('recommander', []).component('prmResourceRecommenderAfter', {
                             }
                         );
 
-                        console.log($scope.databases);
+                        console.log($scope.recommandations);
 
                     }
                 }).catch(function(err) {

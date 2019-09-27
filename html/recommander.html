@@ -32,7 +32,7 @@
     <h2 class="accessible-only"><span translate="nui.aria.resource.resourceRecommender"></span></h2>
     <div layout="row">
         <div layout="row" flex>
-            <md-card ng-repeat="resource in databases | limitTo:2" ng-class="previewClass" class="one-slot">
+            <md-card ng-repeat="resource in recommandations | limitTo:2" ng-class="previewClass" class="one-slot">
                 <div class="resource-header" layout="column" layout-align="center start">
                     <span ng-if="resource.ss_type == 'outils'">Ressource suggérée</span>
                     <span ng-if="resource.ss_type == 'ressource'">Base de données suggérée</span>
