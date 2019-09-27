@@ -98,7 +98,8 @@ app.constant('URLs', {
     bibs: 'https://api-eu.hosted.exlibrisgroup.com/primo/v1/search',
     avail: "https://catalogue.bu.univ-rennes2.fr/r2microws/json.getItems.php",
     covers: 'https://catalogue.bu.univ-rennes2.fr/r2microws/getCover.php?biblionumbers[]=',
-    wwwbu: 'https://cataloguepreprod.bu.univ-rennes2.fr/r2microws/proxySolrPHP/solrproxy.php'
+    wwwbu: 'https://cataloguepreprod.bu.univ-rennes2.fr/r2microws/proxySolrPHP/solrproxy.php',
+    ezproxy: 'https://distant.bu.univ-rennes2.fr/login?url='
 });
 
 app.constant('EXL', {

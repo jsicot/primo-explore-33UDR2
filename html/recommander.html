@@ -1,0 +1,74 @@
+<div layout="column" ng-if="courses" layout-sm="column" class="recommanderengine">
+    <h2 class="accessible-only"><span translate="nui.aria.resource.resourceRecommender"></span></h2>
+    <div layout="row">
+        <div layout="row" flex>
+            <md-card ng-class="previewClass" class="one-slot" flex>
+                <div class="resource-header" layout="column" layout-align="center start">Liste de lecture recommandée</div>
+                <md-card-content layout="row">
+                    <div class="max-width-100">
+                        <div ng-class="layout-row">
+                            <div class="course-info-mark">
+                                <prm-icon ng-if="courses.course_number.indexOf('CO_') > -1" class="course-info-mark-icon" icon-type="svg" svg-icon-set="primo-ui" icon-definition="mdi-teach"> </prm-icon>
+                                <prm-icon ng-if="courses.course_number.indexOf('THEMA_') > -1" class="course-info-mark-icon" icon-type="svg" svg-icon-set="action" icon-definition="ic_stars_24px"> </prm-icon>
+                                <span>{{courses.department}}</span>
+                            </div>
+                            <div class="resource-content" layout-fill>
+                                <h3 class="normal-text resource-title">
+
+
+                                    <span ng-if="courses.section"><strong>{{courses.section}} / </strong></span>
+                                    <span ng-if="courses.course_name"><a ng-if="courses.course_id" ng-href="{{('reserves/'+courses.course_id+'?vid='+vid)}}" ng-click="handle_click()" aria-label="{{courses.course_name}}">{{courses.course_name}}</a></h3>
+                                </span>
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                </md-card-content>
+            </md-card>
+        </div>
+    </div>
+</div>
+<div layout="column" layout-sm="column" class="recommanderengine">
+    <h2 class="accessible-only"><span translate="nui.aria.resource.resourceRecommender"></span></h2>
+    <div layout="row">
+        <div layout="row" flex>
+            <md-card ng-repeat="resource in databases | limitTo:2" ng-class="previewClass" class="one-slot">
+                <div class="resource-header" layout="column" layout-align="center start">
+                    <span ng-if="resource.ss_type == 'outils'">Ressource suggérée</span>
+                    <span ng-if="resource.ss_type == 'ressource'">Base de données suggérée</span>
+                    <span ng-if="resource.ss_type == 'service'">Service suggéré</span>
+                </div>
+                <md-card-content layout="row">
+                    <div class="max-width-100">
+                        <div ng-class="::{'layout-row': resource.ss_type != 'library_information'}">
+                            <div class="resource-image" ng-if="resource.ss_field_image$file$url">
+                                <div class="resource-image-inner" ng-class="::{'person-image': resource.ss_type==='person', 'normlized-resource-image': resource.ss_type!='library_information'}"><img class="md-card-image" ng-src="{{resource.ss_field_image$file$url}}" /></div>
+                            </div>
+                            <div class="resource-image" ng-if="resource.ss_type == 'service'">
+                                <div class="resource-image-inner" ng-class="::{'person-image': resource.ss_type==='person', 'normlized-resource-image': resource.ss_type!='library_information'}">
+                                    <span class="service-icon"><i class="{{('mdi mdi-'+resource.ss_field_icon+' mdi-lg')}}"></span></i>
+                                </div>
+                            </div>
+                            <div class="resource-content" layout-fill>
+                                <h3 class="resource-title">
+                                    <a ng-if="resource.url" ng-href="{{(resource.link || resource.url)}}" target="_blank" ng-click="handle_click()" aria-label="{{(('nui.aria.resRecomm.recommendedRsrc.type.label.'+resource.ss_type) | translate)}}{{::(resource.ss_title|| resource.ss_title || resource.ss_search_api_url)}}">{{(resource.ss_title || resource.ss_title || resource.url)}}</a></h3>
+                                <div ng-if="resource.content">
+                                    <p ng-if="resource.content" style="word-wrap: break-word">{{resource.description | limitTo : 130 }}<a ng-if="resource.ss_search_api_url" ng-href="{{resource.ss_search_api_url}}" target="_blank" ng-click="handle_click()" aria-label="{{(('nui.aria.resRecomm.recommendedRsrc.type.label.'+resource.ss_type) | translate)}}{{::(resource.ss_title|| resource.ss_title || resource.ss_search_api_url)}}">[...]</a></p>
+                                </div>
+                                <div ng-if="resource.email">
+                                    <p ng-if="resource.email" style="word-wrap: break-word">
+                                        <a ng-if="resource.email" ng-href="mailto:{{resource.email}}" aria-label="{{(('nui.aria.resRecomm.recommendedRsrc.type.label.'+resource.ss_type) | translate)}}{{resource.email_text||resource.email}}">
+                                            <prm-icon class="md-icon-button-custom" icon-type="svg" svg-icon-set="primo-actions" icon-definition="email"></prm-icon>{{resource.email_text||resource.email}}</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </md-card-content>
+            </md-card>
+        </div>
+    </div>
+    <div layout="column" layout-align="center end">
+        <md-button class="button-as-link link-alt-color zero-margin" ng-click="openFullView()" ng-if="showAdditionalResourcesLink()"><span class="bold-text ng-binding ng-scope" translate="nui.resRecomm.brief.fullviewLink" translate-values="{'idx_0' : numOfResources()}"></span></md-button>
+    </div>
+</div>
