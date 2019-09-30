@@ -93,6 +93,7 @@ app.constant('courseLists', [{
 }]);
 
 app.constant('URLs', {
+    koha: 'https://cataloguepreprod.bu.univ-rennes2.fr/',
     courses: 'https://cataloguepreprod.bu.univ-rennes2.fr/api/v1/contrib/course/search/',
     course: 'https://cataloguepreprod.bu.univ-rennes2.fr/api/v1/contrib/course/biblios/',
     bibs: 'https://api-eu.hosted.exlibrisgroup.com/primo/v1/search',
@@ -103,7 +104,7 @@ app.constant('URLs', {
 });
 
 app.constant('EXL', {
-    apikey: 'l8xxf37539586c204ebc88a175dec50c155e'
+    apikey: 'YOUR_API_KEY'
 });
 
 // load jquery

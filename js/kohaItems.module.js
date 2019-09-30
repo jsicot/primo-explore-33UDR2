@@ -6,7 +6,7 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
         bindings: {
             parentCtrl: '<'
         },
-        controller: ['$scope', '$rootScope', '$mdDialog', '$http', '$element', 'kohaitemsService', function controller($scope, $rootScope, $mdDialog, $http, $element, kohaitemsService) {
+        controller: ['$scope', '$rootScope', '$mdDialog', '$http', '$element', 'URLs', 'kohaitemsService', function controller($scope, $rootScope, $mdDialog, $http, $element, URLs, kohaitemsService) {
             this.$onInit = function() {
                 if ($scope.$ctrl.parentCtrl.item) {
                     let self = this;
@@ -54,7 +54,7 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                     var bn = obj.sourcerecordid[0];
                                 }
                                 if (bn && source == "33UDR2_KOHA") {
-                                    var url = "https://cataloguepreprod.bu.univ-rennes2.fr/r2microws/json.getSru.php?index=rec.id&q=" + bn;
+                                    var url = URLs.koha + "r2microws/json.getSru.php?index=rec.id&q=" + bn;
                                     $http({
                                         method: 'JSONP',
                                         url: url,
@@ -81,7 +81,7 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
 
                                                 Object.keys(kohaitems).some(function(k) {
                                                     var itemnumber = kohaitems[k].itemnumber;
-                                                    var coursesSvc = "https://cataloguepreprod.bu.univ-rennes2.fr/api/v1/contrib/course/item/" + itemnumber;
+                                                    var coursesSvc = URLs.koha + "api/v1/contrib/course/item/" + itemnumber;
                                                     $http({
                                                         method: 'GET',
                                                         url: coursesSvc,
@@ -182,7 +182,7 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                             }
 
                             //checking if service is opened/available
-                            var availServiceSvc = "https://catalogue.bu.univ-rennes2.fr/r2microws/getAuthorisedValues.php?category=FERMETURE_SERVICES";
+                            var availServiceSvc = URLs.koha + "r2microws/getAuthorisedValues.php?category=FERMETURE_SERVICES";
                             $http({
                                 method: 'JSONP',
                                 url: availServiceSvc,
@@ -233,7 +233,7 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
 
                             if (openurl != undefined) {
                                 $scope.sfxloading = true;
-                                $scope.proxifiedurl = openurl.replace("http://acceder.bu.univ-rennes2.fr/sfx_33puedb", "https://catalogue.bu.univ-rennes2.fr/r2microws/getSfx.php");
+                                $scope.proxifiedurl = openurl.replace("http://acceder.bu.univ-rennes2.fr/sfx_33puedb", URLs.koha + "r2microws/getSfx.php");
                                 $http.jsonp($scope.proxifiedurl).then(function(response) {
                                     if (response.data.error == undefined) {
                                         var keys = Object.keys(response.data);
@@ -300,7 +300,7 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                                 message: message
                                             };
 
-                                            var prefixSvc = "https://cataloguepreprod.bu.univ-rennes2.fr/api/v1/contrib/wrm/request?";
+                                            var prefixSvc = URLs.koha + "api/v1/contrib/wrm/request?";
                                             var querystring = kohaitemsService.encodeQueryData(data);
                                             var url = prefixSvc + querystring;
 

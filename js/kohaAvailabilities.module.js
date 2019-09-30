@@ -6,7 +6,7 @@ angular.module('kohaAvailabilities', []).component('prmBriefResultAfter', {
     bindings: {
         parentCtrl: '<'
     },
-    controller: ['$scope', '$http', '$element', function controller($scope, $http, $element) {
+    controller: ['$scope', '$http', '$element', 'URLs', function controller($scope, $http, $element, URLs) {
         this.$onInit = function() {
             if ($scope.$ctrl.parentCtrl.item) {
                 $scope.kohaDisplay = false; /* default hides template */
@@ -35,7 +35,7 @@ angular.module('kohaAvailabilities', []).component('prmBriefResultAfter', {
                     var type = $scope.$ctrl.parentCtrl.item.pnx.display.type[0];
 
                     if (bn && source == "33UDR2_KOHA" && type != "journal") {
-                        var url = "https://cataloguepreprod.bu.univ-rennes2.fr/r2microws/json.getItems.php?biblionumber=" + bn;
+                        var url = URLs.koha + "r2microws/json.getItems.php?biblionumber=" + bn;
                         $http({
                             method: 'JSONP',
                             url: url,
@@ -67,7 +67,7 @@ angular.module('kohaAvailabilities', []).component('prmBriefResultAfter', {
                                     console.log("it's false");
                                 }
                             } else {
-                                var orderSvc = "https://catalogue.bu.univ-rennes2.fr/r2microws/getInfoOrder.php?biblionumber=" + bn;
+                                var orderSvc = URLs.koha + "r2microws/getInfoOrder.php?biblionumber=" + bn;
                                 $http({
                                     method: 'JSONP',
                                     url: orderSvc,
