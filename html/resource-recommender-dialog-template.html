@@ -1,0 +1,61 @@
+<div layout="row">
+    <md-dialog aria-label="Full Display" class="prm-resource-recommendations-fullview md-dialog-full prm-full-view-dialog">
+        <md-dialog-content layout="row" style="overflow-y: hidden; height: 100%;">
+            <md-toolbar class="default-toolbar is-stuck zero-padding" ng-if="$ctrl.mediaQueries.gtsm">
+                <div class="md-toolbar-tools zero-padding" layout="row">
+                    <md-button class="back-button has-text padding-left-medium" (click)="$ctrl.dialog.hide()" aria-label="{{'nui.aria.fulldisplay.closeButton' | translate}}">
+                        <prm-icon icon-type="svg" svg-icon-set="primo-ui" icon-definition="back-to-search"></prm-icon><span translate="fulldisplay.deatiles.back"></span></md-button>
+                </div>
+            </md-toolbar>
+            <sticky-scroll flex="100" style="overflow-y: scroll;">
+                <div>
+                    <div class="padding-large prm-recommendations-fullview" layout="column">
+                        <div class="padding-medium">
+                            <h2 translate="nui.resRecomm.full.title" class="zero-margin-bottom"></h2><span translate="nui.resRecomm.full.description"></span> <span class="bold-text italic-text">{{$ctrl.query}}</span></div>
+                        <div class="padding-medium padding-left-large" layout="row" ng-class="{'margin-left-small': $ctrl.mediaQueries.gtxs}">
+                            <div flex="60" layout="column">
+                                <md-card class="resource-item" ng-repeat="resource in $ctrl.resources">
+                                    <md-card-content ng-if="$index > 1" layout="row">
+                                        <div class="resource-type" layout="column" layout-align="center start">
+                                            <span ng-if="resource.ss_type == 'outils'">Ressource suggérée</span>
+                                            <span ng-if="resource.ss_type == 'ressource'">Base de données suggérée</span>
+                                            <span ng-if="resource.ss_type == 'service'">Service suggéré</span>
+                                        </div>
+                                        <div class="max-width-100">
+                                            <div ng-class="::{'layout-row': resource.ss_type != 'library_information'}">
+                                                <div class="resource-image" ng-if="resource.ss_field_image$file$url">
+                                                    <div class="resource-image-inner" ng-class="::{'person-image': resource.ss_type==='person', 'normlized-resource-image': resource.ss_type!='library_information'}"><img class="md-card-image" ng-src="{{resource.ss_field_image$file$url}}" /></div>
+                                                </div>
+                                                <div class="resource-image" ng-if="resource.ss_type == 'service'">
+                                                    <div class="resource-image-inner" ng-class="::{'person-image': resource.ss_type==='person', 'normlized-resource-image': resource.ss_type!='library_information'}">
+                                                        <span class="service-icon"><i class="{{('mdi mdi-'+resource.ss_field_icon+' mdi-lg')}}"></span></i>
+                                                    </div>
+                                                </div>
+                                                <div class="resource-content" layout-fill>
+                                                    <h3 class="resource-title">
+                                                        <a ng-if="resource.url" ng-href="{{(resource.link || resource.url)}}" target="_blank" ng-click="handle_click()" aria-label="{{(('nui.aria.resRecomm.recommendedRsrc.type.label.'+resource.ss_type) | translate)}}{{::(resource.ss_title|| resource.ss_title || resource.ss_search_api_url)}}">{{(resource.ss_title || resource.ss_title || resource.url)}}</a></h3>
+                                                    <div ng-if="resource.content">
+                                                        <p ng-if="resource.content" style="word-wrap: break-word">{{resource.description | limitTo : 130 }}<a ng-if="resource.ss_search_api_url" ng-href="{{resource.ss_search_api_url}}" target="_blank" ng-click="handle_click()" aria-label="{{(('nui.aria.resRecomm.recommendedRsrc.type.label.'+resource.ss_type) | translate)}}{{::(resource.ss_title|| resource.ss_title || resource.ss_search_api_url)}}">[...]</a></p>
+                                                    </div>
+                                                    <div ng-if="resource.email">
+                                                        <p ng-if="resource.email" style="word-wrap: break-word">
+                                                            <a ng-if="resource.email" ng-href="mailto:{{resource.email}}" aria-label="{{(('nui.aria.resRecomm.recommendedRsrc.type.label.'+resource.ss_type) | translate)}}{{resource.email_text||resource.email}}">
+                                                                <prm-icon class="md-icon-button-custom" icon-type="svg" svg-icon-set="primo-actions" icon-definition="email"></prm-icon>{{resource.email_text||resource.email}}</a>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </md-card-content>
+                                </md-card>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </sticky-scroll>
+        </md-dialog-content>
+    </md-dialog>
+    <md-button class="md-icon-button close-button" ng-click="$ctrl.dialog.hide()" ng-if="!$ctrl.mediaQueries.gtsm">
+        <prm-icon icon-type="svg" svg-icon-set="primo-ui" icon-definition="close"></prm-icon>
+    </md-button>
+</div>

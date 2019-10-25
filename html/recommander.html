@@ -68,7 +68,7 @@
             </md-card>
         </div>
     </div>
-    <div layout="column" layout-align="center end">
-        <md-button class="button-as-link link-alt-color zero-margin" ng-click="openFullView()" ng-if="showAdditionalResourcesLink()"><span class="bold-text ng-binding ng-scope" translate="nui.resRecomm.brief.fullviewLink" translate-values="{'idx_0' : numOfResources()}"></span></md-button>
+    <div layout="column" layout-align="center end" ng-if="numFound > 2">
+        <md-button class="button-as-link link-alt-color zero-margin" ng-click="openOtherSuggests($event, recommandations)"><span class="bold-text ng-binding ng-scope" translate="nui.resRecomm.brief.fullviewLink" translate-values="{'idx_0' : {{numFound - 2}}}"></span></md-button>
     </div>
 </div>
