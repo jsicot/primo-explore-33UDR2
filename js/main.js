@@ -104,7 +104,7 @@ app.constant('URLs', {
 });
 
 app.constant('EXL', {
-    apikey: 'YOUR_API_KEY'
+    apikey: 'l8xxf37539586c204ebc88a175dec50c155e'
 });
 
 // load jquery
