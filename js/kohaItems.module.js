@@ -173,9 +173,13 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                                 }
                                             }
                                         }
-                                    }, function(response) {
+                                    }).catch(function(response) {
+                                        // error
                                         $scope.loading = false;
+                                        angular.element(document.querySelector('prm-opac>md-tabs'))[0].style.display = "block";
+
                                     });
+
                                 } else {
                                     $scope.loading = false;
                                 }

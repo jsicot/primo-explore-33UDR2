@@ -1,25 +1,26 @@
 {
-  "name": "33udr2_vu1",
-  "version": "1.0.0",
-  "description": "primo customization for Rennes 2 University Libraries",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://gitlab.uhb.fr/applis-doc/primo-explore-custom.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "@material/drawer": "^0.36.0"
-  },
-  "devDependencies": {
-    "angulartics": "^1.6.0",
-    "angulartics-google-tag-manager": "^0.0.1",
-    "primo-explore-google-analytics": "^0.1.1",
-    "primo-explore-oadoi-link": "^1.0.1"
-  },
-  "keywords": []
+    "name": "33udr2_vu1",
+    "version": "1.0.0",
+    "description": "primo customization for Rennes 2 University Libraries",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://gitlab.uhb.fr/applis-doc/primo-explore-custom.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "@material/drawer": "^0.36.0"
+    },
+    "devDependencies": {
+        "angulartics": "^1.6.0",
+        "angulartics-google-tag-manager": "^0.0.1",
+        "primo-explore-external-search": "^1.1.5",
+        "primo-explore-google-analytics": "^0.1.1",
+        "primo-explore-oadoi-link": "^1.0.1"
+    },
+    "keywords": []
 }

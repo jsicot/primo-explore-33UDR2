@@ -93,13 +93,13 @@ app.constant('courseLists', [{
 }]);
 
 app.constant('URLs', {
-    koha: 'https://cataloguepreprod.bu.univ-rennes2.fr/',
-    courses: 'https://cataloguepreprod.bu.univ-rennes2.fr/api/v1/contrib/course/search/',
-    course: 'https://cataloguepreprod.bu.univ-rennes2.fr/api/v1/contrib/course/biblios/',
+    koha: 'https://catalogue.bu.univ-rennes2.fr/',
+    courses: 'https://catalogue.bu.univ-rennes2.fr/api/v1/contrib/course/search/',
+    course: 'https://catalogue.bu.univ-rennes2.fr/api/v1/contrib/course/biblios/',
     bibs: 'https://api-eu.hosted.exlibrisgroup.com/primo/v1/search',
     avail: "https://catalogue.bu.univ-rennes2.fr/r2microws/json.getItems.php",
     covers: 'https://catalogue.bu.univ-rennes2.fr/r2microws/getCover.php?biblionumbers[]=',
-    wwwbu: 'https://cataloguepreprod.bu.univ-rennes2.fr/r2microws/proxySolrPHP/solrproxy.php',
+    wwwbu: 'https://catalogue.bu.univ-rennes2.fr/r2microws/proxySolrPHP/solrproxy.php',
     ezproxy: 'https://distant.bu.univ-rennes2.fr/login?url='
 });
 

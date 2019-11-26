@@ -92,6 +92,23 @@ angular.module('kohaAvailabilities', []).component('prmBriefResultAfter', {
                                 });
                                 $scope.kohaDisplay = true;
                             }
+                        }).catch(function(response) {
+                            // error 
+                            var elems = angular.element(document.querySelectorAll('.search-result-availability-line-wrapper'));
+                            var index = 0,
+                                length = elems.length;
+                            for (; index < length; index++) {
+                                elems[index].style.display = 'block';
+                            }
+                            var elems = angular.element(document.querySelectorAll('prm-brief-result-container prm-search-result-availability-line>*:not(:last-child)'));
+                            var index = 0,
+                                length = elems.length;
+                            for (; index < length; index++) {
+                                elems[index].style.display = 'block';
+                            }
+
+
+
                         });
                     }
                 }
