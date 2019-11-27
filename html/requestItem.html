@@ -104,10 +104,14 @@
                 </div>
                 <div class=" request-form-group layout-column" layout="column">
                     <md-input-container class="underlined-input md-primoExplore-theme">
-                        <label for="message"><span>Si besoin, précisez votre demande :</span></label>
+                        <label for="message"><span>Si besoin, précisez votre demande concernant ce document :</span></label>
                         <textarea class="ng-pristine ng-untouched ng-valid md-input ng-empty ng-valid-pattern ng-valid-maxlength" name="message" ng-model="request.message" placeholder="" md-maxlength="400"></textarea>
                         <div class="md-errors-spacer"></div>
                     </md-input-container>
+                </div>
+
+                <div>
+                    <p class="small"></p>Pour information, les document demandés seront mis à disposition pendant une durée de <strong>trois jours ouvrés à l'accueil de la BU centrale</strong>.</p>
                 </div>
 
             </div>
@@ -118,8 +122,8 @@
         <md-button class="md-button md-secondary" ng-click="cancelRequest()">Annuler</md-button>
         <span flex></span>
         <md-button class="button-with-icon button-confirm md-button md-primoExplore-theme md-ink-ripple" ng-click="sendRequest()">
-            <prm-icon icon-type="svg" svg-icon-set="action" icon-definition="ic_done_24px"></prm-icon>
-            Confirmer votre demande
+            Merci de confirmer votre demande
+            <prm-icon icon-type="svg" svg-icon-set="navigation" icon-definition="ic_chevron_right_24px"></prm-icon>
         </md-button>
     </md-dialog-actions>
 

@@ -222,7 +222,7 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                             if (journalholdings) {
                                 $scope.kohaholdings = journalholdings;
                                 $scope.userIsGuest = userData.isGuest();
-                                // $scope.userIsGuest = false;
+                                //$scope.userIsGuest = false;
                             }
 
                             var delivery = $scope.$ctrl.parentCtrl.item.delivery;
@@ -271,7 +271,7 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                         $scope.itemnumber = itemnumber;
                                         $scope.isavailableonshelf = isavailableonshelf;
                                         $scope.userIsGuest = userData.isGuest();
-                                        // $scope.userIsGuest = false;
+                                        //$scope.userIsGuest = false;
                                         $scope.addata = recordData.pnx.addata;
                                         // console.log($scope.addata);
                                         $scope.title = recordData.pnx.display.title[0];
