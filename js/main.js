@@ -82,13 +82,13 @@ app.constant('courseLists', [{
     group: "burennes2",
     title: "Pour un cours",
     description: "",
-    filter: "CO_",
+    filter: "[CO]",
     sortType: "name"
 }, {
     group: "burennes2",
     title: "Autour d'une thématique",
     description: "",
-    filter: "THEMA_",
+    filter: "[THEMA]",
     sortType: "name"
 }]);
 

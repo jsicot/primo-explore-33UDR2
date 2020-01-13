@@ -8,8 +8,8 @@
                     <div class="max-width-100">
                         <div ng-class="layout-row">
                             <div class="course-info-mark">
-                                <prm-icon ng-if="courses.course_number.indexOf('CO_') > -1" class="course-info-mark-icon" icon-type="svg" svg-icon-set="primo-ui" icon-definition="mdi-teach"> </prm-icon>
-                                <prm-icon ng-if="courses.course_number.indexOf('THEMA_') > -1" class="course-info-mark-icon" icon-type="svg" svg-icon-set="action" icon-definition="ic_stars_24px"> </prm-icon>
+                                <prm-icon ng-if="courses.course_number.indexOf('\[CO\]') > -1" class="course-info-mark-icon" icon-type="svg" svg-icon-set="primo-ui" icon-definition="mdi-teach"> </prm-icon>
+                                <prm-icon ng-if="courses.course_number.indexOf('\[THEMA\]') > -1" class="course-info-mark-icon" icon-type="svg" svg-icon-set="action" icon-definition="ic_stars_24px"> </prm-icon>
                                 <span>{{courses.department}}</span>
                             </div>
                             <div class="resource-content" layout-fill>

@@ -47,6 +47,7 @@ angular.module('kohaAvailabilities', []).component('prmBriefResultAfter', {
                         }).then(function(response) {
                             if (response.data != undefined) {
                                 var items = response.data;
+                                console.log(items);
                                 $scope.kohaDisplay = true;
                                 if (items.available != null) {
                                     $element.children().removeClass("ng-hide"); /* initially set by $scope.kohaDisplay=false */

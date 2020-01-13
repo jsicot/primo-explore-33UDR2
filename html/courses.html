@@ -72,9 +72,9 @@
                                 <md-list-item class="md-3-line" ng-if="list.departmentFilter === 'Tout' || course.department === list.departmentFilter" ng-repeat="course in list.courses | orderBy : list.sortType | filter:searchText" ui-sref="reserves({cid : course.course_id, group: group, vid: vid})">
                                     <div class="md-list-item-text" layout="column" flex>
                                         <div class="course-info-mark">
-                                            <prm-icon ng-if="list.filter === 'CO_'" class="course-info-mark-icon" icon-type="svg" svg-icon-set="primo-ui" icon-definition="mdi-teach"> </prm-icon>
+                                            <prm-icon ng-if="list.filter === '\[CO\]'" class="course-info-mark-icon" icon-type="svg" svg-icon-set="primo-ui" icon-definition="mdi-teach"> </prm-icon>
 
-                                            <prm-icon ng-if="list.filter === 'THEMA_'" class="course-info-mark-icon" icon-type="svg" svg-icon-set="action" icon-definition="ic_stars_24px"> </prm-icon>
+                                            <prm-icon ng-if="list.filter === '\[THEMA\]'" class="course-info-mark-icon" icon-type="svg" svg-icon-set="action" icon-definition="ic_stars_24px"> </prm-icon>
 
 
                                             <span>   {{ course.department }}</span>

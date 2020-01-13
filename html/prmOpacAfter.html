@@ -82,9 +82,9 @@
                                         <div ng-if="courses.course.enabled === 'yes'">
 
 
-                                            <prm-icon ng-if="courses.course.course_number.indexOf('CO_') > -1" class="course-info-mark-icon" icon-type="svg" svg-icon-set="primo-ui" icon-definition="mdi-teach"> </prm-icon>
+                                            <prm-icon ng-if="courses.course.course_number.indexOf('\[CO\]') > -1" class="course-info-mark-icon" icon-type="svg" svg-icon-set="primo-ui" icon-definition="mdi-teach"> </prm-icon>
 
-                                            <prm-icon ng-if="courses.course.course_number.indexOf('THEMA_') > -1" class="course-info-mark-icon" icon-type="svg" svg-icon-set="action" icon-definition="ic_stars_24px"> </prm-icon>
+                                            <prm-icon ng-if="courses.course.course_number.indexOf('\[THEMA\]') > -1" class="course-info-mark-icon" icon-type="svg" svg-icon-set="action" icon-definition="ic_stars_24px"> </prm-icon>
 
                                             <span ng-if="courses.course.department"><strong>{{courses.course.department}}&nbsp;/&nbsp;</strong></span>
                                             <span ng-if="courses.course.section"><strong>{{courses.course.section}} / </strong></span>
@@ -107,9 +107,9 @@
 												<span ng-if="userIsGuest">{{item.istatus}}. Se connecter</span>
 												<md-tooltip md-direction="down" md-delay="400" class="multi-row-tooltip slide-tooltip-anim"><span class="item-description popover">Les documents demandés sont à retirer à l'accueil, pendant les horaires d'ouverture de la BU centrale. Ne vous déplacez pas inutilement, suivez votre demande grâce aux mails envoyés ou sur votre compte lecteur. </span></md-tooltip>
 											</button>
-                                            <button ng-if="!avail_commagbu" ng-disabled="true" class="custom-button md-button zero-margin button-with-icon button-confirm service md-primoExplore-theme md-ink-ripple" type="button" aria-label="Retirer ce document sous 1h à l'accueil de votre bibliothèque">
+                                            <button ng-if="!avail_commagbu" ng-disabled="true" class="custom-button md-button zero-margin button-with-icon button-confirm service md-primoExplore-theme md-ink-ripple" type="button" aria-label="Les documents demandés sont à retirer à l'accueil, pendant les horaires d'ouverture de la BU centrale. Ne vous déplacez pas inutilement, suivez votre demande grâce aux mails envoyés ou sur votre compte lecteur. ">
 												<prm-icon class="md-icon-button-custom" icon-type="svg" svg-icon-set="action" icon-definition="ic_add_shopping_cart_24px"></prm-icon>
-												<span>Retrait 1h BU Centrale</span>
+												<span>{{item.istatus}}</span>
 												<md-tooltip md-direction="down" md-delay="400" class="multi-row-tooltip slide-tooltip-anim"><span class="item-description popover">Les documents demandés sont à retirer à l'accueil, pendant les horaires d'ouverture de la BU centrale. Ne vous déplacez pas inutilement, suivez votre demande grâce aux mails envoyés ou sur votre compte lecteur. </span></md-tooltip>
 											</button>
                                         </p>
