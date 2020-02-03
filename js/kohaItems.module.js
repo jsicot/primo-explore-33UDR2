@@ -291,6 +291,7 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
 
                                         }
                                         $scope.sendRequest = function(answer) {
+                                            $scope.requestSent = true;
                                             var message = $scope.request.message;
 
                                             const data = {
@@ -317,6 +318,7 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                                 cache: false,
                                                 withCredentials: true
                                             }).then(function(response) {
+                                                $scope.requestSent = false;
                                                 if (response.data != undefined) {
                                                     console.log(response.data);
                                                     if (response.data.state == "success") {
@@ -326,17 +328,18 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                                         var errors = {
                                                             "LOGIN_FAILED": "Vous devez être connecté pour pouvoir envoyer le message.",
                                                             "USER_NOT_FOUND": "Erreur de connection, utilisateur non-trouvé.",
+                                                            "USER_NOT_ALLOWED": "Vous n'êtes pas autorisé·e à demander ce document",
                                                             "MISSING_INFO_JOURNAL": "Merci d'indiquer au moins un volume OU un numéro ET une année.",
+                                                            "ALREADY_REQUESTED": "Votre demande a déjà été transmise.",
                                                             "WS_CALL_FAILED": "Le service est temporairement hors-service, veuillez réessayer ultérieurement."
                                                         };
-
-                                                        var failureMessage = errors[response.data.error];
-                                                        $scope.returnMessage = decodeURIComponent(escape(failureMessage));
+                                                        $scope.returnMessage = errors[response.data.error];
                                                     }
                                                 } else {
                                                     $scope.returnMessage = "Le service est temporairement hors-service, veuillez réessayer ultérieurement.";
                                                 }
                                             }, function(response) {
+                                                $scope.requestSent = false;
                                                 $scope.returnMessage = "Le service est temporairement hors-service, veuillez réessayer ultérieurement.";
                                             });
                                         }
