@@ -26,9 +26,10 @@ angular.module('libraryhours', []).component('prmSearchBookmarkFilterAfter', {
                             }
                         }).then(function mySuccess(response) {
                             if (response.data != undefined) {
-                                $scope.libhoursloading = false;
                                 var librarieshours = response.data[1].data.replace(/<a.+>/g, '').replace(/<\/a>/g, '');
-                                $scope.librarieshours = parseTimes(librarieshours);
+				$scope.libhoursloading = false;
+				$scope.librarieshours = librarieshours;
+				getHours(librarieshours, 'libs');
                             }
                         }, function myError(response) {
                             $scope.libhoursloading = false;
@@ -40,9 +41,10 @@ angular.module('libraryhours', []).component('prmSearchBookmarkFilterAfter', {
                             }
                         }).then(function mySuccess(response) {
                             if (response.data != undefined) {
-                                $scope.serhoursloading = false;
                                 var serviceshours = response.data[1].data.replace(/<a.+>/g, '').replace(/<\/a>/g, '');
-                                $scope.serviceshours = parseTimes(serviceshours);
+				$scope.serhoursloading = false;
+                                $scope.serviceshours = serviceshours;
+				getHours(serviceshours, 'serv');
                             }
                         }, function myError(response) {
                             $scope.serhoursloading = false;
@@ -55,51 +57,57 @@ angular.module('libraryhours', []).component('prmSearchBookmarkFilterAfter', {
                 });
             }
 
-            function parseTimes(myDomString) {
+	    function getHours(elts, type) {
                 var d = new Date();
+                var today = new Date().toJSON().slice(0,10);
                 var now = d.getHours() * 100 + d.getMinutes();
-                var parser = new DOMParser();
-                var doc = parser.parseFromString(myDomString, "text/html");
-                var lis = doc.getElementsByTagName("li");
-                [].forEach.call(lis, function(li) {
-                    var hourtext = li.getElementsByClassName("hour-text")[0];
-                    if (hourtext.textContent == "Fermée") {
-                        hourtext.classList.add("closed");
-                        li.getElementsByClassName("menu-icon")[0].classList.add("closed");
-                    } else {
-                        var times = hourtext.getElementsByTagName("time");
-                        var open = 0;
-                        for (var i = 0; i < times.length; i++) {
-                            var time = times[i]
-                            var split = time.textContent.split(":");
-                            var t = split[0] + split[1];
-                            console.log(t);
-                            if (time.classList.contains("starttime")) {
-                                if (now >= t) {
-                                    open++;
-                                }
-                            } else if (time.classList.contains("endtime")) {
-                                if (now <= t) {
-                                    open++;
-                                }
-                                if (open == 2) {
-                                    hourtext.classList.add("open");
-                                    li.getElementsByClassName("menu-icon")[0].classList.add("open");
-                                    i = 9000;
-                                } else {
-                                    open = 0;
-                                }
+		var ids = jQuery(elts).find('.'+(type == 'libs' ? 'kohacode' : 'servnid')).map(function() { return this.innerText; }).get().join();
+		jQuery.ajax({
+                    url: 'https://www.bu.univ-rennes2.fr/'+(type == 'libs' ? 'library_hours' : 'opening_hours')+'/instances',
+                    data: { 
+                        from_date: today,
+                        to_date: today,
+                        nid: ids
+                    },
+                    cache: true,
+                    method: 'GET',
+                    crossDomain: true,
+                    success: function(data) {
+                        var hours = {};
+                        jQuery.each(data, function(i, line) {
+                            var id = type == 'libs' ? line.kohacode : line.nid;
+                            if (hours[id] == undefined) {
+                                hours[id] = [];
                             }
-                        }
-                        if (open == 0) {
-                            hourtext.classList.add("closed");
-                            li.getElementsByClassName("menu-icon")[0].classList.add("closed");
-                        }
+                            hours[id].push(line);
+                            hours[id].sort(function(a,b) { return a.start_date < b.start_date });
+                        });
+                        jQuery.each(hours, function(i,e) {
+                            var status = 'closed';
+                            var id = type == 'libs' ? e[0].kohacode : 'ser'+e[0].nid;
+                            if (e[0].start_time == undefined && e[0].end_time == undefined) {
+                                jQuery('.'+id+' .hour-container').text('Fermé'+(type == 'libs' ? 'e' : ''));
+                            } else {
+                                var content = '';
+                                for (var i = 0 ; i < e.length ; i++) {
+                                    if (now > parseInt(e[i].start_time.replace(/\D+/g, '')) && now < parseInt(e[i].end_time.replace(/\D+/g, ''))) {
+                                        status = 'open';
+                                    }
+                                    if (i > 0) { content += ' / '; }
+                                    content += '<time datetime="'+e[i].start_time+'" class="starttime">'+e[i].start_time.replace(/^0/, '')+'</time> - <time datetime="'+e[i].end_time+'" class="endtime">'+e[i].end_time.replace(/^0/, '')+'</time>';
+                                }
+                                jQuery('.'+id+' .hour-container').html(content);
+                            }
+                            jQuery('.'+id).removeClass('text-services text-libraries').addClass(status);
+                            if (jQuery('.'+id).parents("li").size() > 0) {
+                                jQuery('.'+id).parents("li").find(".menu-icon").addClass(status);
+                            }
+                        });
+                    },
+		    error: function() {
                     }
-                });
-                var serializer = new XMLSerializer();
-                return serializer.serializeToString(doc);
-            }
+		});
+	    }
         }
     }],
     templateUrl: 'custom/' + viewName + '/html/prmSearchBookmarkFilterAfter.html'
