@@ -5,14 +5,14 @@ angular.module('sfxHoldings', []).component('prmViewOnlineAfter', {
     controller: ['$scope', '$http', '$element', function controller($scope, $http, $element) {
         this.$onInit = function() {
             var obj = $scope.$ctrl.parentCtrl.item.linkElement.links[0];
-            console.log(obj);
             if (obj.hasOwnProperty("getItTabText") && obj.hasOwnProperty("displayText") && obj.hasOwnProperty("isLinktoOnline") && obj.hasOwnProperty("link")) {
                 if (obj['displayText'] == "openurlfulltext") {
                     $scope.sfxloading = true;
-                    console.log(obj);
-                    console.log(obj['link']);
                     var openurl = obj['link'];
-                    var openurlSvc = openurl.replace("http://acceder.bu.univ-rennes2.fr/sfx_33puedb", "https://catalogue.bu.univ-rennes2.fr/r2microws/getSfx.php");
+                    let url = new URL(openurl); // or construct from window.location
+                    let params = new URLSearchParams(url.search.slice(1));
+                    var openurlSvc = "https://catalogue.bu.univ-rennes2.fr/r2microws/getSfx.php?" + params.toString();
+                    console.log(openurlSvc);
                     $http({
                         method: 'JSONP',
                         url: openurlSvc,
