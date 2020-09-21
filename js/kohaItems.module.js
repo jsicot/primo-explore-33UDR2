@@ -19,7 +19,7 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                     // console.log(self.rootScope.$$childHead.$ctrl.userSessionManagerService)
                     // console.log(self.rootScope.$$childHead.$ctrl.userSessionManagerService.isGuest())
                     let userData = self.rootScope.$$childHead.$ctrl.userSessionManagerService;
-                    console.log(userData);
+                    //console.log(userData);
                     //console.log(self.rootScope.$$childHead.$ctrl.userSessionManagerService.getUserLanguage())
                     //console.log(self.rootScope.$$childHead.$ctrl.userSessionManagerService.i18nService.getLanguage() )
                     var obj = $scope.$ctrl.parentCtrl.item.pnx.control;
@@ -55,6 +55,7 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                 }
                                 if (bn && source == "33UDR2_KOHA") {
                                     var url = URLs.koha + "r2microws/json.getSru.php?index=rec.id&q=" + bn;
+                                    console.log(url);
                                     $http({
                                         method: 'JSONP',
                                         url: url,
@@ -62,7 +63,7 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                             'Content-Type': 'application/json',
                                             'X-From-ExL-API-Gateway': undefined
                                         },
-                                        cache: true,
+                                        cache: false,
                                     }).then(function(response) {
                                         if (response.data.record[0]) {
                                             //Book Items
@@ -77,7 +78,7 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                                         return kohaitems[k].statusClass === "status-ondemand";
                                                     }
                                                 });
-                                                console.log(Object.values(kohaitems));
+                                                //console.log(Object.values(kohaitems));
 
                                                 Object.keys(kohaitems).some(function(k) {
                                                     var itemnumber = kohaitems[k].itemnumber;
@@ -92,10 +93,10 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                                         cache: false,
                                                     }).then(function(response) {
                                                         if (response.data != undefined) {
-                                                            console.log(response.data);
+                                                            //console.log(response.data);
                                                             var CR = response.data;
                                                             for (var i = 0; i < CR.length; i++) {
-                                                                console.log(CR[i].course.course_name);
+                                                                //console.log(CR[i].course.course_name);
                                                                 kohaitems[k].courses = CR;
                                                                 if (CR[i].public_note && CR[i].course.enabled === 'yes') {
                                                                     kohaitems[k].itemnotes = CR[i].public_note;
@@ -126,6 +127,7 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                                         }
                                                     }
                                                 }
+                                                //console.log(response.data.record[0]);
                                                 //Journal Holdings   
                                             } else if (response.data.record[0].holdings && type === "journal") {
                                                 $scope.kohajholdings_loading = true;
@@ -144,7 +146,7 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
 
                                                 for (var i = 0; i < response.data.record[0].holdings.length; i++) {
                                                     var holding = response.data.record[0].holdings[i]
-                                                        // console.log(response.data.record[0]);
+
                                                     kohaholdings[i] = {
                                                         "library": holding["rcr"],
                                                         "holdings": holding["holdings"]
@@ -152,19 +154,45 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                                     if (holding["holdings"].length > 80) {
                                                         kohaholdings[i]["holdingsSummary"] = holding["holdings"].substring(0, 77) + "...";
                                                     }
-                                                    for (var j = 0; j < response.data.record[0].locations.length; j++) {
-                                                        if (response.data.record[0].locations[j]["5"] == holding["5"]) {
-                                                            kohaholdings[i]["callnumber"] = response.data.record[0].locations[j]["callnumber"];
-                                                            kohaholdings[i]["location"] = response.data.record[0].locations[j]["location"];
+                                                    if (response.data.record[0].locations) {
+                                                        for (var j = 0; j < response.data.record[0].locations.length; j++) {
+                                                            if (response.data.record[0].locations[j]["5"] == holding["5"]) {
+                                                                if (response.data.record[0].locations[j]["callnumber"]) {
+                                                                    kohaholdings[i]["callnumber"] = response.data.record[0].locations[j]["callnumber"];
+                                                                }
+                                                                if (response.data.record[0].locations[j]["location"]) {
+                                                                    kohaholdings[i]["location"] = response.data.record[0].locations[j]["location"];
+                                                                }
+                                                            }
                                                         }
                                                     }
+
+                                                    if (response.data.record[0].holdings_sup) {
+                                                        for (var j = 0; j < response.data.record[0].holdings_sup.length; j++) {
+                                                            if (response.data.record[0].holdings_sup[j]["5"] == holding["5"]) {
+                                                                if (response.data.record[0].holdings_sup[j]["959"]) {
+                                                                    kohaholdings[i]["gaps"] = response.data.record[0].holdings_sup[j]["959"];
+                                                                }
+                                                                if (response.data.record[0].holdings_sup[j]["990"]) {
+                                                                    kohaholdings[i]["gaps"] = response.data.record[0].holdings_sup[j]["990"];
+                                                                }
+                                                                if (response.data.record[0].holdings_sup[j]["956"]) {
+                                                                    kohaholdings[i]["sup"] = response.data.record[0].holdings_sup[j]["956"];
+                                                                }
+                                                                if (response.data.record[0].holdings_sup[j]["957"]) {
+                                                                    kohaholdings[i]["tab"] = response.data.record[0].holdings_sup[j]["957"];
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                    //console.log(kohaholdings[i]);
                                                     journalholdings.push(kohaholdings[i]);
                                                     $scope.kohajholdings_loading = false;
                                                     $scope.loading = false;
                                                 }
 
                                             } else {
-                                                console.log("journal : no holdings");
+                                                //console.log("journal : no holdings");
                                                 if (!angular.element(document.querySelector('#getit_link1_1 > div > prm-full-view-service-container > div.section-body prm-view-online')).length > 0) {
                                                     angular.element(document.querySelector('#getit_link1_1')).addClass("hide");
                                                 }
@@ -193,9 +221,9 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                 cache: false,
                             }).then(function(response) {
                                 if (response.data != undefined) {
-                                    console.log(response.data);
+                                    //console.log(response.data);
                                     if (response.data.COMMAG_BU != "") {
-                                        console.log(response.data.COMMAG_BU);
+                                        //console.log(response.data.COMMAG_BU);
                                         $scope.avail_commagbu = false;
                                         $scope.returnMessage = response.data.COMMAG_BU;
                                     } else {
@@ -212,7 +240,7 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
 
                             if (items) {
                                 $scope.items = items;
-                                console.log(items);
+                                //console.log(items);
 
                                 $scope.branches = branches;
                                 $scope.status = status;
@@ -311,7 +339,7 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
 
                                             //var url = "https://cas.univ-rennes2.fr/login?service=" + encodeURIComponent(svc) ;
                                             //Example : "https://cas.univ-rennes2.fr/login?service=https%3A%2F%2Fcataloguepreprod.bu.univ-rennes2.fr%2Fapi%2Fv1%2Fcontrib%2Fwrm%2Frequest%3Fbiblionumber%3D171221%26callnumber%3DZP%2B39%26type%3DJOUR%26volume%3D2%26issue%3D25%26year%3D1996"
-                                            console.log(url);
+                                            //console.log(url);
                                             $http({
                                                 method: 'JSONP',
                                                 url: url,
@@ -320,7 +348,7 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                             }).then(function(response) {
                                                 $scope.requestSent = false;
                                                 if (response.data != undefined) {
-                                                    console.log(response.data);
+                                                    //console.log(response.data);
                                                     if (response.data.state == "success") {
                                                         // console.log(response.data.state);
                                                         $scope.request_succeed = true;

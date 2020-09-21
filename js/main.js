@@ -189,6 +189,9 @@ var jquery_loaded = function() {
     });
 };
 
+app.config(['$qProvider', function($qProvider) {
+    $qProvider.errorOnUnhandledRejections(false);
+}]);
 
 app.config(['$sceDelegateProvider', function($sceDelegateProvider) {
     var urlWhitelist = $sceDelegateProvider.resourceUrlWhitelist();
