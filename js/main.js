@@ -3,6 +3,7 @@ import { viewName } from './viewName';
 import { kohaItems } from './kohaItems.module';
 import { kohaAvailabilities } from './kohaAvailabilities.module';
 import { sfxHoldings } from './sfxHoldings.module';
+import { embedVideo } from './embedVideo.module';
 // import { googleAnalyticsConfig } from './googleAnalyticsConfig';
 import { libraryhours } from './libraryhours.module';
 import { reportProblem } from './reportProblem.module';
@@ -18,6 +19,7 @@ let app = angular.module('viewCustom', [
     'kohaItems',
     'kohaAvailabilities',
     'sfxHoldings',
+    'embedVideo',
     'libraryhours',
     'getThumbnail',
     'kohaLists',
