@@ -63,7 +63,7 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                             'Content-Type': 'application/json',
                                             'X-From-ExL-API-Gateway': undefined
                                         },
-                                        cache: false,
+                                        cache: true,
                                     }).then(function(response) {
                                         if (response.data.record[0]) {
                                             //Book Items

@@ -26,7 +26,7 @@
                             <p class="availability-status available">Etat de collection : {{holding.holdings}}</p>
                             <md-tooltip>{{holding.holdings}}</md-tooltip>
                             <p ng-if="holding.sup">Suppléments, hors-séries : {{holding.sup}}</p>
-                            <p ng-if="holding.tab">Tables, indexes : {{holding.tab}}</p>
+                            <p ng-if="holding.tab">Tables, index : {{holding.tab}}</p>
                             <p ng-if="holding.gaps" class="prm-warn">Lacunes : {{holding.gaps}}</p>
                         </div>
                         <div ng-if='holding.location.indexOf("Magasin") > -1' flex flex-xs="100">
