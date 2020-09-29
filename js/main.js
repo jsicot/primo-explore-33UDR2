@@ -1,10 +1,8 @@
-// import 'primo-explore-google-analytics';
 import { viewName } from './viewName';
 import { kohaItems } from './kohaItems.module';
 import { kohaAvailabilities } from './kohaAvailabilities.module';
 import { sfxHoldings } from './sfxHoldings.module';
 import { embedVideo } from './embedVideo.module';
-// import { googleAnalyticsConfig } from './googleAnalyticsConfig';
 import { libraryhours } from './libraryhours.module';
 import { reportProblem } from './reportProblem.module';
 import { getThumbnail } from './getThumbnail.module';
