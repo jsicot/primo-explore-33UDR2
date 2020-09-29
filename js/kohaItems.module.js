@@ -127,7 +127,7 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                                         }
                                                     }
                                                 }
-                                                //console.log(response.data.record[0]);
+                                                console.log(items);
                                                 //Journal Holdings   
                                             } else if (response.data.record[0].holdings && type === "journal") {
                                                 $scope.kohajholdings_loading = true;
@@ -191,15 +191,8 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                                     $scope.loading = false;
                                                 }
 
-                                            } else {
-                                                //console.log("journal : no holdings");
-                                                if (!angular.element(document.querySelector('#getit_link1_1 > div > prm-full-view-service-container > div.section-body prm-view-online')).length > 0) {
-                                                    angular.element(document.querySelector('#getit_link1_1')).addClass("hide");
-                                                }
-                                                if (!angular.element(document.querySelector('#getit_link1_0 > div > prm-full-view-service-container > div.section-body prm-view-online')).length > 0) {
-                                                    angular.element(document.querySelector('#getit_link1_0')).addClass("hide");
-                                                }
                                             }
+
                                         }
                                     }).catch(function(response) {
                                         // error
@@ -241,7 +234,6 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                             if (items) {
                                 $scope.items = items;
                                 //console.log(items);
-
                                 $scope.branches = branches;
                                 $scope.status = status;
                                 $scope.userIsGuest = userData.isGuest();
@@ -251,6 +243,16 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                 $scope.kohaholdings = journalholdings;
                                 $scope.userIsGuest = userData.isGuest();
                                 //$scope.userIsGuest = false;
+                            }
+
+                            if (!$scope.items || !$scope.kohaholdings) {
+                                console.log("no holdings");
+                                if (!angular.element(document.querySelector('#getit_link1_1 > div > prm-full-view-service-container > div.section-body prm-view-online')).length > 0) {
+                                    angular.element(document.querySelector('#getit_link1_1')).addClass("hide");
+                                }
+                                if (!angular.element(document.querySelector('#getit_link1_0 > div > prm-full-view-service-container > div.section-body prm-view-online')).length > 0) {
+                                    angular.element(document.querySelector('#getit_link1_0')).addClass("hide");
+                                }
                             }
 
                             var delivery = $scope.$ctrl.parentCtrl.item.delivery;
