@@ -1,0 +1,49 @@
+#r2-portalbar {
+    position: relative;
+    z-index: 1030;
+}
+
+prm-topbar {
+	height: 0;
+}
+
+prm-search-bar {
+	padding: 1.5em 1.5em 90px 1.5em !important;
+}
+
+prm-search-bar {
+	background: #8981B5 !important;
+}
+
+prm-search-bar div.advanced-search-backdrop {
+	background: transparent !important;
+}
+
+prm-search-bar-after .md-fab-toolbar {
+	width: 100%;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+}
+
+prm-search-bar-after .md-button:not(.md-icon-button),
+prm-search-bar-after .top-nav-bar {
+	height: 100%;
+	min-height: 100%;
+}
+
+
+@media screen and (max-width:640px) {
+/*  */
+	prm-search-bar-after .logospace {
+		min-width: 50px;
+	}
+	prm-main-menu[menu-type="menu"] .md-button {
+		min-width: 0;
+	}
+}
+@media screen and (max-width:768px) {
+	prm-main-menu[menu-type="menu"] .md-button {
+		min-width: 80px;
+	}
+}
