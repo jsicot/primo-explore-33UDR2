@@ -7,11 +7,11 @@ import { libraryhours } from './libraryhours.module';
 import { reportProblem } from './reportProblem.module';
 import { getThumbnail } from './getThumbnail.module';
 import { kohaLists } from './koha-lists.module';
-import { courseReserves } from './course-reserves.module';
+// import { courseReserves } from './course-reserves.module';
 import { recommander } from './recommander.module';
 
 let app = angular.module('viewCustom', [
-    'courseReserves',
+    // 'courseReserves',
     'recommander',
     'angularLoad',
     'kohaItems',

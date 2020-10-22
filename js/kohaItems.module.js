@@ -78,34 +78,36 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                                         return kohaitems[k].statusClass === "status-ondemand";
                                                     }
                                                 });
-                                                //console.log(Object.values(kohaitems));
 
-                                                Object.keys(kohaitems).some(function(k) {
-                                                    var itemnumber = kohaitems[k].itemnumber;
-                                                    var coursesSvc = URLs.koha + "api/v1/contrib/course/item/" + itemnumber;
-                                                    $http({
-                                                        method: 'GET',
-                                                        url: coursesSvc,
-                                                        headers: {
-                                                            'Content-Type': 'application/json',
-                                                            'X-From-ExL-API-Gateway': undefined
-                                                        },
-                                                        cache: false,
-                                                    }).then(function(response) {
-                                                        if (response.data != undefined) {
-                                                            //console.log(response.data);
-                                                            var CR = response.data;
-                                                            for (var i = 0; i < CR.length; i++) {
-                                                                //console.log(CR[i].course.course_name);
-                                                                kohaitems[k].courses = CR;
-                                                                if (CR[i].public_note && CR[i].course.enabled === 'yes') {
-                                                                    kohaitems[k].itemnotes = CR[i].public_note;
-                                                                }
-                                                                return kohaitems[k];
-                                                            }
-                                                        }
-                                                    }, function(response) {});
-                                                });
+                                                // Course reserves Info for items
+                                                //-----------------------------------
+                                                // Object.keys(kohaitems).some(function(k) {
+                                                //     var itemnumber = kohaitems[k].itemnumber;
+                                                //     var coursesSvc = URLs.koha + "api/v1/contrib/course/item/" + itemnumber;
+                                                //     $http({
+                                                //         method: 'GET',
+                                                //         url: coursesSvc,
+                                                //         headers: {
+                                                //             'Content-Type': 'application/json',
+                                                //             'X-From-ExL-API-Gateway': undefined
+                                                //         },
+                                                //         cache: false,
+                                                //     }).then(function(response) {
+                                                //         if (response.data != undefined) {
+                                                //             //console.log(response.data);
+                                                //             var CR = response.data;
+                                                //             for (var i = 0; i < CR.length; i++) {
+                                                //                 //console.log(CR[i].course.course_name);
+                                                //                 kohaitems[k].courses = CR;
+                                                //                 if (CR[i].public_note && CR[i].course.enabled === 'yes') {
+                                                //                     kohaitems[k].itemnotes = CR[i].public_note;
+                                                //                 }
+                                                //                 return kohaitems[k];
+                                                //             }
+                                                //         }
+                                                //     }, function(response) {});
+                                                // });
+
                                                 var isavailableonshelf = Object.keys(kohaitems).some(function(k) {
                                                     return kohaitems[k].istatus === "Disponible";
                                                 });
