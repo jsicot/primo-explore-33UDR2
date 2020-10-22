@@ -193,6 +193,9 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                                     $scope.loading = false;
                                                 }
 
+                                            } else {
+                                                $scope.loading = false;
+                                                angular.element(document.querySelector('#getit_link1_0 > div > prm-full-view-service-container > div.section-head > prm-service-header > div '))[0].style.display = "none";
                                             }
 
                                         }
