@@ -1,4 +1,4 @@
-import { viewName } from './viewName';
+import { viewName } from '.././viewName';
 
 angular.module('libraryhours', []).component('prmSearchBookmarkFilterAfter', {
     bindings: { parentCtrl: '<' },
@@ -27,9 +27,9 @@ angular.module('libraryhours', []).component('prmSearchBookmarkFilterAfter', {
                         }).then(function mySuccess(response) {
                             if (response.data != undefined) {
                                 var librarieshours = response.data[1].data.replace(/<a.+>/g, '').replace(/<\/a>/g, '');
-				$scope.libhoursloading = false;
-				$scope.librarieshours = librarieshours;
-				getHours(librarieshours, 'libs');
+                                $scope.libhoursloading = false;
+                                $scope.librarieshours = librarieshours;
+                                getHours(librarieshours, 'libs');
                             }
                         }, function myError(response) {
                             $scope.libhoursloading = false;
@@ -42,9 +42,9 @@ angular.module('libraryhours', []).component('prmSearchBookmarkFilterAfter', {
                         }).then(function mySuccess(response) {
                             if (response.data != undefined) {
                                 var serviceshours = response.data[1].data.replace(/<a.+>/g, '').replace(/<\/a>/g, '');
-				$scope.serhoursloading = false;
+                                $scope.serhoursloading = false;
                                 $scope.serviceshours = serviceshours;
-				getHours(serviceshours, 'serv');
+                                getHours(serviceshours, 'serv');
                             }
                         }, function myError(response) {
                             $scope.serhoursloading = false;
@@ -57,14 +57,14 @@ angular.module('libraryhours', []).component('prmSearchBookmarkFilterAfter', {
                 });
             }
 
-	    function getHours(elts, type) {
+            function getHours(elts, type) {
                 var d = new Date();
-                var today = new Date().toJSON().slice(0,10);
+                var today = new Date().toJSON().slice(0, 10);
                 var now = d.getHours() * 100 + d.getMinutes();
-		var ids = jQuery(elts).find('.'+(type == 'libs' ? 'kohacode' : 'servnid')).map(function() { return this.innerText; }).get().join();
-		jQuery.ajax({
-                    url: 'https://www.bu.univ-rennes2.fr/'+(type == 'libs' ? 'library_hours' : 'opening_hours')+'/instances',
-                    data: { 
+                var ids = jQuery(elts).find('.' + (type == 'libs' ? 'kohacode' : 'servnid')).map(function() { return this.innerText; }).get().join();
+                jQuery.ajax({
+                    url: 'https://www.bu.univ-rennes2.fr/' + (type == 'libs' ? 'library_hours' : 'opening_hours') + '/instances',
+                    data: {
                         from_date: today,
                         to_date: today,
                         nid: ids
@@ -80,34 +80,33 @@ angular.module('libraryhours', []).component('prmSearchBookmarkFilterAfter', {
                                 hours[id] = [];
                             }
                             hours[id].push(line);
-                            hours[id].sort(function(a,b) { return a.start_date < b.start_date });
+                            hours[id].sort(function(a, b) { return a.start_date < b.start_date });
                         });
-                        jQuery.each(hours, function(i,e) {
+                        jQuery.each(hours, function(i, e) {
                             var status = 'closed';
-                            var id = type == 'libs' ? e[0].kohacode : 'ser'+e[0].nid;
+                            var id = type == 'libs' ? e[0].kohacode : 'ser' + e[0].nid;
                             if (e[0].start_time == undefined && e[0].end_time == undefined) {
-                                jQuery('.'+id+' .hour-container').text('Fermé'+(type == 'libs' ? 'e' : ''));
+                                jQuery('.' + id + ' .hour-container').text('Fermé' + (type == 'libs' ? 'e' : ''));
                             } else {
                                 var content = '';
-                                for (var i = 0 ; i < e.length ; i++) {
+                                for (var i = 0; i < e.length; i++) {
                                     if (now > parseInt(e[i].start_time.replace(/\D+/g, '')) && now < parseInt(e[i].end_time.replace(/\D+/g, ''))) {
                                         status = 'open';
                                     }
                                     if (i > 0) { content += ' / '; }
-                                    content += '<time datetime="'+e[i].start_time+'" class="starttime">'+e[i].start_time.replace(/^0/, '')+'</time> - <time datetime="'+e[i].end_time+'" class="endtime">'+e[i].end_time.replace(/^0/, '')+'</time>';
+                                    content += '<time datetime="' + e[i].start_time + '" class="starttime">' + e[i].start_time.replace(/^0/, '') + '</time> - <time datetime="' + e[i].end_time + '" class="endtime">' + e[i].end_time.replace(/^0/, '') + '</time>';
                                 }
-                                jQuery('.'+id+' .hour-container').html(content);
+                                jQuery('.' + id + ' .hour-container').html(content);
                             }
-                            jQuery('.'+id).removeClass('text-services text-libraries').addClass(status);
-                            if (jQuery('.'+id).parents("li").size() > 0) {
-                                jQuery('.'+id).parents("li").find(".menu-icon").addClass(status);
+                            jQuery('.' + id).removeClass('text-services text-libraries').addClass(status);
+                            if (jQuery('.' + id).parents("li").size() > 0) {
+                                jQuery('.' + id).parents("li").find(".menu-icon").addClass(status);
                             }
                         });
                     },
-		    error: function() {
-                    }
-		});
-	    }
+                    error: function() {}
+                });
+            }
         }
     }],
     templateUrl: 'custom/' + viewName + '/html/prmSearchBookmarkFilterAfter.html'

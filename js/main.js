@@ -1,14 +1,14 @@
 import { viewName } from './viewName';
-import { kohaItems } from './kohaItems.module';
-import { kohaAvailabilities } from './kohaAvailabilities.module';
-import { sfxHoldings } from './sfxHoldings.module';
-import { embedVideo } from './embedVideo.module';
-import { libraryhours } from './libraryhours.module';
-import { reportProblem } from './reportProblem.module';
-import { getThumbnail } from './getThumbnail.module';
-import { kohaLists } from './koha-lists.module';
-// import { courseReserves } from './course-reserves.module';
-import { recommander } from './recommander.module';
+import { kohaItems } from './prmOpacAfter/kohaItems.module';
+import { kohaAvailabilities } from './prmBriefResultAfter/kohaAvailabilities.module';
+import { sfxHoldings } from './prmViewOnlineAfter/sfxHoldings.module';
+import { embedVideo } from './prmServiceDetailsAfter/embedVideo.module';
+import { libraryhours } from './prmSearchBookmarkFilterAfter/libraryhours.module';
+import { reportProblem } from './prmSaveToFavoritesButtonAfter/reportProblem.module';
+import { getThumbnail } from './prmSearchResultThumbnailContainerAfter/getThumbnail.module';
+import { kohaLists } from './kohaLists/koha-lists.module';
+// import { courseReserves } from './courseReserves/course-reserves.module';
+import { recommander } from './prmResourceRecommenderAfter/recommander.module';
 
 let app = angular.module('viewCustom', [
     // 'courseReserves',

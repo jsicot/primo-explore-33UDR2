@@ -1,4 +1,4 @@
-import { viewName } from './viewName';
+import { viewName } from '.././viewName';
 
 angular
     .module('kohaLists', [])

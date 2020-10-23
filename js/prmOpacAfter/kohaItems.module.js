@@ -1,6 +1,6 @@
 import {
     viewName
-} from './viewName';
+} from '.././viewName';
 
 angular.module('kohaItems', []).component('prmOpacAfter', {
         bindings: {

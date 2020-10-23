@@ -1,6 +1,6 @@
 import {
     viewName
-} from './viewName';
+} from '.././viewName';
 import { stringify } from 'querystring';
 
 angular.module('courseReserves', ['ui.router']).config(['$stateProvider',

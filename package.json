@@ -15,12 +15,6 @@
     "dependencies": {
         "@material/drawer": "^0.36.0"
     },
-    "devDependencies": {
-        "angulartics": "^1.6.0",
-        "angulartics-google-tag-manager": "^0.0.1",
-        "primo-explore-external-search": "^1.1.5",
-        "primo-explore-google-analytics": "^0.1.1",
-        "primo-explore-oadoi-link": "^1.0.1"
-    },
+    "devDependencies": {},
     "keywords": []
 }
