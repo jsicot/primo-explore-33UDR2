@@ -9,7 +9,7 @@ angular.module('getThumbnail', []).component('prmSearchResultThumbnailContainerA
                 var obj = $scope.$ctrl.parentCtrl.item.pnx.control;
                 if (obj.hasOwnProperty("sourcerecordid") && obj.hasOwnProperty("sourceid")) {
                     var recid = obj.recordid[0];
-                    console.log(recid)
+                    // console.log(recid)
                     var ids = obj.sourcerecordid;
                     var total_ids = ids.length;
                     if (total_ids > 1) {

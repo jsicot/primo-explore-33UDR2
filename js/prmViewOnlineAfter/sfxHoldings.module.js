@@ -12,7 +12,7 @@ angular.module('sfxHoldings', []).component('prmViewOnlineAfter', {
                     let url = new URL(openurl); // or construct from window.location
                     let params = new URLSearchParams(url.search.slice(1));
                     var openurlSvc = "https://catalogue.bu.univ-rennes2.fr/r2microws/getSfx.php?" + params.toString();
-                    console.log(openurlSvc);
+                    // console.log(openurlSvc);
                     $http({
                         method: 'JSONP',
                         url: openurlSvc,
@@ -31,7 +31,7 @@ angular.module('sfxHoldings', []).component('prmViewOnlineAfter', {
                                 angular.element(document.querySelector('prm-view-online div a.arrow-link.md-primoExplore-theme'))[0].style.display = "none";
                             }
                             $scope.sfxloading = false;
-                            console.log(holdings);
+                            // console.log(holdings);
                             $scope.sfxholdings = holdings;
                         }
                     });

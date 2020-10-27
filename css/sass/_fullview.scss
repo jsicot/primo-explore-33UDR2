@@ -5,6 +5,21 @@
     /*cursor: auto;*/
 }
 
+.multiwhere .multiwherelist .md-list-item-text h3 {
+    font-size: 0.9em;
+    font-weight: 400;
+    letter-spacing: .01em;
+    margin: 0;
+    line-height: 1.2em;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.multiwhere .availability-status.availability-status.check_holdings {
+    font-size: .9em;
+}
+
 .full-view-section {
     margin-top: 1em;
 }

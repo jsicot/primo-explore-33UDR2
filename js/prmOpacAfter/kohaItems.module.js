@@ -55,7 +55,7 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                 }
                                 if (bn && source == "33UDR2_KOHA") {
                                     var url = URLs.koha + "r2microws/json.getSru.php?index=rec.id&q=" + bn;
-                                    console.log(url);
+                                    // console.log(url);
                                     $http({
                                         method: 'JSONP',
                                         url: url,
@@ -129,7 +129,7 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                                         }
                                                     }
                                                 }
-                                                console.log(items);
+                                                // console.log(items);
                                                 //Journal Holdings   
                                             } else if (response.data.record[0].holdings && type === "journal") {
                                                 $scope.kohajholdings_loading = true;
@@ -251,7 +251,7 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                             }
 
                             if (!$scope.items || !$scope.kohaholdings) {
-                                console.log("no holdings");
+                                // console.log("no holdings");
                                 if (!angular.element(document.querySelector('#getit_link1_1 > div > prm-full-view-service-container > div.section-body prm-view-online')).length > 0) {
                                     angular.element(document.querySelector('#getit_link1_1')).addClass("hide");
                                 }
@@ -277,7 +277,7 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                     if (response.data.error == undefined) {
                                         var keys = Object.keys(response.data);
                                         var len = keys.length;
-                                        console.log("SFX results: " + len);
+                                        // console.log("SFX results: " + len);
                                         if (len > 0) {
                                             $scope.sfxholdings = response.data
                                             $scope.sfxloading = false;

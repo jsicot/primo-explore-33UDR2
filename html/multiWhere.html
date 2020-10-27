@@ -1,0 +1,20 @@
+<div ng-if="$ctrl.serviceName==='getit_link1_0' && otherLibs===true" class="multiwhere">
+    <h3 class="medium-uppercase-bold"> <span translate="nui.brief.results.tabs.getit_other">Get it from other
+            institutions  </span> </h3>
+    <div ng-repeat="libraries in mwLibraries">
+        <div ng-repeat="library in libraries" class="multiwherelist">
+            <a class="neutralized-button layout-full-width layout-display-flex md-button md-primoExplore-theme md-ink-ripple" role="button" href="{{library.racinedeeplinkpsi.toString().replace('#Ppn#', ppn)}}" target="_blank">
+                <div layout="row" flex="100" layout-align="space-between center" class="layout-align-space-between-center layout-row flex-100">
+                    <div class="md-list-item-text">
+                        <h3 translate="{{library.shortname}}">{{library.shortname}}</h3>
+                        <p><span class="availability-status availability-status check_holdings" translate="nui.brief.results.tabs.check_holdings"></span></p>
+                    </div>
+                    <prm-icon icon-type="svg" svg-icon-set="hardware" icon-definition="ic_keyboard_arrow_right_24px">
+                        <md-icon md-svg-icon="hardware:ic_keyboard_arrow_right_24px" alt="" class="md-primoExplore-theme" aria-hidden="true"></md-icon>
+                        <prm-icon-after parent-ctrl="$ctrl"></prm-icon-after>
+                    </prm-icon>
+                </div>
+                <div class="md-ripple-container"></div>
+            </a>
+        </div>
+    </div>

@@ -2,28 +2,26 @@
 
 <h3 ng-if="sfxholdings.length > 0" class="section-title" style="margin-bottom: .75em !important;"><span>En Ligne :</span></h3>
 
-    <md-list ng-if="sfxholdings" class="separate-list-items margin-left-medium">
-        <md-list-item class="md-2-line _md-no-proxy _md" ng-repeat="(index, holding) in sfxholdings">
+<md-list ng-if="sfxholdings" class="separate-list-items margin-left-medium">
+    <md-list-item class="md-2-line _md-no-proxy _md" ng-repeat="(index, holding) in sfxholdings">
         <a class="neutralized-button layout-full-width layout-display-flex md-button md-ink-ripple layout-row" tabindex="0" layout="flex" href="{{holding.href}}" target="_blank" md-ink-ripple="red" role="button">
-                <div layout="row" flex="100" layout-align="space-between center" class="layout-align-space-between-center layout-row flex-100">
-                    <div class="md-list-item-text layout-wrap layout-row flex" layout="row" layout-wrap="" flex="">
-                        <div flex="" flex-xs="100" class="flex-xs-100 flex">
+            <div layout="row" flex="100" layout-align="space-between center" class="layout-align-space-between-center layout-row flex-100">
+                <div class="md-list-item-text layout-wrap layout-row flex" layout="row" layout-wrap="" flex="">
+                    <div flex="" flex-xs="100" class="flex-xs-100 flex">
                         <h3>{{holding.title}}</h3>
-                            <p><span class="availability-status available">Accès</span>
-                            	<span ng-if="holding.coverage">, </span>
-                                <span ng-if="holding.coverage">{{holding.coverage}}</span>
-                            </p>
-                            <p><span ng-if="holding.note" class="weak-text">{{holding.note}}</span></p>
-						</div>
-                        <div layout-align="end center" layout="row" layout-wrap="" flex-xs="100" flex-sm="10" flex="" class="list-item-actions layout-wrap layout-align-end-center layout-row flex-xs-100 flex-sm-10 flex-10"></div>
+                        <p><span class="availability-status available">Accès</span>
+                            <span ng-if="holding.coverage">, </span>
+                            <span ng-if="holding.coverage">{{holding.coverage}}</span>
+                        </p>
+                        <p><span ng-if="holding.note" class="weak-text">{{holding.note}}</span></p>
                     </div>
-                    <prm-icon class="padding-right-small" icon-type="svg" svg-icon-set="action" icon-definition="ic_open_in_new_24px"></prm-icon-after>
-                    </prm-icon>
+                    <div layout-align="end center" layout="row" layout-wrap="" flex-xs="100" flex-sm="10" flex="" class="list-item-actions layout-wrap layout-align-end-center layout-row flex-xs-100 flex-sm-10 flex-10"></div>
                 </div>
-                <div class="md-ripple-container" style=""></div>
+                <prm-icon class="padding-right-small" icon-type="svg" svg-icon-set="action" icon-definition="ic_open_in_new_24px"></prm-icon-after>
+                </prm-icon>
             </div>
-            </a>
-        </md-list-item>
-    </md-list>
-
-
+            <div class="md-ripple-container"></div>
+            </div>
+        </a>
+    </md-list-item>
+</md-list>
