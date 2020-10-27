@@ -20,7 +20,7 @@ class multiWhereController {
                         var ppn = ppn[3];
                         $scope.ppn = ppn;
                         // console.log(ppn);
-                        var UnirRcr = new Array("141182304", "350472301", "352382102", "352382103", "352382104", "352382210", "352382241", "352382305", "352382339", "352385201", "352386106");
+                        var UnirRcr = new Array("350472301", "352382102", "352382103", "352382104", "352382210", "352382241", "352382305", "352382339", "352385201", "352386106");
                         var url = "https://www.sudoc.fr/services/multiwhere/" + ppn + "&format=text/json";
                         // console.log(url);
                         $scope.mwLibraries = [];
