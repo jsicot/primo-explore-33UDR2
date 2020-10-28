@@ -7,12 +7,12 @@ import { libraryhours } from './prmSearchBookmarkFilterAfter/libraryhours.module
 import { reportProblem } from './prmSaveToFavoritesButtonAfter/reportProblem.module';
 import { getThumbnail } from './prmSearchResultThumbnailContainerAfter/getThumbnail.module';
 import { kohaLists } from './kohaLists/koha-lists.module';
-// import { courseReserves } from './courseReserves/course-reserves.module';
+import { courseReserves } from './courseReserves/course-reserves.module';
 import { recommander } from './prmResourceRecommenderAfter/recommander.module';
 import { multiWhereConfig } from './prmFullViewServiceContainerAfter/multiWhere';
 
 let app = angular.module('viewCustom', [
-    // 'courseReserves',
+    'courseReserves',
     'recommander',
     'angularLoad',
     'kohaItems',
@@ -94,13 +94,15 @@ if (app) {
 
     app.constant('courseLists', [{
         group: "burennes2",
-        title: "Pour un cours",
+        title: "Pour un cours ou un concours",
+        class: "co",
         description: "",
         filter: "[CO]",
         sortType: "name"
     }, {
         group: "burennes2",
         title: "Autour d'une thématique",
+        class: "thema",
         description: "",
         filter: "[THEMA]",
         sortType: "name"

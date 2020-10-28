@@ -21,17 +21,61 @@ md-card.courses {
     padding: 0;
 }
 
-.courses .md-headline,
-.reserves .md-headline {
-    font-size: 30px;
-    font-weight: 300;
-    line-height: 38px;
+.courses md-card-title-text,
+.reserves md-card-title-text {
     padding: 5px;
 }
 
 .courses md-card md-card-title {
-    padding: 24px 16px 16px;
-    background-color: #f0f0f0;
+    padding: 20px;
+}
+
+.courses .bg-co md-card-title-text,
+.courses .bg-thema md-card-title-text {
+    padding: 10px;
+    background: #fff;
+    opacity: 0.8;
+}
+
+.courses md-card-title-text {
+    font-weight: 600;
+}
+
+.courses .bg-co md-card-title-text .md-headline,
+.courses .bg-thema md-card-title-text .md-headline {
+    font-weight: 500;
+    font-size: 2em;
+}
+
+.courses-selections {
+    background-color: #774E9A !important;
+    color: #ffffff !important;
+    text-align: center;
+}
+
+.courses-selections .md-headline {
+    font-size: 3em;
+    font-weight: 500;
+}
+
+.courses-selections .md-subhead {
+    font-size: 1.2em;
+    font-weight: 300;
+}
+
+.bg-co {
+    background-image: url(../img/co.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    ;
+}
+
+.bg-thema {
+    background-image: url(../img/thema.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
 }
 
 .courses md-list-item.md-3-line,

@@ -8,29 +8,34 @@ angular.module('recommander', []).component('prmResourceRecommenderAfter', {
             parentCtrl: '<'
         },
         templateUrl: 'custom/' + viewName + '/html/recommander.html',
-        controller: ['$scope', '$rootScope', '$location', '$http', '$element', 'URLs', 'recoService', '$mdDialog', function controller($scope, $rootScope, $location, $http, $element, URLs, coursesService, recoService, $mdDialog) {
+        controller: ['$scope', '$rootScope', '$location', '$http', '$element', 'URLs', 'recoService', 'coursesService', '$mdDialog', function controller($scope, $rootScope, $location, $http, $element, URLs, recoService, coursesService, $mdDialog) {
             this.$onInit = function() {
                 var query = $location.search().query
                 var queries = Object.prototype.toString.call(query) === '[object Array]' ? query : query ? [query] : false
                 console.log(queries);
+
                 var q = queries.map(part => {
-                    let terms = part.split(',')
-                    let string = terms[2].normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[\s]+/g, "%25") || ''
-                    return '%25' + string + '%25'
+                    var arr = part.split(",")
+                    arr.splice(0, 2)
+                    var terms = arr.join(",")
+                    let string = terms.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[\s]+/g, "%") || ''
+                    return encodeURI(string)
                 }).join('')
 
-                // coursesService.getCourses(q).then(function(data) {
-                //     // no need to call user.data, service handles this
-                //     if (data) {
-                //         $scope.courses = data[0];
-                //         $scope.vid = viewName;
-                //         console.log($scope.courses);
-                //         $element.parent().removeClass("ng-hide");
+                console.log("ReqCRapi", q);
 
-                //     }
-                // }).catch(function(err) {
-                //     // handle errors here if needed
-                // });
+                coursesService.getCourses(q).then(function(data) {
+                    // no need to call user.data, service handles this
+                    if (data) {
+                        $scope.courses = data[0];
+                        $scope.vid = viewName;
+                        console.log($scope.courses);
+                        $element.parent().removeClass("ng-hide");
+
+                    }
+                }).catch(function(err) {
+                    // handle errors here if needed
+                });
                 // var query = queries.map(part => {
                 //     let terms = part.split(',')
                 //     let string = terms[2].normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[\s]+/g, " ") || ''

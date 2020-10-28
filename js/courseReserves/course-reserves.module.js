@@ -12,7 +12,7 @@ angular.module('courseReserves', ['ui.router']).config(['$stateProvider',
                     controller: ['$scope', '$stateParams', 'coursesService', 'courseLists', function controller($scope, $stateParams, coursesService, courseLists) {
                         $scope.vid = $stateParams.vid
                         $scope.group = $stateParams.group
-                        $scope.title = "Listes de lecture"
+                        $scope.title = "Sélections"
                         $scope.body = "Retrouvez les bibliographies de vos questions de cours ou de concours : ces listes vous permettent d'aller à l'essentiel et facilitent vos recherches dans les bibliothèques. Découvrez aussi les sélections thématiques des bibliothécaires."
                             //$scope.policyInfo = policyInfo.filter(info => info.group === $stateParams.group)
                         $scope.courseLists = courseLists.filter(list => list.group === 'burennes2')
@@ -135,7 +135,7 @@ angular.module('courseReserves', ['ui.router']).config(['$stateProvider',
                 getCourses: function(filter) {
                     return $http({
                         method: 'GET',
-                        url: URLs.courses + filter,
+                        url: URLs.courses + "?keywords=" + filter,
                         cache: true
                     }).then(response => response.data)
                 },
