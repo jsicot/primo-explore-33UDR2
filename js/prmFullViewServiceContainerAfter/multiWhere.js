@@ -39,33 +39,35 @@ class multiWhereController {
                                                 rcrlist += data.rcr + ',';
                                             }
                                         });
-                                        // console.log(rcrlist);
-                                        var deeplinksvc = "https://www.sudoc.fr/services/multilinkrcr/" + rcrlist.replace(/,\s*$/, "");
-                                        console.log(deeplinksvc);
-                                        $http({
-                                            method: 'GET',
-                                            url: deeplinksvc,
-                                            cache: true
-                                        }).then(function(r) {
-                                                if (r.data && r.data.sudoc && r.data.sudoc.result) {
-                                                    var l = r.data.sudoc.result;
-                                                    if (angular.isArray(l)) {
-                                                        $scope.mwLibraries = l;
-                                                        // console.log("list", l);
-                                                    } else {
-                                                        var library = l.library;
-                                                        console.log("library", library);
-                                                        var libraries = [];
-                                                        libraries.push({ 'library': library });
-                                                        // console.log("libraries", libraries);
-                                                        $scope.mwLibraries = libraries;
+                                        // console.log('rcrlist', rcrlist);
+                                        if (rcrlist) {
+                                            var deeplinksvc = "https://www.sudoc.fr/services/multilinkrcr/" + rcrlist.replace(/,\s*$/, "");
+                                            console.log(deeplinksvc);
+                                            $http({
+                                                method: 'GET',
+                                                url: deeplinksvc,
+                                                cache: true
+                                            }).then(function(r) {
+                                                    if (r.data && r.data.sudoc && r.data.sudoc.result) {
+                                                        var l = r.data.sudoc.result;
+                                                        if (angular.isArray(l)) {
+                                                            $scope.mwLibraries = l;
+                                                            // console.log("list", l);
+                                                        } else {
+                                                            var library = l.library;
+                                                            console.log("library", library);
+                                                            var libraries = [];
+                                                            libraries.push({ 'library': library });
+                                                            // console.log("libraries", libraries);
+                                                            $scope.mwLibraries = libraries;
+                                                        }
+                                                        $scope.otherLibs = true;
                                                     }
-                                                    $scope.otherLibs = true;
-                                                }
-                                            },
-                                            function(data) {
-                                                console.log('multilinkrcr failed.')
-                                            });
+                                                },
+                                                function(data) {
+                                                    console.log('multilinkrcr failed.')
+                                                });
+                                        }
                                     }
                                 }
                             },
