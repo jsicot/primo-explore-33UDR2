@@ -204,7 +204,6 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                         // error
                                         $scope.loading = false;
                                         angular.element(document.querySelector('prm-opac>md-tabs'))[0].style.display = "block";
-
                                     });
 
                                 } else {
@@ -272,6 +271,11 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                             }
 
                             if (openurl != undefined) {
+                                if (recid.startsWith("dedupmrg")) {
+                                    if (angular.element(document.querySelector('#getit_link1_0')).length > 0) {
+                                        angular.element(document.querySelector('#getit_link1_0'))[0].style.display = "none";
+                                    }
+                                }
                                 $scope.sfxloading = true;
                                 $scope.proxifiedurl = openurl.replace("http://acceder.bu.univ-rennes2.fr/sfx_33puedb", URLs.koha + "r2microws/getSfx.php");
                                 $http.jsonp($scope.proxifiedurl).then(function(response) {

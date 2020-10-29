@@ -3,7 +3,8 @@
 <h3 ng-if="sfxholdings.length > 0" class="section-title" style="margin-bottom: .75em !important;"><span>En Ligne :</span></h3>
 
 <md-list ng-if="sfxholdings" class="separate-list-items margin-left-medium">
-    <md-list-item class="md-2-line _md-no-proxy _md" ng-repeat="(index, holding) in sfxholdings">
+    <md-list-item class="md-2-line _md-no-proxy _md" ng-repeat="(index, holding) in sfxholdings" ng-if="holding.service_type == 'getFullTxt'">
+
         <a class="neutralized-button layout-full-width layout-display-flex md-button md-ink-ripple layout-row" tabindex="0" layout="flex" href="{{holding.href}}" target="_blank" md-ink-ripple="red" role="button">
             <div layout="row" flex="100" layout-align="space-between center" class="layout-align-space-between-center layout-row flex-100">
                 <div class="md-list-item-text layout-wrap layout-row flex" layout="row" layout-wrap="" flex="">
@@ -21,7 +22,7 @@
                 </prm-icon>
             </div>
             <div class="md-ripple-container"></div>
-            </div>
         </a>
+        </div>
     </md-list-item>
 </md-list>
