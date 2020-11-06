@@ -109,7 +109,7 @@ if (app) {
     }]);
 
     app.constant('URLs', {
-        koha: 'https://catalogue.bu.univ-rennes2.fr/',
+        koha: 'https://cataloguepreprod.bu.univ-rennes2.fr/',
         courses: 'https://catalogue.bu.univ-rennes2.fr/api/v1/contrib/course/search/',
         course: 'https://catalogue.bu.univ-rennes2.fr/api/v1/contrib/course/biblios/',
         bibs: 'https://api-eu.hosted.exlibrisgroup.com/primo/v1/search',

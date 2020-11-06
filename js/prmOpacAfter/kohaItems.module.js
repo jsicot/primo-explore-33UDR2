@@ -73,16 +73,43 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                                 $scope.loading = false;
                                                 var kohaitems = response.data.record[0].item
 
-                                                var isclosedstacks = Object.keys(kohaitems).some(function(k) {
-                                                    if (kohaitems[k].branchcode === "BU" && kohaitems[k].isfa === false) {
-                                                        return kohaitems[k].statusClass === "status-ondemand";
-                                                    }
+
+                                                // WRM Info
+                                                // for items
+                                                // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -
+                                                var isclosedstacks = false;
+                                                Object.keys(kohaitems).some(function(k) {
+                                                    var wrmSvc = URLs.koha + "api/v1/contrib/wrm/biblio/" + bn;
+                                                    $http({
+                                                        method: 'GET',
+                                                        url: wrmSvc,
+                                                        headers: {
+                                                            'Content-Type': 'application/json',
+                                                            'X-From-ExL-API-Gateway': undefined
+                                                        },
+                                                        cache: false,
+                                                    }).then(function(response) {
+                                                        if (response.data != undefined) {
+                                                            // console.log("wrm response", response.data);
+                                                            var WRM = response.data;
+                                                            for (var i = 0; i < WRM.length; i++) {
+                                                                console.log("WRM itemnumber", WRM[i].itemnumber.toString());
+                                                                console.log("itemnumber", kohaitems[k].itemnumber);
+                                                                if (WRM[i].itemnumber.toString() === kohaitems[k].itemnumber) {
+                                                                    kohaitems[k].statusClass = "status-ondemand";
+                                                                    kohaitems[k].istatus = "Cliquez et ramassez";
+                                                                    $scope.isclosedstacks = true;
+                                                                }
+                                                                return kohaitems[k];
+                                                            }
+                                                        }
+                                                    }, function(response) {});
                                                 });
+
 
                                                 // Course reserves Info
                                                 // for items
                                                 // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -
-
 
                                                 Object.keys(kohaitems).some(function(k) {
                                                     var itemnumber = kohaitems[k].itemnumber;
@@ -114,7 +141,8 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                                 var isavailableonshelf = Object.keys(kohaitems).some(function(k) {
                                                     return kohaitems[k].istatus === "Disponible";
                                                 });
-                                                $scope.isclosedstacks = isclosedstacks;
+
+
                                                 $scope.isavailableonshelf = isavailableonshelf;
                                                 for (var i = 0; i < kohaitems.length; i++) {
                                                     if (kohaitems[i].withdrawnstatus == 'false' && kohaitems[i].itemlost == "0") {
@@ -244,12 +272,12 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                 $scope.branches = branches;
                                 $scope.status = status;
                                 $scope.userIsGuest = userData.isGuest();
-                                //$scope.userIsGuest = false;
+                                // $scope.userIsGuest = false;
                             }
                             if (journalholdings) {
                                 $scope.kohaholdings = journalholdings;
                                 $scope.userIsGuest = userData.isGuest();
-                                //$scope.userIsGuest = false;
+                                // $scope.userIsGuest = false;
                             }
 
                             if (!$scope.items || !$scope.kohaholdings) {
@@ -313,7 +341,7 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                         $scope.itemnumber = itemnumber;
                                         $scope.isavailableonshelf = isavailableonshelf;
                                         $scope.userIsGuest = userData.isGuest();
-                                        //$scope.userIsGuest = false;
+                                        // $scope.userIsGuest = false;
                                         $scope.addata = recordData.pnx.addata;
                                         // console.log($scope.addata);
                                         $scope.title = recordData.pnx.display.title[0];
