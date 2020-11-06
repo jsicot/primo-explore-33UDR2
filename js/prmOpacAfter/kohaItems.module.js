@@ -100,11 +100,15 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                                                     kohaitems[k].istatus = "Cliquez et ramassez";
                                                                     $scope.isclosedstacks = true;
                                                                 }
-                                                                return kohaitems[k];
+                                                                kohaitems[k];
                                                             }
+
                                                         }
                                                     }, function(response) {});
                                                 });
+
+
+                                                // angular.forEach(kohaitems, function(item) { console.log("itemnumberTEST", item.itemnumber); });
 
 
                                                 // Course reserves Info
