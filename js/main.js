@@ -54,7 +54,7 @@ if (app) {
 
     var url = new URL(document.location.href);
     var lang = url.searchParams.get('lang');
-    var homeLink = location.origin + '/primo-explore/search?vid=' + window.appConfig.vid + '&lang=' + lang;
+    var homeLink = location.origin + '/primo-explore/courses?vid=' + window.appConfig.vid + '&lang=' + lang;
 
 
     function add_custom_header(header_container) {

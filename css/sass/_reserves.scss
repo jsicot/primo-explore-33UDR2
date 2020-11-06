@@ -2,10 +2,23 @@
     background-color: #f3f3f3;
 }
 
+.courses h2 {
+    font-size: 1.2em;
+    line-height: 1.2em;
+}
+
+md-toolbar.courses {
+    background: #fff;
+}
+
 prm-brief-result .course-info-mark span {
     color: darkgoldenrod;
     padding: 2px;
     font-weight: 700;
+}
+
+.courses md-card {
+    background: #F3F3F3F3;
 }
 
 md-card.courses {
@@ -53,14 +66,17 @@ md-card.courses {
     text-align: center;
 }
 
+.md-subhead.courses-desc {
+    font-family: inherit;
+    font-size: 1.4em;
+    font-weight: 300;
+    display: inline !important;
+    white-space: pre-wrap;
+}
+
 .courses-selections .md-headline {
     font-size: 3em;
     font-weight: 500;
-}
-
-.courses-selections .md-subhead {
-    font-size: 1.2em;
-    font-weight: 300;
 }
 
 .bg-co {
@@ -253,6 +269,7 @@ $actionButtonMargin: 4px;
     padding: .25em 0;
     position: relative;
     left: -2px;
+    line-height: 0.9em;
     & span {
         font-weight: 600;
         font-size: 12px;

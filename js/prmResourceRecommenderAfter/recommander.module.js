@@ -36,11 +36,8 @@ angular.module('recommander', []).component('prmResourceRecommenderAfter', {
                 }).catch(function(err) {
                     // handle errors here if needed
                 });
-                // var query = queries.map(part => {
-                //     let terms = part.split(',')
-                //     let string = terms[2].normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[\s]+/g, " ") || ''
-                //     return string
-                // }).join(' ')
+
+
                 var query = queries.map(part => part.split(",")[2] || "").join(' ');
                 console.log(query);
                 recoService.searchWwwbu(query).then(function(response) {

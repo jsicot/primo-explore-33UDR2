@@ -82,6 +82,8 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                                 // Course reserves Info
                                                 // for items
                                                 // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -
+
+
                                                 Object.keys(kohaitems).some(function(k) {
                                                     var itemnumber = kohaitems[k].itemnumber;
                                                     var coursesSvc = URLs.koha + "api/v1/contrib/course/item/" + itemnumber;

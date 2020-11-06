@@ -1,0 +1,96 @@
+<div flex layout="column" class="courses">
+
+    <div flex layout="row" layout-xs="column">
+        <md-card flex class="courses-selections">
+            <md-card-title>
+                <md-card-title-text flex>
+                    <span class="md-headline">{{ title }}</span>
+                </md-card-title-text>
+            </md-card-title>
+            <md-card-content>
+                <span class="md-subhead courses-desc ">{{ body }}</span>
+            </md-card-content>
+            <!-- <md-card-actions layout="row">
+                <div>
+                    <a ng-href="{{ link.url }}">
+                        <md-button>{{ link.name }}</md-button>
+                    </a>
+                </div>
+            </md-card-actions> -->
+        </md-card>
+    </div>
+    <section section="courses" class="courses-type" class="sm-padding" layout="row" layout-xs="column" layout-align="center" flex>
+        <div ng-repeat="list in courseLists" flex>
+            <md-card>
+                <md-card-title layout="row" layout-xs="column" class="bg-{{ list.class }}">
+                    <md-card-title-text flex flex-lg="45" flex-md="45" flex-xl="45">
+                        <span class="md-headline">{{ list.title }}</span>
+                        <!-- -->
+                        <span ng-if="list.courses.length === 0" class="md-title ">Aucun résultat trouvé.</span>
+                        <p class=" md-subhead lg-padding weak">{{ list.description }}</p>
+                        <div ng-if="list.courses.length > 1" class="">{{ list.courses.length }} listes</div>
+                    </md-card-title-text>
+
+                    <md-card-title-text flex layout="row">
+
+                        <md-card-title-text flex layout="column">
+                            <div layout="row" layout-sm="column" class="layout-sm-column layout-row">
+                                <md-input-container class="underlined-input md-primoExplore-theme">
+                                    <label class="course-search" for="course-search">Explorer les sélections...</label>
+                                    <input type="text" name="course-search" id="course-search" size="50" ng-model="searchText" class="course-search ng-pristine ng-untouched md-input ng-empty ">
+                                    <!---->
+                                </md-input-container>
+                            </div>
+                            <md-card-title-text flex layout="row">
+                                <md-input-container flex>
+                                    <label>Domaines :</label>
+                                    <md-select ng-model="list.departmentFilter">
+                                        <md-option ng-repeat="department in list.departments" value="{{ department }}" ng-selected="$first">
+                                            {{ department }}
+                                        </md-option>
+                                    </md-select>
+                                </md-input-container>
+                                <md-input-container flex>
+                                    <label>Trier&nbsp;:</label>
+                                    <md-select ng-model="list.sortType">
+                                        <md-option value="course_name">Intitulé</md-option>
+                                        <!-- <md-option value="section">Section</md-option> -->
+                                    </md-select>
+                                </md-input-container>
+                            </md-card-title-text>
+                        </md-card-title-text>
+                    </md-card-title-text>
+                </md-card-title>
+                <md-card-content ng-if="list.courses.length > 0">
+
+                    <md-list flex>
+                        <md-list-item class="md-3-line" ng-if="list.departmentFilter === 'Tout' || course.department === list.departmentFilter" ng-repeat="course in list.courses | orderBy : list.sortType | filter:searchText" ui-sref="reserves({cid : course.course_id, group: group, vid: vid})">
+                            <div class="md-list-item-text" layout="column" flex>
+                                <div class="course-info-mark">
+                                    <prm-icon ng-if="list.filter === '\[CO\]'" class="course-info-mark-icon" icon-type="svg" svg-icon-set="primo-ui" icon-definition="mdi-teach"> </prm-icon>
+
+                                    <prm-icon ng-if="list.filter === '\[THEMA\]'" class="course-info-mark-icon" icon-type="svg" svg-icon-set="action" icon-definition="ic_stars_24px"> </prm-icon>
+
+
+                                    <span>   {{ course.department }}</span>
+                                </div>
+                                <div>
+
+                                    <h2><span ng-if="course.section"><strong>{{course.section}} / </strong></span>
+                                        <span ng-if="course.course_name">{{course.course_name}}</span>
+                                    </h2>
+                                    <p class="weak-text">{{course.public_note}}</p>
+                                    <!-- <ng-template ng-if="list.sortType === 'course_name'">
+                                        <h5>{{ course.name }}</h3>
+                                        <h3>{{ course.department }}</h4>
+                                    </ng-template> -->
+                                </div>
+                            </div>
+                        </md-list-item>
+                    </md-list>
+                </md-card-content>
+            </md-card>
+        </div>
+    </section>
+
+</div>

@@ -10,10 +10,10 @@ angular.module('courseReserves', ['ui.router']).config(['$stateProvider',
                     url: '/courses?vid',
                     templateUrl: 'custom/' + viewName + '/html/courses.html',
                     controller: ['$scope', '$stateParams', 'coursesService', 'courseLists', function controller($scope, $stateParams, coursesService, courseLists) {
-                        $scope.vid = $stateParams.vid
+                        $scope.vid = viewName
                         $scope.group = $stateParams.group
                         $scope.title = "Sélections"
-                        $scope.body = "Retrouvez les bibliographies de vos questions de cours ou de concours : ces listes vous permettent d'aller à l'essentiel et facilitent vos recherches dans les bibliothèques. Découvrez aussi les sélections thématiques des bibliothécaires."
+                        $scope.body = "Retrouvez les bibliographies de vos questions de cours ou de concours : ces listes vous permettent d'aller à l'essentiel et facilitent vos recherches dans les bibliothèques.\n\nDécouvrez aussi les sélections thématiques des bibliothécaires."
                             //$scope.policyInfo = policyInfo.filter(info => info.group === $stateParams.group)
                         $scope.courseLists = courseLists.filter(list => list.group === 'burennes2')
                         $scope.courseLists.map(
@@ -38,7 +38,7 @@ angular.module('courseReserves', ['ui.router']).config(['$stateProvider',
                     url: '/reserves/:cid?group&vid',
                     templateUrl: 'custom/' + viewName + '/html/reserves.html',
                     controller: ['$scope', '$stateParams', 'reservesService', function controller($scope, $stateParams, reservesService) {
-                        $scope.vid = $stateParams.vid
+                        $scope.vid = viewName
                             // $scope.policyInfo = policyInfo.filter(info => info.group === $stateParams.group)
                         reservesService.getCourse($stateParams.cid).then(
                             course => {
