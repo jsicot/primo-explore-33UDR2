@@ -1,5 +1,6 @@
 import { viewName } from './viewName';
 import { kohaItems } from './prmOpacAfter/kohaItems.module';
+import { wrmConf } from './prmOpacAfter/wrmConf';
 import { kohaAvailabilities } from './prmBriefResultAfter/kohaAvailabilities.module';
 import { sfxHoldings } from './prmViewOnlineAfter/sfxHoldings.module';
 import { embedVideo } from './prmServiceDetailsAfter/embedVideo.module';

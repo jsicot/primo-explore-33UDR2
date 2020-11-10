@@ -51,14 +51,14 @@ angular.module('kohaAvailabilities', []).component('prmBriefResultAfter', {
                                 $scope.kohaDisplay = true;
                                 if (items.available != null) {
                                     $element.children().removeClass("ng-hide"); /* initially set by $scope.kohaDisplay=false */
-                                    $scope.status = items.status;
+                                    $scope.status = "vérifier la disponibilité";
                                     $scope.recordid = bn;
                                     var homebranch = items.homebranch;
                                     // homebranch = homebranch.replace(/Bibliothèque Universitaire/,"BU");
                                     // homebranch = homebranch.replace(/Bibliothèque/,"BU");
                                     $scope.branch = homebranch;
                                     $scope.location = items.location;
-                                    $scope.class = items.class;
+                                    $scope.class = "check_holdings";
                                     $scope.callnumber = items.itemcallnumber;
                                     $scope.otherLocations = (items.total - 1);
                                     $scope.courses_co = items.courses_co;

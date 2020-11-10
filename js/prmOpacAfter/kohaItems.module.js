@@ -2,6 +2,18 @@ import {
     viewName
 } from '.././viewName';
 
+import {
+    wrmName,
+    wrmDefaultStatus,
+    wrmWhereToPick,
+    wrmNotAvail,
+    wrmAskToLib,
+    wrmReqFormName,
+    wrmReqInfo,
+    wrmReqAlertInfo,
+    wrmReqSubmitted
+} from '../prmOpacAfter/wrmConf';
+
 angular.module('kohaItems', []).component('prmOpacAfter', {
         bindings: {
             parentCtrl: '<'
@@ -68,11 +80,17 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                         if (response.data.record[0]) {
                                             //Book Items
                                             $scope.biblionumber = bn;
+
+                                            // WRM variables
+                                            $scope.wrmName = wrmName;
+                                            $scope.wrmWhereToPick = wrmWhereToPick;
+                                            $scope.wrmNotAvail = wrmNotAvail;
+                                            $scope.wrmAskToLib = wrmAskToLib;
+
                                             if (response.data.record[0].item && type !== "journal") {
                                                 $scope.kohaitems_loading = true;
                                                 $scope.loading = false;
                                                 var kohaitems = response.data.record[0].item
-
 
                                                 // WRM Info
                                                 // for items
@@ -93,11 +111,9 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                                             // console.log("wrm response", response.data);
                                                             var WRM = response.data;
                                                             for (var i = 0; i < WRM.length; i++) {
-                                                                console.log("WRM itemnumber", WRM[i].itemnumber.toString());
-                                                                console.log("itemnumber", kohaitems[k].itemnumber);
                                                                 if (WRM[i].itemnumber.toString() === kohaitems[k].itemnumber) {
                                                                     kohaitems[k].statusClass = "status-ondemand";
-                                                                    kohaitems[k].istatus = "Cliquez et ramassez";
+                                                                    kohaitems[k].istatus = wrmDefaultStatus;
                                                                     $scope.isclosedstacks = true;
                                                                 }
                                                                 kohaitems[k];
@@ -106,10 +122,6 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                                         }
                                                     }, function(response) {});
                                                 });
-
-
-                                                // angular.forEach(kohaitems, function(item) { console.log("itemnumberTEST", item.itemnumber); });
-
 
                                                 // Course reserves Info
                                                 // for items
@@ -336,8 +348,13 @@ angular.module('kohaItems', []).component('prmOpacAfter', {
                                     targetEvent: $event,
                                     templateUrl: 'custom/' + viewName + '/html/requestItem.html',
                                     controller: ['$scope', '$http', '$mdDialog', function controller($scope, $http, $mdDialog) {
+
                                         let recordData = self.parentCtrl.item
                                             // console.log(recordData.pnx.display);
+                                        $scope.wrmReqFormName = wrmReqFormName;
+                                        $scope.wrmReqInfo = wrmReqInfo;
+                                        $scope.wrmReqAlertInfo = wrmReqAlertInfo;
+                                        $scope.wrmReqSubmitted = wrmReqSubmitted;
                                         $scope.biblionumber = biblionumber;
                                         $scope.holdings = holdings;
                                         //console.log("call num:"+callnumber);

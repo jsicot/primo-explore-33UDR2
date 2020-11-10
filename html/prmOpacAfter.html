@@ -59,8 +59,8 @@
                                         <md-tooltip>{{item.location}}</md-tooltip>
                                     </div>
                                     <div ng-if="item.location && item.statusClass === 'status-ondemand' && !item.isfa">
-                                        <p class="weak-text"><strong>Service de cueillette</strong></p>
-                                        <md-tooltip>Accueil de la bibliothèque</md-tooltip>
+                                        <p class="weak-text"><strong>{{wrmName}}</strong></p>
+                                        <md-tooltip>{{wrmName}}</md-tooltip>
                                     </div>
                                     <div ng-if="item.itemcallnumber">
                                         <p class="callnum"><span translate="nui.item.brief.4"></span> {{item.itemcallnumber}}</p>
@@ -105,16 +105,16 @@
 												<prm-icon class="md-icon-button-custom" icon-type="svg" svg-icon-set="action" icon-definition="ic_add_shopping_cart_24px"></prm-icon>
 												<span ng-if="!userIsGuest">{{item.istatus}}</span>
 												<span ng-if="userIsGuest">{{item.istatus}}. Se connecter</span>
-												<md-tooltip md-direction="down" md-delay="400" class="multi-row-tooltip slide-tooltip-anim"><span class="item-description popover">Les documents demandés sont à retirer à l'accueil, pendant les horaires d'ouverture de la BU centrale. Ne vous déplacez pas inutilement, suivez votre demande grâce aux mails envoyés ou sur votre compte lecteur. </span></md-tooltip>
+												<md-tooltip md-direction="down" md-delay="400" class="multi-row-tooltip slide-tooltip-anim"><span class="item-description popover">{{wrmWhereToPick}}</span></md-tooltip>
 											</button>
-                                            <button ng-if="!avail_commagbu" ng-disabled="true" class="custom-button md-button zero-margin button-with-icon button-confirm service md-primoExplore-theme md-ink-ripple" type="button" aria-label="Les documents demandés sont à retirer à l'accueil, pendant les horaires d'ouverture de la BU centrale. Ne vous déplacez pas inutilement, suivez votre demande grâce aux mails envoyés ou sur votre compte lecteur. ">
+                                            <button ng-if="!avail_commagbu" ng-disabled="true" class="custom-button md-button zero-margin button-with-icon button-confirm service md-primoExplore-theme md-ink-ripple" type="button" aria-label="{{wrmWhereToPick}}">
 												<prm-icon class="md-icon-button-custom" icon-type="svg" svg-icon-set="action" icon-definition="ic_add_shopping_cart_24px"></prm-icon>
 												<span>{{item.istatus}}</span>
-												<md-tooltip md-direction="down" md-delay="400" class="multi-row-tooltip slide-tooltip-anim"><span class="item-description popover">Les documents demandés sont à retirer à l'accueil, pendant les horaires d'ouverture de la BU centrale. Ne vous déplacez pas inutilement, suivez votre demande grâce aux mails envoyés ou sur votre compte lecteur. </span></md-tooltip>
+												<md-tooltip md-direction="down" md-delay="400" class="multi-row-tooltip slide-tooltip-anim"><span class="item-description popover">{{wrmWhereToPick}}</span></md-tooltip>
 											</button>
                                         </p>
-                                        <p ng-if='item.statusClass === "status-ondemand" && item.branchcode === "BU" && item.isrequested == "true" && !item.isfa' class="availability-status status-unavailable unavailable"> Document déjà demandé par un lecteur</p>
-                                        <p ng-if='item.statusClass === "status-ondemand" && (item.branchcode !== "BU" || item.isfa)' class="availability-status {{item.statusClass}}"> Demander à un bibliothécaire</p>
+                                        <p ng-if='item.statusClass === "status-ondemand" && item.branchcode === "BU" && item.isrequested == "true" && !item.isfa' class="availability-status status-unavailable unavailable"> {{wrmNotAvail}}</p>
+                                        <p ng-if='item.statusClass === "status-ondemand" && (item.branchcode !== "BU" || item.isfa)' class="availability-status {{item.statusClass}}"> {{wrmAskToLib}}</p>
                                         <p ng-if='item.statusClass !== "status-ondemand"' class="availability-status {{item.statusClass}}"> {{item.istatus}}
                                             <md-tooltip>{{item.istatus}}</md-tooltip>
                                         </p>
@@ -126,16 +126,16 @@
 												<prm-icon class="md-icon-button-custom" icon-type="svg" svg-icon-set="action" icon-definition="ic_shopping_basket_24px"></prm-icon>
 												<span ng-if="!userIsGuest">{{item.istatus}}</span>
 												<span ng-if="userIsGuest">{{item.istatus}}. Se connecter</span>
-												<md-tooltip md-direction="down" md-delay="400" class="multi-row-tooltip slide-tooltip-anim"><span class="item-description popover">Les documents demandés sont à retirer à l'accueil, pendant les horaires d'ouverture de la BU centrale. Ne vous déplacez pas inutilement, suivez votre demande grâce aux mails envoyés ou sur votre compte lecteur. </span></md-tooltip>
+												<md-tooltip md-direction="down" md-delay="400" class="multi-row-tooltip slide-tooltip-anim"><span class="item-description popover">{{wrmWhereToPick}}</span></md-tooltip>
 											</button>
-                                            <button ng-if="!avail_commagbu" ng-disabled="true" class="custom-button md-button zero-margin button-with-icon button-confirm service md-primoExplore-theme md-ink-ripple" type="button" aria-label="Les documents demandés sont à retirer à l'accueil, pendant les horaires d'ouverture de la BU centrale. Ne vous déplacez pas inutilement, suivez votre demande grâce aux mails envoyés ou sur votre compte lecteur. ">
+                                            <button ng-if="!avail_commagbu" ng-disabled="true" class="custom-button md-button zero-margin button-with-icon button-confirm service md-primoExplore-theme md-ink-ripple" type="button" aria-label="{{wrmWhereToPick}}">
 												<prm-icon class="md-icon-button-custom" icon-type="svg" svg-icon-set="action" icon-definition="ic_shopping_basket_24px"></prm-icon>
 												<span>{{item.istatus}}</span>
-												<md-tooltip md-direction="down" md-delay="400" class="multi-row-tooltip slide-tooltip-anim"><span class="item-description popover">Les documents demandés sont à retirer à l'accueil, pendant les horaires d'ouverture de la BU centrale. Ne vous déplacez pas inutilement, suivez votre demande grâce aux mails envoyés ou sur votre compte lecteur. </span></md-tooltip>
+												<md-tooltip md-direction="down" md-delay="400" class="multi-row-tooltip slide-tooltip-anim"><span class="item-description popover">{{wrmWhereToPick}}</span></md-tooltip>
 											</button>
                                         </p>
-                                        <p ng-if='item.statusClass === "status-ondemand"  && item.isrequested == "true" && !item.isfa' class="availability-status status-unavailable unavailable"> Document déjà demandé par un lecteur</p>
-                                        <p ng-if='item.statusClass === "status-ondemand" && item.isfa' class="availability-status {{item.statusClass}}"> Demander à un bibliothécaire</p>
+                                        <p ng-if='item.statusClass === "status-ondemand"  && item.isrequested == "true" && !item.isfa' class="availability-status status-unavailable unavailable"> {{wrmNotAvail}}</p>
+                                        <p ng-if='item.statusClass === "status-ondemand" && item.isfa' class="availability-status {{item.statusClass}}"> {{wrmAskToLib}}</p>
                                         <p ng-if='item.statusClass !== "status-ondemand"' class="availability-status {{item.statusClass}}"> {{item.istatus}}
                                             <md-tooltip>{{item.istatus}}</md-tooltip>
                                         </p>

@@ -1839,7 +1839,7 @@ prm-search-result-frbr-line .md-button.arrow-link-button .button-content > prm-i
 [class*="no_"],
 .restricted,
 .duedate {
-  color: #6E6E6E; }
+  color: #6E6E6E !important; }
 
 .prm-citation-color,
 prm-citation-trails-item .item-type {
@@ -1936,6 +1936,7 @@ prm-search-result-list prm-personalize-results-button .md-button md-switch._md-c
   background-color: #7d1538; }
 
 /* primary color hook end*/
+/*# sourceMappingURL=app-colors.css.map */
 /*# sourceMappingURL=app-colors.css.map */
 /*# sourceMappingURL=app-colors.css.map */
 /*# sourceMappingURL=app-colors.css.map */

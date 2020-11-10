@@ -1,7 +1,7 @@
 <md-dialog id="requestItem" aria-label="Obtenir le document" ng-hide="hideForm">
     <md-toolbar>
         <div class="md-toolbar-tools">
-            <h2><span>Obtenir le document</span></h2>
+            <h2><span>{{wrmReqFormName}}</span></h2>
             <span flex></span>
             <md-button class="md-icon-button" ng-click="closeRequest()">
                 <md-icon md-svg-icon="navigation:ic_close_24px" aria-label="Close dialog"></md-icon>
@@ -50,7 +50,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- <p ng-if="isavailableonshelf" class="isavailableonshelf">D'autres exemplaires semblent disponibles en rayon pour ce document, n'hésitez pas à emprunter ces derniers.</p> -->
+                <!-- <p ng-if="isavailableonshelf" class="isavailableonshelf">{{wrmAlreadyOnShelf}}</p> -->
 
             </md-content>
         </div>
@@ -108,10 +108,10 @@
                 </div>
 
                 <div>
-                    <p class="small"></p>Pour information, les document demandés seront mis à disposition pendant une durée de <strong>trois jours ouvrés à l'accueil de la BU centrale</strong>.</p>
+                    <p class="md-dialog-content" ng-bind-html="wrmReqInfo"></p>
                     <div class="bar error-bar zero-margin-bottom layout-align-center-center layout-row">
                         <div class="md-dialog-content">
-                            <p class="bold-text "></p>Malgré la réouverture des demandes en magasin, <strong>certains ouvrages sont rendus indisponibles</strong> par un sinistre survenu lors du confinement.</p>
+                            <p class="bold-text ">{{wrmReqAlertInfo}}</p>
                         </div>
                     </div>
                 </div>
@@ -121,24 +121,19 @@
     </md-dialog-content>
 
     <md-dialog-actions layout="row" ng-if="!request_succeed && !userIsGuest">
-        <md-button class="md-button md-secondary" ng-click="cancelRequest()">Annuler</md-button>
+        <md-button class="md-button button-large md-secondary" ng-click="cancelRequest()">Annuler</md-button>
         <span flex></span>
-        <md-button ng-if="!requestSent" class="button-with-icon button-confirm md-button md-primoExplore-theme md-ink-ripple" ng-click="sendRequest()">
+        <md-button ng-if="!requestSent" class="button-with-icon button-confirm button-large md-button md-primoExplore-theme md-ink-ripple" ng-click="sendRequest()">
             Merci de confirmer votre demande
             <prm-icon icon-type="svg" svg-icon-set="navigation" icon-definition="ic_chevron_right_24px"></prm-icon>
         </md-button>
-        <md-button ng-if="requestSent" class="button-with-icon button-confirm md-button md-primoExplore-theme md-ink-ripple" ng-disabled="true">
+        <md-button ng-if="requestSent" class="button-with-icon button-confirm button-large md-button md-primoExplore-theme md-ink-ripple" ng-disabled="true">
             Traitement
         </md-button>
     </md-dialog-actions>
 
     <md-dialog-content ng-if="request_succeed && !userIsGuest">
-        <div class="md-dialog-content">
-            <p><strong>Votre demande a bien été enregistrée.</strong></p>
-            <p>Vous recevrez très prochainement <strong>une première confirmation par e-mail</strong> annonçant sa prise en charge par nos services,<br \> puis <strong>une seconde</strong> vous informant de la disponibilité du document.<br \>
-                <strong>Ne vous déplacez pas avant de recevoir cette dernière.</strong><br \> Les documents restent accessibles pendant <strong>3 jours à l’accueil de la BU centrale.</strong> </p>
-            <p>Très bonne journée et à bientôt dans nos bibliothèques.</p>
-        </div>
+        <div class="md-dialog-content" ng-bind-html="wrmReqSubmitted"></div>
     </md-dialog-content>
 
     <md-dialog-actions layout="row" ng-if="request_succeed && !userIsGuest">
