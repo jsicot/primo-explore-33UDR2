@@ -37,14 +37,14 @@
                             <div layout="row" layout-sm="column" class="layout-sm-column layout-row">
                                 <md-input-container class="underlined-input md-primoExplore-theme">
                                     <label class="course-search" for="course-search">Explorer les sélections...</label>
-                                    <input type="text" name="course-search" id="course-search" size="50" ng-model="searchText" class="course-search ng-pristine ng-untouched md-input ng-empty ">
+                                    <input type="text" name="course-search" size="50" ng-model="searchText" class="course-search ng-pristine ng-untouched md-input ng-empty ">
                                     <!---->
                                 </md-input-container>
                             </div>
                             <md-card-title-text flex layout="row">
                                 <md-input-container flex>
                                     <label>Domaines :</label>
-                                    <md-select ng-model="list.departmentFilter">
+                                    <md-select ng-model="list.departmentFilter" ng-init="list.departmentFilter='Tout'">
                                         <md-option ng-repeat="department in list.departments" value="{{ department }}" ng-selected="$first">
                                             {{ department }}
                                         </md-option>
