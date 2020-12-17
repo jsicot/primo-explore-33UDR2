@@ -1,4 +1,5 @@
 import { viewName } from './viewName';
+import { matomoAnalytics } from './matomoAnalytics.module';
 import { kohaItems } from './prmOpacAfter/kohaItems.module';
 import { kohaAvailabilities } from './prmBriefResultAfter/kohaAvailabilities.module';
 import { sfxHoldings } from './prmViewOnlineAfter/sfxHoldings.module';
@@ -10,6 +11,7 @@ import { kohaLists } from './kohaLists/koha-lists.module';
 import { courseReserves } from './courseReserves/course-reserves.module';
 import { recommander } from './prmResourceRecommenderAfter/recommander.module';
 import { multiWhereConfig } from './prmFullViewServiceContainerAfter/multiWhere';
+import { zoteroBib } from './courseReserves/course-reserves.module';
 
 let app = angular.module('viewCustom', [
     'courseReserves',
@@ -23,6 +25,7 @@ let app = angular.module('viewCustom', [
     'getThumbnail',
     'kohaLists',
     'reportProblem',
+    'matomoAnalytics'
 ]);
 
 if (app) {
@@ -298,6 +301,7 @@ if (app) {
             return array;
         }
     });
+
 
     // app.run(runBlock);
     // runBlock.$inject = ['gaInjectionService'];
