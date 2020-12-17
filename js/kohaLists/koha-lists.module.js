@@ -28,9 +28,8 @@ angular
             );
             //flex-xl-25 flex-xl-20 flex-md-0 flex-lg-10 flex-0 flex-lgPlus-20
             //flex-xl-10 flex-md-0 flex-lg-10 flex-0 flex-lgPlus-15
-            angular.element(document.querySelector('#primoExploreRoot prm-search > md-content > div.flex-xl-25.flex-xl-20.flex-md-0.flex-lg-10.flex-0.flex-lgPlus-20')).removeClass("flex-xl-25 flex-xl-20 flex-md-0 flex-lg-10 flex-0 flex-lgPlus-20").addClass("flex-xl-10 flex-md-0 flex-lg-10 flex-0 flex-lgPlus-15");
-
-            angular.element(document.querySelector('#primoExploreRoot prm-search > md-content > div.flex-lgPlus-25.flex-xl-25.flex-md-10.flex-lg-25.flex-0')).removeClass("flex-lgPlus-25 flex-xl-25 flex-md-10 flex-lg-25 flex-0").addClass("flex-xl-10 flex-md-0 flex-lg-10 flex-0 flex-lgPlus-15");
+            angular.element(document.querySelector('body > primo-explore > div > prm-explore-main > ui-view > prm-search > md-content > div.flex-xl-25.flex-xl-20.flex-md-0.flex-lg-10.flex-0')).removeClass("flex-xl-25 flex-xl-20 flex-md-0 flex-lg-10 flex-0 flex-lgPlus-20").addClass("flex-xl-10 flex-md-0 flex-lg-10 flex-0 flex-lgPlus-15");
+            angular.element(document.querySelector('body > primo-explore > div > prm-explore-main > ui-view > prm-search > md-content > div.flex-xl-25.flex-md-10.flex-lg-25.flex-0')).removeClass("flex-lgPlus-25 flex-xl-25 flex-md-10 flex-lg-25 flex-0").addClass("flex-xl-10 flex-md-0 flex-lg-10 flex-0 flex-lgPlus-15");
 
 
 
